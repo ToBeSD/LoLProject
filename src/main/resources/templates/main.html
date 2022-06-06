@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +21,9 @@
                 <a class="nav-items" href="/community/build">빌드연구소</a>
             </div>
             <div class="sign-login">
-                <button class="signin">회원가입</button>
+                <a href="/signin">
+                    <button class="signin">회원가입</button>
+                </a>
                 <a href="/login">
                     <button class="login">로그인</button>
                 </a>

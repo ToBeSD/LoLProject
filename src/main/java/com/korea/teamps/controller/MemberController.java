@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class MemberController {
@@ -22,18 +23,13 @@ public class MemberController {
     }
 
     @GetMapping("/signin")
-    public String SignIn() {
+    public String signIn() {
         return "signin";
     }
 
     @PostMapping("signin")
-    public String create(MemberForm memberForm) {
-        Member member = new Member();
-        member.setEmail(memberForm.getEmail());
-        member.setPw(memberForm.getPassword());
-        member.setName(memberForm.getName());
+    public String create(@RequestBody Member member) {
         memberService.join(member);
-
         return "redirect:/";
     }
 }

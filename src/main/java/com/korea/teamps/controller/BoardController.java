@@ -1,14 +1,8 @@
 package com.korea.teamps.controller;
 
-import com.korea.teamps.domain.Member;
-import com.korea.teamps.repository.JdbcMemberRepository;
 import com.korea.teamps.repository.MemberRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.Map;
-import java.util.Random;
 
 @Controller
 public class BoardController {

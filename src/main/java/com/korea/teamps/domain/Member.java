@@ -1,10 +1,9 @@
 package com.korea.teamps.domain;
 
 public class Member {
-    private Long id;
     private String email;
-    private String pw;
-    private String name;
+    private String password;
+    private String nickName;
 
 
     public String getEmail() {
@@ -15,27 +14,19 @@ public class Member {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getPassword() {
+        return password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Long getId() {
-        return id;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPw() {
-        return pw;
-    }
-
-    public void setPw(String pw) {
-        this.pw = pw;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

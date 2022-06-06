@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +7,7 @@
     <title>yg_ac</title>
     <link rel="stylesheet" href="/rank/rank.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+    <script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     
@@ -23,7 +24,9 @@
                 <a class="nav-items" href="/community/build">빌드연구소</a>
             </div>
             <div class="sign-login">
-                <button class="signin">회원가입</button>
+                <a href="/signin">
+                    <button class="signin">회원가입</button>
+                </a>
                 <a href="/login">
                     <button class="login">로그인</button>
                 </a>
@@ -58,54 +61,14 @@
                 <li class="position-button">미드</li>
                 <li class="position-button">원딜</li>
                 <li class="position-button">서폿</li>
+                <li class="position-button">전체</li>
             </ul>
         </div>
 
         <div class="champ-list-tier"></div>
         
         <div class="champ-list">
-            <div class="list">
-                <span>1</span>
-                <div style="width: 40px; padding: 0;">
-                    <img class="list-image" src="/rank/gangplank.png" alt="img">
-                </div>
-                <span style="width: 30%;">갱플랭크</span>
-                <span>탑</span>
-                <span class="list-number">55.69</span>
-                <span class="list-number">-9.20</span>
-                <span class="list-number">49.42%</span>
-                <span class="list-number">10.10%</span>
-                <span class="list-number">38.74%</span>
-                <span class="list-number">27,126</span>
-            </div>
-            <div class="list">
-                <span>2</span>
-                <div style="width: 40px; padding: 0;">
-                    <img class="list-image" src="/rank/gangplank.png" alt="img">
-                </div>
-                <span style="width: 30%;">갱플랭크</span>
-                <span>탑</span>
-                <span class="list-number">55.69</span>
-                <span class="list-number">-9.20</span>
-                <span class="list-number">49.42%</span>
-                <span class="list-number">10.10%</span>
-                <span class="list-number">38.74%</span>
-                <span class="list-number">27,126</span>
-            </div>
-            <div class="list">
-                <span>3</span>
-                <div style="width: 40px; padding: 0;">
-                    <img class="list-image" src="/rank/gangplank.png" alt="img">
-                </div>
-                <span style="width: 30%;">갱플랭크</span>
-                <span>탑</span>
-                <span class="list-number">55.69</span>
-                <span class="list-number">-9.20</span>
-                <span class="list-number">49.42%</span>
-                <span class="list-number">10.10%</span>
-                <span class="list-number">38.74%</span>
-                <span class="list-number">27,126</span>
-            </div>
+            <!--ajax로 데이터 블러오기-->
         </div>
     </div>
 
