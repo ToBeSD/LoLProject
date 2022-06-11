@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/main/main.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header class="header-mainnav">
@@ -34,7 +35,7 @@
     </header>
     <main class="main">
         <div class="search">
-            
+
             <form action="/champ/statistics" method="post" id="search_form">
                 <div class="searchbar">
                     <input class="main-input" type="text" name="name" placeholder="챔피언 이름을 입력하세요">
@@ -83,73 +84,106 @@
                 </div>
             </div>
         </div>
-        
+
         <h3  style="color: #fff;">주목해야 할 챔피언 (KR) <small style="color: darkgray;">05-24 10:46 기준</small></h3>
-        <div class="mainslide_container" style="color: #fff;">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="slide-image">
-                        <h3 class="champion-name none">아트록스<small>(탑)</small></h3>
-                    </div>
+        <div style="overflow: hidden;">
+            <div class="mainslide_container" style="color: #fff;">
+<!--                <div class="swiper-wrapper">-->
+<!--                    <div class="swiper-slide">-->
+<!--                        <div class="slide-image">-->
+<!--                            <h3 class="champion-name none">아트록스<small>(탑)</small></h3>-->
+<!--                        </div>-->
 
-                    <div class="champslide-infobox">
-                        <div class="champ-status">
-                            <h2>아트록스(탑)</h2>
+<!--                        <div class="champslide-infobox">-->
+<!--                            <div class="champ-status">-->
+<!--                                <h2>아트록스(탑)</h2>-->
 
-                            <li class="champ-status-header">
-                                <span></span>
-                                <span class="before">이전패치</span>
-                                <span>현재패치</span>
-                            </li>
-                            <li class="champ-status-item">
-                                <h4>승률</h4>
-                                <span class="before">50.38%</span>
-                                <span>49.38%</span>
-                            </li>
-                            <li class="champ-status-item">
-                                <h4>픽률</h4>
-                                <span class="before">11.23%</span>
-                                <span>10.23%</span>
-                            </li>
-                            <li class="champ-status-item">
-                                <h4>벤율</h4>
-                                <span class="before">6.5%</span>
-                                <span>4.2%</span>
-                            </li>
-                        </div>
+<!--                                <li class="champ-status-header">-->
+<!--                                    <span></span>-->
+<!--                                    <span class="before">이전패치</span>-->
+<!--                                    <span>현재패치</span>-->
+<!--                                </li>-->
+<!--                                <li class="champ-status-item">-->
+<!--                                    <h4>승률</h4>-->
+<!--                                    <span class="before">50.38%</span>-->
+<!--                                    <span>49.38%</span>-->
+<!--                                </li>-->
+<!--                                <li class="champ-status-item">-->
+<!--                                    <h4>픽률</h4>-->
+<!--                                    <span class="before">11.23%</span>-->
+<!--                                    <span>10.23%</span>-->
+<!--                                </li>-->
+<!--                                <li class="champ-status-item">-->
+<!--                                    <h4>벤율</h4>-->
+<!--                                    <span class="before">6.5%</span>-->
+<!--                                    <span>4.2%</span>-->
+<!--                                </li>-->
+<!--                            </div>-->
 
-                        <div class="champ-point">
-                            <h4>주목해야 할 포인트</h4>
-                            <p style="font-size: 12px;">최근 패치에서 아트록스의 승률이 -1% 하락하였습니다. 곧 구체적인 원인을 분석하여 업데이트 될 예정입니다.</p>
-                        </div>
+<!--                            <div class="champ-point">-->
+<!--                                <h4>주목해야 할 포인트</h4>-->
+<!--                                <p style="font-size: 12px;">최근 패치에서 아트록스의 승률이 -1% 하락하였습니다. 곧 구체적인 원인을 분석하여 업데이트 될 예정입니다.</p>-->
+<!--                            </div>-->
+<!--                            <div style="width: 332px; height: 60px">-->
+<!--                                <div class="champ-link">-->
+<!--                                    <a href="#">챔피언 상세정보</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                        <div class="champ-link">
-                            <a href="#">챔피언 상세정보</a>
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">베인<small>(탑)</small></h3>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="swiper-wrapper-small">
-                <div class="swiper-slide">
-                    <div class="slide-image-small">
-                        <h3 class="champion-name">아트록스<small>(탑)</small></h3>
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">루시안<small>(탑)</small></h3>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="swiper-wrapper-small">
-                <div class="swiper-slide">
-                    <div class="slide-image-small">
-                        <h3 class="champion-name">아트록스<small>(탑)</small></h3>
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">제이스<small>(탑)</small></h3>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="swiper-wrapper-small">
-                <div class="swiper-slide">
-                    <div class="slide-image-small">
-                        <h3 class="champion-name">아트록스<small>(탑)</small></h3>
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">가렌<small>(탑)</small></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">나르<small>(탑)</small></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">탐켄치<small>(탑)</small></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">모데카이저<small>(탑)</small></h3>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -157,6 +191,8 @@
     </main>
 
     <div style="height: 300px;"></div>
+    <button class="left">왼쪽</button>
+    <button class="right">오른쪽</button>
 
     <div class="community-container">
         <div class="community">
@@ -242,11 +278,11 @@
                     </a>
                     <span class="post-like">4</span>
                 </li>
-                
-                
+
+
             </ul>
         </div>
-        
+
         <div class="community">
             <h3 class="title">빌드 연구소</h3>
             <ul class="community-list-container">
@@ -348,8 +384,8 @@
         <div class="footer-right">
             <h5>PS Analytics, Inc. © 2020</h5>
             <p>
-                lol.ps is hosted by PS Analytics, Inc. lol.ps isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in 
-                producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. 
+                lol.ps is hosted by PS Analytics, Inc. lol.ps isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in
+                producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc.
                 League of Legends © Riot Games, Inc.
             </p>
         </div>

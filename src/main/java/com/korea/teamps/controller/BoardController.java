@@ -19,18 +19,23 @@ public class BoardController {
         return "free";
     }
 
+    @GetMapping("community/free/detail")
+    public String freeDetail() {
+        return "community-post-free";
+    }
+
     @GetMapping("/community/build")
     public String build() {
         return "build";
     }
+    @GetMapping("community/build/detail")
+    public String buildDetail() {
+        return "community-post-build";
+    }
 
-    @GetMapping("/community/post/free")
+    @GetMapping("/community/post")
     public String postFree() {
         return "write-post";
-    }
-    @GetMapping("/community/post/bulid")
-    public String postBuild() {
-        return "community-post-build";
     }
 
     @GetMapping("/notice")
