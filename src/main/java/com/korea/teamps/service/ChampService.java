@@ -14,5 +14,5 @@ public class ChampService {
         this.champRepository = champRepository;
     }
 
-    //기본정보
+
 }

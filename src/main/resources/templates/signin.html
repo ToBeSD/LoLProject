@@ -5,8 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>yg_ac</title>
+    <link rel="stylesheet" href="/common/all.css">
     <link rel="stylesheet" href="/login/login.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     
@@ -45,24 +48,27 @@
                 <div class = "row">
                     <div class = "email_login_box"> 
                         <h3>이메일 회원 가입</h3>
-                        <form method="post" action="/signin">
+                        <form name="signInForm" onsubmit="return;">
                             <div class = "form-group">
-                                <label for="id_email">이메일 주소</label>
-                                <input type="email" name="email" class="form-control" placeholder="gamer@lol.ps" required="" id="id_email">
+                                <label>이메일 주소</label>
+                                <input type="email" name="email" class="form-control" placeholder="gamer@lol.ps">
+                                <p id="email-p"></p>
                             </div>
                             <div class = "form-group">
-                                <label for="id_password">비밀번호</label>
-                                <input type="password" name="password" class="form-control" placeholder="비밀번호" required="" id="id_password">
+                                <label>비밀번호</label>
+                                <input type="password" name="password" class="form-control" placeholder="비밀번호">
+                                <p id="password-p"></p>
                             </div>
                             <div class = "form-group">
-                                <label for="id_password-confirm">비밀번호 확인</label>
-                                <input type="password" name="password-confirm" class="form-control" placeholder="비밀번호 확인" required="" id="id_password-confirm">
+                                <label>비밀번호 확인</label>
+                                <input type="password" name="password-confirm" class="form-control" placeholder="비밀번호 확인">
+                                <p id="password-confirm-p"></p>
                             </div>
                             <div class = "form-group">
-                                <label for="id_nickname">닉네임</label>
-                                <input type="text" name="nickName" class="form-control" placeholder="닉네임" required="" id="id_nickname">
+                                <label>닉네임</label>
+                                <input type="text" name="nickname" class="form-control" id="nickname-input" placeholder="닉네임">
                             </div>
-                            <button type="submit" class="btn btn-lg btn-theme btn-big">이메일 주소로 가입</button>
+                            <button class="btn btn-lg btn-theme btn-big" id="summit-button">이메일 주소로 가입</button>
                         </form>
                     </div>
 
@@ -114,7 +120,7 @@
 
 </footer>
 
-
-<script src="/login/login.js"></script>
+<script src="/common/common.js"></script>
+<script src="/login/signin.js"></script>
 </body>
 </html>

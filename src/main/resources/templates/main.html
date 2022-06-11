@@ -5,8 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>yg_ac</title>
+    <link rel="stylesheet" href="/common/all.css">
     <link rel="stylesheet" href="/main/main.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 </head>
 <body>
     <header class="header-mainnav">
@@ -33,9 +35,9 @@
     <main class="main">
         <div class="search">
             
-            <form action="#" target="_blank" method="get" id="search_form">
+            <form action="/champ/statistics" method="post" id="search_form">
                 <div class="searchbar">
-                    <input type="text" placeholder="검색어를 입력하세요" id="search_input">
+                    <input class="main-input" type="text" name="name" placeholder="챔피언 이름을 입력하세요">
                     <button type="submit">
                         <img src="/main/icon_search.webp" style="width: 20px; height: 20px;">
                     </button>
@@ -151,6 +153,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </main>
 
     <div style="height: 300px;"></div>
@@ -352,7 +355,7 @@
         </div>
 
     </footer>
-
+<script src="/common/all.js"></script>
 <script src="/main/main.js"></script>
 </body>
 </html>

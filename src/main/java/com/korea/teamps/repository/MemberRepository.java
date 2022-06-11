@@ -13,8 +13,8 @@ import java.util.Optional;
 public interface MemberRepository {
 
 
-    @Insert("INSERT INTO member VALUES (SQ_MEMBER.NEXTVAL, #{email}, #{pw}, #{nickname}, null, null, null)")
-    Member save(@Param("email") String email, @Param("pw") String pw, @Param("nickname") String name);
+    @Insert("INSERT INTO member VALUES (SQ_MEMBER.NEXTVAL, #{email}, #{password}, #{nickname}, null, null, null)")
+    void save(Member member);
 
     @Select("SELECT * FROM member WHERE email = #{email}")
     Optional<Member> findByEmail(@Param("email") String email);

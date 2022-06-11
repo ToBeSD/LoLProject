@@ -1,49 +1,51 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자유게시판</title>
+    <link rel="stylesheet" href="/common/all.css">
     <link rel="stylesheet" href="/community/community.css">
+    <link rel="stylesheet" href="/community/community-main.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <!-- 위에 navbar 부분입니다 -->
+   <!-- 위에 navbar 부분입니다 -->
     <header class="header-mainnav">
         <div class="header-container">
             <a href="/">
                 <img src="/header-logo.webp" alt="LOL.PS">
             </a>
             <div class = "nav-item-container">
-				<a class="nav-items" href="/notice">공지사항</a>
-				<a class="nav-items" href="/champ/rank">챔피언 랭킹</a>
-				<a class="nav-items" href="/community">자유게시판</a>
-				<a class="nav-items" href="/community/build">빌드연구소</a>
+                <a class="nav-items" href="/notice">공지사항</a>
+                <a class="nav-items" href="/champ/rank">챔피언 랭킹</a>
+                <a class="nav-items" href="/community">자유게시판</a>
+                <a class="nav-items" href="/community/build">빌드연구소</a>
             </div>
             <div class="sign-login">
-				<a href="/signin">
-					<button class="signin">회원가입</button>
-				</a>
-				<a href="/login">
-					<button class="login">로그인</button>
-				</a>
-			</div>
+                <a href="/signin">
+                    <button class="signin">회원가입</button>
+                </a>
+                <a href="/login">
+                    <button class="login">로그인</button>
+                </a>
+            </div>
         </div>
     </header>
 
     <div class="main">
-        <div class="first-title">커뮤니티>자유게시판</div>
+        <div class="first-title">자유게시판</div>
         <div class="second-title">
-        	<button class="main-button">✎게시물 쓰기</button>
+        	<a class="main-button" href="/community/post/free">✎게시물 쓰기</a>
         	<form method="post">
         		<input class="main-input" spellcheck="false" placeholder="챔피언이름을 입력하세요"/>
         	</form>
         </div>
         <div style="clear: both;"></div>
     </div>
-
-    <main class="clearfix">
+	
+    <main>
         <div class="contents">
            	<div class="whiteDiv"></div>
            	<div class="firstDiv">
@@ -53,279 +55,38 @@
            				<option>제목</option>
            				<option>작성자</option>
            			</select>
-           			<input class="contents-input" spellcheck="false" placeholder="게시물 검색"/>
-           			<button class="main-button">✎게시물쓰기</button>
-           		</div>
+           			<input class="contents-input" spellcheck="false" placeholder="검색하기"/>
+                    <a class="main-button" href="/community/post/free">✎게시물 쓰기</a>
+                </div>
            	</div>
            	<div class="title-build">
-				<span style="width: 70%">제목</span>
-				<span class="explain" style="width: 5%">작성자</span>
-				<span class="explain" style="width: 5%">날짜</span>
-				<span class="explain" style="width: 5%">조회</span>
-				<span class="explain" style="width: 5%">추천</span>
+           		<span style="padding-left:8px;">제목</span>
+           		<span style="padding-left:700px;">작성자</span>
+           		<span style="padding-left:50px;">날짜</span>
+           		<span style="padding-left:45px;">조회</span>
+           		<span style="padding-left:22px;">추천</span>
            	</div>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
+           	<a class="contents-item" href="community-post-free.html">
+           		<span class="build1" style="padding-left:10px">
            			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
+           		</span>
+           		<span class="build2" style="width:150px;">
            			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
+           		</span>
+           		<span class="build2" style="width:100px;">
            			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
+           		</span>
+           		<span class="build2" style="width:30px;">
            			579
-           		</div>
-           		<div class="build2" style="width:30px">
+           		</span>
+           		<span class="build2" style="width:30px">
            			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
-           	</a>
-           	<a class="contents-item" href="#">
-           		<div class="build1" style="padding-left:10px">
-           			 이거 자유게시판 활성화 되는 거임?
-           		</div>
-           		<div class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</div>
-           		<div class="build2" style="width:100px;">
-           			2022-06-03
-           		</div>
-           		<div class="build2" style="width:30px;">
-           			579
-           		</div>
-           		<div class="build2" style="width:30px">
-           			10
-           		</div>
+           		</span>
            	</a>
         </div>
-
     </main>
-
-	<div style="height: 50px;"></div>
-
-	<div class="bottom-btn">
+    
+    <div class="bottom-btn">
 		<button class="bottom-btn-in"><<</button>
 		<button class="bottom-btn-in">1</button>
 		<button class="bottom-btn-in">2</button>
@@ -334,14 +95,14 @@
 		<button class="bottom-btn-in">5</button>
 		<button class="bottom-btn-in">>></button>
 		<span class="bottom-btn-in2">
-			<button class="main-button">✎게시물쓰기</button>
+			<a class="main-button" href="/community/post/free">✎게시물 쓰기</a>
 		</span>
 	</div>
-
+	
 	<div class="top-button">
         <span style="color: #6c757d;">UP</span>
     </div>
-
+	
    	<footer class="footer">
 
         <div class="footer-left">
@@ -356,13 +117,14 @@
         <div class="footer-right">
             <h5>PS Analytics, Inc. © 2020</h5>
             <p>
-                lol.ps is hosted by PS Analytics, Inc. lol.ps isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in
-                producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc.
+                lol.ps is hosted by PS Analytics, Inc. lol.ps isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in 
+                producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. 
                 League of Legends © Riot Games, Inc.
             </p>
         </div>
+
     </footer>
 
-<script src="/community/community.js"></script>
+<script src="/common/all.js"></script>
 </body>
 </html>

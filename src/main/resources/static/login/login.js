@@ -1,10 +1,14 @@
-const navbar = document.querySelector('.header-mainnav');
+const signInForm = document.querySelector('[name=signInForm]');
+const submitBtn = document.querySelector('#summit-button');
 
-document.addEventListener('scroll', () => {
-    console.log(window.scrollY)
-    if(window.scrollY > 160) {
-        navbar.style.background = '#172b65';
-    }else if(window.scrollY < 160) {
-        navbar.style.background = 'none';
-    }
+submitBtn.addEventListener('click', () => {
+    $.ajax({
+        type: "POST",
+        url: '/login',
+        data: JSON.stringify(signInForm.toObject()),
+        contentType : 'application/json',
+        success: function () {
+            console.log('success')
+        },
+    })
 })

@@ -1,0 +1,82 @@
+main {
+	margin:auto;
+}
+
+.title-build {
+	padding: 5px; 
+	font-size: 12px; 
+	color: rgb(33, 58, 150); 
+	border-top:2px solid rgb(41, 59, 117); 
+	border-bottom:2px solid rgb(41, 59, 117);
+}
+
+.champion-head {
+	height: 40px;
+	transform: translate(0%, -15%);
+	border-radius: 3px;
+}
+
+.build {
+	color: blue;
+	width: 72px;
+	height: 24px;
+	text-align: center;
+}
+
+.build1 {
+	color: black;
+	width: 770px;
+	height: 24px;
+	text-align: left;
+}
+
+.build2 {
+	font-size: 12px;
+	height: 24px;
+	text-align: right;
+	padding: 0px 10px;
+	color: rgb(77, 83, 102);
+}
+
+.contents-item {
+	display: flex;
+	width: 970px;
+	height: 50px;
+	box-sizing: border-box;
+	padding-top: 12px;
+	text-decoration: none;
+	border-bottom: 1px solid rgb(33, 58, 150);
+	justify-content: space-between;
+}
+
+.contents-item:hover {
+	background-color: rgba(126,155,255,.1);
+}
+
+.bottom-btn {
+	display: flex;
+	justify-content: right;
+	width: 1000px;
+	padding-top: 100px;
+	margin: auto;
+}
+
+.bottom-btn-in {
+	display: block;
+	width: 35px;
+	height: 35px;
+	border-radius:50%;
+	padding: 2px;
+	cursor: pointer;
+	border: none;
+	color: rgb(67, 91, 171);
+	background-color: transparent;
+}
+
+.bottom-btn-in:hover {
+	background-color: rgb(225, 228, 237);
+}
+
+.bottom-btn-in2 {
+	padding-left: 290px;
+}

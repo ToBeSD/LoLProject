@@ -4,18 +4,14 @@ public class ChampRank {
 
     private String name;
     private String line;
-
     private double psScore;
     private double honeyScore;
     private double winRate;
     private double pickRate;
     private double banRate;
     private int count;
-
     private String count2;
-
     private String image;
-
 
     public ChampRank(String name, String line, double psScore, double honeyScore, double winRate, double pickRate, double banRate, int count, String count2, String image) {
         this.name = name;
@@ -29,6 +25,7 @@ public class ChampRank {
         this.count2 = count2;
         this.image = image;
     }
+
 
     public String getName() {
         return name;
@@ -93,7 +90,6 @@ public class ChampRank {
     public void setCount(int count) {
         this.count = count;
     }
-
 
     public String getCount2() {
         return count2;

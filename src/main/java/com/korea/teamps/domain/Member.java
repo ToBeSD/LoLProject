@@ -1,10 +1,17 @@
 package com.korea.teamps.domain;
 
 public class Member {
+
     private String email;
     private String password;
-    private String nickName;
+    private String nickname;
 
+
+    public Member(String email, String password, String nickname) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+    }
 
     public String getEmail() {
         return email;
@@ -22,11 +29,11 @@ public class Member {
         this.password = password;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

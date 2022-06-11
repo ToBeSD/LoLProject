@@ -4,6 +4,7 @@ import com.korea.teamps.domain.ChampBasicStat;
 import com.korea.teamps.domain.ChampPatchHistory;
 import com.korea.teamps.domain.ChampRank;
 import com.korea.teamps.repository.ChampRepository;
+import com.korea.teamps.service.ChampService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +15,12 @@ import java.util.List;
 @Controller
 public class ChampController {
 
+    private ChampService champService;
     private ChampRepository champRepository;
 
     @Autowired
-    public ChampController(ChampRepository champRepository) {
+    public ChampController(ChampService champService, ChampRepository champRepository) {
+        this.champService = champService;
         this.champRepository = champRepository;
     }
 
@@ -34,9 +37,9 @@ public class ChampController {
         return champRepository.findPatchHistory(champName);
     }
 
-    @GetMapping("/champ/statistics")
-    public String statistics(@RequestParam("name") String champName, Model model) {
-        model.addAttribute("name", champName);
+    @PostMapping("/champ/statistics")
+    public String statistics(@RequestParam("name") String name, Model model) {
+        model.addAttribute("name", name);
         return "statistics";
     }
 
@@ -45,10 +48,10 @@ public class ChampController {
         return "rank";
     }
 
-    @GetMapping ("/champ/rankline")
+    @PostMapping ("/champ/rankline")
     @ResponseBody
     public List<ChampRank> champLineRanks(@RequestBody ChampRank champRank) {
-        return champRepository.findByLineChampRank(champRank.getLine());
+        return champRepository.findByLineChampRank(champRank);
     }
 
     @GetMapping("/champ/rankall")
@@ -56,4 +59,16 @@ public class ChampController {
     public List<ChampRank> champAllRanks() {
         return champRepository.findAllChampRank();
     }
+
+//    @PostMapping("/champ/statistics/champname")
+//    @ResponseBody
+//    public ChampName postChampName(@RequestBody ChampName champName) {
+//        return champRepository.findChampName(champName);
+//    }
+//
+//    @GetMapping("/champ/statistics/champname")
+//    @ResponseBody
+//    public ChampName getChampName(ChampName champName) {
+//        return champRepository.findChampName(champName);
+//    }
 }

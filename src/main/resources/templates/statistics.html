@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/common/all.css">
     <link rel="stylesheet" href="/statistics/statistics.css">
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header class="header-mainnav">
@@ -16,9 +19,8 @@
             <div class = "nav-item-container">
                 <a class="nav-items" href="/notice">공지사항</a>
                 <a class="nav-items" href="/champ/rank">챔피언 랭킹</a>
-                <button class="nav-items">커뮤니티</button>
-                <button class="nav-items">PS 연구실</button>
-                <button class="nav-items">상대법 검색</button>
+                <a class="nav-items" href="/community">자유게시판</a>
+                <a class="nav-items" href="/community/build">빌드연구소</a>
             </div>
             <div class="sign-login">
                 <a href="/signin">
@@ -35,71 +37,700 @@
 
     </div>
 
-    <div class="menu-scroll">
-        <div class="category">
-            <div class="category-item">
-                <span>요약</span>
-                <span>통계</span>
-                <span>카운터</span>
-                <span>스펠,아이템</span>
-                <span>코어템</span>
-                <span>스킬</span>
-                <span>룬</span>
+    <div class="main-content-container">
+        <div class="menu-scroll">
+            <div class="category">
+                <div class="category-item">
+                    <a href="#yoyack">요약</a>
+                    <a href="#counter">카운터</a>
+                    <a href="#spell-startitem">스펠,아이템</a>
+                    <a href="#coreitem">코어템</a>
+                    <a href="#skills">스킬</a>
+                    <a href="#runes">룬</a>
+                </div>
+            </div>
+            <div class="container">
+                <div class="line-and-input">
+                    <div class="select-line">
+                        <button class="line-button button-active" style="border-radius: 6px 0px 0px 6px;">
+                            <img src="/image/position/line-top.png" alt="img">
+                            <span>탑</span>
+                            <span>84.0%</span>
+                        </button>
+                        <button class="line-button">
+                            <img src="/image/position/line-jun.png" alt="img">
+                            <span>정글</span>
+                            <span>1.7%</span>
+                        </button>
+                        <button class="line-button">
+                            <img src="/image/position/line-mid.png" alt="img">
+                            <span>미드</span>
+                            <span>13.3%</span>
+                        </button>
+                        <button class="line-button">
+                            <img src="/image/position/line-bot.png" alt="img">
+                            <span>원딜</span>
+                            <span>0.5%</span>
+                        </button>
+                        <button class="line-button" style="border-radius: 0px 6px 6px 0px; border-right: none;">
+                            <img src="/image/position/line-sup.png" alt="img">
+                            <span>서폿</span>
+                            <span>0.4%</span>
+                        </button>
+                    </div>
+                    <div class="input-box">
+                        <input class="main-input" type="text" placeholder="챔피언 이름을 입력하세요">
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
             </div>
         </div>
-        <div class="container">
-            <div class="line-and-input">
-                <div class="select-line">
-                    <button class="line-button button-active" style="border-radius: 6px 0px 0px 6px;">
-                        <i></i> 
-                        <span>탑</span>
-                    </button>
-                    <button class="line-button">
-                        정글
-                    </button>
-                    <button class="line-button button-active">
-                        미드
-                    </button>
-                    <button class="line-button">
-                        원딜
-                    </button>
-                    <button class="line-button" style="border-radius: 0px 6px 6px 0px; border-right: none;">
-                        서폿
-                    </button>
+
+        <div class="statistics-continer">
+            <div class="champ-summary-header">
+                <div class="champ-head">
+                    <div class="head">
+                        <img src="/image/champhead/twistedFate.png" alt="img">
+                    </div>
+                    <h1 style="font-weight: 400; font-size: 38px; margin: 0; width:100%; margin-top: 15px; margin-left: 190px;" th:text="${name}"></h1>
                 </div>
-                <div class="input-box">
-                    <input class="main-input" type="text" placeholder="챔피언 이름을 입력하세요">
+                <button class="summary-button summary-button-active">대중적인 빌드</button>
+                <button class="summary-button" style="left: 33%;">고승률 빌드</button>
+            </div>
+
+            <div class="champ-summary"  id="yoyack">
+                <div class="rate-content">
+
+                    <div class="number-box">
+                        <div style="padding-top: 10px; width: 80px;">
+                            <div class="rate yellow">승률</div>
+                            <div class="rate">54.05%</div>
+                        </div>
+
+                        <div style="padding-top: 10px; width: 80px;">
+                            <div class="rate yellow">픽률</div>
+                            <div class="rate">0.79%</div>
+                        </div>
+
+                        <div style="padding-top: 10px; width: 80px;">
+                            <div class="rate yellow">벤율</div>
+                            <div class="rate">0.21</div>
+                        </div>
+
+                        <div style="padding-top: 10px; width: 165px;">
+                            <div class="rate yellow">PS스코어</div>
+                            <div class="rate" style="color: #FFFFFFA6;">12.9 패치 48.31</div>
+                            <div class="rate">12.10 패치 51.24</div>
+                        </div>
+                        <div style="padding-top: 10px; width: 140px;">
+                            <div class="rate yellow">챔피언순위</div>
+                            <div class="rate" style="color: #FFFFFFA6;">12.9 39등</div>
+                            <div class="rate">12.10 14등</div>
+                        </div>
+                        <div style="padding-top: 10px; width: 230px; display: flex; flex-wrap: wrap;">
+                            <div class="rate yellow">주로 선택하는 포지션</div>
+                            <div class="rate" style="width: 33.3%;">
+                                <p>미드</p>
+                                <span style="color: #FFFFFFA6;">46.86%</span>
+                            </div>
+                            <div class="rate" style="width: 33.3%;">
+                                <p>서폿</p>
+                                <span style="color: #FFFFFFA6;">32.15%</span>
+                            </div>
+                            <div class="rate" style="width: 33.3%;">
+                                <p>탑</p>
+                                <span style="color: #FFFFFFA6;">10.85%</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="rune-item-skill-container">
+                    <div class="main-rune">
+                        <div class="rune-summary">
+                            <h4 style="margin: 0; color: #ae9056">메인룬</h4>
+                        <div class="rune-select">
+                            <img src="../Images/rune/지배/d_r_1.png" alt="img">
+                            <img src="../Images/aatrox.jpg" alt="img">
+                            <img src="../Images/aatrox.jpg" alt="img">
+                            <img src="../Images/aatrox.jpg" alt="img">
+                        </div>
+                        <div class="rune-select">
+                            <img src="../Images/aatrox.jpg" alt="img">
+                            <img src="../Images/aatrox.jpg" alt="img">
+                            <img src="../Images/aatrox.jpg" alt="img">
+                        </div>
+                        <div class="rune-select">
+                            <img src="../Images/aatrox.jpg" alt="img">
+                            <img src="../Images/aatrox.jpg" alt="img">
+                            <img src="../Images/aatrox.jpg" alt="img">
+                        </div>
+                        <div class="rune-select">
+                            <img src="../Images/aatrox.jpg" alt="img">
+                            <img src="../Images/aatrox.jpg" alt="img">
+                            <img src="../Images/aatrox.jpg" alt="img">
+                            <img src="../Images/aatrox.jpg" alt="img">
+                        </div>
+                        <div class="rune-select">
+                            <span style="color:#FFFFFFA6">승률 <span class="yellow">54.98%</span></span>
+                        </div>
+                        <div class="rune-select">
+                            <span style="color:#FFFFFFA6">게임 수 <span class="yellow">291</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sub-rune">
+                    <div class="rune-summary">
+                        <h4 style="margin: 0; color: #ae9056">보조룬</h4>
+                        <div class="rune-select">
+                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                        </div>
+                        <div class="rune-select">
+                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                        </div>
+                        <div class="rune-select">
+                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                        </div>
+
+                        <div style="padding-top: 30px;">
+                            <div class="rune-select">
+                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                            </div>
+                            <div class="rune-select">
+                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                            </div>
+                            <div class="rune-select">
+                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-skill-summary">
+                    <div class="item-core-summary">
+                        <div class="item-core-summary-items">
+                            1코어
+                            <img src="../Images/garen.png" alt="img">
+                            or
+                            <img src="../Images/garen.png" alt="img">
+                            or
+                            <img src="../Images/garen.png" alt="img">
+                        </div>
+                        <div class="item-core-summary-items">
+                            2코어
+                            <img src="../Images/garen.png" alt="img">
+                            or
+                            <img src="../Images/garen.png" alt="img">
+                            or
+                            <img src="../Images/garen.png" alt="img">
+                        </div>
+                        <div class="item-core-summary-items">
+                            3코어
+                            <img src="../Images/garen.png" alt="img">
+                            or
+                            <img src="../Images/garen.png" alt="img">
+                            or
+                            <img src="../Images/garen.png" alt="img">
+                        </div>
+                    </div>
+
+                    <div class="skill-summary-container">
+                        <div class="skill-summary">
+                            <div class="skill-seq-row">
+                                <div class="skill-title">Q</div>
+                                <img src="../Images/anne1.jpg" alt="img">
+                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">1</div>
+                                <div class="skill-box yellow-background">2</div>
+                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">3</div>
+                                <div class="skill-box">4</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">5</div>
+                                <div class="skill-box">6</div>
+                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">7</div>
+                                <div class="skill-box">8</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">0</div>
+                                <div class="skill-box">9</div>
+                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">9</div>
+                                <div class="skill-box">1</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                <div class="skill-box yellow-background">1</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                            </div>
+                            <div class="skill-seq-row">
+                                <div class="skill-title">W</div>
+                                <img src="../Images/anne1.jpg" alt="img">
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                <div class="skill-box">2</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">3</div>
+                                <div class="skill-box yellow-background">4</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">5</div>
+                                <div class="skill-box yellow-background">6</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">7</div>
+                                <div class="skill-box">8</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">0</div>
+                                <div class="skill-box">9</div>
+                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">9</div>
+                                <div class="skill-box">1</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                <div class="skill-box">1</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                            </div>
+                            <div class="skill-seq-row">
+                                <div class="skill-title">E</div>
+                                <img src="../Images/anne1.jpg" alt="img">
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                <div class="skill-box">2</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">3</div>
+                                <div class="skill-box">4</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">5</div>
+                                <div class="skill-box">6</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">7</div>
+                                <div class="skill-box">8</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">0</div>
+                                <div class="skill-box">9</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">9</div>
+                                <div class="skill-box">1</div>
+                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">1</div>
+                                <div class="skill-box">1</div>
+                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">1</div>
+                            </div>
+                            <div class="skill-seq-row">
+                                <div class="skill-title">R</div>
+                                <img src="../Images/anne1.jpg" alt="img">
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                <div class="skill-box">2</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">3</div>
+                                <div class="skill-box">4</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">5</div>
+                                <div class="skill-box yellow-background">6</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">7</div>
+                                <div class="skill-box">8</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">0</div>
+                                <div class="skill-box yellow-background">9</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">9</div>
+                                <div class="skill-box">1</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                <div class="skill-box">1</div>
+                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-mastar-summary">
+                        <div class="good-skill-master">
+                            <p>스킬 마스터 순서</p>
+                            <img src="../Images/icon_search.webp" alt="img">
+                            <img src="../Images/icon_search.webp" alt="img">
+                            <img src="../Images/icon_search.webp" alt="img">
+                        </div>
+                        <div class="good-spell">
+                            <p>추천 스펠</p>
+                            <img src="../Images/flash.png" alt="img">
+                            <img src="../Images/heal.png" alt="img">
+                        </div>
+                        <div class="good-start-item">
+                            <p>스펠</p>
+                            <img src="../Images/flash.png" alt="img">
+                            <img src="../Images/heal.png" alt="img">
+                        </div>
+                        <div class="good-shoes">
+                            <p>신발</p>
+                            <img src="../Images/flash.png" alt="img">
+                        </div>
+                        <div class="good-core">
+                            <p>코어템</p>
+                            <img src="../Images/heal.png" alt="img">
+                            <img src="../Images/heal.png" alt="img">
+                            <img src="../Images/heal.png" alt="img">
+                            <img src="../Images/heal.png" alt="img">
+                            <img src="../Images/heal.png" alt="img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+
+        <div style="width: 100%; height: 600px;"></div>
+
+        <div class="champ-nav">
+            <a class="champ-nav-items champ-nav-active" href="/champ/statistics">챔피언 통계</a>
+            <a class="champ-nav-items" href="/champ">기본 정보</a>
+            <a class="champ-nav-items" href="/champ/patch">패치 히스토리</a>
+        </div>
+
+        <div class="champ-match-container" id="counter">
+            <div class="title">
+                <span>상대 챔피언 VS</span>
+                <span th:text="${name}"></span>
+            </div>
+            <div class="champ-match">
+                <div class="match-list">
+                    <h4>상대하기 어려움</h4>
+<!--                    상대하기 어려움 리스트-->
+                </div>
+                <div class="match-list">
+                    <h4>상대하기 쉬움</h4>
+<!--                    상대하기 쉬움 리스트-->
+                </div>
+            </div>
+        </div>
+
+        <div class="content-container" id="spell-startitem">
+            <div class="spell-items">
+                <div class="title">스펠, 아이템 선택</div>
+                <div class="spell-item-content">
+                    <div class="spell-box">
+                        <h4 style="padding:5px">스펠</h4>
+                        <div class="number">
+                            <span class="number-items">승률</span>
+                            <span class="number-items">선택률</span>
+                            <span class="number-items">카운트수</span>
+                        </div>
+                        <ul class="spell-list" id="spell-list">
+<!--                            스펠 통계 들어가는 곳-->
+                        </ul>
+                    </div>
+                    <div class="spell-box">
+                        <h4 style="padding:5px">스타트 아이템</h4>
+                        <div class="number">
+                            <span class="number-items">승률</span>
+                            <span class="number-items">선택률</span>
+                            <span class="number-items">카운트수</span>
+                        </div>
+                        <ul class="spell-list" id="start-item-list">
+<!--                          스타트아이템 들어가는 곳-->
+                        </ul>
+                    </div>
+                    <div class="spell-box" style="border-right: none;">
+                        <h4 style="padding:5px">신발</h4>
+                        <div class="number">
+                            <span class="number-items">승률</span>
+                            <span class="number-items">선택률</span>
+                            <span class="number-items">카운트수</span>
+                        </div>
+                        <ul class="spell-list" id="shoes-list">
+<!--                            신발 들어가는곳-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-container core-each" id="coreitem">
+            <div class="spell-items">
+                <div class="title">코어템 통계</div>
+                <div class="spell-item-content">
+                    <div class="spell-box">
+                        <h4 style="padding:5px">1코어</h4>
+                        <div class="number">
+                            <span class="number-items">승률</span>
+                            <span class="number-items">선택률</span>
+                            <span class="number-items">카운트수</span>
+                        </div>
+                        <ul class="spell-list">
+                            <li class="list-items gray">
+                                <div class="spell">
+                                    <img src="../Images/spell/flash.png" alt="img">
+                                </div>
+                                <div class="spell-percent">
+                                    <span style="width: 23.3%;">52.44</span>
+                                    <span style="width: 23.3%;">76.39</span>
+                                    <span style="width: 23.3%;">1,556</span>
+                                </div>
+                            </li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                        </ul>
+                    </div>
+                    <div class="spell-box">
+                        <h4 style="padding:5px">2코어</h4>
+                        <div class="number">
+                            <span class="number-items">승률</span>
+                            <span class="number-items">선택률</span>
+                            <span class="number-items">카운트수</span>
+                        </div>
+                        <ul class="spell-list">
+                            <li class="list-items gray">
+                                <div class="spell">
+                                    <img src="../Images/spell/flash.png" alt="img">
+                                </div>
+                                <div class="spell-percent">
+                                    <span style="width: 23.3%;">52.44</span>
+                                    <span style="width: 23.3%;">76.39</span>
+                                    <span style="width: 23.3%;">1,556</span>
+                                </div>
+                            </li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                        </ul>
+                    </div>
+                    <div class="spell-box" style="border-right: none;">
+                        <h4 style="padding:5px;">3코어</h4>
+                        <div class="number">
+                            <span class="number-items">승률</span>
+                            <span class="number-items">선택률</span>
+                            <span class="number-items">카운트수</span>
+                        </div>
+                        <ul class="spell-list">
+                            <li class="list-items gray">
+                                <div class="spell">
+                                    <img src="../Images/spell/flash.png" alt="img">
+                                </div>
+                                <div class="spell-percent">
+                                    <span style="width: 23.3%;">52.44</span>
+                                    <span style="width: 23.3%;">76.39</span>
+                                    <span style="width: 23.3%;">1,556</span>
+                                </div>
+                            </li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-container core-combine">
+            <div class="spell-items">
+                <div class="title">코어템 조합 통계</div>
+                <div class="spell-item-content">
+                    <div class="spell-box">
+                        <h4 style="padding:5px">2코어 조합</h4>
+                        <div class="number">
+                            <span class="number-items">승률</span>
+                            <span class="number-items">선택률</span>
+                            <span class="number-items">카운트수</span>
+                        </div>
+                        <ul class="spell-list">
+                            <li class="list-items gray">
+                                <div class="spell">
+                                    <img src="../Images/spell/flash.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                </div>
+                                <div class="spell-percent">
+                                    <span style="width: 23.3%;">52.44</span>
+                                    <span style="width: 23.3%;">76.39</span>
+                                    <span style="width: 23.3%;">1,556</span>
+                                </div>
+                            </li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                            <li class="list-items "></li>
+                            <li class="list-items gray"></li>
+                            <li class="list-items"></li>
+                        </ul>
+                    </div>
+                    <div class="spell-box">
+                        <h4 style="padding:5px">3코어 조합</h4>
+                        <div class="number">
+                            <span class="number-items">승률</span>
+                            <span class="number-items">선택률</span>
+                            <span class="number-items">카운트수</span>
+                        </div>
+                        <ul class="spell-list">
+                            <li class="list-items gray">
+                                <div class="spell">
+                                    <img src="../Images/spell/flash.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                </div>
+                                <div class="spell-percent">
+                                    <span style="width: 23.3%;">52.44</span>
+                                    <span style="width: 23.3%;">76.39</span>
+                                    <span style="width: 23.3%;">1,556</span>
+                                </div>
+                            </li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                        </ul>
+                    </div>
+                    <div class="spell-box" style="border-right: none;">
+                        <h4 style="padding:5px;">4코어 조합</h4>
+                        <div class="number">
+                            <span class="number-items">승률</span>
+                            <span class="number-items">선택률</span>
+                            <span class="number-items">카운트수</span>
+                        </div>
+                        <ul class="spell-list">
+                            <li class="list-items gray">
+                                <div class="spell">
+                                    <img src="../Images/spell/flash.png" alt="img">
+                                    <img src="../Images/spell/flash.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                </div>
+                                <div class="spell-percent">
+                                    <span style="width: 23.3%;">52.44</span>
+                                    <span style="width: 23.3%;">76.39</span>
+                                    <span style="width: 23.3%;">1,556</span>
+                                </div>
+                            </li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-container skill" id="skills">
+            <div class="spell-items">
+                <div class="title">스킬</div>
+                <div class="spell-item-content">
+                    <div class="spell-box" style="border-right: none; width: 35%;">
+                        <h4 style="padding:5px">마스터 순서</h4>
+                        <div class="number">
+                            <span class="number-items">승률</span>
+                            <span class="number-items">선택률</span>
+                            <span class="number-items">카운트수</span>
+                        </div>
+                        <ul class="spell-list">
+                            <li class="list-items border-bottom">
+                                <div class="spell">
+                                    <img src="../Images/spell/flash.png" alt="img">
+                                    <img src="../Images/spell/flash.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                </div>
+                                <div class="spell-percent">
+                                    <span style="width: 23.3%;">52.44</span>
+                                    <span style="width: 23.3%;">76.39</span>
+                                    <span style="width: 23.3%;">1,556</span>
+                                </div>
+                            </li>
+                            <li class="list-items border-bottom"></li>
+                            <li class="list-items border-bottom"></li>
+                            <li class="list-items border-bottom"></li>
+                            <li class="list-items border-bottom"></li>
+                        </ul>
+                    </div>
+                    <div class="spell-box" style="border-right: none; width: 65%; padding: 12px 12px;">
+                        <div class="what-level-container">
+                            <span class="what-level what-level-active">3레벨 까지</span>
+                            <span class="what-level">6레벨 까지</span>
+                            <span class="what-level">11레벨 까지</span>
+                        </div>
+                        <div class="number">
+                            <span class="number-items">승률</span>
+                            <span class="number-items">선택률</span>
+                            <span class="number-items">카운트수</span>
+                        </div>
+                        <ul class="spell-list">
+                            <li class="list-items border-bottom">
+                                <div class="spell">
+                                    <img src="../Images/spell/flash.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                </div>
+                                <div class="spell-percent" style="width: 40%;">
+                                    <span style="width: 23.3%;">52.44</span>
+                                    <span style="width: 23.3%;">76.39</span>
+                                    <span style="width: 23.3%;">1,556</span>
+                                </div>
+                            </li>
+                            <li class="list-items border-bottom"></li>
+                            <li class="list-items border-bottom"></li>
+                            <li class="list-items border-bottom"></li>
+                            <li class="list-items border-bottom"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-container rune" id="runes">
+            <div class="spell-items">
+                <div class="title">룬</div>
+                <div class="spell-item-content">
+                    <div class="spell-box" style="width: 60%; padding: 15px;">
+                        <h4 style="padding:5px">조합별 통계</h4>
+                        <div class="number">
+                            <span class="number-items">승률</span>
+                            <span class="number-items">선택률</span>
+                            <span class="number-items">카운트수</span>
+                        </div>
+                        <ul class="spell-list">
+                            <li class="list-items gray">
+                                <div class="spell">
+                                    <img src="../Images/spell/flash.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                </div>
+                                <div class="spell-percent" style="width: 45%;">
+                                    <span style="width: 23.3%;">52.44</span>
+                                    <span style="width: 23.3%;">76.39</span>
+                                    <span style="width: 23.3%;">1,556</span>
+                                </div>
+                            </li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                        </ul>
+                    </div>
+                    <div class="spell-box" style="border-right: none; width: 40%; padding: 15px;">
+                        <h4 style="padding:5px">파편 조합 통계</h4>
+                        <div class="number">
+                            <span class="number-items">승률</span>
+                            <span class="number-items">선택률</span>
+                            <span class="number-items">카운트수</span>
+                        </div>
+                        <ul class="spell-list">
+                            <li class="list-items gray">
+                                <div class="spell">
+                                    <img src="../Images/spell/flash.png" alt="img">
+                                    <img src="../Images/spell/exhaust.png" alt="img">
+                                </div>
+                                <div class="spell-percent">
+                                    <span style="width: 23.3%;">52.44</span>
+                                    <span style="width: 23.3%;">76.39</span>
+                                    <span style="width: 23.3%;">1,556</span>
+                                </div>
+                            </li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                            <li class="list-items"></li>
+                            <li class="list-items gray"></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="statistics-continer">
-        <div class="champ-summary">
-            <div class="header-box">
-                <div class="champ-head"></div>
-                <div class="build"></div>
-                <div class="conter"></div>
-            </div>
-
-            <div class="content">
-                <div class="number-box">
-                    <div class="number"></div>
-                    <div class="number"></div>
-                    <div class="number"></div>
-                    <div class="number"></div>
-                    <div class="number"></div>
-                    <div class="number"></div>
-                </div>
-
-                <div>
-                    
-                </div>
-            </div>
-        </div>
-
-    </div>
-
     
     <div class="top-button">
         <span style="color: #6c757d;">UP</span>

@@ -1,21 +1,21 @@
 package com.korea.teamps.controller;
 
 import com.korea.teamps.domain.Member;
+import com.korea.teamps.repository.MemberRepository;
 import com.korea.teamps.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MemberController {
-    private MemberService memberService;
+    private MemberRepository memberRepository;
 
     @Autowired
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
+    public MemberController(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
+
 
     @GetMapping("/login")
     public String logIn() {
@@ -27,9 +27,10 @@ public class MemberController {
         return "signin";
     }
 
-    @PostMapping("signin")
+    @PostMapping("/signin")
+    @ResponseBody
     public String create(@RequestBody Member member) {
-        memberService.join(member);
-        return "redirect:/";
+        memberRepository.save(member);
+        return "test";
     }
 }

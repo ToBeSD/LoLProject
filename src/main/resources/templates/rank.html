@@ -5,8 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>yg_ac</title>
+    <link rel="stylesheet" href="/common/all.css">
     <link rel="stylesheet" href="/rank/rank.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -38,8 +40,9 @@
         <div class="main-content">
             <p>챔피언 랭킹</p>
             <span class="main-content-item main-content-active">라인별 챔피언 티어</span>
-            <span class="main-content-item">챔피언 리스트</span>
-            <input class="main-input" type="text" placeholder="챔피언 이름을 입력하세요">
+            <form action="/champ/statistics" method="post">
+                <input class="main-input" type="text" name="name" placeholder="챔피언 이름을 입력하세요">
+            </form>
             <div style="clear: both;"></div>
         </div>
     </div>
@@ -48,7 +51,7 @@
 
     </div>
 
-    <div class="champ-rank-container">
+    <div class="champ-rank-container" id="line-champ">
         <div class="champ-rank">
             <h3 style="color: #213a86; margin: 0; font-size: 16px;">라인별 챔피언 티어</h3>
             <p style = "color: rgba(47,62,78,.7); font-size : 12px; margin-top: 10px; margin-bottom: 40px;">
@@ -57,7 +60,7 @@
 
             <ul class="position">
                 <li class="position-button active">탑</li>
-                <li class="position-button">정글</il>
+                <li class="position-button">정글</li>
                 <li class="position-button">미드</li>
                 <li class="position-button">원딜</li>
                 <li class="position-button">서폿</li>

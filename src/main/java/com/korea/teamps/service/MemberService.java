@@ -21,7 +21,7 @@ public class MemberService {
     //회원 가입
     public void join(Member member) {
 //        validateDuplicateMember(member); // 중복 회원 검증
-        memberRepository.save(member.getEmail(), member.getPassword(), member.getNickName());
+//        memberRepository.save(member);
     }
 
     private void validateDuplicateMember(Member member) {
