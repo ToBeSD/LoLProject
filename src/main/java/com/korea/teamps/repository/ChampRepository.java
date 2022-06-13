@@ -9,6 +9,30 @@ import java.util.List;
 
 @Mapper
 public interface ChampRepository {
+    @Select("select t.* , image.IMAGE_FULL\n" +
+            "from (\n" +
+            "    select tier.name,\n" +
+            "           tier.line,\n" +
+            "           tier.win_rate                            w,\n" +
+            "           tier_before.win_rate                     w_before,\n" +
+            "           (tier_before.win_rate - tier.win_rate)   win_vari,\n" +
+            "           tier.pick_rate                           p,\n" +
+            "           tier_before.pick_rate                    p_before,\n" +
+            "           (tier_before.pick_rate - tier.pick_rate) pick_vari,\n" +
+            "           tier.ban_rate                            b,\n" +
+            "           tier_before.ban_rate                     b_before,\n" +
+            "           (tier_before.ban_rate - tier.ban_rate)   ban_vari\n" +
+            "    from c_champ_tier tier,\n" +
+            "         c_champ_tier_before tier_before\n" +
+            "    where tier.name = tier_before.name\n" +
+            "      and tier.line = tier_before.line\n" +
+            ") t, CHAMP_SKILL image\n" +
+            "where t.name = image.na                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           me\n" +
+            " and( t.win_vari > 2 or t.win_vari < -2.5 )\n" +
+            " and ROWNUM < 9\n" +
+            "order by win_vari desc")
+    List<ChampMainCard> findMainCard();
+
     @Select("select * from C_BASICSTAT where name = #{name}")
     List<ChampBasicStat> findBasicStat(@Param("name") String name);
 

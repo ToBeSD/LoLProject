@@ -14,10 +14,16 @@ public interface MemberRepository {
 
 
     @Insert("INSERT INTO member VALUES (SQ_MEMBER.NEXTVAL, #{email}, #{password}, #{nickname}, null, null, null)")
-    void save(Member member);
+    void
+
+
+    save(Member member);
+
+    @Select("SELECT * FROM member WHERE email = #{email} and pw = #{password}")
+    Optional<Member> findMember(Member member);
 
     @Select("SELECT * FROM member WHERE email = #{email}")
-    Optional<Member> findByEmail(@Param("email") String email);
+    Optional<Member> findByEmail(String email);
 
     List<Member> findAll();
 }

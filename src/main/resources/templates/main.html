@@ -38,55 +38,59 @@
 
             <form action="/champ/statistics" method="post" id="search_form">
                 <div class="searchbar">
-                    <input class="main-input" type="text" name="name" placeholder="챔피언 이름을 입력하세요">
+                    <div style="width: 560px;">
+                        <input type="text" name="name" placeholder="챔피언 이름을 입력하세요">
+                    </div>
                     <button type="submit">
                         <img src="/main/icon_search.webp" style="width: 20px; height: 20px;">
                     </button>
                 </div>
-            </form>
 
-            <div class="realtime">
-                <span class="realspan">실시간 검색어</span>
-                <img src="/main/icon_chevron-white.png" alt="img" style="float : right;">
-                <div class="word_wrapper">
-                    <ul id="realtime_search">
-                        <a class="realtime_word" href="">
-                            <li><span>1</span>탈리야</li>
-                        </a>
-                        <a class="realtime_word" href="">
-                            <li><span>2</span>루시안</li>
-                        </a>
-                        <a class="realtime_word" href="">
-                            <li><span>3</span>세나</li>
-                        </a>
-                        <a class="realtime_word" href="">
-                            <li><span>4</span>올라프</li>
-                        </a>
-                        <a class="realtime_word" href="">
-                            <li><span>5</span>이즈리얼</li>
-                        </a>
-                        <a class="realtime_word" href="">
-                            <li><span>6</span>카이사</li>
-                        </a>
-                        <a class="realtime_word" href="">
-                            <li><span>7</span>그레이브즈</li>
-                        </a>
-                        <a class="realtime_word" href="">
-                            <li><span>8</span>아리</li>
-                        </a>
-                        <a class="realtime_word" href="">
-                            <li><span>9</span>아칼리</li>
-                        </a>
-                        <a class="realtime_word" href="">
-                            <li><span>10</span>스웨인</li>
-                        </a>
-                    </ul>
+                <div class="realtime">
+                    <span class="realspan">실시간 검색어</span>
+                    <img src="/main/icon_chevron-white.png" alt="img" style="float : right;">
+                    <div class="word_wrapper">
+                        <ul id="realtime_search">
+                            <a class="realtime_word" href="">
+                                <li><span>1</span>탈리야</li>
+                            </a>
+                            <a class="realtime_word" href="">
+                                <li><span>2</span>루시안</li>
+                            </a>
+                            <a class="realtime_word" href="">
+                                <li><span>3</span>세나</li>
+                            </a>
+                            <a class="realtime_word" href="">
+                                <li><span>4</span>올라프</li>
+                            </a>
+                            <a class="realtime_word" href="">
+                                <li><span>5</span>이즈리얼</li>
+                            </a>
+                            <a class="realtime_word" href="">
+                                <li><span>6</span>카이사</li>
+                            </a>
+                            <a class="realtime_word" href="">
+                                <li><span>7</span>그레이브즈</li>
+                            </a>
+                            <a class="realtime_word" href="">
+                                <li><span>8</span>아리</li>
+                            </a>
+                            <a class="realtime_word" href="">
+                                <li><span>9</span>아칼리</li>
+                            </a>
+                            <a class="realtime_word" href="">
+                                <li><span>10</span>스웨인</li>
+                            </a>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 
+        <button class="left">왼쪽</button>
+        <button class="right">오른쪽</button>
         <h3  style="color: #fff;">주목해야 할 챔피언 (KR) <small style="color: darkgray;">05-24 10:46 기준</small></h3>
-        <div style="overflow: hidden;">
+        <div style="overflow: hidden; position: absolute; bottom: 0;">
             <div class="mainslide_container" style="color: #fff;">
 <!--                <div class="swiper-wrapper">-->
 <!--                    <div class="swiper-slide">-->
@@ -133,66 +137,11 @@
 <!--                    </div>-->
 <!--                </div>-->
 
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">베인<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">루시안<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">제이스<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">가렌<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">나르<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">탐켄치<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">모데카이저<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </main>
 
     <div style="height: 300px;"></div>
-    <button class="left">왼쪽</button>
-    <button class="right">오른쪽</button>
 
     <div class="community-container">
         <div class="community">

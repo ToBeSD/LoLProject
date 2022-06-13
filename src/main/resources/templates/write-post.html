@@ -50,51 +50,49 @@
     <main>
 		<div class="whiteDiv"></div>
       	<!-- 포스트 -->  	
-      	<div class="post-detail">
-      		<!-- 제목 -->
-      		<div class="title">
-      			<div style="font-size:15px; color:#7e9bff; padding-bottom:20px;"><b>게시물 쓰기</b></div>
-      			<div style="height:20px;"></div>
+        <form id="community-form" method="post" onsubmit="return;">
+            <div class="post-detail">
+                <!-- 제목 -->
+                <div class="title">
+                    <div style="font-size:15px; color:#7e9bff; padding-bottom:20px;"><b>게시물 쓰기</b></div>
+                    <div style="height:20px;"></div>
 
-                 <form method="post">
+                        <span style="font-size:15px;"><b>제목</b></span>
 
-                    <span style="font-size:15px;"><b>제목</b></span>
+                        <input style="width:678px; border: 1px solid rgb(126, 155, 255);" class="input-title" id="title" name="title"/>
 
-                    <input style="width:678px; border: 1px solid rgb(126, 155, 255);" class="input-title"/>
+                        <div style="height:50px;"></div>
 
-                    <div style="height:50px;"></div>
+                        <span style="font-size:15px;"><b>카테고리</b></span>
 
-                    <span style="font-size:15px;"><b>카테고리</b></span>
+                        <select style="width:700px; border-color:rgb(126, 155, 255);" class="input-title" id="community-select">
+                                <option>--------</option>
+                                <option >빌드 연구소</option>
+                                <option>자유 게시판</option>
+                        </select>
+                        <!-- 내용 -->
 
-                    <select style="width:700px; border-color:rgb(126, 155, 255);" class="input-title">
-                            <option>--------</option>
-                            <option>빌드 연구소</option>
-                            <option>자유 게시판</option>
-                    </select>
-                    <!-- 내용 -->
+                        <div style="height:50px;"></div>
 
-                    <div style="height:50px;"></div>
+                        <div style="padding:20px 0px;">
+                            <div style="font-size:15px;"><b>본문</b></div>
+                            <div style="height:20px;"></div>
+                            <!-- form 안에 에디터를 사용하는 경우 (보통 이경우를 많이 사용하는듯)-->
+                                <textarea style="resize: none;" id="summernote" class="summernote" name="content"></textarea>
+                        </div>
+                </div>
 
-                    <div style="padding:20px 0px;">
-                        <div style="font-size:15px;"><b>본문</b></div>
-                        <div style="height:20px;"></div>
-                        <!-- form 안에 에디터를 사용하는 경우 (보통 이경우를 많이 사용하는듯)-->
-                            <textarea style="resize: none;" id="summernote" class="summernote" name="editordata"></textarea>
-			        </div>
-                </form>
-      		</div>
-			
-			<div class="complete-btn-div">
-				<div style="font-size:12px; color: darkgray;">
-					※ 저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시글은 이용약관 및 관련법률에 의해 제재를</br>
-					받으실 수 있습니다.
-				</div>
-				<div style="padding-left: 250px;">
-					<button class="complete-btn" onClick="history.back()">작성완료</button>
-				</div>
-			</div>
-			
-        </div>
+                <div class="complete-btn-div">
+                    <div style="font-size:12px; color: darkgray;">
+                        ※ 저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시글은 이용약관 및 관련법률에 의해 제재를</br>
+                        받으실 수 있습니다.
+                    </div>
+                    <div style="padding-left: 250px;">
+                        <button class="submit-button" onClick="history.back()">작성완료</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </main>
 	
 	<!-- 하단고정 -->

@@ -19,6 +19,7 @@ a:active {
 }
 
 .main {
+    position: relative;
     padding-top : 7vh;
     width: 100vw;
     height: 85vh;
@@ -31,16 +32,18 @@ a:active {
 
 .search {
     height: 12vh;
-    margin: 80px 372px 24px;
+    margin: 80px 500px 24px;
+    min-width: 920px;
 }
 
 .search input {
+    position: absolute;
     border: none;
     border-radius: 4px 0px 0px 4px;
     outline: none;
     height: 32px;
     margin-right: 48px;
-    width: 100%;
+    width: 90%;
     padding: 8px 12px;
     font-size: 16px;
     color: #213a96;
@@ -49,9 +52,8 @@ a:active {
 
 .searchbar {
     position: relative;
-    display: flex;
-    width: 71%;
-    min-width: 562px;
+    display: inline-block;
+    width: 560px;
     height: 48px;
     border-radius: 4px;
     margin: 0;
@@ -60,6 +62,7 @@ a:active {
 
 .searchbar button {
     position: absolute;
+    right: 0;
     padding: 13px 14px 15px;
     width: 48px;
     height: 48px;
@@ -67,7 +70,6 @@ a:active {
     border-radius: 0px 4px 4px 0px;
     outline: none;
     background-color: #fff;
-    right : 0;
     font-size: 12px;
     transition: all 300ms;
     cursor: pointer;
@@ -89,17 +91,15 @@ a:active {
 }
 
 .realtime {
-    position: absolute;
+    display: inline-block;
     width: 275px;
     height: 70px;
     background: rgba(255,255,255,.08);
-    position: relative;
-    left: 514px;
-    top: -70px;
     border-radius: 4px;
     color: rgba(255,255,255,.65);
     font-size: 12px;
     padding: 8px 8px 8px 64px;
+    transform: translate(-15%, 0%);
 }
 
 .realtime a {
@@ -144,11 +144,10 @@ ul {
 }
 
 .mainslide_container {
-    position: relative;
-    overflow: hidden;
+    display: flex;
     width: 300vw;
     height: 400px;
-    padding: 15px 0px;
+    padding-top: 0;
     transition: all ease 250ms;
 }
 
@@ -156,16 +155,14 @@ ul {
     box-sizing: content-box;
     width: 650px;
     height: 420px;
-    z-index: 1;
-    float: left;
+    transform: translate(0%,-3.5%);
 }
 
 .swiper-wrapper-small {
-    float: left;
     box-sizing: content-box;
     width: 210px;
     height: 420px;
-    z-index: 1;
+    transform: translate(0%,-5%);
 }
 
 .swiper-slide {
@@ -178,7 +175,6 @@ ul {
 
 
 .slide-image {
-    background-image: url('../image/champfull/aatrox.jpg');
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
@@ -186,11 +182,10 @@ ul {
     width: 40%;
     height: 400px;
     z-index: 10;
-    box-shadow: 0px 4px 8px rgb(0 0 0 / 50%);
+    box-shadow: 0px 4px 8px rgba(184, 184, 184, 0.5);
 }
 
 .slide-image-small {
-    background-image: url('../image/champfull/aatrox.jpg');
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
@@ -200,7 +195,12 @@ ul {
     height: 250px;
     bottom: 3.5%;
     z-index: 10;
-    box-shadow: 4px 4px 8px rgb(0 0 0 / 50%);
+    box-shadow: 0px 4px 8px rgba(184, 184, 184, 0.5);
+}
+
+.small-img {
+    width: 100%;
+    height: 100%;
 }
 
 .champion-name {
@@ -222,7 +222,7 @@ ul {
     height: 400px;
     background : linear-gradient(0deg, #1F2331 10%, rgba(0, 0, 0, 0.3) 100%);
     border-radius: 0px 8px 8px 0px;
-    box-shadow: 4px 4px 8px rgb(0 0 0 / 50%);
+    box-shadow: 0px 4px 8px rgba(184, 184, 184, 0.5);
     padding: 20px 20px 20px 20px;
 }
 
@@ -288,12 +288,10 @@ h2 {
 .champ-link {
     width: 115px;
     height: 16.8px;
-    padding: 5px 7px;
+    padding: 5px 8px;
     color: #3d69ff;
     background-color: #fff;
     border-radius: 6px;
-    float: right;
-    margin-top: 40px;
     font-size: 15px;
     font-weight: 600;
 }
@@ -381,18 +379,4 @@ h2 {
 .post-like {
     font-weight: 600;
     color: #3d69ff;
-}
-
-@media (min-width: 455px) {
-    .header-mainnav {
-        min-width: 1280px;
-        height: 40px;
-    }
-
-    .header-container {
-        min-width: 1280px;
-        width: 100%;
-        max-width: 1680px;
-        justify-content: flex-start;
-    }
 }

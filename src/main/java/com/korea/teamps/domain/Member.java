@@ -20,7 +20,6 @@ public class Member {
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getPassword() {
         return password;
     }
@@ -36,4 +35,6 @@ public class Member {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
+
 }

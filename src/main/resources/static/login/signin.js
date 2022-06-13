@@ -5,30 +5,36 @@ const emailInput = signInForm.querySelector('input[name=email]');
 const passwordInput = signInForm.querySelector('input[name=password]');
 const passwordConfirmInput = signInForm.querySelector('input[name=password-confirm]')
 
-const eamilPattern = new RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);
+const emailPattern = new RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);
 const passwordPattern = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/)
 
 const emailPtag = document.querySelector('#email-p');
 const passwordPtag = document.querySelector('#password-p');
 const passwordConfirmPtag = document.querySelector('#password-confirm-p');
 
+function validationTest(pattern, input) {
+    if(pattern.test(input.value)) {
+        return true;
+    }else {
+        return false;
+    }s
+}
+
 emailInput.addEventListener('change', (e) => {
-    if(eamilPattern.test(emailInput.value) == true) {
+    if(validationTest(emailPattern, emailInput)) {
         emailPtag.innerHTML = "";
     }else{
         emailPtag.innerHTML = '올바른 이메일 형식을 입력하세요!!'
-        emailInput.value='';
         emailInput.focus();
         return;
     }
 })
 
 passwordInput.addEventListener('change', (e) => {
-    if(passwordPattern.test(passwordInput.value) == true) {
+    if(validationTest(passwordPattern, passwordInput)) {
         passwordPtag.innerHTML = "";
     }else{
         passwordPtag.innerHTML = '숫자, 알파벳, 특수문자를 포함하셔야 합니다!!';
-        passwordInput.value='';
         passwordInput.focus();
         return;
     }
@@ -43,13 +49,17 @@ passwordConfirmInput.addEventListener('change', () => {
 })
 
 submitBtn.addEventListener('click', () => {
-    $.ajax({
-        type: "POST",
-        url: '/signin',
-        data: JSON.stringify(signInForm.toObject()),
-        contentType : 'application/json',
-        success: function () {
-            console.log('success')
-        },
-    })
+    if(validationTest(emailPattern, emailInput) && validationTest(passwordPattern, passwordInput)) {
+        $.ajax({
+            type: "POST",
+            url: '/signin',
+            data: JSON.stringify(signInForm.toObject()),
+            contentType : 'application/json',
+            success: function () {
+                console.log('success')
+            },
+        })
+    }else {
+        console.log('적절한 이메일, 비밀번호가 아닙니다.')
+    }
 })

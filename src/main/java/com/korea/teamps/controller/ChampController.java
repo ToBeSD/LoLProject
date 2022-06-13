@@ -25,10 +25,15 @@ public class ChampController {
     }
 
 
+//    @GetMapping("/champ")
+//    @ResponseBody
+//    public List<ChampBasicStat> champ(@RequestParam("name") String champName) {
+//        return champRepository.findBasicStat(champName);
+//    }
+
     @GetMapping("/champ")
-    @ResponseBody
-    public List<ChampBasicStat> champ(@RequestParam("name") String champName) {
-        return champRepository.findBasicStat(champName);
+    public String champ() {
+        return "basic-info.html";
     }
 
     @GetMapping("/champ/patch")

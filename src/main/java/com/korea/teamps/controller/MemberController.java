@@ -1,7 +1,6 @@
 package com.korea.teamps.controller;
 
 import com.korea.teamps.domain.Member;
-import com.korea.teamps.repository.MemberRepository;
 import com.korea.teamps.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,17 +8,24 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MemberController {
-    private MemberRepository memberRepository;
+
+    private MemberService memberService;
 
     @Autowired
-    public MemberController(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
     }
 
 
+
     @GetMapping("/login")
-    public String logIn() {
+    public String logInPage() {
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String tryLogIn(@RequestBody Member member) {
+        return "my-page";
     }
 
     @GetMapping("/signin")
@@ -28,9 +34,8 @@ public class MemberController {
     }
 
     @PostMapping("/signin")
-    @ResponseBody
     public String create(@RequestBody Member member) {
-        memberRepository.save(member);
-        return "test";
+        memberService.join(member);
+        return "main";
     }
 }

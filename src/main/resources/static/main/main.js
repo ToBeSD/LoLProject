@@ -1,5 +1,4 @@
 const realtime = document.getElementById('realtime_search');
-const realWrapper = document.querySelector('.word_wrapper');
 
 let count = 1;
 
@@ -12,13 +11,33 @@ const slideRealtime = setInterval(() => {
         count = 1;
     }
 
-}, 4000);
+}, 1000);
 
-realtime.addEventListener('click', () => {
-    realWrapper.style.overflow = 'visible';
-    clearInterval(slideRealtime);
-})
+$.ajax({
+    type: "GET",
+    url: '/maincard',
+    dataType: 'JSON',
+    contentType : 'application/json',
+    success: function (data) {
+        let smallCard;
+        for(let i = 0; i < data.length; i++) {
+            smallCard +=`        
+                        <div class="swiper-wrapper-small">
+                            <div class="swiper-slide">
+                                <div class="slide-image-small">
+                                    <img class="small-img" src="/image/champfull/${data[i].image}">
+                                    <h3 class="champion-name">${data[i].name}<small>(${data[i].line})</small></h3>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+        }
+        $('.mainslide_container').append(smallCard);
 
+
+
+    },
+});
 
 let card = `
         <div class="swiper-wrapper">
@@ -58,33 +77,98 @@ let card = `
                         <p style="font-size: 12px;">최근 패치에서 아트록스의 승률이 -1% 하락하였습니다. 곧 구체적인 원인을 분석하여 업데이트 될 예정입니다.</p>
                     </div>
 
-                    <div style="width:135px; padding: 50px 0px 0px 220px;">
-                        <a class="champ-link" href="#">챔피언 상세정보 →</a>
+                    <div style="width:135px; padding: 50px 0px 0px 200px;">
+                        <a class="champ-link">챔피언 상세정보 →</a>
                     </div>
                 </div>
             </div>
         </div>`;
 
-$('.swiper-wrapper-small').eq(4).click(() => {
-    $('.swiper-wrapper-small').eq(4).css({display : 'none'});
-    $('.swiper-wrapper').remove();
-
-    $('.swiper-wrapper-small').eq(5).css({display : 'block'});
-    $('.swiper-wrapper-small').eq(3).after(card);
-})
-
-$('.swiper-wrapper-small').eq(5).click(() => {
-    $('.swiper-wrapper-small').eq(4).css({display : 'block'});
-    $('.swiper-wrapper').remove();
-
-    $('.swiper-wrapper-small').eq(5).css({display: 'none'});
-    $('.swiper-wrapper-small').eq(4).after(card);
-})
-
-
 const left = document.querySelector('.left');
 const right = document.querySelector('.right');
-const container = document.querySelector('.mainslide_container')
+
+$('.mainslide_container').on('click', (e) => {
+    console.log(e.target)
+    if(e.target === $('.swiper-wrapper-small')) {
+        $('.swiper-wrapper-small').css({display: 'block'});
+        e.target.css({display: 'none'});
+        $('.swiper-wrapper').remove();
+    }
+});
+
+
+
+
+// $('.swiper-wrapper-small').eq(0).on('click', () => {
+//     $('.swiper-wrapper-small').css({display: 'block'});
+//     $('.swiper-wrapper-small').eq(0).css({display : 'none'});
+//     $('.swiper-wrapper').remove();
+//
+//     $('.mainslide_container').prepend(card);
+// })
+//
+// $('.swiper-wrapper-small').eq(1).on('click', () => {
+//     $('.swiper-wrapper-small').css({display: 'block'});
+//     $('.swiper-wrapper-small').eq(1).css({display : 'none'});
+//     $('.swiper-wrapper').remove();
+//
+//     $('.mainslide_container').prepend(card);
+// })
+//
+// $('.swiper-wrapper-small').eq(2).on('click', () => {
+//     $('.swiper-wrapper-small').css({display: 'block'});
+//     $('.swiper-wrapper-small').eq(2).css({display : 'none'});
+//     $('.swiper-wrapper').remove();
+//
+//     $('.mainslide_container').prepend(card);
+// })
+//
+// $('.swiper-wrapper-small').eq(3).on('click', () => {
+//     $('.swiper-wrapper-small').css({display: 'block'});
+//     $('.swiper-wrapper-small').eq(3).css({display : 'none'});
+//     $('.swiper-wrapper').remove();
+//
+//     $('.mainslide_container').prepend(card);
+// })
+//
+// $('.swiper-wrapper-small').eq(4).on('click', () => {
+//     $('.swiper-wrapper-small').css({display: 'block'});
+//     $('.swiper-wrapper-small').eq(4).css({display : 'none'});
+//     $('.swiper-wrapper').remove();
+//
+//     $('.mainslide_container').prepend(card);
+// })
+//
+// $('.swiper-wrapper-small').eq(5).on('click', () => {
+//     $('.swiper-wrapper-small').css({display: 'block'});
+//     $('.swiper-wrapper-small').eq(5).css({display : 'none'});
+//     $('.swiper-wrapper').remove();
+//
+//     $('.mainslide_container').prepend(card);
+// })
+// $('.swiper-wrapper-small').eq(6).on('click', () => {
+//     $('.swiper-wrapper-small').css({display: 'block'});
+//     $('.swiper-wrapper-small').eq(6).css({display : 'none'});
+//     $('.swiper-wrapper').remove();
+//
+//     $('.mainslide_container').prepend(card);
+// })
+//
+// $('.swiper-wrapper-small').eq(7).on('click', () => {
+//     $('.swiper-wrapper-small').css({display: 'block'});
+//     $('.swiper-wrapper-small').eq(7).css({display : 'none'});
+//     $('.swiper-wrapper').remove();
+//
+//     $('.mainslide_container').prepend(card);
+// })
+//
+// $('.swiper-wrapper-small').eq(8).on('click', () => {
+//     $('.swiper-wrapper-small').css({display: 'block'});
+//     $('.swiper-wrapper-small').eq(8).css({display : 'none'});
+//     $('.swiper-wrapper').remove();
+//
+//     $('.mainslide_container').prepend(card);
+// })
 
 let cardSlide = 0;
 
@@ -107,3 +191,21 @@ left.addEventListener('click', () => {
         console.log(cardSlide)
     }
 })
+
+
+
+
+const goStatistics = document.querySelector('.champ-link');
+
+// $.ajax({
+//     type: "POST",
+//     url: '/champ/statistics',
+//     data: JSON.stringify(signInForm.toObject()),
+//     contentType : 'application/json',
+//     success: function () {
+//         console.log('success')
+//     },
+// })
+
+
+
