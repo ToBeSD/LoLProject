@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>yg_ac</title>
+    <title>메인페이지</title>
     <link rel="stylesheet" href="/common/all.css">
     <link rel="stylesheet" href="/main/main.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
-    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -36,7 +35,7 @@
     <main class="main">
         <div class="search">
 
-            <form action="/champ/statistics" method="post" id="search_form">
+            <form action="/champ/statistics" method="post" id="search_form" style="z-index:11; position : relative;">
                 <div class="searchbar">
                     <div style="width: 560px;">
                         <input type="text" name="name" placeholder="챔피언 이름을 입력하세요">
@@ -49,38 +48,58 @@
                 <div class="realtime">
                     <span class="realspan">실시간 검색어</span>
                     <img src="/main/icon_chevron-white.png" alt="img" style="float : right;">
-                    <div class="word_wrapper">
+                    <div class="word_wrapper overflow">
                         <ul id="realtime_search">
-                            <a class="realtime_word" href="">
-                                <li><span>1</span>탈리야</li>
-                            </a>
-                            <a class="realtime_word" href="">
-                                <li><span>2</span>루시안</li>
-                            </a>
-                            <a class="realtime_word" href="">
-                                <li><span>3</span>세나</li>
-                            </a>
-                            <a class="realtime_word" href="">
-                                <li><span>4</span>올라프</li>
-                            </a>
-                            <a class="realtime_word" href="">
-                                <li><span>5</span>이즈리얼</li>
-                            </a>
-                            <a class="realtime_word" href="">
-                                <li><span>6</span>카이사</li>
-                            </a>
-                            <a class="realtime_word" href="">
-                                <li><span>7</span>그레이브즈</li>
-                            </a>
-                            <a class="realtime_word" href="">
-                                <li><span>8</span>아리</li>
-                            </a>
-                            <a class="realtime_word" href="">
-                                <li><span>9</span>아칼리</li>
-                            </a>
-                            <a class="realtime_word" href="">
-                                <li><span>10</span>스웨인</li>
-                            </a>
+                            <li>
+                            	<a class="realtime_word realtime-color-white" href="javascript:void(0);" onclick="callFunction();">
+                                	<span>1</span>탈리야
+                            	</a>
+                            </li>
+                            <li>
+                            	<a class="realtime_word realtime-color-white" href="javascript:void(0);" onclick="callFunction();">
+                                	<span>2</span>샤코
+                            	</a>
+                            </li>
+                            <li>
+                            	<a class="realtime_word realtime-color-white" href="javascript:void(0);" onclick="callFunction();">
+                                	<span>3</span>이즈리얼
+                            	</a>
+                            </li>
+                            <li>
+                            	<a class="realtime_word realtime-color-white" href="javascript:void(0);" onclick="callFunction();">
+                                	<span>4</span>탐켄치
+                            	</a>
+                            </li>
+                            <li>
+                            	<a class="realtime_word realtime-color-white" href="javascript:void(0);" onclick="callFunction();">
+                                	<span>5</span>일라오이
+                            	</a>
+                            </li>
+                            <li>
+                            	<a class="realtime_word realtime-color-white" href="javascript:void(0);" onclick="callFunction();">
+                                	<span>6</span>쉬바나 
+                            	</a>                    
+                            </li>                       
+                            <li>                        
+                            	<a class="realtime_word realtime-color-white" href="javascript:void(0);" onclick="callFunction();">
+                                	<span>7</span>트위치 
+                            	</a>                    
+                            </li>                       
+                            <li>                        
+                            	<a class="realtime_word realtime-color-white" href="javascript:void(0);" onclick="callFunction();">
+                                	<span>8</span>신지드 
+                            	</a>                    
+                            </li>                       
+                            <li>                        
+                            	<a class="realtime_word realtime-color-white" href="javascript:void(0);" onclick="callFunction();">
+                                	<span>9</span>오리 아나
+                            	</a>                    
+                            </li>                       
+                            <li>                        
+                            	<a class="realtime_word realtime-color-white" href="javascript:void(0);" onclick="callFunction();">
+                                	<span>10</span>쉔
+                            	</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -90,8 +109,8 @@
         <button class="left">왼쪽</button>
         <button class="right">오른쪽</button>
         <h3  style="color: #fff;">주목해야 할 챔피언 (KR) <small style="color: darkgray;">05-24 10:46 기준</small></h3>
-        <div style="overflow: hidden; position: absolute; bottom: 0;">
-            <div class="mainslide_container" style="color: #fff;">
+        <div style="overflow: hidden; position: relative;">
+            <div class="mainslide_container" style="color: #fff; z-index: 1;">
 <!--                <div class="swiper-wrapper">-->
 <!--                    <div class="swiper-slide">-->
 <!--                        <div class="slide-image">-->
@@ -128,7 +147,7 @@
 <!--                                <h4>주목해야 할 포인트</h4>-->
 <!--                                <p style="font-size: 12px;">최근 패치에서 아트록스의 승률이 -1% 하락하였습니다. 곧 구체적인 원인을 분석하여 업데이트 될 예정입니다.</p>-->
 <!--                            </div>-->
-<!--                            <div style="width: 332px; height: 60px">-->
+<!--                            <div style="width:135px; padding: 10px 0px 0px 170px;">-->
 <!--                                <div class="champ-link">-->
 <!--                                    <a href="#">챔피언 상세정보</a>-->
 <!--                                </div>-->
@@ -137,11 +156,65 @@
 <!--                    </div>-->
 <!--                </div>-->
 
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">베인<small>(탑)</small></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">루시안<small>(탑)</small></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">제이스<small>(탑)</small></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">가렌<small>(탑)</small></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">나르<small>(탑)</small></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">탐켄치<small>(탑)</small></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-wrapper-small">
+                    <div class="swiper-slide">
+                        <div class="slide-image-small">
+                            <h3 class="champion-name">모데카이저<small>(탑)</small></h3>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
     <div style="height: 300px;"></div>
+
 
     <div class="community-container">
         <div class="community">
@@ -340,7 +413,7 @@
         </div>
 
     </footer>
-<script src="/common/all.js"></script>
 <script src="/main/main.js"></script>
+<script src="/common/all.js"></script>
 </body>
 </html>

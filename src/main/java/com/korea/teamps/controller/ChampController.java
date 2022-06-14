@@ -33,14 +33,24 @@ public class ChampController {
 
     @GetMapping("/champ")
     public String champ() {
-        return "basic-info.html";
+        return "basic-info";
     }
 
     @GetMapping("/champ/patch")
-    @ResponseBody
-    public List<ChampPatchHistory> patchHistories(@RequestParam("name") String champName) {
-        return champRepository.findPatchHistory(champName);
+    public String patchHistory() {
+        return "patch-history";
     }
+
+    @GetMapping("/champ/community")
+    public String community() {
+        return "champ-community";
+    }
+
+//    @GetMapping("/champ/patch")
+//    @ResponseBody
+//    public List<ChampPatchHistory> patchHistories(@RequestParam("name") String champName) {
+//        return champRepository.findPatchHistory(champName);
+//    }
 
     @PostMapping("/champ/statistics")
     public String statistics(@RequestParam("name") String name, Model model) {

@@ -60,6 +60,10 @@ a:active {
     top: 0;
 }
 
+.searchbar-padding-bottom {
+	padding-bottom: 261px;
+}
+
 .searchbar button {
     position: absolute;
     right: 0;
@@ -83,11 +87,14 @@ a:active {
 .word_wrapper {
     position: relative;
     height: 31px;
-    overflow: hidden;
     margin-top: 12px;
     margin-right: 5px;
     z-index: 0;
     transition: all 400ms;
+}
+
+.overflow {
+	overflow: hidden;
 }
 
 .realtime {
@@ -105,13 +112,20 @@ a:active {
 .realtime a {
     display: block;
     position: relative;
-    color: #fff;
     font-weight: 700;
     padding: 5px;
     padding-left: 32px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.realtime-color-white {
+	color: white;
+}
+
+.realtime-color-black {
+	color: black;
 }
 
 .realtime li span {
@@ -138,9 +152,13 @@ ul {
     transition: all ease .4s;
 }
 
+.background-white {
+	background-color: white;
+	color: black;
+}
+
 .realtime_word {
     text-decoration: none;
-    color: #fff;
 }
 
 .mainslide_container {
@@ -153,16 +171,15 @@ ul {
 
 .swiper-wrapper {
     box-sizing: content-box;
-    width: 650px;
-    height: 420px;
-    transform: translate(0%,-3.5%);
+    width: 600px;
+    height: 0px;
 }
 
 .swiper-wrapper-small {
     box-sizing: content-box;
     width: 210px;
-    height: 420px;
-    transform: translate(0%,-5%);
+    height: 400px;
+    transform: translate(0%,-10%);
 }
 
 .swiper-slide {
@@ -173,19 +190,20 @@ ul {
     border-radius: 8px;
 }
 
-
 .slide-image {
+    background-image: url('../Images/champion/full/aatrox.jpg');
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
     border-radius: 8px 0px 0px 8px;
     width: 40%;
-    height: 400px;
+    height: 347px;
     z-index: 10;
     box-shadow: 0px 4px 8px rgba(184, 184, 184, 0.5);
 }
 
 .slide-image-small {
+    background-image: url('../Images/champion/full/aatrox.jpg');
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
@@ -196,11 +214,6 @@ ul {
     bottom: 3.5%;
     z-index: 10;
     box-shadow: 0px 4px 8px rgba(184, 184, 184, 0.5);
-}
-
-.small-img {
-    width: 100%;
-    height: 100%;
 }
 
 .champion-name {
@@ -219,7 +232,7 @@ ul {
     box-sizing: border-box;
     position: relative;
     width: 60%;
-    height: 400px;
+    height: 347px;
     background : linear-gradient(0deg, #1F2331 10%, rgba(0, 0, 0, 0.3) 100%);
     border-radius: 0px 8px 8px 0px;
     box-shadow: 0px 4px 8px rgba(184, 184, 184, 0.5);
@@ -286,7 +299,7 @@ h2 {
 }
 
 .champ-link {
-    width: 115px;
+    width: 120px;
     height: 16.8px;
     padding: 5px 8px;
     color: #3d69ff;
