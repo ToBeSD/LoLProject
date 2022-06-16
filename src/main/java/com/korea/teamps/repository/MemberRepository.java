@@ -17,7 +17,7 @@ public interface MemberRepository {
     void save(Member member);
 
     @Select("SELECT * FROM member WHERE email = #{email} and pw = #{password}")
-    Optional<Member> findMember(Member member);
+    Member findMember(Member member);
 
     @Select("SELECT * FROM member WHERE email = #{email}")
     Optional<Member> findByEmail(String email);

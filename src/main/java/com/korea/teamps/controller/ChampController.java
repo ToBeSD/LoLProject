@@ -52,8 +52,8 @@ public class ChampController {
 //        return champRepository.findPatchHistory(champName);
 //    }
 
-    @PostMapping("/champ/statistics")
-    public String statistics(@RequestParam("name") String name, Model model) {
+    @GetMapping("/champ/statistics")
+    public String getStatistics(@RequestParam("name") String name, Model model) {
         model.addAttribute("name", name);
         return "statistics";
     }
@@ -74,16 +74,4 @@ public class ChampController {
     public List<ChampRank> champAllRanks() {
         return champRepository.findAllChampRank();
     }
-
-//    @PostMapping("/champ/statistics/champname")
-//    @ResponseBody
-//    public ChampName postChampName(@RequestBody ChampName champName) {
-//        return champRepository.findChampName(champName);
-//    }
-//
-//    @GetMapping("/champ/statistics/champname")
-//    @ResponseBody
-//    public ChampName getChampName(ChampName champName) {
-//        return champRepository.findChampName(champName);
-//    }
 }

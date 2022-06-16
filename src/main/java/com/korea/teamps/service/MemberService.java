@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +17,7 @@ public class MemberService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
     private final MemberRepository memberRepository;
 
     @Autowired
@@ -25,7 +28,6 @@ public class MemberService {
     //회원 가입
     public void join(Member member) {
 //        validateDuplicateMember(member); // 중복 회원 검증
-
         memberRepository.save(passwordEncoder(member));
     }
     
@@ -47,15 +49,27 @@ public class MemberService {
     }
 
     //로그인
-    public void logIn(Member member) {
-        Optional<Member> result = memberRepository.findMember(member);
+    public void logIn(HttpServletRequest request, Member inputMember) {
+        Member realMember = memberRepository.findMember(inputMember);
 
-//        result.isPresent(m -> {
-//
-//        })
+        if(isValidEmailPassword(inputMember, realMember)) {
+            HttpSession session = request.getSession(true);
 
+            session.setAttribute("USER", realMember);
+        }
+    }
+
+    //로그아웃
+    public void logOut(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+            session.invalidate();
+        }
     }
 
     //비밀번호 비교
-
+    private boolean isValidEmailPassword(Member inputMember, Member realMember) {
+        boolean matches = passwordEncoder.matches(inputMember.getPassword(),realMember.getPassword());
+        return false;
+    }
 }

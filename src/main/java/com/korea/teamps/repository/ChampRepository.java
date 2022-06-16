@@ -81,21 +81,92 @@ public interface ChampRepository {
             "and craw.line = '탑'")
     List<ChampItemSelect> findByNameSpell(ChampItemSelect champItemSelect);
 
-    @Select("select craw.name, craw.line, image.IMAGE pick1, image2.IMAGE pick2, craw.WIN_RATE, craw.PICK_RATE, craw.COUNT\n" +
+    @Select("select craw.name, craw.line, image.IMAGE pick1, nvl(image2.IMAGE, '없음') pick2, craw.WIN_RATE, craw.PICK_RATE, craw.COUNT\n" +
             "from C_SPELL_ITEM craw, ITEM_INFO image, ITEM_INFO image2\n" +
             "where craw.pick1 = image.name\n" +
-            "and craw.pick2 = image2.name\n" +
-            "and craw.CATEGORY = '스타트아이템'\n" +
+            "and nvl(craw.pick2, '없음') = image2.name\n" +
+            "and craw.CATEGORY = '스타트 아이템'\n" +
             "and craw.name = #{name}\n" +
             "and craw.line = '탑'")
     List<ChampItemSelect> findByNameStartItem(ChampItemSelect champItemSelect);
 
-    @Select("select craw.name, craw.line, image.IMAGE pick1, image2.IMAGE pick2, craw.WIN_RATE, craw.PICK_RATE, craw.COUNT\n" +
+    @Select("select craw.name, craw.line, image.IMAGE pick1, nvl(image2.IMAGE, '없음') pick2, craw.WIN_RATE, craw.PICK_RATE, craw.COUNT\n" +
             "from C_SPELL_ITEM craw, ITEM_INFO image, ITEM_INFO image2\n" +
             "where craw.pick1 = image.name\n" +
-            "and craw.pick2 = image2.name\n" +
+            "and nvl(craw.pick2, '없음') = image2.name\n" +
             "and craw.CATEGORY = '신발'\n" +
             "and craw.name = #{name}\n" +
             "and craw.line = '탑'")
     List<ChampItemSelect> findByNameShoes(ChampItemSelect champItemSelect);
+
+    @Select("select craw.name, craw.line, craw.rank, image.IMAGE item, craw.WIN_RATE, craw.PICK_RATE, craw.COUNT\n" +
+            "from C_CORE_EACH craw, ITEM_INFO image\n" +
+            "where craw.pick = image.name\n" +
+            "and craw.name = #{name}\n" +
+            "and craw.rank = #{rank}\n" +
+            "and craw.line = '탑'")
+    List<ChampCoreEach> findByCoreCoreEach(ChampCoreEach champCoreEach);
+
+    @Select("select craw.name, craw.line, craw.RANK, image1.IMAGE item1, image2.IMAGE item2, nvl(image3.IMAGE, '없음') item3, nvl(image4.IMAGE, '없음') item4, craw.WIN_RATE, craw.PICK_RATE, craw.COUNT\n" +
+            "from C_CORE_COMBINE craw, ITEM_INFO image1, ITEM_INFO image2, ITEM_INFO image3, ITEM_INFO image4\n" +
+            "where craw.pick1 = image1.name\n" +
+            "  and craw.pick2 = image2.name\n" +
+            "  and nvl(craw.pick3, '없음') = image3.name\n" +
+            "  and nvl(craw.pick4, '없음') = image4.name\n" +
+            "  and craw.name = #{name}\n" +
+            "  and craw.rank = #{rank}\n" +
+            "  and craw.line = '탑'")
+    List<ChampCoreCombine> findByCoreCoreCombine(ChampCoreCombine champCoreCombine);
+
+    @Select("select craw.name, craw.line, image1.image skill1, image2.image skill2, image3.image skill3, craw.WIN_RATE, craw.PICK_RATE, craw.COUNT\n" +
+            "from C_SKILL_MASTER craw, SKILL_INFO image1, SKILL_INFO image2, SKILL_INFO image3\n" +
+            "where craw.pick1 = image1.name\n" +
+            "  and craw.pick2 = image2.name\n" +
+            "  and craw.pick3 = image3.name\n" +
+            "  and craw.name = #{name}\n" +
+            "  and craw.line = '탑'")
+    List<ChampSkillMaster> findByNameSkillMaster(ChampSkillMaster champSkillMaster);
+
+    @Select("select craw.name, craw.line, image1.image skill1, image2.image skill2, image3.image skill3, nvl(image4.image, '없음') skill4, nvl(image5.image, '없음') skill5,\n" +
+            "       nvl(image6.image, '없음') skill6, nvl(image7.image, '없음') skill7, nvl(image8.image, '없음') skill8, nvl(image9.image, '없음') skill9, nvl(image10.image, '없음') skill10,\n" +
+            "       nvl(image11.image, '없음') skill11,craw.WIN_RATE, craw.PICK_RATE, craw.COUNT, craw.what_level\n" +
+            "from C_SKILL_SEQ craw, SKILL_INFO image1, SKILL_INFO image2, SKILL_INFO image3, SKILL_INFO image4, SKILL_INFO image5, SKILL_INFO image6\n" +
+            "   , SKILL_INFO image7, SKILL_INFO image8, SKILL_INFO image9, SKILL_INFO image10, SKILL_INFO image11\n" +
+            "where craw.pick1 = image1.name\n" +
+            "  and craw.pick2 = image2.name\n" +
+            "  and craw.pick3 = image3.name\n" +
+            "  and nvl(craw.pick4, '없음') = image4.name\n" +
+            "  and nvl(craw.pick5, '없음') = image5.name\n" +
+            "  and nvl(craw.pick6, '없음') = image6.name\n" +
+            "  and nvl(craw.pick7, '없음') = image7.name\n" +
+            "  and nvl(craw.pick8, '없음') = image8.name\n" +
+            "  and nvl(craw.pick9, '없음') = image9.name\n" +
+            "  and nvl(craw.pick10, '없음') = image10.name\n" +
+            "  and nvl(craw.pick11, '없음') = image11.name\n" +
+            "  and craw.name = #{name}\n" +
+            "  and craw.line = '탑'\n" +
+            "  and craw.WHAT_LEVEL = ${whatLevel}")
+    List<ChampSkillSeq> findByNameSkillSeq(ChampSkillSeq champSkillSeq);
+
+    @Select("select craw.name, craw.line, image1.image skill1, image2.image skill2, image3.image skill3, image4.image skill4, image5.image skill5,\n" +
+            "       image6.image skill6, craw.WIN_RATE, craw.PICK_RATE\n" +
+            "from C_RUNE_COMBINE craw, RUNE_INFO image1, RUNE_INFO image2, RUNE_INFO image3, RUNE_INFO image4, RUNE_INFO image5, RUNE_INFO image6\n" +
+            "where craw.pick1 = image1.name\n" +
+            "  and craw.pick2 = image2.name\n" +
+            "  and craw.pick3 = image3.name\n" +
+            "  and craw.pick4 = image4.name\n" +
+            "  and craw.pick5 = image5.name\n" +
+            "  and craw.pick6 = image6.name\n" +
+            "  and craw.name = #{name}\n" +
+            "  and craw.line = '탑'")
+    List<ChampRuneCombine> findByNameRuneCombine(ChampRuneCombine champRuneCombine);
+
+    @Select("select craw.name, craw.line, image1.image pick1, image2.image pick2, image3.image pick3, craw.WIN_RATE, craw.PICK_RATE\n" +
+            "from C_RUNE_SHARD craw, RUNE_INFO image1, RUNE_INFO image2, RUNE_INFO image3\n" +
+            "where craw.pick1 = image1.name\n" +
+            "  and craw.pick2 = image2.name\n" +
+            "  and craw.pick3 = image3.name\n" +
+            "  and craw.name = #{name}\n" +
+            "  and craw.line = '탑'")
+    List<ChampRuneShard> findByNameRuneShard(ChampRuneShard champRuneShard);
 }

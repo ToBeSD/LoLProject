@@ -6,10 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class MemberController {
 
     private MemberService memberService;
+
+    @Autowired
+    HttpSession httpSession;
 
     @Autowired
     public MemberController(MemberService memberService) {
@@ -24,8 +30,15 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String tryLogIn(@RequestBody Member member) {
+    public String tryLogIn(HttpServletRequest request, @RequestBody Member member) {
+        memberService.logIn(request, member);
         return "my-page";
+    }
+
+    @PostMapping("/logout")
+    public String tryLogOut(HttpServletRequest request) {
+        memberService.logOut(request);
+        return "redirect:/";
     }
 
     @GetMapping("/signin")

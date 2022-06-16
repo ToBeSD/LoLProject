@@ -1,7 +1,6 @@
 package com.korea.teamps.controller;
 
-import com.korea.teamps.domain.ChampItemSelect;
-import com.korea.teamps.domain.ChampMatchLIst;
+import com.korea.teamps.domain.*;
 import com.korea.teamps.repository.ChampRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,5 +37,35 @@ public class ChampStatisticsController {
     @PostMapping("/champ/statistics/shoes")
     public List<ChampItemSelect> getShoes(@RequestBody ChampItemSelect champItemSelect) {
         return champRepository.findByNameShoes(champItemSelect);
+    }
+
+    @PostMapping("/champ/statistics/coreeach")
+    public List<ChampCoreEach> getCoreEach(@RequestBody ChampCoreEach champCoreEach) {
+        return champRepository.findByCoreCoreEach(champCoreEach);
+    }
+
+    @PostMapping("/champ/statistics/corecombine")
+    public List<ChampCoreCombine> getCoreCombine(@RequestBody ChampCoreCombine champCoreCombine) {
+        return champRepository.findByCoreCoreCombine(champCoreCombine);
+    }
+
+    @PostMapping("/champ/statistics/skillmaster")
+    public List<ChampSkillMaster> getSkillMaster(@RequestBody ChampSkillMaster champSkillMaster) {
+        return champRepository.findByNameSkillMaster(champSkillMaster);
+    }
+
+    @PostMapping("/champ/statistics/skillseq")
+    public List<ChampSkillSeq> getSkillSeq(@RequestBody ChampSkillSeq champSkillSeq) {
+        return champRepository.findByNameSkillSeq(champSkillSeq);
+    }
+
+    @PostMapping("/champ/statistics/runecombine")
+    public List<ChampRuneCombine> getRuneCombine(@RequestBody ChampRuneCombine champRuneCombine) {
+        return champRepository.findByNameRuneCombine(champRuneCombine);
+    }
+
+    @PostMapping("/champ/statistics/runeshard")
+    public List<ChampRuneShard> getRuneShard(@RequestBody ChampRuneShard champRuneShard) {
+        return champRepository.findByNameRuneShard(champRuneShard);
     }
 }

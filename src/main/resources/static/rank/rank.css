@@ -1,5 +1,9 @@
 * { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
 
+list-a:any-link {
+    color: rgba(47,62,78,.7);
+}
+
 body {
     position:relative;
     margin: 0;

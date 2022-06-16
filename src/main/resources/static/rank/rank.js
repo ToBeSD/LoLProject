@@ -22,7 +22,7 @@ $.ajax({
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
-        let list;
+        let list = '';
         for(let i = 0; i < data.length; i++) {
             list +=`
                <div class="list">
@@ -51,6 +51,7 @@ position.addEventListener('click', (e) => {
         midBtn.classList.remove('active');
         adBtn.classList.remove('active');
         supBtn.classList.remove('active');
+        allBtn.classList.remove('active')
 
         topBtn.classList.add('active');
 
@@ -63,7 +64,7 @@ position.addEventListener('click', (e) => {
             success: function (data) {
                 $('.champ-list').remove();
                 let champList = $("<div>").attr('class', 'champ-list');
-                let list;
+                let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
                        <div class="list">
@@ -106,7 +107,7 @@ position.addEventListener('click', (e) => {
             success: function (data) {
                 $('.champ-list').remove();
                 let champList = $("<div>").attr('class', 'champ-list');
-                let list;
+                let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
                        <div class="list">
@@ -148,7 +149,7 @@ position.addEventListener('click', (e) => {
             success: function (data) {
                 $('.champ-list').remove();
                 let champList = $("<div>").attr('class', 'champ-list');
-                let list;
+                let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
                        <div class="list">
@@ -191,7 +192,7 @@ position.addEventListener('click', (e) => {
             success: function (data) {
                 $('.champ-list').remove();
                 let champList = $("<div>").attr('class', 'champ-list');
-                let list;
+                let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
                        <div class="list">
@@ -233,7 +234,7 @@ position.addEventListener('click', (e) => {
             success: function (data) {
                 $('.champ-list').remove();
                 let champList = $("<div>").attr('class', 'champ-list');
-                let list;
+                let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
                        <div class="list">
@@ -271,9 +272,10 @@ position.addEventListener('click', (e) => {
             .done((data) => {
                 $('.champ-list').remove();
                 let champList = $("<div>").attr('class', 'champ-list');
-                let list;
+                let list = '';
                 for(let i = 0; i < data.length; i++) {
                      list +=`
+                     <a href="/champ/statistics?name=${data[i].name}" style="text-decoration: none">
                        <div class="list">
                             <span>${i + 1}</span>
                             <div style="width: 40px; padding: 0;">
@@ -287,7 +289,8 @@ position.addEventListener('click', (e) => {
                             <span class="list-number">${data[i].pickRate}</span>
                             <span class="list-number">${data[i].banRate}</span>
                             <span class="list-number">${data[i].count}</span>
-                        </div>`;
+                        </div>
+                     </a>`;
                 }
                 champList.append(list);
                 $('.champ-rank-container').append(champList);
