@@ -1,5 +1,5 @@
-const signInForm = document.querySelector('[name=signInForm]');
-const submitBtn = document.querySelector('#summit-button');
+const signInForm = document.querySelector('.login-form');
+const submitBtn = document.querySelector('#submit-button');
 
 submitBtn.addEventListener('click', () => {
     $.ajax({
@@ -12,3 +12,4 @@ submitBtn.addEventListener('click', () => {
         },
     })
 })
+

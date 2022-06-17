@@ -41,21 +41,25 @@ public class MemberService {
     }
 
     private void validateDuplicateMember(Member member) {
-        Optional<Member> result = memberRepository.findByEmail(member.getEmail());
+//        Optional<Member> result = memberRepository.findByEmail(member.getEmail());
 
-        result.ifPresent(m -> {
-            throw new IllegalStateException("이미 존재 하는 회원 입니다.");
-        });
+//        result.ifPresent(m -> {
+//            throw new IllegalStateException("이미 존재 하는 회원 입니다.");
+//        });
     }
 
     //로그인
-    public void logIn(HttpServletRequest request, Member inputMember) {
-        Member realMember = memberRepository.findMember(inputMember);
+    public boolean logIn(HttpServletRequest request, Member inputMember) {
+        Member realMember = memberRepository.findByEmail(inputMember.getEmail());
 
         if(isValidEmailPassword(inputMember, realMember)) {
             HttpSession session = request.getSession(true);
 
-            session.setAttribute("USER", realMember);
+            session.setAttribute("MEMBER", realMember);
+
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -69,7 +73,12 @@ public class MemberService {
 
     //비밀번호 비교
     private boolean isValidEmailPassword(Member inputMember, Member realMember) {
-        boolean matches = passwordEncoder.matches(inputMember.getPassword(),realMember.getPassword());
-        return false;
+        boolean matches = passwordEncoder.matches(inputMember.getPassword(), realMember.getPassword());
+
+        if(matches == true) {
+            return true;
+        }else {
+            return false;
+        }
     }
 }

@@ -591,14 +591,14 @@ $.ajax({
                 isGray = "gray"
             }
             list +=
-                `<li class="list-items ${isGray}">
-                    <div class="spell">
-                        <img src="../image/rune/${data[i].pick1}" alt="img">
-                        <img src="../image/rune/${data[i].pick2}" alt="img">
-                        <img src="../image/rune/${data[i].pick3}" alt="img">
-                        <img src="../image/rune/${data[i].pick4}" alt="img">
-                        <img src="../image/rune/${data[i].pick5}" alt="img">
-                        <img src="../image/rune/${data[i].pick6}" alt="img">
+                `<li class="list-items ${isGray}" style="height: 45px"> 
+                    <div class="spell" style="width: 75%">
+                        <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick1}" alt="img">
+                        <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick2}" alt="img">
+                        <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick3}" alt="img">
+                        <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick4}" alt="img">
+                        <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick5}" alt="img">
+                        <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick6}" alt="img">
                     </div>
                     <div class="spell-percent" style="width: 45%;">
                         <span style="width: 23.3%;">${data[i].winRate}</span>
@@ -626,7 +626,7 @@ $.ajax({
                 isGray = "gray"
             }
             list +=
-                `<li class="list-items ${isGray}">
+                `<li class="list-items ${isGray}" style="height: 45px">
                     <div class="spell">
                         <img src="../image/rune/${data[i].pick1}" alt="img">
                         <img src="../image/rune/${data[i].pick2}" alt="img">

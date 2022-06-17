@@ -15,14 +15,9 @@ public class MemberController {
     private MemberService memberService;
 
     @Autowired
-    HttpSession httpSession;
-
-    @Autowired
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
-
-
 
     @GetMapping("/login")
     public String logInPage() {
@@ -31,8 +26,11 @@ public class MemberController {
 
     @PostMapping("/login")
     public String tryLogIn(HttpServletRequest request, @RequestBody Member member) {
-        memberService.logIn(request, member);
-        return "my-page";
+        if(memberService.logIn(request, member)) {
+            return "redirect:/mypage";
+        }else {
+            return "redirect:/login";
+        }
     }
 
     @PostMapping("/logout")
@@ -50,5 +48,10 @@ public class MemberController {
     public String create(@RequestBody Member member) {
         memberService.join(member);
         return "main";
+    }
+
+    @GetMapping("/mypage")
+    public String mypage() {
+        return "my-page";
     }
 }

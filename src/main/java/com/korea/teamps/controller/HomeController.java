@@ -30,4 +30,9 @@ public class HomeController {
     public List<ChampMainCard> getMainCard() {
         return champService.attentionList();
     }
+
+    @GetMapping("/minigame")
+    public String minigame() {
+        return "minigame";
+    }
 }

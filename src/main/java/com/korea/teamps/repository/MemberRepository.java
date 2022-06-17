@@ -20,7 +20,7 @@ public interface MemberRepository {
     Member findMember(Member member);
 
     @Select("SELECT * FROM member WHERE email = #{email}")
-    Optional<Member> findByEmail(String email);
+    Member findByEmail(@Param("email") String email);
 
     List<Member> findAll();
 }

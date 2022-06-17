@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/login/login.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     
@@ -23,6 +24,7 @@
                 <a class="nav-items" href="/champ/rank">챔피언 랭킹</a>
                 <a class="nav-items" href="/community">자유게시판</a>
                 <a class="nav-items" href="/community/build">빌드연구소</a>
+                <a class="nav-items" href="/minigame">미니게임</a>
             </div>
             <div class="sign-login">
                 <a href="/signin">
@@ -47,8 +49,7 @@
                 <div class = "row">
                     <div class = "email_login_box"> 
                         <h3>이메일 로그인</h3>
-                        <form onsubmit="return;">
-                            <input type="hidden" name="csrfmiddlewaretoken" value="7HxOd1EHsTRdbB8LGU9AhEcjiPyXKw6HMAlOdG0UPnD8b8s0Ys2BKaMtsP9rRRLa">
+                        <form class="login-form" onsubmit="return false;">
                             <div class = "form-group">
                                 <label for="id_email">이메일 주소</label>
                                 <input type="email" name="email" class="form-control" placeholder="gamer@lol.ps" required="" id="id_email">
@@ -58,10 +59,10 @@
                                 <input type="password" name="password" class="form-control" placeholder="비밀번호" required="" id="id_password">
 
                             </div>
-                            <button type="submit" class="btn btn-lg btn-theme btn-big">이메일 계정 로그인</button>
+                            <button id="submit-button" type="submit" class="btn btn-lg btn-theme btn-big">이메일 계정 로그인</button>
                             <div class="text-center">
-                                <a href="/ko/member/find_id/" class="btn btn-lg btn-light-theme btn-small">이메일 찾기</a>
-                                <a href="/ko/member/recovery_password/" class="btn btn-lg btn-light-theme btn-small">비밀번호 찾기</a>
+                                <a href="#" class="btn btn-lg btn-light-theme btn-small">이메일 찾기</a>
+                                <a href="#" class="btn btn-lg btn-light-theme btn-small">비밀번호 찾기</a>
                             </div>
                         </form>
                     </div>
@@ -113,7 +114,7 @@
     </div>
 
 </footer>
-
+<script src="/common/common.js"></script>
 <script src="/common/all.js"></script>
 <script src="/login/login.js"></script>
 </body>
