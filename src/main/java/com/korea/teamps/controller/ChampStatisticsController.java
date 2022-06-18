@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController()
+@RequestMapping("/champ/statistics")
 public class ChampStatisticsController {
     private ChampRepository champRepository;
 
@@ -16,55 +17,60 @@ public class ChampStatisticsController {
         this.champRepository = champRepository;
     }
 
-    @PostMapping("/champ/statistics/hardmatch")
+    @PostMapping("/highpick")
+    public List<ChampHighPick> highPickList(@RequestBody ChampHighPick champHighPick) {
+        return champRepository.findByNameHighPick(champHighPick);
+    }
+
+    @PostMapping("/hardmatch")
     public List<ChampMatchLIst> hardMatchList(@RequestBody ChampMatchLIst champMatchLIst) {
         return champRepository.findByNameHardMatch(champMatchLIst);
     }
 
-    @PostMapping("/champ/statistics/easymatch")
+    @PostMapping("/easymatch")
     public List<ChampMatchLIst> easyMatchList(@RequestBody ChampMatchLIst champMatchLIst) {
         return champRepository.findByNameEasyMatch(champMatchLIst);
     }
 
-    @PostMapping("/champ/statistics/spell")
+    @PostMapping("/spell")
     public List<ChampItemSelect> getSpell(@RequestBody ChampItemSelect champItemSelect) {
         return champRepository.findByNameSpell(champItemSelect);
     }
-    @PostMapping("/champ/statistics/startitem")
+    @PostMapping("/startitem")
     public List<ChampItemSelect> getStartItem(@RequestBody ChampItemSelect champItemSelect) {
         return champRepository.findByNameStartItem(champItemSelect);
     }
-    @PostMapping("/champ/statistics/shoes")
+    @PostMapping("/shoes")
     public List<ChampItemSelect> getShoes(@RequestBody ChampItemSelect champItemSelect) {
         return champRepository.findByNameShoes(champItemSelect);
     }
 
-    @PostMapping("/champ/statistics/coreeach")
+    @PostMapping("/coreeach")
     public List<ChampCoreEach> getCoreEach(@RequestBody ChampCoreEach champCoreEach) {
         return champRepository.findByCoreCoreEach(champCoreEach);
     }
 
-    @PostMapping("/champ/statistics/corecombine")
+    @PostMapping("/corecombine")
     public List<ChampCoreCombine> getCoreCombine(@RequestBody ChampCoreCombine champCoreCombine) {
         return champRepository.findByCoreCoreCombine(champCoreCombine);
     }
 
-    @PostMapping("/champ/statistics/skillmaster")
+    @PostMapping("/skillmaster")
     public List<ChampSkillMaster> getSkillMaster(@RequestBody ChampSkillMaster champSkillMaster) {
         return champRepository.findByNameSkillMaster(champSkillMaster);
     }
 
-    @PostMapping("/champ/statistics/skillseq")
+    @PostMapping("/skillseq")
     public List<ChampSkillSeq> getSkillSeq(@RequestBody ChampSkillSeq champSkillSeq) {
         return champRepository.findByNameSkillSeq(champSkillSeq);
     }
 
-    @PostMapping("/champ/statistics/runecombine")
+    @PostMapping("/runecombine")
     public List<ChampRuneCombine> getRuneCombine(@RequestBody ChampRuneCombine champRuneCombine) {
         return champRepository.findByNameRuneCombine(champRuneCombine);
     }
 
-    @PostMapping("/champ/statistics/runeshard")
+    @PostMapping("/runeshard")
     public List<ChampRuneShard> getRuneShard(@RequestBody ChampRuneShard champRuneShard) {
         return champRepository.findByNameRuneShard(champRuneShard);
     }

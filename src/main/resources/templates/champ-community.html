@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -93,7 +93,7 @@
             <div class="champ-summary-header">
                 <div class="champ-head">
                     <div class="head">
-                        <img src="../Images/champion/head/twistedFate.png" alt="img">
+                        <img th:src="@{${'/image/champhead/' + headImage}}" alt="img">
                     </div>
                     <h1 style="font-weight: 400; font-size: 38px; margin: 0; width:100%; margin-top: 15px; margin-left: 190px;">트위스티드 페이트</h1>
                 </div>

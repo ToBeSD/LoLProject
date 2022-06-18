@@ -1,27 +1,20 @@
 package com.korea.teamps.domain;
 
 public class ChampBasicStat {
-    private String champName;
+    private String name;
     private String stat;
     private String statStart;
     private String statFinal;
     private String statRank;
 
-    ChampBasicStat(String champName, String stat, String statStart, String statFinal, String statRank) {
-        this.champName = champName;
+    ChampBasicStat(String name, String stat, String statStart, String statFinal, String statRank) {
+        this.name = name;
         this.stat = stat;
         this.statStart = statStart;
         this.statFinal = statFinal;
         this.statRank = statRank;
     }
 
-    public String getChampName() {
-        return champName;
-    }
-
-    public void setChampName(String champName) {
-        this.champName = champName;
-    }
 
     public String getStat() {
         return stat;
@@ -53,5 +46,13 @@ public class ChampBasicStat {
 
     public void setStatRank(String statRank) {
         this.statRank = statRank;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

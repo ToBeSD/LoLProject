@@ -1,6 +1,7 @@
 package com.korea.teamps.controller;
 
 import com.korea.teamps.domain.ChampBasicStat;
+import com.korea.teamps.domain.ChampName;
 import com.korea.teamps.domain.ChampPatchHistory;
 import com.korea.teamps.domain.ChampRank;
 import com.korea.teamps.repository.ChampRepository;
@@ -24,13 +25,6 @@ public class ChampController {
         this.champRepository = champRepository;
     }
 
-
-//    @GetMapping("/champ")
-//    @ResponseBody
-//    public List<ChampBasicStat> champ(@RequestParam("name") String champName) {
-//        return champRepository.findBasicStat(champName);
-//    }
-
     @GetMapping("/champ")
     public String champ() {
         return "basic-info";
@@ -46,15 +40,12 @@ public class ChampController {
         return "champ-community";
     }
 
-//    @GetMapping("/champ/patch")
-//    @ResponseBody
-//    public List<ChampPatchHistory> patchHistories(@RequestParam("name") String champName) {
-//        return champRepository.findPatchHistory(champName);
-//    }
-
     @GetMapping("/champ/statistics")
     public String getStatistics(@RequestParam("name") String name, Model model) {
+        ChampName champName = champRepository.findByNameHeadImage(name);
+        String headImage = champName.getHeadImage();
         model.addAttribute("name", name);
+        model.addAttribute("headImage", headImage);
         return "statistics";
     }
 

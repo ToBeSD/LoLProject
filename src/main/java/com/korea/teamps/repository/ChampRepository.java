@@ -34,7 +34,7 @@ public interface ChampRepository {
     List<ChampMainCard> findMainCard();
 
     @Select("select * from C_BASICSTAT where name = #{name}")
-    List<ChampBasicStat> findBasicStat(@Param("name") String name);
+    List<ChampBasicStat> findByNameBasicStat(@Param("name") String name);
 
     @Select("SELECT * FROM c_patch_history WHERE name = #{name}")
     List<ChampPatchHistory> findPatchHistory(@Param("name") String name);
@@ -53,6 +53,13 @@ public interface ChampRepository {
             "where tier.name = image.name\n" +
             "order by tier.PS_SCORE desc")
     List<ChampRank> findAllChampRank();
+
+    @Select("select * from C_HIGH_PICK where name = #{name}")
+    List<ChampHighPick> findByNameHighPick(ChampHighPick champHighPick);
+
+    @Select("select name, IMAGE_HEAD from CHAMP_SKILL where name = #{name}")
+    ChampName findByNameHeadImage(@Param("name") String name);
+
 
     @Select("select match.enemy name, match.COUNT count, match.WIN_RATE winRate, image.IMAGE_HEAD image\n" +
             "from C_CHAMP_MATCH match, CHAMP_SKILL image\n" +

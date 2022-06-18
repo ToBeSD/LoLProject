@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -82,11 +83,17 @@
 				<a class="nav-items" href="/minigame">미니게임</a>
 			</div>
 			<div class="sign-login">
-				<a href="/signin">
+				<a sec:authorize="" href="/signin">
 					<button class="signin">회원가입</button>
 				</a>
-				<a href="/login">
+				<a sec:authorize="" href="/login">
 					<button class="login">로그인</button>
+				</a>
+				<a sec:authorize="" href="/logout">
+					<button class="signin">로그아웃</button>
+				</a>
+				<a sec:authorize="" href="/mypage">
+					<button class="login">마이페이지</button>
 				</a>
 			</div>
 		</div>

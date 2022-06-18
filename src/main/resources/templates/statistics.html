@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/common/all.css">
+    <link rel="stylesheet" href="/statistics/statistics-main.css">
     <link rel="stylesheet" href="/statistics/statistics.css">
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <script src="/common/jquery-3.6.0.min.js"></script>
@@ -52,33 +53,7 @@
             </div>
             <div class="container">
                 <div class="line-and-input">
-                    <div class="select-line">
-                        <button class="line-button button-active" style="border-radius: 6px 0px 0px 6px;">
-                            <img src="/image/position/line-top.png" alt="img">
-                            <span>탑</span>
-                            <span>84.0%</span>
-                        </button>
-                        <button class="line-button">
-                            <img src="/image/position/line-jun.png" alt="img">
-                            <span>정글</span>
-                            <span>1.7%</span>
-                        </button>
-                        <button class="line-button">
-                            <img src="/image/position/line-mid.png" alt="img">
-                            <span>미드</span>
-                            <span>13.3%</span>
-                        </button>
-                        <button class="line-button">
-                            <img src="/image/position/line-bot.png" alt="img">
-                            <span>원딜</span>
-                            <span>0.5%</span>
-                        </button>
-                        <button class="line-button" style="border-radius: 0px 6px 6px 0px; border-right: none;">
-                            <img src="/image/position/line-sup.png" alt="img">
-                            <span>서폿</span>
-                            <span>0.4%</span>
-                        </button>
-                    </div>
+<!--                        라인별 승률 들어가는 곳-->
                     <div class="input-box">
                         <form action="/champ/statistics"  method="get">
                             <input class="main-input" type="text" name="name" placeholder="챔피언이름을 입력하세요"/>
@@ -93,7 +68,7 @@
             <div class="champ-summary-header">
                 <div class="champ-head">
                     <div class="head">
-                        <img src="/image/champhead/twistedFate.png" alt="img">
+                        <img th:src="@{${'/image/champhead/' + headImage}}" alt="img">
                     </div>
                     <h1 style="font-weight: 400; font-size: 38px; margin: 0; width:100%; margin-top: 15px; margin-left: 190px;" th:text="${name}"></h1>
                 </div>

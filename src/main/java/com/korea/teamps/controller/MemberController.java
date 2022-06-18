@@ -25,18 +25,20 @@ public class MemberController {
     }
 
     @PostMapping("/login")
+    @ResponseBody
     public String tryLogIn(HttpServletRequest request, @RequestBody Member member) {
         if(memberService.logIn(request, member)) {
-            return "redirect:/mypage";
+            return "/mypage";
         }else {
-            return "redirect:/login";
+            return "/login";
         }
     }
 
     @PostMapping("/logout")
+    @ResponseBody
     public String tryLogOut(HttpServletRequest request) {
         memberService.logOut(request);
-        return "redirect:/";
+        return "/";
     }
 
     @GetMapping("/signin")
