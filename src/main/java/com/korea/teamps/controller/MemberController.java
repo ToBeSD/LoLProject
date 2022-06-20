@@ -1,6 +1,9 @@
 package com.korea.teamps.controller;
 
+import com.korea.teamps.domain.CommunityDetail;
 import com.korea.teamps.domain.Member;
+import com.korea.teamps.domain.Profile;
+import com.korea.teamps.repository.MemberRepository;
 import com.korea.teamps.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class MemberController {
@@ -27,7 +31,7 @@ public class MemberController {
 
     @PostMapping("/login")
     @ResponseBody
-    public String tryLogIn(HttpServletRequest request,@RequestBody Member member) {
+    public String tryLogIn(HttpServletRequest request, @RequestBody Member member) {
         if(memberService.logIn(request, member)) {
             return "/mypage";
         }else {
@@ -53,10 +57,11 @@ public class MemberController {
     }
 
     @GetMapping("/mypage")
-    public String mypage(HttpSession session, Model model) {
-        Member member = (Member) session.getAttribute("MEMBER");
-        if(member != null) {
-            model.addAttribute("member", member);
+    public String mypage(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+            List<Profile> profileList = memberService.getAllProfile();
+            model.addAttribute("profileList", profileList);
             return "my-page";
         }
         return "login";

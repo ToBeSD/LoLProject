@@ -1,6 +1,6 @@
 package com.korea.teamps.domain;
 
-public class Community {
+public class CommunityDetail {
     private int bno;
     private String title;
     private String content;
@@ -9,10 +9,12 @@ public class Community {
     private int bad;
     private int count;
     private String category;
-    private String nickName;
+    private String introduce;
     private String image;
+    private String nickName;
 
-    public Community(int bno, String title, String content, String writeDate, int good, int bad, int count, String category, String nickName, String image) {
+
+    public CommunityDetail(int bno, String title, String content, String writeDate, int good, int bad, int count, String category, String introduce, String image, String nickName) {
         this.bno = bno;
         this.title = title;
         this.content = content;
@@ -21,8 +23,17 @@ public class Community {
         this.bad = bad;
         this.count = count;
         this.category = category;
-        this.nickName = nickName;
+        this.introduce = introduce;
         this.image = image;
+        this.nickName = nickName;
+    }
+
+    public int getBno() {
+        return bno;
+    }
+
+    public void setBno(int bno) {
+        this.bno = bno;
     }
 
     public String getTitle() {
@@ -81,12 +92,12 @@ public class Community {
         this.category = category;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getIntroduce() {
+        return introduce;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
     }
 
     public String getImage() {
@@ -97,11 +108,11 @@ public class Community {
         this.image = image;
     }
 
-    public int getBno() {
-        return bno;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setBno(int bno) {
-        this.bno = bno;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

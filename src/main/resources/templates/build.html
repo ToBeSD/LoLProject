@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/community/community.css">
     <link rel="stylesheet" href="/community/community-main.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+    <script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <!-- 위에 navbar 부분입니다 -->
@@ -26,18 +27,18 @@
                 <a class="nav-items" href="/minigame">미니게임</a>
             </div>
             <div class="sign-login">
-                <a th:if="${member} == null" href="/signin">
+                <a th:if="${#session} == null" href="/signin">
                     <button class="signin">회원가입</button>
                 </a>
-                <a th:if="${member} == null" href="/login">
+                <a th:if="${#session} == null" href="/login">
                     <button class="login">로그인</button>
                 </a>
                 <a>
-                    <form th:if="${member} != null" action="/logout" style="display: inline">
+                    <form th:if="${#session} != null" action="/logout" style="display: inline">
                         <button class="signin">로그아웃</button>
                     </form>
                 </a>
-                <a th:if="${member} != null" href="/mypage">
+                <a th:if="${#session} != null" href="/mypage">
                     <button class="login">마이페이지</button>
                 </a>
             </div>
@@ -77,30 +78,10 @@
            		<span style="padding-left:40px;">조회</span>
            		<span style="padding-left:22px;">추천</span>
            	</div>
+<!--        글 들어가는 곳-->
+
+
         </div>
-        <div>
-        <a class="contents-item" href="/community/build/detail">
-           		<span class="build">
-           			<img class="champion-head" src="/image/champhead/gragas.png"/>
-           		</span>
-           		<span class="build1">
-           			 [상남자의 라인, TOP] 이게 왜 좋은거지..? 화공탱 거드라 가렌
-           		</span>
-           		<span class="build2" style="width:150px;">
-           			작성자 닉네임
-           		</span>
-           		<span class="build2" style="width:100px;">
-           			2022-05-25
-           		</span>
-           		<span class="build2" style="width:30px;">
-           			579
-           		</span>
-           		<span class="build2" style="width:30px">
-           			10
-           		</span>
-           	</a>
-        </div>
-		
     </main>
     
     <div class="bottom-btn">
@@ -141,7 +122,7 @@
         </div>
 
     </footer>
-
+<script src="/community/build.js"></script>
 <script src="/common/all.js"></script>
 </body>
 </html>

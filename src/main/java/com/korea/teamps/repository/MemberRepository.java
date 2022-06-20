@@ -1,6 +1,7 @@
 package com.korea.teamps.repository;
 
 import com.korea.teamps.domain.Member;
+import com.korea.teamps.domain.Profile;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -22,5 +23,6 @@ public interface MemberRepository {
     @Select("SELECT * FROM member WHERE email = #{email}")
     Member findByEmail(@Param("email") String email);
 
-    List<Member> findAll();
+    @Select("select image from PROFILE_IMAGE")
+    List<Profile> getAllProfile();
 }

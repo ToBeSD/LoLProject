@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -24,17 +25,11 @@ public class ChampController {
     }
 
     @GetMapping("/champ")
-    public String champ(@RequestParam("name") String name, Model model, HttpSession session) {
+    public String champ(@RequestParam("name") String name, Model model) {
         ChampName champName = champRepository.findByNameHeadImage(name);
         String headImage = champName.getHeadImage();
         model.addAttribute("name", name);
         model.addAttribute("headImage", headImage);
-
-        Member member = (Member) session.getAttribute("MEMBER");
-        if(member != null) {
-            model.addAttribute("member", member);
-            return "basic-info";
-        }
 
         return "basic-info";
     }
@@ -51,17 +46,12 @@ public class ChampController {
     }
 
     @GetMapping("/champ/patch")
-    public String patchHistory(@RequestParam("name") String name, Model model, HttpSession session) {
+    public String patchHistory(@RequestParam("name") String name, Model model) {
         ChampName champName = champRepository.findByNameHeadImage(name);
         String headImage = champName.getHeadImage();
         model.addAttribute("name", name);
         model.addAttribute("headImage", headImage);
 
-        Member member = (Member) session.getAttribute("MEMBER");
-        if(member != null) {
-            model.addAttribute("member", member);
-            return "patch-history";
-        }
         return "patch-history";
     }
 
@@ -72,23 +62,17 @@ public class ChampController {
     }
 
     @GetMapping("/champ/community")
-    public String community(@RequestParam("name") String name, Model model, HttpSession session) {
+    public String community(@RequestParam("name") String name, Model model) {
         ChampName champName = champRepository.findByNameHeadImage(name);
         String headImage = champName.getHeadImage();
         model.addAttribute("name", name);
         model.addAttribute("headImage", headImage);
 
-        Member member = (Member) session.getAttribute("MEMBER");
-        if(member != null) {
-            model.addAttribute("member", member);
-            return "champ-community";
-        }
-
         return "champ-community";
     }
 
     @GetMapping("/champ/statistics")
-    public String getStatistics(@RequestParam("name") String name, Model model, HttpSession session) {
+    public String getStatistics(@RequestParam("name") String name, Model model) {
         ChampName champName = champRepository.findByNameHeadImage(name);
         ChampRuneType champRuneType = champRepository.findByNameRuneType(name);
         String headImage = champName.getHeadImage();
@@ -99,22 +83,11 @@ public class ChampController {
         model.addAttribute("mainRuneType", mainRuneType);
         model.addAttribute("subRuneType", subRuneType);
 
-        Member member = (Member) session.getAttribute("MEMBER");
-        if(member != null) {
-            model.addAttribute("member", member);
-            return "statistics";
-        }
-
         return "statistics";
     }
 
     @GetMapping("/champ/rank")
-    public String rank(HttpSession session, Model model) {
-        Member member = (Member) session.getAttribute("MEMBER");
-        if(member != null) {
-            model.addAttribute("member", member);
-            return "rank";
-        }
+    public String rank() {
         return "rank";
     }
 

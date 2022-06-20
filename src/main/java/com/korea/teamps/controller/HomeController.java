@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -24,12 +25,7 @@ public class HomeController {
 
 
     @GetMapping("/")
-    public String home(HttpSession session, Model model) {
-        Member member = (Member) session.getAttribute("MEMBER");
-        if(member != null) {
-            model.addAttribute("member", member);
-            return "main";
-        }
+    public String home(Model model) {
         return "main";
     }
 

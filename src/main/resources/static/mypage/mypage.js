@@ -9,10 +9,10 @@ $(function() {
         $(this).find("img").eq(1).css('opacity','1');
         $(this).find("div").css('opacity','1');
         $(this).find("img").eq(2).css('opacity','1'); */
-        $(this).find("img:first-child").animate({opacity:0},250);// ('opacity','0');
-        $(this).find("img").eq(1).animate({opacity:1},250); // .css('opacity','1');
+        $(this).find("img:first-child").animate({opacity:0},100);// ('opacity','0');
+        $(this).find("img").eq(1).animate({opacity:1},100); // .css('opacity','1');
         $(this).find("div").animate({opacity:1},250); //css('opacity','1');
-        $(this).find("img").eq(2).animate({opacity:1},250);  //.css('opacity','1');
+        $(this).find("img").eq(2).animate({opacity:1},100);  //.css('opacity','1');
     }, function() {
         //$(this).find("img:first-child").css('display','block');
         //$(this).find("img").eq(2).css('display','none');
@@ -42,12 +42,12 @@ $(function() {
         alert("회원탈퇴 완료.");
     });
 
-    $('#introduce-modal-id').animate({opacity:0},25);
-    $('#change-pw-modal-id').animate({opacity:0},25);
-    $('#member-secession-modal-id').animate({opacity:0},25);
+    $('#introduce-modal-id').animate({opacity:0},10);
+    $('#change-pw-modal-id').animate({opacity:0},10);
+    $('#member-secession-modal-id').animate({opacity:0},10);
 
     $("#introduce-btn").click(function() {
-        $('#fake-body').animate({opacity:0.7},25);
+        $('#fake-body').animate({opacity:0.7},10);
         $('#introduce-modal-id').animate({opacity:1});
 
         $('.background-gray').removeClass('modal-del');
@@ -62,7 +62,7 @@ $(function() {
         $('.background-gray').click(function(e) {
             if(e.target.id === 'background-gray-id') {
                 $('#fake-body').animate({opacity:1});
-                $('#introduce-modal-id').animate({opacity:0},25);
+                $('#introduce-modal-id').animate({opacity:0},10);
                 $('.background-gray').removeClass('modal-show');
                 $('.background-gray').addClass('modal-del');
 
@@ -77,7 +77,7 @@ $(function() {
         $('.introduce-modal-btn').click(function(e) {
             if(e.target.id === 'introduce-modal-btn-id') {
                 $('#fake-body').animate({opacity:1});
-                $('#introduce-modal-id').animate({opacity:0},25);
+                $('#introduce-modal-id').animate({opacity:0},10);
                 $('.background-gray').removeClass('modal-show');
                 $('.background-gray').addClass('modal-del');
 
@@ -92,7 +92,7 @@ $(function() {
         $('.btn-save').click(function(e) {
             if(e.target.id === 'btn-save-id') {
                 $('#fake-body').animate({opacity:1});
-                $('#introduce-modal-id').animate({opacity:0},25);
+                $('#introduce-modal-id').animate({opacity:0},10);
                 $('.background-gray').removeClass('modal-show');
                 $('.background-gray').addClass('modal-del');
 
@@ -113,7 +113,7 @@ $(function() {
     });
     // 비밀번호 변경
     $("#change-pw-btn").click(function() {
-        $('#fake-body').animate({opacity:0.7},25);
+        $('#fake-body').animate({opacity:0.7},10);
         $('#change-pw-modal-id').animate({opacity:1});
 
         $('.background-gray2').removeClass('modal-del');
@@ -128,7 +128,7 @@ $(function() {
         $('.background-gray2').click(function(e) {
             if(e.target.id === 'background-gray-id2') {
                 $('#fake-body').animate({opacity:1});
-                $('#change-pw-modal-id').animate({opacity:0},25);
+                $('#change-pw-modal-id').animate({opacity:0},10);
                 $('.background-gray2').removeClass('modal-show');
                 $('.background-gray2').addClass('modal-del');
 
@@ -143,7 +143,7 @@ $(function() {
         $('.change-pw-modal-btn').click(function(e) {
             if(e.target.id === 'change-pw-modal-btn-id') {
                 $('#fake-body').animate({opacity:1});
-                $('#change-pw-modal-id').animate({opacity:0},25);
+                $('#change-pw-modal-id').animate({opacity:0},10);
                 $('.background-gray2').removeClass('modal-show');
                 $('.background-gray2').addClass('modal-del');
 
@@ -158,7 +158,7 @@ $(function() {
         $('#btn-save-id2').click(function(e) {
             if(e.target.id === 'btn-save-id2') {
                 $('#fake-body').animate({opacity:1});
-                $('#change-pw-modal-id').animate({opacity:0},25);
+                $('#change-pw-modal-id').animate({opacity:0},10);
                 $('.background-gray2').removeClass('modal-show');
                 $('.background-gray2').addClass('modal-del');
 
@@ -179,7 +179,7 @@ $(function() {
     });
     //회원탈퇴
     $("#member-secession-btn").click(function() {
-        $('#fake-body').animate({opacity:0.7},25);
+        $('#fake-body').animate({opacity:0.7},10);
         $('#member-secession-modal-id').animate({opacity:1});
 
         $('.background-gray3').removeClass('modal-del');
@@ -194,7 +194,7 @@ $(function() {
         $('.background-gray3').click(function(e) {
             if(e.target.id === 'background-gray-id3') {
                 $('#fake-body').animate({opacity:1});
-                $('#member-secession-modal-id').animate({opacity:0},25);
+                $('#member-secession-modal-id').animate({opacity:0},10);
                 $('.background-gray3').removeClass('modal-show');
                 $('.background-gray3').addClass('modal-del');
 
@@ -209,7 +209,7 @@ $(function() {
         $('.member-secession-modal-btn').click(function(e) {
             if(e.target.id === 'member-secession-modal-btn-id') {
                 $('#fake-body').animate({opacity:1});
-                $('#member-secession-modal-id').animate({opacity:0},25);
+                $('#member-secession-modal-id').animate({opacity:0},10);
                 $('.background-gray3').removeClass('modal-show');
                 $('.background-gray3').addClass('modal-del');
 
@@ -224,7 +224,7 @@ $(function() {
         $('#btn-save-id3').click(function(e) {
             if(e.target.id === 'btn-save-id3') {
                 $('#fake-body').animate({opacity:1});
-                $('#member-secession-modal-id').animate({opacity:0},25);
+                $('#member-secession-modal-id').animate({opacity:0},10);
                 $('.background-gray3').removeClass('modal-show');
                 $('.background-gray3').addClass('modal-del');
 
@@ -244,3 +244,4 @@ $(function() {
         });
     });
 });
+

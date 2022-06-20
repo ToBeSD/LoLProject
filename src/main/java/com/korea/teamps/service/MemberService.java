@@ -1,6 +1,7 @@
 package com.korea.teamps.service;
 
 import com.korea.teamps.domain.Member;
+import com.korea.teamps.domain.Profile;
 import com.korea.teamps.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -84,5 +85,10 @@ public class MemberService {
         }else {
             return false;
         }
+    }
+
+    //프로필 가져오기
+    public List<Profile> getAllProfile() {
+        return memberRepository.getAllProfile();
     }
 }

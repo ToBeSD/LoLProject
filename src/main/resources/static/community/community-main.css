@@ -17,25 +17,27 @@ main {
 }
 
 .build {
-	color: blue;
+	font-weight: 600;
+	color: #353945;
 	width: 72px;
 	height: 24px;
 	text-align: center;
 }
 
 .build1 {
-	color: black;
+	color: #353945;
 	width: 770px;
 	height: 24px;
 	text-align: left;
 }
 
 .build2 {
-	font-size: 12px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #828B95;
 	height: 24px;
 	text-align: right;
 	padding: 0px 10px;
-	color: rgb(77, 83, 102);
 }
 
 .contents-item {
