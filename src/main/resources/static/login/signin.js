@@ -17,7 +17,7 @@ function validationTest(pattern, input) {
         return true;
     }else {
         return false;
-    }s
+    }
 }
 
 emailInput.addEventListener('change', (e) => {

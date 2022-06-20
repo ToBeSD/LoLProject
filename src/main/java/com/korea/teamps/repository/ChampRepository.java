@@ -33,13 +33,18 @@ public interface ChampRepository {
             "order by win_vari desc")
     List<ChampMainCard> findMainCard();
 
-    @Select("select * from C_BASICSTAT where name = #{name}")
-    List<ChampBasicStat> findByNameBasicStat(@Param("name") String name);
+    @Select("select name, stat, STAT_START startStat, STAT_FINAL finalStat, STAT_RANK statRank from C_BASICSTAT where name = #{name}")
+    List<ChampBasicStat> findByNameBasicStat(ChampBasicStat champBasicStat);
 
-    @Select("SELECT * FROM c_patch_history WHERE name = #{name}")
-    List<ChampPatchHistory> findPatchHistory(@Param("name") String name);
+    @Select("select champ name, SHOW_NAME skillName, SKILL_KEY skillKey, FUNCTION, image from SKILL_INFO where champ = #{name}")
+    List<ChampBasicSkill> findByNameBasicSkill(ChampBasicSkill champBasicSkill);
 
-    List<ChampBasicStat> findAllChampImage();
+    @Select("SELECT craw.name, craw.VERSION2 version, craw.SKILL_KEY, image.SHOW_NAME skillName, craw.FUNCTION content, image.IMAGE\n" +
+            "FROM c_patch_history craw, SKILL_INFO image\n" +
+            "WHERE craw.name = image.champ\n" +
+            "  and craw.SKILL_KEY = image.SKILL_KEY\n" +
+            "  and craw.name = #{name}")
+    List<ChampPatchHistory> findPatchHistory(ChampPatchHistory champPatchHistory);
 
     @Select("SELECT tier.*, image.IMAGE_HEAD\n" +
             "FROM c_champ_tier tier, champ_skill image\n" +
@@ -60,6 +65,15 @@ public interface ChampRepository {
     @Select("select name, IMAGE_HEAD from CHAMP_SKILL where name = #{name}")
     ChampName findByNameHeadImage(@Param("name") String name);
 
+    @Select("select craw.name, craw.line, image1.BUILD mainRuneType, image2.BUILD subRuneType\n" +
+            "            from C_RUNE_COMBINE craw, RUNE_INFO image1, RUNE_INFO image2\n" +
+            "            where craw.pick1 = image1.name\n" +
+            "              and craw.pick5 = image2.name\n" +
+            "              and craw.name = '가렌'\n" +
+            "              and craw.line = '탑'\n" +
+            "              and ROWNUM = 1\n" +
+            "            order by craw.PICK_RATE desc")
+    ChampRuneType findByNameRuneType(@Param("name") String name);
 
     @Select("select match.enemy name, match.COUNT count, match.WIN_RATE winRate, image.IMAGE_HEAD image\n" +
             "from C_CHAMP_MATCH match, CHAMP_SKILL image\n" +
@@ -85,7 +99,8 @@ public interface ChampRepository {
             "and craw.pick2 = image2.name\n" +
             "and craw.CATEGORY = '스펠'\n" +
             "and craw.name = #{name}\n" +
-            "and craw.line = '탑'")
+            "and craw.line = '탑'" +
+            "order by craw.PICK_RATE desc")
     List<ChampItemSelect> findByNameSpell(ChampItemSelect champItemSelect);
 
     @Select("select craw.name, craw.line, image.IMAGE pick1, nvl(image2.IMAGE, '없음') pick2, craw.WIN_RATE, craw.PICK_RATE, craw.COUNT\n" +
@@ -94,7 +109,8 @@ public interface ChampRepository {
             "and nvl(craw.pick2, '없음') = image2.name\n" +
             "and craw.CATEGORY = '스타트 아이템'\n" +
             "and craw.name = #{name}\n" +
-            "and craw.line = '탑'")
+            "and craw.line = '탑'" +
+            "order by craw.PICK_RATE desc")
     List<ChampItemSelect> findByNameStartItem(ChampItemSelect champItemSelect);
 
     @Select("select craw.name, craw.line, image.IMAGE pick1, nvl(image2.IMAGE, '없음') pick2, craw.WIN_RATE, craw.PICK_RATE, craw.COUNT\n" +
@@ -103,7 +119,8 @@ public interface ChampRepository {
             "and nvl(craw.pick2, '없음') = image2.name\n" +
             "and craw.CATEGORY = '신발'\n" +
             "and craw.name = #{name}\n" +
-            "and craw.line = '탑'")
+            "and craw.line = '탑'" +
+            "order by craw.PICK_RATE desc")
     List<ChampItemSelect> findByNameShoes(ChampItemSelect champItemSelect);
 
     @Select("select craw.name, craw.line, craw.rank, image.IMAGE item, craw.WIN_RATE, craw.PICK_RATE, craw.COUNT\n" +
@@ -111,7 +128,8 @@ public interface ChampRepository {
             "where craw.pick = image.name\n" +
             "and craw.name = #{name}\n" +
             "and craw.rank = #{rank}\n" +
-            "and craw.line = '탑'")
+            "and craw.line = '탑'" +
+            "order by craw.PICK_RATE desc")
     List<ChampCoreEach> findByCoreCoreEach(ChampCoreEach champCoreEach);
 
     @Select("select craw.name, craw.line, craw.RANK, image1.IMAGE item1, image2.IMAGE item2, nvl(image3.IMAGE, '없음') item3, nvl(image4.IMAGE, '없음') item4, craw.WIN_RATE, craw.PICK_RATE, craw.COUNT\n" +
@@ -122,7 +140,8 @@ public interface ChampRepository {
             "  and nvl(craw.pick4, '없음') = image4.name\n" +
             "  and craw.name = #{name}\n" +
             "  and craw.rank = #{rank}\n" +
-            "  and craw.line = '탑'")
+            "  and craw.line = '탑'" +
+            "order by craw.PICK_RATE desc")
     List<ChampCoreCombine> findByCoreCoreCombine(ChampCoreCombine champCoreCombine);
 
     @Select("select craw.name, craw.line, image1.image skill1, image2.image skill2, image3.image skill3, craw.WIN_RATE, craw.PICK_RATE, craw.COUNT\n" +
@@ -131,7 +150,8 @@ public interface ChampRepository {
             "  and craw.pick2 = image2.name\n" +
             "  and craw.pick3 = image3.name\n" +
             "  and craw.name = #{name}\n" +
-            "  and craw.line = '탑'")
+            "  and craw.line = '탑'" +
+            "order by craw.PICK_RATE desc")
     List<ChampSkillMaster> findByNameSkillMaster(ChampSkillMaster champSkillMaster);
 
     @Select("select craw.name, craw.line, image1.image skill1, image2.image skill2, image3.image skill3, nvl(image4.image, '없음') skill4, nvl(image5.image, '없음') skill5,\n" +
@@ -152,7 +172,8 @@ public interface ChampRepository {
             "  and nvl(craw.pick11, '없음') = image11.name\n" +
             "  and craw.name = #{name}\n" +
             "  and craw.line = '탑'\n" +
-            "  and craw.WHAT_LEVEL = ${whatLevel}")
+            "  and craw.WHAT_LEVEL = ${whatLevel}" +
+            "order by craw.PICK_RATE desc")
     List<ChampSkillSeq> findByNameSkillSeq(ChampSkillSeq champSkillSeq);
 
     @Select("select craw.name, craw.line, image1.image skill1, image2.image skill2, image3.image skill3, image4.image skill4, image5.image skill5,\n" +
@@ -165,7 +186,8 @@ public interface ChampRepository {
             "  and craw.pick5 = image5.name\n" +
             "  and craw.pick6 = image6.name\n" +
             "  and craw.name = #{name}\n" +
-            "  and craw.line = '탑'")
+            "  and craw.line = '탑'" +
+            "order by craw.PICK_RATE desc")
     List<ChampRuneCombine> findByNameRuneCombine(ChampRuneCombine champRuneCombine);
 
     @Select("select craw.name, craw.line, image1.image pick1, image2.image pick2, image3.image pick3, craw.WIN_RATE, craw.PICK_RATE\n" +
@@ -174,6 +196,7 @@ public interface ChampRepository {
             "  and craw.pick2 = image2.name\n" +
             "  and craw.pick3 = image3.name\n" +
             "  and craw.name = #{name}\n" +
-            "  and craw.line = '탑'")
+            "  and craw.line = '탑'" +
+            "order by craw.PICK_RATE desc")
     List<ChampRuneShard> findByNameRuneShard(ChampRuneShard champRuneShard);
 }

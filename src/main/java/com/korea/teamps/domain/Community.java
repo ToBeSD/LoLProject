@@ -1,16 +1,17 @@
 package com.korea.teamps.domain;
 
-public class Community {
+import java.util.Date;
 
+public class Community {
     private String title;
     private String content;
-    private String writeDate;
+    private Date writeDate;
     private int good;
     private int bad;
     private int count;
     private String category;
 
-    public Community(String title, String content, String writeDate, int good, int bad, int count, String category) {
+    public Community(String title, String content, Date writeDate, int good, int bad, int count, String category) {
         this.title = title;
         this.content = content;
         this.writeDate = writeDate;
@@ -36,11 +37,11 @@ public class Community {
         this.content = content;
     }
 
-    public String getWriteDate() {
+    public Date getWriteDate() {
         return writeDate;
     }
 
-    public void setWriteDate(String writeDate) {
+    public void setWriteDate(Date writeDate) {
         this.writeDate = writeDate;
     }
 
@@ -75,4 +76,5 @@ public class Community {
     public void setCategory(String category) {
         this.category = category;
     }
+
 }

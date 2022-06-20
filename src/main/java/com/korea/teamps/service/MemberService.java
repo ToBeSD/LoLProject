@@ -48,12 +48,16 @@ public class MemberService {
 //        });
     }
 
+
     //로그인
     public boolean logIn(HttpServletRequest request, Member inputMember) {
         Member realMember = memberRepository.findByEmail(inputMember.getEmail());
 
         if(isValidEmailPassword(inputMember, realMember)) {
-            HttpSession session = request.getSession(true);
+            HttpSession session = request.getSession(false);
+            if (session == null) {
+                session = request.getSession(true);
+            }
 
             session.setAttribute("MEMBER", realMember);
 

@@ -2,12 +2,15 @@ package com.korea.teamps.controller;
 
 import com.korea.teamps.domain.ChampMainCard;
 import com.korea.teamps.domain.ChampRank;
+import com.korea.teamps.domain.Member;
 import com.korea.teamps.service.ChampService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -21,7 +24,12 @@ public class HomeController {
 
 
     @GetMapping("/")
-    public String home() {
+    public String home(HttpSession session, Model model) {
+        Member member = (Member) session.getAttribute("MEMBER");
+        if(member != null) {
+            model.addAttribute("member", member);
+            return "main";
+        }
         return "main";
     }
 

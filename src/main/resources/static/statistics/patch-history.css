@@ -110,10 +110,6 @@ body {
     padding: 4px 8px;
 }
 
-img {
-    height: 24px;
-}
-
 .signin {
     padding: 6px 12px;
     border: none;
@@ -602,67 +598,43 @@ p {
     margin: auto;
 }
 
-.footer div{
-    text-align: left;
-    color:rgba(47,62,78,.7);
-}
-
-.footer-left {
-    padding: 40px 50px;
-    width: 30%;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.footer-left-item {
-    margin: 10px;
-}
-
-.footer-right {
-    padding: 20px 50px;
-    font-size: 12px;
-    width: 70%;
-}
 .patch{
+    position: relative;
 	padding-top: 24px;
 }
-.patch .ver{
-	border-top: 1px solid rgba(126,155,255,.5);
-    position: relative;
-    padding: 12px 0 30px 80px;
+
+.ver{
+    border-top: 1px solid rgba(126,155,255,.5);
+    display: flex;
+    justify-content: space-between;
 }
+
 .patch .ver h4 {
     color: #1d2e69;
-    position: absolute;
-    left: 0;
-    top: 20px;
     font-size: 16px;
 }
+
 h4 {
     font-weight: 700;
     font-size: 14px;
     color: #213a96;
     display: inline-block;
 }
-.patch .ver .skill-imgbox {
-    left: 0;
-    top: 0;
-    width: 36px;
-    height: 36px;
-}
+
 .skill-imgbox{
-	margin-right: 30px;
-	margin-top:30px;
-	float: left;
+	margin-top:20px;
 	border-radius: 4px;
-    overflow: hidden;
-	display: inline-block;
 }
-.patch .ver .content {
-    position: relative;
-    padding-left: 48px;
-    color: rgba(47,62,78,.7);
+
+.skill-imgbox img {
+    width: 40px;
+    height: 40px;
 }
+
+.content {
+    padding-left: 30px;
+}
+
 ul {
     display: block;
     list-style-type: disc;
@@ -672,12 +644,8 @@ ul {
     margin-inline-end: 0px;
     padding-inline-start: 40px;
 }
+
 li {
     display: list-item;
     text-align: -webkit-match-parent;
-}
-.img{
-	float: left;
-	width: 40px;
-	height: 40px;
 }

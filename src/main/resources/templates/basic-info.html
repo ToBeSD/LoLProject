@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/statistics/basic-info.css">
     <link rel="stylesheet" href="/statistics/statistics-main.css">
+    <script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header class="header-mainnav">
@@ -22,11 +23,19 @@
                 <a class="nav-items" href="/minigame">미니게임</a>
             </div>
             <div class="sign-login">
-                <a href="/signin">
+                <a th:if="${member} == null" href="/signin">
                     <button class="signin">회원가입</button>
                 </a>
-                <a href="/login">
+                <a th:if="${member} == null" href="/login">
                     <button class="login">로그인</button>
+                </a>
+                <a>
+                    <form th:if="${member} != null" action="/logout" style="display: inline">
+                        <button class="signin">로그아웃</button>
+                    </form>
+                </a>
+                <a th:if="${member} != null" href="/mypage">
+                    <button class="login">마이페이지</button>
                 </a>
             </div>
         </div>
@@ -51,31 +60,7 @@
             <div class="container">
                 <div class="line-and-input">
                     <div class="select-line">
-                        <button class="line-button button-active" style="border-radius: 6px 0px 0px 6px;">
-                            <img src="../Images/icon/line-top.png" alt="img">
-                            <span>탑</span>
-                            <span>84.0%</span>
-                        </button>
-                        <button class="line-button">
-                            <img src="../Images/icon/line-jun.png" alt="img">
-                            <span>정글</span>
-                            <span>1.7%</span>
-                        </button>
-                        <button class="line-button">
-                            <img src="../Images/icon/line-mid.png" alt="img">
-                            <span>미드</span>
-                            <span>13.3%</span>
-                        </button>
-                        <button class="line-button">
-                            <img src="../Images/icon/line-bot.png" alt="img">
-                            <span>원딜</span>
-                            <span>0.5%</span>
-                        </button>
-                        <button class="line-button" style="border-radius: 0px 6px 6px 0px; border-right: none;">
-                            <img src="../Images/icon/line-sup.png" alt="img">
-                            <span>서폿</span>
-                            <span>0.4%</span>
-                        </button>
+
                     </div>
                     <div class="input-box">
                         <form action="/champ/statistics"  method="get">
@@ -93,7 +78,7 @@
                     <div class="head">
                         <img th:src="@{${'/image/champhead/' + headImage}}" alt="img">
                     </div>
-                    <h1 style="font-weight: 400; font-size: 38px; margin: 0; width:100%; margin-top: 15px; margin-left: 190px;">트위스티드 페이트</h1>
+                    <h1 style="font-weight: 400; font-size: 38px; margin: 0; width:100%; margin-top: 15px; margin-left: 190px;" th:text="${name}"></h1>
                 </div>
                 <button class="summary-button summary-button-active">대중적인 빌드</button>
                 <button class="summary-button" style="left: 33%;">고승률 빌드</button>
@@ -128,22 +113,9 @@
                             <div class="rate" style="color: #FFFFFFA6;">12.9 39등</div>
                             <div class="rate">12.10 14등</div>
                         </div>
-                        <div style="padding-top: 10px; width: 230px; display: flex; flex-wrap: wrap;">
-                            <div class="rate yellow">주로 선택하는 포지션</div>
-                            <div class="rate" style="width: 33.3%;">
-                                <p>미드</p>
-                                <span style="color: #FFFFFFA6;">46.86%</span>
-                            </div>
-                            <div class="rate" style="width: 33.3%;">
-                                <p>서폿</p>
-                                <span style="color: #FFFFFFA6;">32.15%</span>
-                            </div>
-                            <div class="rate" style="width: 33.3%;">
-                                <p>탑</p>
-                                <span style="color: #FFFFFFA6;">10.85%</span>
-                            </div>
+                        <div id="usually-position" style="padding-top: 10px; width: 230px; display: flex; flex-wrap: wrap;">
+                            <!--                            주로 선택하는 포지션-->
                         </div>
-
                     </div>
                 </div>
 
@@ -151,227 +123,199 @@
                     <div class="main-rune">
                         <div class="rune-summary">
                             <h4 style="margin: 0; color: #ae9056">메인룬</h4>
-                        <div class="rune-select">
-                            <img src="../Images/rune/지배/d_r_1.png" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                        </div>
-                        <div class="rune-select">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                        </div>
-                        <div class="rune-select">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                        </div>
-                        <div class="rune-select">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                        </div>
-                        <div class="rune-select">
-                            <span style="color:#FFFFFFA6">승률 <span class="yellow">54.98%</span></span>
-                        </div>
-                        <div class="rune-select">
-                            <span style="color:#FFFFFFA6">게임 수 <span class="yellow">291</span></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sub-rune">
-                    <div class="rune-summary">
-                        <h4 style="margin: 0; color: #ae9056">보조룬</h4>
-                        <div class="rune-select">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                        </div>
-                        <div class="rune-select">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                        </div>
-                        <div class="rune-select">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                        </div>
-
-                        <div style="padding-top: 30px;">
                             <div class="rune-select">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img src="../Images/rune/지배/d_r_1.png" alt="img">
+                                <img src="../Images/aatrox.jpg" alt="img">
+                                <img src="../Images/aatrox.jpg" alt="img">
+                                <img src="../Images/aatrox.jpg" alt="img">
                             </div>
                             <div class="rune-select">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img src="../Images/aatrox.jpg" alt="img">
+                                <img src="../Images/aatrox.jpg" alt="img">
+                                <img src="../Images/aatrox.jpg" alt="img">
                             </div>
                             <div class="rune-select">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img src="../Images/aatrox.jpg" alt="img">
+                                <img src="../Images/aatrox.jpg" alt="img">
+                                <img src="../Images/aatrox.jpg" alt="img">
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-skill-summary">
-                    <div class="item-core-summary">
-                        <div class="item-core-summary-items">
-                            1코어
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
-                        </div>
-                        <div class="item-core-summary-items">
-                            2코어
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
-                        </div>
-                        <div class="item-core-summary-items">
-                            3코어
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
-                        </div>
-                    </div>
-
-                    <div class="skill-summary-container">
-                        <div class="skill-summary">
-                            <div class="skill-seq-row">
-                                <div class="skill-title">Q</div>
-                                <img src="../Images/anne1.jpg" alt="img">
-                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">1</div>
-                                <div class="skill-box yellow-background">2</div>
-                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">3</div>
-                                <div class="skill-box">4</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">5</div>
-                                <div class="skill-box">6</div>
-                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">7</div>
-                                <div class="skill-box">8</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">0</div>
-                                <div class="skill-box">9</div>
-                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">9</div>
-                                <div class="skill-box">1</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
-                                <div class="skill-box yellow-background">1</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                            <div class="rune-select">
+                                <img src="../Images/aatrox.jpg" alt="img">
+                                <img src="../Images/aatrox.jpg" alt="img">
+                                <img src="../Images/aatrox.jpg" alt="img">
+                                <img src="../Images/aatrox.jpg" alt="img">
                             </div>
-                            <div class="skill-seq-row">
-                                <div class="skill-title">W</div>
-                                <img src="../Images/anne1.jpg" alt="img">
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
-                                <div class="skill-box">2</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">3</div>
-                                <div class="skill-box yellow-background">4</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">5</div>
-                                <div class="skill-box yellow-background">6</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">7</div>
-                                <div class="skill-box">8</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">0</div>
-                                <div class="skill-box">9</div>
-                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">9</div>
-                                <div class="skill-box">1</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
-                                <div class="skill-box">1</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                            <div class="rune-select">
+                                <span style="color:#FFFFFFA6">승률 <span class="yellow">54.98%</span></span>
                             </div>
-                            <div class="skill-seq-row">
-                                <div class="skill-title">E</div>
-                                <img src="../Images/anne1.jpg" alt="img">
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
-                                <div class="skill-box">2</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">3</div>
-                                <div class="skill-box">4</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">5</div>
-                                <div class="skill-box">6</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">7</div>
-                                <div class="skill-box">8</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">0</div>
-                                <div class="skill-box">9</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">9</div>
-                                <div class="skill-box">1</div>
-                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">1</div>
-                                <div class="skill-box">1</div>
-                                <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">1</div>
-                            </div>
-                            <div class="skill-seq-row">
-                                <div class="skill-title">R</div>
-                                <img src="../Images/anne1.jpg" alt="img">
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
-                                <div class="skill-box">2</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">3</div>
-                                <div class="skill-box">4</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">5</div>
-                                <div class="skill-box yellow-background">6</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">7</div>
-                                <div class="skill-box">8</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">0</div>
-                                <div class="skill-box yellow-background">9</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">9</div>
-                                <div class="skill-box">1</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
-                                <div class="skill-box">1</div>
-                                <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                            <div class="rune-select">
+                                <span style="color:#FFFFFFA6">게임 수 <span class="yellow">291</span></span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="skill-mastar-summary">
-                        <div class="good-skill-master">
-                            <p>스킬 마스터 순서</p>
-                            <img src="../Images/icon_search.webp" alt="img">
-                            <img src="../Images/icon_search.webp" alt="img">
-                            <img src="../Images/icon_search.webp" alt="img">
+                    <div class="sub-rune">
+                        <div class="rune-summary">
+                            <h4 style="margin: 0; color: #ae9056">보조룬</h4>
+                            <div class="rune-select">
+                                <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                                <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                                <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                            </div>
+                            <div class="rune-select">
+                                <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                                <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                                <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                            </div>
+                            <div class="rune-select">
+                                <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                                <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                                <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                            </div>
+
+                            <div id="good-rune-shard">
+                                <div class="rune-select">
+                                    <img src="../image/rune/ability.png" alt="img">
+                                    <img src="../image/rune/attackspeed.png" alt="img">
+                                    <img src="../image/rune/cooltime.png" alt="img">
+                                </div>
+                                <div class="rune-select">
+                                    <img src="../image/rune/ability.png" alt="img">
+                                    <img src="../image/rune/Def.png" alt="img">
+                                    <img src="../image/rune/magicDef.png" alt="img">
+                                </div>
+                                <div class="rune-select">
+                                    <img src="../image/rune/health.png" alt="img">
+                                    <img src="../image/rune/Def.png" alt="img">
+                                    <img src="../image/rune/magicDef.png" alt="img">
+                                </div>
+                            </div>
                         </div>
-                        <div class="good-spell">
-                            <p>추천 스펠</p>
-                            <img src="../Images/flash.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
+                    </div>
+
+                    <div class="item-skill-summary">
+                        <div class="item-core-summary">
+                            <div class="item-core-summary-items" id="goodOneCore">
+                                <!--                                1코어 들어가는 곳-->
+                            </div>
+                            <div class="item-core-summary-items" id="goodTwoCore">
+                                <!--                                2코어 들어가는 곳-->
+                            </div>
+                            <div class="item-core-summary-items" id="goodThreeCore">
+                                <!--                                3코어 들어가는 곳-->
+                            </div>
                         </div>
-                        <div class="good-start-item">
-                            <p>스펠</p>
-                            <img src="../Images/flash.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
+
+                        <div class="skill-summary-container">
+                            <div class="skill-summary">
+                                <div class="skill-seq-row">
+                                    <div class="skill-title">Q</div>
+                                    <img src="../Images/anne1.jpg" alt="img">
+                                    <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">1</div>
+                                    <div class="skill-box yellow-background">2</div>
+                                    <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">3</div>
+                                    <div class="skill-box">4</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">5</div>
+                                    <div class="skill-box">6</div>
+                                    <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">7</div>
+                                    <div class="skill-box">8</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">0</div>
+                                    <div class="skill-box">9</div>
+                                    <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">9</div>
+                                    <div class="skill-box">1</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                    <div class="skill-box yellow-background">1</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                </div>
+                                <div class="skill-seq-row">
+                                    <div class="skill-title">W</div>
+                                    <img src="../Images/anne1.jpg" alt="img">
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                    <div class="skill-box">2</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">3</div>
+                                    <div class="skill-box yellow-background">4</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">5</div>
+                                    <div class="skill-box yellow-background">6</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">7</div>
+                                    <div class="skill-box">8</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">0</div>
+                                    <div class="skill-box">9</div>
+                                    <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">9</div>
+                                    <div class="skill-box">1</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                    <div class="skill-box">1</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                </div>
+                                <div class="skill-seq-row">
+                                    <div class="skill-title">E</div>
+                                    <img src="../Images/anne1.jpg" alt="img">
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                    <div class="skill-box">2</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">3</div>
+                                    <div class="skill-box">4</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">5</div>
+                                    <div class="skill-box">6</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">7</div>
+                                    <div class="skill-box">8</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">0</div>
+                                    <div class="skill-box">9</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">9</div>
+                                    <div class="skill-box">1</div>
+                                    <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">1</div>
+                                    <div class="skill-box">1</div>
+                                    <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">1</div>
+                                </div>
+                                <div class="skill-seq-row">
+                                    <div class="skill-title">R</div>
+                                    <img src="../Images/anne1.jpg" alt="img">
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                    <div class="skill-box">2</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">3</div>
+                                    <div class="skill-box">4</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">5</div>
+                                    <div class="skill-box yellow-background">6</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">7</div>
+                                    <div class="skill-box">8</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">0</div>
+                                    <div class="skill-box yellow-background">9</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">9</div>
+                                    <div class="skill-box">1</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                    <div class="skill-box">1</div>
+                                    <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="good-shoes">
-                            <p>신발</p>
-                            <img src="../Images/flash.png" alt="img">
-                        </div>
-                        <div class="good-core">
-                            <p>코어템</p>
-                            <img src="../Images/heal.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
+
+                        <div class="skill-mastar-summary">
+                            <div class="good-skill-master">
+                                <!--                            스킬마스터 순서-->
+                            </div>
+                            <div class="good-spell">
+                                <!--                            추천 스펠-->
+                            </div>
+                            <div class="good-start-item">
+                                <!--                            시작 아이템-->
+                            </div>
+                            <div class="good-shoes">
+                                <!--                            신발-->
+                            </div>
+                            <div class="good-core">
+                                <!--                            코어템-->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>   
 
-    <div style="width: 100%; height: 400px;"></div>
+        <div style="width: 100%; height: 400px;"></div>
 
     <div class="champ-nav">
-        <a class="champ-nav-items" href="/champ/statistics">챔피언 통계</a>
-        <a class="champ-nav-items champ-nav-active" href="/champ">기본 정보</a>
-        <a class="champ-nav-items" href="/champ/patch">패치 히스토리</a>
-        <a class="champ-nav-items" href="/champ/community">커뮤니티</a>
+        <a class="champ-nav-items" th:href="@{/champ/statistics(name=${name})}">챔피언 통계</a>
+        <a class="champ-nav-items champ-nav-active" th:href="@{/champ(name=${name})}">기본 정보</a>
+        <a class="champ-nav-items" th:href="@{/champ/patch(name=${name})}">패치 히스토리</a>
+        <a class="champ-nav-items" th:href="@{/champ/community(name=${name})}">커뮤니티</a>
     </div>
 
     <!-- 기본정보 스킬 container -->
@@ -381,100 +325,22 @@
             <h4 style="margin: 24px 0 12px;">기본 능력치</h4>
             <div class = "stat-top-div">
                 <span class="stat-name" style = "background-color:transparent;"></span>
-                <span class = "stat-basic">기본능력치 ㅇㅇㅇ ㅇㅇ</span>
+                <span class = "stat-basic">기본능력치</span>
                 <span class = "stat-final">최종수치</span>
                 <span class = "stat-rank">챔피언 순위</span>
             </div>
-            <div class = "stat-div">
-                <span class = "stat-name">체력</span>
-                <span class = "stat-basic">600+200</span>
-                <span class = "stat-final">2453.00</span>
-                <span class = "stat-rank">117<i class ="i-rank">/160</i></span>
-            </div>
-            <div class = "stat-div" style = "background-color:transparent;">
-                <span class = "stat-name">체력</span>
-                <span class = "stat-basic">600+200</span>
-                <span class = "stat-final">2453.00</span>
-                <span class = "stat-rank">117<i class ="i-rank">/160</i></span>
-            </div>
-            <div class = "stat-div">
-                <span class = "stat-name">체력</span>
-                <span class = "stat-basic">600+200</span>
-                <span class = "stat-final">2453.00</span>
-                <span class = "stat-rank">117<i class ="i-rank">/160</i></span>
-            </div>
-            <div class = "stat-div"style = "background-color:transparent;">
-                <span class = "stat-name">체력</span>
-                <span class = "stat-basic">600+200</span>
-                <span class = "stat-final">2453.00</span>
-                <span class = "stat-rank">117<i class ="i-rank">/160</i></span>
-            </div>
-            <div class = "stat-div">
-                <span class = "stat-name">체력</span>
-                <span class = "stat-basic">600+200</span>
-                <span class = "stat-final">2453.00</span>
-                <span class = "stat-rank">117<i class ="i-rank">/160</i></span>
-            </div>
-            <div class = "stat-div"style = "background-color:transparent;">
-                <span class = "stat-name">체력</span>
-                <span class = "stat-basic">600+200</span>
-                <span class = "stat-final">2453.00</span>
-                <span class = "stat-rank">117<i class ="i-rank">/160</i></span>
-            </div>
-            <div class = "stat-div" >
-                <span class = "stat-name">체력</span>
-                <span class = "stat-basic">600+200</span>
-                <span class = "stat-final">2453.00</span>
-                <span class = "stat-rank">117<i class ="i-rank">/160</i></span>
-            </div>
-            <div class = "stat-div" style = "background-color:transparent;">
-                <span class = "stat-name">체력</span>
-                <span class = "stat-basic">600+200</span>
-                <span class = "stat-final">2453.00</span>
-                <span class = "stat-rank">117<i class ="i-rank">/160</i></span>
-            </div>
-            <div class = "stat-div">
-                <span class = "stat-name">체력</span>
-                <span class = "stat-basic">600+200</span>
-                <span class = "stat-final">2453.00</span>
-                <span class = "stat-rank">117<i class ="i-rank">/160</i></span>
-            </div>
-            <div class = "stat-div" style="border-bottom: 1px solid blue; background-color:transparent;">
-                <span class = "stat-name">체력</span>
-                <span class = "stat-basic">600+200</span>
-                <span class = "stat-final">2453.00</span>
-                <span class = "stat-rank">117<i class ="i-rank">/160</i></span>
-            </div>
+
+<!--            기본 능력치 들어가는 곳-->
             
         </div>
         <div class = "skill-detail-box">
             <h4 style="margin: 24px 0 12px;">스킬</h4>
-            <p class = "explanation">클릭하여 상세 설명을 볼 수 있습니다.</p>
-            <a href="#skill-p" class = "skill-detail-info">
-                <img class = "champ-img" src="img/ZeriP.png"/>
-                <span class = "champ-skill">P</span>
-                <p class = "skill-name">살아있는 버탸이</p>
-            </a>
-            <a href="#skill-q" class = "skill-detail-info">
-                <img class = "champ-img" src="img/ZeriP.png"/>
-                <span class = "champ-skill">P</span>
-                <p class = "skill-name">살아있는 배터리</p>
-            </a>
-            <a href="#skill-w" class = "skill-detail-info">
-                <img class = "champ-img" src="img/ZeriP.png"/>
-                <span class = "champ-skill">P</span>
-                <p class = "skill-name">살아있는 배터리</p>   
-            </a>
-            <a href="#skill-e" class = "skill-detail-info">
-                <img class = "champ-img" src="img/ZeriP.png"/>
-                <span class = "champ-skill">P</span>
-                <p class = "skill-name">살아있는 배터리</p>
-            </a>
-            <a href="#skill-r" class = "skill-detail-info">
-                <img class = "champ-img" src="img/ZeriP.png"/>
-                <span class = "champ-skill">P</span>
-                <p class = "skill-name">살아있는 배터리</p>
-            </a>
+            <p class = "explanation" > 클릭하여 설명을 볼 수 있습니다.</p>
+
+            <div id="skill-info">
+
+            </div>
+
             <div>
                 <h4 style="margin:24px 0 12px;">상세정보</h4>
                 <span style="color: rgba(47,62,78 , .7); font-size: 12px;">역할군</span>
@@ -488,145 +354,9 @@
 
         <div class = "skill-container">
             <h4>스킬 상세설명</h4>
-            <div class = "skill-info-box" style="border-top: 1px solid rgba(126, 155, 255, .5);">
-                <div class = "skill-info-name">
-                    <span class = "skill-kind" id = "skill-p">PASSIVE</span>
-                    <h5 class = "skill-kor-name">살아있는 배터리<br>
-                        <b class = "skill-eng-name">Living Battery</b>
-                    </h5>                   
-                </div>
-                <div class = "skill-info">
-                    <img src="/img/ZeriP.png" style="display: block;" />
-                  
-                    <p class="skill-text-style"> 적 챔피언에 적중하면 폭발하는 달빛 광선을 발사하여 해당 지역에 물리 피해를 입힙니다.
 
-                        그 다음, 아펠리오스는 주 무기로 월광포화에 적중당한 모든 챔피언들을 공격합니다. 적중 시 효과가 적용되며 치명타가 120%의 피해를 입힙니다.
-                        
-                        만월총 추가 효과: 해당 방식으로 추가된 표식은 표식을 소모하여 각각 추가 물리 피해를 입힙니다.
-                        절단검 추가 효과: 월광포화 사용 시 아펠리오스의 체력이 회복됩니다.
-                        중력포 추가 효과: 월광포화의 후속 공격이 적의 이동 속도를 99%만큼 감소시킵니다.
-                        화염포 추가 효과: 최초 폭발 시 추가적으로 물리 피해를 입히고 다음 번 공격이 범위가 크게 증가한 광역 공격을 가합니다.
-                        반월검 추가 효과: 추가적으로 3개의 반월검 환영을 소환합니다.
-                        쿨타임: 120/110/100
-                        
-                    </p>
-                      
-                </div>
-            </div>
+<!--            스킬 상세 설명-->
 
-            <div class = "skill-info-box" style="border-top: 1px solid rgba(126, 155, 255, .5);">
-                <div class = "skill-info-name">
-                    <span class = "skill-kind" id = "skill-q">PASSIVE</span>
-                    <h5 class = "skill-kor-name">살아있는 배터리<br>
-                        <b class = "skill-eng-name">Living Battery</b>
-                    </h5>                   
-                </div>
-                <div class = "skill-info">
-                    <img src="/img/ZeriP.png" style="display: block;" />
-                  
-                    <p class="skill-text-style"> 적 챔피언에 적중하면 폭발하는 달빛 광선을 발사하여 해당 지역에 물리 피해를 입힙니다.
-
-                        그 다음, 아펠리오스는 주 무기로 월광포화에 적중당한 모든 챔피언들을 공격합니다. 적중 시 효과가 적용되며 치명타가 120%의 피해를 입힙니다.
-                        
-                        만월총 추가 효과: 해당 방식으로 추가된 표식은 표식을 소모하여 각각 추가 물리 피해를 입힙니다.
-                        절단검 추가 효과: 월광포화 사용 시 아펠리오스의 체력이 회복됩니다.
-                        중력포 추가 효과: 월광포화의 후속 공격이 적의 이동 속도를 99%만큼 감소시킵니다.
-                        화염포 추가 효과: 최초 폭발 시 추가적으로 물리 피해를 입히고 다음 번 공격이 범위가 크게 증가한 광역 공격을 가합니다.
-                        반월검 추가 효과: 추가적으로 3개의 반월검 환영을 소환합니다.
-                        쿨타임: 120/110/100
-                        
-                    </p>
-                      
-                </div>
-            </div>
-
-
-            <div class = "skill-info-box" style="border-top: 1px solid rgba(126, 155, 255, .5);">
-                <div class = "skill-info-name">
-                    <span class = "skill-kind" id = "skill-w">PASSIVE</span>
-                    <h5 class = "skill-kor-name">살아있는 배터리<br>
-                        <b class = "skill-eng-name">Living Battery</b>
-                    </h5>                   
-                </div>
-                <div class = "skill-info">
-                    <img src="/img/ZeriP.png" style="display: block;" />
-                  
-                    <p class="skill-text-style"> 적 챔피언에 적중하면 폭발하는 달빛 광선을 발사하여 해당 지역에 물리 피해를 입힙니다.
-
-                        그 다음, 아펠리오스는 주 무기로 월광포화에 적중당한 모든 챔피언들을 공격합니다. 적중 시 효과가 적용되며 치명타가 120%의 피해를 입힙니다.
-                        
-                        만월총 추가 효과: 해당 방식으로 추가된 표식은 표식을 소모하여 각각 추가 물리 피해를 입힙니다.
-                        절단검 추가 효과: 월광포화 사용 시 아펠리오스의 체력이 회복됩니다.
-                        중력포 추가 효과: 월광포화의 후속 공격이 적의 이동 속도를 99%만큼 감소시킵니다.
-                        화염포 추가 효과: 최초 폭발 시 추가적으로 물리 피해를 입히고 다음 번 공격이 범위가 크게 증가한 광역 공격을 가합니다.
-                        반월검 추가 효과: 추가적으로 3개의 반월검 환영을 소환합니다.
-                        쿨타임: 120/110/100
-                        
-                    </p>
-                      
-                </div>
-            </div>
-
-            <div class = "skill-info-box" style="border-top: 1px solid rgba(126, 155, 255, .5);">
-                <div class = "skill-info-name">
-                    <span class = "skill-kind" id = "skill-e">PASSIVE</span>
-                    <h5 class = "skill-kor-name">살아있는 배터리<br>
-                        <b class = "skill-eng-name">Living Battery</b>
-                    </h5>                   
-                </div>
-                <div class = "skill-info">
-                    <img src="/img/ZeriP.png" style="display: block;" />
-                  
-                    <p class="skill-text-style"> 적 챔피언에 적중하면 폭발하는 달빛 광선을 발사하여 해당 지역에 물리 피해를 입힙니다.
-
-                        그 다음, 아펠리오스는 주 무기로 월광포화에 적중당한 모든 챔피언들을 공격합니다. 적중 시 효과가 적용되며 치명타가 120%의 피해를 입힙니다.
-                        
-                        만월총 추가 효과: 해당 방식으로 추가된 표식은 표식을 소모하여 각각 추가 물리 피해를 입힙니다.
-                        절단검 추가 효과: 월광포화 사용 시 아펠리오스의 체력이 회복됩니다.
-                        중력포 추가 효과: 월광포화의 후속 공격이 적의 이동 속도를 99%만큼 감소시킵니다.
-                        화염포 추가 효과: 최초 폭발 시 추가적으로 물리 피해를 입히고 다음 번 공격이 범위가 크게 증가한 광역 공격을 가합니다.
-                        반월검 추가 효과: 추가적으로 3개의 반월검 환영을 소환합니다.
-                        쿨타임: 120/110/100
-                        
-                    </p>
-                      
-                </div>
-            </div>
-
-            <div class = "skill-info-box" style="border-top: 1px solid rgba(126, 155, 255, .5);">
-                <div class = "skill-info-name">
-                    <span class = "skill-kind" id="skill-r">PASSIVE</span>
-                    <h5 class = "skill-kor-name">살아있는 배터리<br>
-                        <b class = "skill-eng-name">Living Battery</b>
-                    </h5>                   
-                </div>
-                <div class = "skill-info">
-                    <img src="/img/ZeriP.png" style="display: block;" />
-                  
-                    <p class="skill-text-style"> 적 챔피언에 적중하면 폭발하는 달빛 광선을 발사하여 해당 지역에 물리 피해를 입힙니다.
-
-                        그 다음, 아펠리오스는 주 무기로 월광포화에 적중당한 모든 챔피언들을 공격합니다. 적중 시 효과가 적용되며 치명타가 120%의 피해를 입힙니다.
-                        
-                        만월총 추가 효과: 해당 방식으로 추가된 표식은 표식을 소모하여 각각 추가 물리 피해를 입힙니다.
-                        절단검 추가 효과: 월광포화 사용 시 아펠리오스의 체력이 회복됩니다.
-                        중력포 추가 효과: 월광포화의 후속 공격이 적의 이동 속도를 99%만큼 감소시킵니다.
-                        화염포 추가 효과: 최초 폭발 시 추가적으로 물리 피해를 입히고 다음 번 공격이 범위가 크게 증가한 광역 공격을 가합니다.
-                        반월검 추가 효과: 추가적으로 3개의 반월검 환영을 소환합니다.
-                        쿨타임: 120/110/100
-                        
-                    </p>
-                      
-                </div>
-            </div>
-
-
-
-
-          
-
-          
-              
-            
         </div>
     </div>
 
@@ -662,6 +392,8 @@
         </div>
 
     </footer>
+
+<script src="/statistics/basic-info.js"></script>
 <script src="/statistics/statistics.js"></script>
 <script src="/common/all.js"></script>
 </body>

@@ -4,6 +4,7 @@ public class ChampName {
     private String name;
     private String headImage;
 
+
     public ChampName(String name, String headImage) {
         this.name = name;
         this.headImage = headImage;

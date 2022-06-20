@@ -414,6 +414,16 @@ img {
     padding: 3px;
 }
 
+#good-rune-shard {
+    padding-top: 30px;
+}
+
+#good-rune-shard img {
+    width: 25px;
+    height: 25px;
+    opacity: 0.5;
+}
+
 .item-skill-summary {
     display: flex;
     flex-wrap: wrap;
@@ -435,10 +445,17 @@ img {
     font-size: 13px;
 }
 
+.core-img-div {
+    height: 33px;
+    display: inline-block;
+    width: 33px;
+    border: 1.5px solid #ffc030;
+    border-radius: 4px;
+}
+
 .item-core-summary-items img{
-    width: 35px;
-    height: 35px;
-    transform: translate(0%, 30%);
+    width: 30px;
+    height: 30px;
 }
 
 .skill-summary-container {

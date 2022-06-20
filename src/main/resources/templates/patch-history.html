@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>패치히스토리</title>
-    <link rel="stylesheet" href="/statistics/history-patch.css">
+    <link rel="stylesheet" href="/statistics/patch-history.css">
     <link rel="stylesheet" href="/statistics/statistics-main.css">
+    <script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body style="height:auto;">
     <header class="header-mainnav">
@@ -22,11 +23,19 @@
                 <a class="nav-items" href="/minigame">미니게임</a>
             </div>
             <div class="sign-login">
-                <a href="/signin">
+                <a th:if="${member} == null" href="/signin">
                     <button class="signin">회원가입</button>
                 </a>
-                <a href="/login">
+                <a th:if="${member} == null" href="/login">
                     <button class="login">로그인</button>
+                </a>
+                <a>
+                    <form th:if="${member} != null" action="/logout" style="display: inline">
+                        <button class="signin">로그아웃</button>
+                    </form>
+                </a>
+                <a th:if="${member} != null" href="/mypage">
+                    <button class="login">마이페이지</button>
                 </a>
             </div>
         </div>
@@ -51,31 +60,7 @@
             <div class="container">
                 <div class="line-and-input">
                     <div class="select-line">
-                        <button class="line-button button-active" style="border-radius: 6px 0px 0px 6px;">
-                            <img src="../Images/icon/line-top.png" alt="img">
-                            <span>탑</span>
-                            <span>84.0%</span>
-                        </button>
-                        <button class="line-button">
-                            <img src="../Images/icon/line-jun.png" alt="img">
-                            <span>정글</span>
-                            <span>1.7%</span>
-                        </button>
-                        <button class="line-button">
-                            <img src="../Images/icon/line-mid.png" alt="img">
-                            <span>미드</span>
-                            <span>13.3%</span>
-                        </button>
-                        <button class="line-button">
-                            <img src="../Images/icon/line-bot.png" alt="img">
-                            <span>원딜</span>
-                            <span>0.5%</span>
-                        </button>
-                        <button class="line-button" style="border-radius: 0px 6px 6px 0px; border-right: none;">
-                            <img src="../Images/icon/line-sup.png" alt="img">
-                            <span>서폿</span>
-                            <span>0.4%</span>
-                        </button>
+
                     </div>
                     <div class="input-box">
                         <form action="/champ/statistics"  method="get">
@@ -93,7 +78,7 @@
                     <div class="head">
                         <img th:src="@{${'/image/champhead/' + headImage}}" alt="img">
                     </div>
-                    <h1 style="font-weight: 400; font-size: 38px; margin: 0; width:100%; margin-top: 15px; margin-left: 190px;">트위스티드 페이트</h1>
+                    <h1 style="font-weight: 400; font-size: 38px; margin: 0; width:100%; margin-top: 15px; margin-left: 190px;" th:text="${name}"></h1>
                 </div>
                 <button class="summary-button summary-button-active">대중적인 빌드</button>
                 <button class="summary-button" style="left: 33%;">고승률 빌드</button>
@@ -130,18 +115,7 @@
                         </div>
                         <div style="padding-top: 10px; width: 230px; display: flex; flex-wrap: wrap;">
                             <div class="rate yellow">주로 선택하는 포지션</div>
-                            <div class="rate" style="width: 33.3%;">
-                                <p>미드</p>
-                                <span style="color: #FFFFFFA6;">46.86%</span>
-                            </div>
-                            <div class="rate" style="width: 33.3%;">
-                                <p>서폿</p>
-                                <span style="color: #FFFFFFA6;">32.15%</span>
-                            </div>
-                            <div class="rate" style="width: 33.3%;">
-                                <p>탑</p>
-                                <span style="color: #FFFFFFA6;">10.85%</span>
-                            </div>
+
                         </div>
 
                     </div>
@@ -201,21 +175,21 @@
                             <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
                         </div>
 
-                        <div style="padding-top: 30px;">
+                        <div id="good-rune-shard" style="padding-top: 30px;">
                             <div class="rune-select">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img src="../image/rune/ability.png" alt="img">
+                                <img src="../image/rune/attackspeed.png" alt="img">
+                                <img src="../image/rune/cooltime.png" alt="img">
                             </div>
                             <div class="rune-select">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img src="../image/rune/ability.png" alt="img">
+                                <img src="../image/rune/Def.png" alt="img">
+                                <img src="../image/rune/magicDef.png" alt="img">
                             </div>
                             <div class="rune-select">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img src="../image/rune/health.png" alt="img">
+                                <img src="../image/rune/Def.png" alt="img">
+                                <img src="../image/rune/magicDef.png" alt="img">
                             </div>
                         </div>
                     </div>
@@ -223,29 +197,14 @@
 
                 <div class="item-skill-summary">
                     <div class="item-core-summary">
-                        <div class="item-core-summary-items">
-                            1코어
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
+                        <div class="item-core-summary-items"  id="goodOneCore">
+
                         </div>
-                        <div class="item-core-summary-items">
-                            2코어
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
+                        <div class="item-core-summary-items"  id="goodTwoCore">
+
                         </div>
-                        <div class="item-core-summary-items">
-                            3코어
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
+                        <div class="item-core-summary-items"  id="goodThreeCore">
+
                         </div>
                     </div>
 
@@ -316,32 +275,19 @@
 
                     <div class="skill-mastar-summary">
                         <div class="good-skill-master">
-                            <p>스킬 마스터 순서</p>
-                            <img src="../Images/icon_search.webp" alt="img">
-                            <img src="../Images/icon_search.webp" alt="img">
-                            <img src="../Images/icon_search.webp" alt="img">
+
                         </div>
                         <div class="good-spell">
-                            <p>추천 스펠</p>
-                            <img src="../Images/flash.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
+
                         </div>
                         <div class="good-start-item">
-                            <p>스펠</p>
-                            <img src="../Images/flash.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
+
                         </div>
                         <div class="good-shoes">
-                            <p>신발</p>
-                            <img src="../Images/flash.png" alt="img">
+
                         </div>
                         <div class="good-core">
-                            <p>코어템</p>
-                            <img src="../Images/heal.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
+
                         </div>
                     </div>
                 </div>
@@ -351,61 +297,17 @@
 
         <div style="width: 100%; height: 400px;"></div>
 
-    <div class="champ-nav">
-        <a class="champ-nav-items" href="/champ/statistics">챔피언 통계</a>
-        <a class="champ-nav-items" href="/champ">기본 정보</a>
-        <a class="champ-nav-items champ-nav-active" href="/champ/patch">패치 히스토리</a>
-        <a class="champ-nav-items" href="/champ/community">커뮤니티</a>
-    </div>
-	<section style="padding-bottom:400px;">
+        <div class="champ-nav">
+            <a class="champ-nav-items" th:href="@{/champ/statistics(name=${name})}">챔피언 통계</a>
+            <a class="champ-nav-items" th:href="@{/champ(name=${name})}">기본 정보</a>
+            <a class="champ-nav-items champ-nav-active" th:href="@{/champ/patch(name=${name})}">패치 히스토리</a>
+            <a class="champ-nav-items" th:href="@{/champ/community(name=${name})}">커뮤니티</a>
+        </div>
+	<section id="patch-history" style="padding-bottom:400px;">
 		<h3>패치 히스토리</h3>
 		
-		<div class="patch">
-			<div class="ver">
-				<h4>버전</h4>
-				<div class="skill-imgbox">
-					<span><img class="img" src="../images/annieP.png"/></span>
-				</div>
-				<div class="content">
-					<ul>
-						<li>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</li>
-						<li>내용</li>
-						<li>내용</li>
-						<li>내용</li>
-						<li>내용</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="patch">
-			<div class="ver">
-				<h4>버전</h4>
-				<div class="skill-imgbox">
-					<span><img class="img" src="../images/annieP.png"/></span>
-				</div>
-				<div class="content">
-					<ul>
-						<li>내용</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="patch">
-			<div class="ver">
-				<h4>버전</h4>
-				<div class="skill-imgbox">
-					<span><img class="img" src="../images/annieP.png"/></span>
-				</div>
-				<div class="content">
-					<h5></h5>
-					<ul>
-						<li>내용</li>
-						<li>내용</li>
-						<li>내용</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+<!--        패치 히스토리-->
+
 		
 	</section>
 </div> <!--  이거 지우면 깨지니까 지우지 말자 -->
@@ -438,6 +340,7 @@
         </div>
 
     </footer>
+<script src="/statistics/patch-history.js"></script>
 <script src="/statistics/statistics.js"></script>
 <script src="/common/all.js"></script>
 </body>

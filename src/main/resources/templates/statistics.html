@@ -25,11 +25,19 @@
                 <a class="nav-items" href="/minigame">미니게임</a>
             </div>
             <div class="sign-login">
-                <a href="/signin">
+                <a th:if="${member} == null" href="/signin">
                     <button class="signin">회원가입</button>
                 </a>
-                <a href="/login">
+                <a th:if="${member} == null" href="/login">
                     <button class="login">로그인</button>
+                </a>
+                <a>
+                    <form th:if="${member} != null" action="/logout" style="display: inline">
+                        <button class="signin">로그아웃</button>
+                    </form>
+                </a>
+                <a th:if="${member} != null" href="/mypage">
+                    <button class="login">마이페이지</button>
                 </a>
             </div>
         </div>
@@ -105,22 +113,9 @@
                             <div class="rate" style="color: #FFFFFFA6;">12.9 39등</div>
                             <div class="rate">12.10 14등</div>
                         </div>
-                        <div style="padding-top: 10px; width: 230px; display: flex; flex-wrap: wrap;">
-                            <div class="rate yellow">주로 선택하는 포지션</div>
-                            <div class="rate" style="width: 33.3%;">
-                                <p>미드</p>
-                                <span style="color: #FFFFFFA6;">46.86%</span>
-                            </div>
-                            <div class="rate" style="width: 33.3%;">
-                                <p>서폿</p>
-                                <span style="color: #FFFFFFA6;">32.15%</span>
-                            </div>
-                            <div class="rate" style="width: 33.3%;">
-                                <p>탑</p>
-                                <span style="color: #FFFFFFA6;">10.85%</span>
-                            </div>
+                        <div id="usually-position" style="padding-top: 10px; width: 230px; display: flex; flex-wrap: wrap;">
+<!--                            주로 선택하는 포지션-->
                         </div>
-
                     </div>
                 </div>
 
@@ -178,21 +173,21 @@
                             <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
                         </div>
 
-                        <div style="padding-top: 30px;">
+                        <div id="good-rune-shard">
                             <div class="rune-select">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img src="../image/rune/ability.png" alt="img">
+                                <img src="../image/rune/attackspeed.png" alt="img">
+                                <img src="../image/rune/cooltime.png" alt="img">
                             </div>
                             <div class="rune-select">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img src="../image/rune/ability.png" alt="img">
+                                <img src="../image/rune/Def.png" alt="img">
+                                <img src="../image/rune/magicDef.png" alt="img">
                             </div>
                             <div class="rune-select">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
-                                <img style="width: 25px; height:25px" src="../Images/ability.png" alt="img">
+                                <img src="../image/rune/health.png" alt="img">
+                                <img src="../image/rune/Def.png" alt="img">
+                                <img src="../image/rune/magicDef.png" alt="img">
                             </div>
                         </div>
                     </div>
@@ -200,29 +195,14 @@
 
                 <div class="item-skill-summary">
                     <div class="item-core-summary">
-                        <div class="item-core-summary-items">
-                            1코어
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
+                        <div class="item-core-summary-items" id="goodOneCore">
+<!--                                1코어 들어가는 곳-->
                         </div>
-                        <div class="item-core-summary-items">
-                            2코어
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
+                        <div class="item-core-summary-items" id="goodTwoCore">
+<!--                                2코어 들어가는 곳-->
                         </div>
-                        <div class="item-core-summary-items">
-                            3코어
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
-                            or
-                            <img src="../Images/garen.png" alt="img">
+                        <div class="item-core-summary-items" id="goodThreeCore">
+<!--                                3코어 들어가는 곳-->
                         </div>
                     </div>
 
@@ -309,32 +289,19 @@
 
                     <div class="skill-mastar-summary">
                         <div class="good-skill-master">
-                            <p>스킬 마스터 순서</p>
-                            <img src="../Images/icon_search.webp" alt="img">
-                            <img src="../Images/icon_search.webp" alt="img">
-                            <img src="../Images/icon_search.webp" alt="img">
+<!--                            스킬마스터 순서-->
                         </div>
                         <div class="good-spell">
-                            <p>추천 스펠</p>
-                            <img src="../Images/flash.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
+<!--                            추천 스펠-->
                         </div>
                         <div class="good-start-item">
-                            <p>스펠</p>
-                            <img src="../Images/flash.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
+<!--                            시작 아이템-->
                         </div>
                         <div class="good-shoes">
-                            <p>신발</p>
-                            <img src="../Images/flash.png" alt="img">
+<!--                            신발-->
                         </div>
                         <div class="good-core">
-                            <p>코어템</p>
-                            <img src="../Images/heal.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
-                            <img src="../Images/heal.png" alt="img">
+<!--                            코어템-->
                         </div>
                     </div>
                 </div>
@@ -345,16 +312,15 @@
         <div style="width: 100%; height: 600px;"></div>
 
         <div class="champ-nav">
-            <a class="champ-nav-items champ-nav-active" href="/champ/statistics">챔피언 통계</a>
-            <a class="champ-nav-items" href="/champ">기본 정보</a>
-            <a class="champ-nav-items" href="/champ/patch">패치 히스토리</a>
-            <a class="champ-nav-items" href="/champ/community">커뮤니티</a>
+            <a class="champ-nav-items champ-nav-active" th:href="@{/champ/statistics(name=${name})}">챔피언 통계</a>
+            <a class="champ-nav-items" th:href="@{/champ(name=${name})}">기본 정보</a>
+            <a class="champ-nav-items" th:href="@{/champ/patch(name=${name})}">패치 히스토리</a>
+            <a class="champ-nav-items" th:href="@{/champ/community(name=${name})}">커뮤니티</a>
         </div>
 
         <div class="champ-match-container" id="counter">
             <div class="title">
-                <span>상대 챔피언 VS</span>
-                <span th:text="${name}"></span>
+                <span th:text="|${name} 상대 챔피언|"></span>
             </div>
             <div class="champ-match">
                 <div class="match-list">

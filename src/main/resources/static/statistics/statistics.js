@@ -61,7 +61,22 @@ $.ajax({
                    </button>
                 </div>`;
 
+    usually = `<div class="rate yellow">주로 선택하는 포지션</div>
+                    <div class="rate" style="width: 33.3%;">
+                        <p>${data[0].line}</p>
+                        <span style="color: #FFFFFFA6;">${data[0].pickRate}%</span>
+                    </div>
+                    <div class="rate" style="width: 33.3%;">
+                        <p>${data[1].line}</p>
+                        <span style="color: #FFFFFFA6;">${data[1].pickRate}%</span>
+                    </div>
+                    <div class="rate" style="width: 33.3%;">
+                        <p>${data[2].line}</p>
+                        <span style="color: #FFFFFFA6;">${data[2].pickRate}%</span>
+               </div>`;
+
         $('.line-and-input').prepend(list);
+        $('#usually-position').append(usually);
     },
 });
 
@@ -173,6 +188,12 @@ $.ajax({
                         </div>
                     </li>`;
         }
+
+        let goodSpell = `<p>추천 스펠</p>
+                         <img src="../image/spell/${data[0].pick1}" alt="img">
+                         <img src="../image/spell/${data[0].pick2}" alt="img">`;
+
+        $('.good-spell').append(goodSpell);
         $('#spell-list').append(list);
     },
 })
@@ -232,6 +253,11 @@ $.ajax({
                         </li>`;
             }
         }
+
+        let goodStartItem = `<p>시작 아이템</p>
+                             <img src="../image/item/${data[0].pick1}" alt="img">
+                             <img src="../image/item/${data[0].pick2}" alt="img">`;
+        $('.good-start-item').append(goodStartItem);
         $('#start-item-list').append(list);
     },
 })
@@ -278,6 +304,9 @@ $.ajax({
                         </li>`;
             }
         }
+        let goodShoes = `<p>신발</p>
+                         <img src="../image/item/${data[0].pick1}" alt="img">`;
+        $('.good-shoes').append(goodShoes);
         $('#shoes-list').append(list);
     },
 })
@@ -324,6 +353,16 @@ $.ajax({
                     </div>
                 </li>`;
         }
+
+        let goodOneCore = `1코어
+                           <div class="core-img-div">
+                                <img src="../image/item/${data[0].item}" alt="img">
+                           </div>
+                           or
+                           <img src="../image/item/${data[1].item}" alt="img">
+                           or
+                           <img src="../image/item/${data[2].item}" alt="img">`;
+        $('#goodOneCore').append(goodOneCore);
         $('#core1-list').append(list);
     },
 })
@@ -370,6 +409,15 @@ $.ajax({
                     </div>
                 </li>`;
         }
+        let goodTwoCore = `2코어
+                           <div class="core-img-div">
+                               <img src="../image/item/${data[0].item}" alt="img">
+                           </div>
+                           or
+                           <img src="../image/item/${data[1].item}" alt="img">
+                           or
+                           <img src="../image/item/${data[2].item}" alt="img">`;
+        $('#goodTwoCore').append(goodTwoCore);
         $('#core2-list').append(list);
     },
 })
@@ -416,6 +464,16 @@ $.ajax({
                     </div>
                 </li>`;
         }
+
+        let goodThreeCore = `3코어
+                           <div class="core-img-div">
+                               <img src="../image/item/${data[0].item}" alt="img">
+                           </div>
+                           or
+                           <img src="../image/item/${data[1].item}" alt="img">
+                           or
+                           <img src="../image/item/${data[2].item}" alt="img">`;
+        $('#goodThreeCore').append(goodThreeCore);
         $('#core3-list').append(list);
     },
 })
@@ -559,6 +617,13 @@ $.ajax({
                     </div>
                 </li>`;
         }
+
+        let goodCore = `<p>코어템</p>
+                        <img src="../image/item/${data[0].item1}" alt="img">
+                        <img src="../image/item/${data[0].item2}" alt="img">
+                        <img src="../image/item/${data[0].item3}" alt="img">
+                        <img src="../image/item/${data[0].item4}" alt="img">`;
+        $('.good-core').append(goodCore);
         $('#core4-combine').append(list);
     },
 })
@@ -607,6 +672,12 @@ $.ajax({
                     </div>
                 </li>`;
         }
+
+        let goodSkillMaster = `<p>스킬 마스터 순서</p>
+                               <img src="../image/skill/${data[0].skill1}" alt="img">
+                               <img src="../image/skill/${data[0].skill2}" alt="img">
+                               <img src="../image/skill/${data[0].skill3}" alt="img">`;
+        $('.good-skill-master').append(goodSkillMaster);
         $('#skill-master').append(list);
     },
 })
@@ -869,6 +940,7 @@ $.ajax({
                     </div>
                 </li>`;
         }
+
         $('#rune-combine').append(list);
     },
 })
@@ -916,6 +988,9 @@ $.ajax({
                     </div>
                 </li>`;
         }
+
+        let goodRuneShard = ``;
+        $('#good-rune-shard').append(goodRuneShard);
         $('#rune-shard').append(list);
     },
 })

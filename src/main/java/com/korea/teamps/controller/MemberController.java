@@ -4,6 +4,7 @@ import com.korea.teamps.domain.Member;
 import com.korea.teamps.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,7 @@ public class MemberController {
 
     @PostMapping("/login")
     @ResponseBody
-    public String tryLogIn(HttpServletRequest request, @RequestBody Member member) {
+    public String tryLogIn(HttpServletRequest request,@RequestBody Member member) {
         if(memberService.logIn(request, member)) {
             return "/mypage";
         }else {
@@ -34,11 +35,10 @@ public class MemberController {
         }
     }
 
-    @PostMapping("/logout")
-    @ResponseBody
+    @GetMapping("/logout")
     public String tryLogOut(HttpServletRequest request) {
         memberService.logOut(request);
-        return "/";
+        return "main";
     }
 
     @GetMapping("/signin")
@@ -53,7 +53,12 @@ public class MemberController {
     }
 
     @GetMapping("/mypage")
-    public String mypage() {
-        return "my-page";
+    public String mypage(HttpSession session, Model model) {
+        Member member = (Member) session.getAttribute("MEMBER");
+        if(member != null) {
+            model.addAttribute("member", member);
+            return "my-page";
+        }
+        return "login";
     }
 }

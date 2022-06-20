@@ -27,11 +27,19 @@
                 <a class="nav-items" href="/minigame">미니게임</a>
             </div>
             <div class="sign-login">
-                <a href="/signin">
+                <a th:if="${member} == null" href="/signin">
                     <button class="signin">회원가입</button>
                 </a>
-                <a href="/login">
+                <a th:if="${member} == null" href="/login">
                     <button class="login">로그인</button>
+                </a>
+                <a>
+                    <form th:if="${member} != null" action="/logout" style="display: inline">
+                        <button class="signin">로그아웃</button>
+                    </form>
+                </a>
+                <a th:if="${member} != null" href="/mypage">
+                    <button class="login">마이페이지</button>
                 </a>
             </div>
         </div>
@@ -51,7 +59,7 @@
     <main>
 		<div class="whiteDiv"></div>
       	<!-- 포스트 -->  	
-        <form id="community-form" method="post" onsubmit="return;">
+        <form id="community-form" onsubmit="return;">
             <div class="post-detail">
                 <!-- 제목 -->
                 <div class="title">
@@ -66,7 +74,7 @@
 
                         <span style="font-size:15px;"><b>카테고리</b></span>
 
-                        <select style="width:700px; border-color:rgb(126, 155, 255);" class="input-title" id="community-select">
+                        <select style="width:700px; border-color:rgb(126, 155, 255);" class="input-title" id="community-select" name="category">
                                 <option>--------</option>
                                 <option >빌드 연구소</option>
                                 <option>자유 게시판</option>
@@ -123,7 +131,9 @@
 
     </footer>
 
+<script src="/community/write-post.js"></script>
 <script src="/common/all.js"></script>
+<script src="/common/common.js"></script>
 <script src="/common/summernote.js"></script>
 <script src="/common/summernote-ko-KR.js"></script>
 <script src="/common/summernote-lite.js"></script>

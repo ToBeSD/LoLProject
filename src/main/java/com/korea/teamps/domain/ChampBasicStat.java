@@ -15,6 +15,13 @@ public class ChampBasicStat {
         this.statRank = statRank;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getStat() {
         return stat;
@@ -48,11 +55,5 @@ public class ChampBasicStat {
         this.statRank = statRank;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }

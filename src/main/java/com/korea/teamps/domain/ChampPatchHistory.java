@@ -2,18 +2,19 @@ package com.korea.teamps.domain;
 
 public class ChampPatchHistory {
     private String name;
-    private String version1;
-    private String version2;
+    private String version;
     private String skillKey;
+    private String skillName;
     private String content;
+    private String image;
 
-    ChampPatchHistory(String name, String version1, String version2, String skillKey, String content) {
+    public ChampPatchHistory(String name, String version, String skillKey, String skillName, String content, String image) {
         this.name = name;
-        this.version1 = version1;
-        this.version2 = version2;
-
+        this.version = version;
         this.skillKey = skillKey;
+        this.skillName = skillName;
         this.content = content;
+        this.image = image;
     }
 
     public String getName() {
@@ -22,6 +23,14 @@ public class ChampPatchHistory {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public String getSkillKey() {
@@ -40,19 +49,19 @@ public class ChampPatchHistory {
         this.content = content;
     }
 
-    public String getVersion1() {
-        return version1;
+    public String getImage() {
+        return image;
     }
 
-    public void setVersion1(String version1) {
-        this.version1 = version1;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getVersion2() {
-        return version2;
+    public String getSkillName() {
+        return skillName;
     }
 
-    public void setVersion2(String version2) {
-        this.version2 = version2;
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
     }
 }
