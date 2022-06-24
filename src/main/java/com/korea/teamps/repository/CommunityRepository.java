@@ -3,10 +3,7 @@ package com.korea.teamps.repository;
 import com.korea.teamps.domain.Community;
 import com.korea.teamps.domain.CommunityDetail;
 import com.korea.teamps.domain.WriteContent;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -26,10 +23,13 @@ public interface CommunityRepository {
             "order by community.WRITEDATE desc")
     List<Community> findByCategoryCommunity(Community community);
 
-    @Select("select community.bno, community.title, community.CONTENT, community.WRITEDATE, community.good, community.bad,\n" +
+    @Select("select member.memberkey, community.bno, community.title, community.CONTENT, community.WRITEDATE, community.good, community.bad,\n" +
             "       community.COUNT, community.CATEGORY , member.INTRODUCE, member.IMAGE, member.nickname\n" +
             "from COMMUNITY community, MEMBER member\n" +
             "where community.MEMBERKEY = member.MEMBERKEY\n" +
             " and bno = #{bno}")
     CommunityDetail findByTitleContent(@Param("bno") int bno);
+
+    @Delete("delete from COMMUNITY where bno = #{bno}")
+    void deleteByBnoContent(CommunityDetail communityDetail);
 }

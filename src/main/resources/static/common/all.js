@@ -8,8 +8,11 @@ document.addEventListener('scroll', () => {
     }
 })
 
+
 const goTop = document.querySelector('.top-button');
 
-goTop.addEventListener('click', () => {
-    window.scrollTo({ top:0, behavior: 'smooth' })
-})
+if(goTop !== undefined) {
+    goTop.addEventListener('click', () => {
+        window.scrollTo({ top:0, behavior: 'smooth' })
+    })
+}

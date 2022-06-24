@@ -1,5 +1,8 @@
 package com.korea.teamps.domain;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class ChampPatchHistory {
     private String name;
     private String version;

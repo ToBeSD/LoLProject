@@ -1,5 +1,8 @@
 package com.korea.teamps.domain;
 
+import lombok.NoArgsConstructor;
+
+
 public class ChampMainCard {
     private String  name;
     private String line;

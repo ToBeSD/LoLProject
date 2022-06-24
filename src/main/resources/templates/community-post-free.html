@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/community/community.css">
     <link rel="stylesheet" href="/community/community-post.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+	<script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<!-- 위에 navbar 부분입니다 -->
@@ -48,9 +49,9 @@
         <div class="first-title">자유게시판</div>
         <div class="second-title">
         	<a class="main-button" href="/community/post">✎게시물 쓰기</a>
-        	<form method="post">
-        		<input class="main-input" spellcheck="false" placeholder="챔피언이름을 입력하세요"/>
-        	</form>
+			<form action="/champ/statistics/noline"  method="get">
+				<input class="main-input" name="name" placeholder="챔피언이름을 입력하세요"/>
+			</form>
         </div>
         <div style="clear: both;"></div>
     </div>
@@ -60,35 +61,32 @@
 		<div class="whiteDiv"></div>
       	<!-- 포스트 -->  	
       	<div class="post-detail">
+			<input type="hidden" id="bno" th:value="${communityDetail.getBno()}">
       		<!-- 포스트제목 -->
       		<div class="title">
       			<div style="font-size:15px; color:#7e9bff;"><b>자유게시판</b></div>
-      			<h3 style="padding-top: 15px;">이거 자유게시판 활성화 되는거임?</h3>
+				<h3 style="padding-top: 15px;" th:text="${communityDetail.getTitle()}"></h3>
       		</div>
       		<!-- 포스트내용 -->
-      		<div class="write">
-			이거 자유게시판 활성화 되는거임?</br> </br> 이거 자유게시판 활성화 되는거임?</br> </br> 이거 자유게시판
-			활성화 되는거임?이거 자유게시판 활성화 되는거임?이거 자유게시판 활성화 되는거임?</br> </br> 이거 자유게시판 활성화
-			되는거임?이거 자유게시판 활성화 되는거임?이거 자유게시판 활성화 되는거임?</br> </br> 이거 자유게시판 활성화
-			되는거임?이거 자유게시판 활성화 되는거임?</br> </br> 이거 자유게시판 활성화 되는거임?</br> </br> 이거
-			자유게시판 활성화 되는거임?이거 자유게시판 활성화 되는거임?
-		</div>
+			<div class="write" th:text="${communityDetail.getContent()}"></div>
       		<!-- 포스트글쓴이 -->
       		<div class="writer">
       			<div>
-      				<img class="writer-img" src="../Images/anne1.jpg"/>
+					<img class="writer-img" th:src="@{${'/image/profile/' + communityDetail.getImage()}}"/>
       			</div>
-      			
+
       			<div class="writer-mid">
       				<div style="padding:5px 10px; font-size:12px; color:darkgray;">글쓴이</div>
-      				<div style="padding:5px 10px;"><b>민첩한 하이머딩거</b></div>
-      				<div style="padding:5px 10px; font-size:15px; color:gray;">안녕 나는 블라디미르 장인 KS 야 6767</div>
+					<div style="padding:5px 10px;"><b th:text="${communityDetail.getNickName()}"></b></div>
+					<div style="padding:5px 10px; font-size:15px; color:gray;" th:text="${communityDetail.getIntroduce()}"></div>
       			</div>
-      			
+
       			<div class="writer-bot">
       				<span>댓글 100 |</span>
-      				<span> 조회수 1000</span>
+					<span th:text="|조회수 ${communityDetail.getCount()}|"></span>
       			</div>
+				<button id="revise-button" th:if="${communityDetail.getMemberKey() == #session.getAttribute('MEMBER').getMemberKey()}">글 수정</button>
+				<button id="delete-button" th:if="${communityDetail.getMemberKey() == #session.getAttribute('MEMBER').getMemberKey()}">글 삭제</button>
       		</div>
       		<!-- 포스트하단 -->
            	<div class="content-function">
@@ -185,5 +183,6 @@
     </footer>
 
 <script src="/common/all.js"></script>
+<script src="/community/deleteAndRenewContent.js"></script>
 </body>
 </html>

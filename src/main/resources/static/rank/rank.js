@@ -25,6 +25,7 @@ $.ajax({
         let list = '';
         for(let i = 0; i < data.length; i++) {
             list +=`
+             <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
                <div class="list">
                     <span>${i + 1}</span>
                     <div style="width: 40px; padding: 0;">
@@ -38,7 +39,8 @@ $.ajax({
                     <span class="list-number">${data[i].pickRate}</span>
                     <span class="list-number">${data[i].banRate}</span>
                     <span class="list-number">${data[i].count}</span>
-                </div>`;
+                </div>
+               </a>`;
         }
         $('.champ-list').append(list);
     },
@@ -67,6 +69,7 @@ position.addEventListener('click', (e) => {
                 let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
+                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
                        <div class="list">
                             <span>${i + 1}</span>
                             <div style="width: 40px; padding: 0;">
@@ -80,7 +83,8 @@ position.addEventListener('click', (e) => {
                             <span class="list-number">${data[i].pickRate}</span>
                             <span class="list-number">${data[i].banRate}</span>
                             <span class="list-number">${data[i].count}</span>
-                        </div>`;
+                        </div>
+                     </a>`;
                 }
                 champList.append(list);
                 $('.champ-rank-container').append(champList);
@@ -110,6 +114,7 @@ position.addEventListener('click', (e) => {
                 let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
+                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
                        <div class="list">
                             <span>${i + 1}</span>
                             <div style="width: 40px; padding: 0;">
@@ -123,7 +128,8 @@ position.addEventListener('click', (e) => {
                             <span class="list-number">${data[i].pickRate}</span>
                             <span class="list-number">${data[i].banRate}</span>
                             <span class="list-number">${data[i].count}</span>
-                        </div>`;
+                        </div>
+                     </a>`;
                 }
                 champList.append(list);
                 $('.champ-rank-container').append(champList);
@@ -152,6 +158,7 @@ position.addEventListener('click', (e) => {
                 let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
+                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
                        <div class="list">
                             <span>${i + 1}</span>
                             <div style="width: 40px; padding: 0;">
@@ -165,7 +172,8 @@ position.addEventListener('click', (e) => {
                             <span class="list-number">${data[i].pickRate}</span>
                             <span class="list-number">${data[i].banRate}</span>
                             <span class="list-number">${data[i].count}</span>
-                        </div>`;
+                        </div>
+                     </a>`;
                 }
                 champList.append(list);
                 $('.champ-rank-container').append(champList);
@@ -195,6 +203,7 @@ position.addEventListener('click', (e) => {
                 let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
+                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
                        <div class="list">
                             <span>${i + 1}</span>
                             <div style="width: 40px; padding: 0;">
@@ -208,7 +217,8 @@ position.addEventListener('click', (e) => {
                             <span class="list-number">${data[i].pickRate}</span>
                             <span class="list-number">${data[i].banRate}</span>
                             <span class="list-number">${data[i].count}</span>
-                        </div>`;
+                        </div>
+                     </a>`;
                 }
                 champList.append(list);
                 $('.champ-rank-container').append(champList);
@@ -237,6 +247,7 @@ position.addEventListener('click', (e) => {
                 let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
+                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
                        <div class="list">
                             <span>${i + 1}</span>
                             <div style="width: 40px; padding: 0;">
@@ -250,7 +261,8 @@ position.addEventListener('click', (e) => {
                             <span class="list-number">${data[i].pickRate}</span>
                             <span class="list-number">${data[i].banRate}</span>
                             <span class="list-number">${data[i].count}</span>
-                        </div>`;
+                        </div>
+                     </a>`;
                 }
                 champList.append(list);
                 $('.champ-rank-container').append(champList);
@@ -275,7 +287,7 @@ position.addEventListener('click', (e) => {
                 let list = '';
                 for(let i = 0; i < data.length; i++) {
                      list +=`
-                     <a href="/champ/statistics?name=${data[i].name}" style="text-decoration: none">
+                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
                        <div class="list">
                             <span>${i + 1}</span>
                             <div style="width: 40px; padding: 0;">

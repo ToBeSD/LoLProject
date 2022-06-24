@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -74,17 +75,24 @@ public class ChampController {
     @GetMapping("/champ/statistics")
     public String getStatistics(@RequestParam("name") String name, Model model) {
         ChampName champName = champRepository.findByNameHeadImage(name);
-        ChampRuneType champRuneType = champRepository.findByNameRuneType(name);
-        String headImage = champName.getHeadImage();
-        String mainRuneType = champRuneType.getMainRuneType();
-        String subRuneType = champRuneType.getSubRuneType();
-        model.addAttribute("name", name);
-        model.addAttribute("headImage", headImage);
-        model.addAttribute("mainRuneType", mainRuneType);
-        model.addAttribute("subRuneType", subRuneType);
+        if(champName.getName() != null) {
+            String headImage = champName.getHeadImage();
+            model.addAttribute("headImage", headImage);
+            model.addAttribute("name", champName.getName());
+            return "statistics";
+        }
 
-        return "statistics";
+        return "";
     }
+
+    @GetMapping("/champ/statistics/noline")
+    public String getNoLineStatistics(ChampHighPick champHighPick, RedirectAttributes re) {
+        ChampHighPick line = champRepository.findByNameHighPickOne(champHighPick);
+        re.addAttribute("name", line.getName());
+        re.addAttribute("line", line.getLine());
+        return "redirect:/champ/statistics";
+    }
+
 
     @GetMapping("/champ/rank")
     public String rank() {

@@ -1,5 +1,7 @@
 package com.korea.teamps.domain;
 
+import lombok.NoArgsConstructor;
+
 public class ChampRank {
 
     private String name;

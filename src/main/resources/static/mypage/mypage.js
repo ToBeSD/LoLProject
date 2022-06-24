@@ -13,6 +13,9 @@ $(function() {
         $(this).find("img").eq(1).animate({opacity:1},100); // .css('opacity','1');
         $(this).find("div").animate({opacity:1},250); //css('opacity','1');
         $(this).find("img").eq(2).animate({opacity:1},100);  //.css('opacity','1');
+        $(this).find("div").click(() => {
+            alert('click');
+        })
     }, function() {
         //$(this).find("img:first-child").css('display','block');
         //$(this).find("img").eq(2).css('display','none');
@@ -30,12 +33,45 @@ $(function() {
     //한줄소개변경
     $("#btn-save-id").click(function() {
         var text = $("#introduce-modal-insert-id").val();
-        $("#introduce-text").html(text);
-        alert("한줄소개가 변경되었습니다.");
+        const introduce = $('#introduce');
+        const memberkey = $('#memberkey').val();
+        $.ajax({
+            type: "POST",
+            url: '/mypage/introduce',
+            data: JSON.stringify({
+                memberKey : memberkey,
+                introduce : text,
+            }),
+            contentType : 'application/json',
+            success: function (data) {
+                introduce.val(data.introduce)
+            },
+        })
     });
 
     $("#btn-save-id2").click(function() {
-        alert("비밀번호가 변경되었습니다.");
+        if($('#new-password').val() === $('#new-password-confirm').val()) {
+            $.ajax({
+                type: "POST",
+                url: '/mypage/changepassword',
+                data: JSON.stringify({
+                    password : $('#new-password').val(),
+                }),
+                contentType : 'application/json',
+                success: function (data) {
+
+                },
+            })
+            alert("비밀번호가 변경되었습니다. 다시 로그인 해주세요.");
+
+        } else {
+            $('#new-password').html("");
+            $('#new-password-confirm').html("");
+            $('#new-password').focus();
+            alert('새로운 비밀번호와 비밀번호 확인이 일치하지 않습니다.')
+        }
+
+
     });
 
     $("#btn-save-id3").click(function() {

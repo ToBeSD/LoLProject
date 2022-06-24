@@ -9,7 +9,7 @@ $.ajax({
         let list = '';
         for(let i = 0; i < data.length; i++) {
             list += `<div>
-                <a class="contents-item" href="/community/build/detail?bno=${data[i].bno}">
+                <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
                     <span class="build">
                         자유
                     </span>

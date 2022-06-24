@@ -28,37 +28,48 @@ function getParameterByName(name) {
 $.ajax({
     type: "POST",
     url: '/champ/statistics/highpick',
-    data: JSON.stringify({"name": getParameterByName('name')}),
+    data: JSON.stringify({
+        "name": getParameterByName('name')
+    }),
     dataType: 'JSON',
     contentType: 'application/json',
     success: function (data) {
         list = `
                 <div class="select-line">
-                    <button class="line-button button-active" style="border-radius: 6px 0px 0px 6px;">
-                        <img src="/image/position/line-top.png" alt="img">
-                        <span>${data[0].line}</span>
-                        <span>${data[0].pickRate}%</span>
-                    </button>
+                    <a href="/champ/statistics?name=${data[0].name}&line=${data[0].line}">
+                        <button class="line-button" style="border-radius: 6px 0px 0px 6px;">
+                            <img src="/image/position/line-top.png" alt="img">
+                            <span>${data[0].line}</span>
+                            <span>${data[0].pickRate}%</span>
+                        </button>
+                    </a>
+                    <a href="/champ/statistics?name=${data[0].name}&line=${data[1].line}">
                     <button class="line-button">
                         <img src="/image/position/line-jun.png" alt="img">
                         <span>${data[1].line}</span>
                         <span>${data[1].pickRate}%</span>
                     </button>
-                    <button class="line-button">
-                        <img src="/image/position/line-mid.png" alt="img">
-                        <span>${data[2].line}</span>
-                        <span>${data[2].pickRate}%</span>
-                    </button>
-                    <button class="line-button">
-                        <img src="/image/position/line-bot.png" alt="img">
-                        <span>${data[3].line}</span>
-                        <span>${data[3].pickRate}%</span>
-                   </button>
-                    <button class="line-button" style="border-radius: 0px 6px 6px 0px; border-right: none;">
-                        <img src="/image/position/line-sup.png" alt="img">
-                        <span>${data[4].line}</span>
-                        <span>${data[4].pickRate}%</span>
-                   </button>
+                    <a href="/champ/statistics?name=${data[0].name}&line=${data[2].line}">
+                        <button class="line-button">
+                            <img src="/image/position/line-mid.png" alt="img">
+                            <span>${data[2].line}</span>
+                            <span>${data[2].pickRate}%</span>
+                        </button>
+                    </a>
+                    <a href="/champ/statistics?name=${data[0].name}&line=${data[3].line}">
+                        <button class="line-button">
+                            <img src="/image/position/line-bot.png" alt="img">
+                            <span>${data[3].line}</span>
+                            <span>${data[3].pickRate}%</span>
+                       </button>
+                   </a>
+                   <a href="/champ/statistics?name=${data[0].name}&line=${data[4].line}">
+                        <button class="line-button" style="border-radius: 0px 6px 6px 0px; border-right: none;">
+                            <img src="/image/position/line-sup.png" alt="img">
+                            <span>${data[4].line}</span>
+                            <span>${data[4].pickRate}%</span>
+                       </button>
+                   </a>
                 </div>`;
 
     usually = `<div class="rate yellow">주로 선택하는 포지션</div>
@@ -77,13 +88,34 @@ $.ajax({
 
         $('.line-and-input').prepend(list);
         $('#usually-position').append(usually);
+
+        switch (getParameterByName('line')) {
+            case '탑' :
+                $('.select-line button').eq(0).addClass('button-active')
+                break;
+            case '정글' :
+                $('.select-line button').eq(1).addClass('button-active')
+                break;
+            case '미드' :
+                $('.select-line button').eq(2).addClass('button-active')
+                break;
+            case '원딜' :
+                $('.select-line button').eq(3).addClass('button-active')
+                break;
+            case '서폿' :
+                $('.select-line button').eq(4).addClass('button-active')
+                break;
+        }
     },
 });
 
 $.ajax({
     type: "POST",
     url: '/champ/statistics/hardmatch',
-    data: JSON.stringify({ "name" : getParameterByName('name') }),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
@@ -95,7 +127,7 @@ $.ajax({
             }else {
                 isGray = "gray"
             }
-            list += `<a href="/champ/statistics?name=${data[i].name}" class="list-a">
+            list += `<a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" class="list-a">
                         <div class="hard-list ${isGray}">
                             <div style="width: 10%;">
                                 <img src="../image/champhead/${data[i].image}" alt="img">
@@ -117,7 +149,10 @@ $.ajax({
 $.ajax({
     type: "POST",
     url: '/champ/statistics/easymatch',
-    data: JSON.stringify({ "name" : getParameterByName('name') }),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
@@ -129,7 +164,7 @@ $.ajax({
             }else {
                 isGray = "gray"
             }
-            list += `<a href="/champ/statistics?name=${data[i].name}" class="list-a">
+            list += `<a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" class="list-a">
                         <div class="hard-list ${isGray}">
                             <div style="width: 10%;">
                                 <img src="../image/champhead/${data[i].image}" alt="img">
@@ -151,7 +186,10 @@ $.ajax({
 $.ajax({
     type: "POST",
     url: '/champ/statistics/spell',
-    data: JSON.stringify({ "name" : getParameterByName('name') }),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
@@ -202,11 +240,15 @@ $.ajax({
 $.ajax({
     type: "POST",
     url: '/champ/statistics/startitem',
-    data: JSON.stringify({ "name" : getParameterByName('name') }),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
         let list = '';
+        let goodStartItem = '';
         let isGray = "gray";
         let isGoodOrBad = "";
         for(let i = 0; i < data.length; i++) {
@@ -254,9 +296,16 @@ $.ajax({
             }
         }
 
-        let goodStartItem = `<p>시작 아이템</p>
-                             <img src="../image/item/${data[0].pick1}" alt="img">
-                             <img src="../image/item/${data[0].pick2}" alt="img">`;
+
+
+        if(data[0].pick2 == '없음') {
+            goodStartItem = `<p>시작 아이템</p>
+                                 <img src="../image/item/${data[0].pick1}" alt="img">`;
+        }else {
+            goodStartItem = `<p>시작 아이템</p>
+                                 <img src="../image/item/${data[0].pick1}" alt="img">
+                                 <img src="../image/item/${data[0].pick2}" alt="img">`;
+        }
         $('.good-start-item').append(goodStartItem);
         $('#start-item-list').append(list);
     },
@@ -265,7 +314,10 @@ $.ajax({
 $.ajax({
     type: "POST",
     url: '/champ/statistics/shoes',
-    data: JSON.stringify({ "name" : getParameterByName('name') }),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
@@ -314,7 +366,11 @@ $.ajax({
 $.ajax({
     type: "POST",
     url: '/champ/statistics/coreeach',
-    data: JSON.stringify({ "name" : getParameterByName('name'), "rank" : "1코어" }),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+        "rank" : '1코어',
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
@@ -370,7 +426,11 @@ $.ajax({
 $.ajax({
     type: "POST",
     url: '/champ/statistics/coreeach',
-    data: JSON.stringify({ "name" : getParameterByName('name'), "rank" : "2코어" }),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+        "rank" : '2코어',
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
@@ -425,7 +485,11 @@ $.ajax({
 $.ajax({
     type: "POST",
     url: '/champ/statistics/coreeach',
-    data: JSON.stringify({ "name" : getParameterByName('name'), "rank" : "3코어" }),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+        "rank" : '3코어',
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
@@ -481,7 +545,11 @@ $.ajax({
 $.ajax({
     type: "POST",
     url: '/champ/statistics/corecombine',
-    data: JSON.stringify({ "name" : getParameterByName('name'), "rank" : "2코어 조합" }),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+        "rank" : '2코어 조합',
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
@@ -528,7 +596,11 @@ $.ajax({
 $.ajax({
     type: "POST",
     url: '/champ/statistics/corecombine',
-    data: JSON.stringify({ "name" : getParameterByName('name'), "rank" : "3코어 조합" }),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+        "rank" : '3코어 조합',
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
@@ -575,7 +647,11 @@ $.ajax({
 $.ajax({
     type: "POST",
     url: '/champ/statistics/corecombine',
-    data: JSON.stringify({ "name" : getParameterByName('name'), "rank" : "4코어 조합" }),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+        "rank" : '4코어 조합',
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
@@ -631,7 +707,11 @@ $.ajax({
 $.ajax({
     type: "POST",
     url: '/champ/statistics/skillmaster',
-    data: JSON.stringify({ "name" : getParameterByName('name') }),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+        "whatLevel" : 3,
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
@@ -690,7 +770,11 @@ const whatLv2 = document.querySelectorAll('.what-level')[2];
 $.ajax({
     type: "POST",
     url: '/champ/statistics/skillseq',
-    data: JSON.stringify({ "name" : getParameterByName('name'), "whatLevel" : 3}),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+        "whatLevel" : 3,
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
@@ -740,7 +824,11 @@ whatLv0.addEventListener('click', () => {
     $.ajax({
         type: "POST",
         url: '/champ/statistics/skillseq',
-        data: JSON.stringify({ "name" : getParameterByName('name'), "whatLevel" : 3}),
+        data: JSON.stringify({
+            "name" : getParameterByName('name'),
+            "line" : getParameterByName('line'),
+            "whatLevel" : 3,
+        }),
         dataType: 'JSON',
         contentType : 'application/json',
         success: function (data) {
@@ -791,7 +879,11 @@ whatLv1.addEventListener('click', () => {
     $.ajax({
         type: "POST",
         url: '/champ/statistics/skillseq',
-        data: JSON.stringify({ "name" : getParameterByName('name'), "whatLevel" : 6}),
+        data: JSON.stringify({
+            "name" : getParameterByName('name'),
+            "line" : getParameterByName('line'),
+            "whatLevel" : 6,
+        }),
         dataType: 'JSON',
         contentType : 'application/json',
         success: function (data) {
@@ -845,7 +937,11 @@ whatLv2.addEventListener('click', () => {
     $.ajax({
         type: "POST",
         url: '/champ/statistics/skillseq',
-        data: JSON.stringify({ "name" : getParameterByName('name'), "whatLevel" : 11}),
+        data: JSON.stringify({
+            "name" : getParameterByName('name'),
+            "line" : getParameterByName('line'),
+            "whatLevel" : 11,
+        }),
         dataType: 'JSON',
         contentType : 'application/json',
         success: function (data) {
@@ -897,7 +993,10 @@ whatLv2.addEventListener('click', () => {
 $.ajax({
     type: "POST",
     url: '/champ/statistics/runecombine',
-    data: JSON.stringify({ "name" : getParameterByName('name')}),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {
@@ -948,7 +1047,10 @@ $.ajax({
 $.ajax({
     type: "POST",
     url: '/champ/statistics/runeshard',
-    data: JSON.stringify({ "name" : getParameterByName('name')}),
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+    }),
     dataType: 'JSON',
     contentType : 'application/json',
     success: function (data) {

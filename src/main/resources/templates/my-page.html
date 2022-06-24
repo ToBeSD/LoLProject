@@ -38,11 +38,11 @@
 			
 			<div style="width:240px; height: 220px; margin:auto;">
 				<p style="font-size:12px;">현재 비밀번호</p>
-				<input class="pw-input" type="password" />
+				<input id="now-password" class="pw-input" type="password" />
 				<p style="font-size:12px;">새로운 비밀번호</p>
-				<input class="pw-input" type="password" />
+				<input id="new-password" class="pw-input" type="password" />
 				<p style="font-size:12px;">새로운 비밀번호 확인</p>
-				<input class="pw-input" type="password" />
+				<input id="new-password-confirm" class="pw-input" type="password" />
 			</div>
 		
 			<div style="float:right; margin-right:2px; width:120px; height:50px;">
@@ -104,7 +104,7 @@
     <div class="main">
         <div class="first-title">마이페이지</div>
         <div class="second-title">
-			<form action="/champ/statistics"  method="get">
+			<form action="/champ/statistics/noline"  method="get">
 				<input class="main-input" type="text" name="name" placeholder="챔피언이름을 입력하세요"/>
 			</form>
         </div>
@@ -118,16 +118,14 @@
       		<!-- 제목 -->
       		<div class="title">
       		
-				<div style="color:rgb(23, 60, 189);"><b>내 프로필</b></div>
-				
+				<div style="color:rgb(23, 60, 189);"><b th:text="${member.getNickname()}"></b></div>
+				<input id="memberkey" type="hidden" th:value="${member.getMemberKey()}">
 				<div class="writer">
       				<div>
-      					<img class="my-image" src="/image/profile/anne1.jpg"/>
+      					<img class="my-image" th:src="@{${'/image/profile/' + member.getImage()}}" />
       				</div>
       				<div style="padding-left: 30px; width: 580px;">
-      					<div style="padding-bottom: 10px; color: darkgray;">
-      						한줄소개
-      					</div>
+      					<div id="introduce" style="padding-bottom: 10px; color: darkgray;" th:text="${member.getIntroduce()}"></div>
       					<div class="introduce">
       						<div id="introduce-text"></div>
       					</div>

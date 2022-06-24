@@ -3,11 +3,14 @@ package com.korea.teamps.controller;
 import com.korea.teamps.domain.ChampMainCard;
 import com.korea.teamps.domain.ChampRank;
 import com.korea.teamps.domain.Member;
+import com.korea.teamps.repository.ChampRepository;
 import com.korea.teamps.service.ChampService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +21,11 @@ import java.util.List;
 public class HomeController {
 
     private ChampService champService;
+    private ChampRepository champRepository;
     @Autowired
-    public HomeController(ChampService champService) {
+    public HomeController(ChampService champService, ChampRepository champRepository) {
         this.champService = champService;
+        this.champRepository = champRepository;
     }
 
 
@@ -31,8 +36,17 @@ public class HomeController {
 
     @GetMapping("/maincard")
     @ResponseBody
-    public List<ChampMainCard> getMainCard() {
+    public List<ChampMainCard> getAllMainCard() {
         return champService.attentionList();
+    }
+
+    @PostMapping("/maincard")
+    @ResponseBody
+    public ChampMainCard getOneMainCard(@RequestBody ChampMainCard champMainCard) {
+        if(champMainCard.getName() == null) {
+            return champMainCard;
+        }
+        return champRepository.findByNameMainCard(champMainCard);
     }
 
     @GetMapping("/minigame")

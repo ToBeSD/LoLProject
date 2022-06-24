@@ -1,5 +1,8 @@
 package com.korea.teamps.domain;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class WriteContent {
 
     private String title;

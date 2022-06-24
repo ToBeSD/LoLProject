@@ -51,8 +51,10 @@ function addItem() {
     const item = document.createElement('img');
     
     item.setAttribute('class', 'dong');
-    item.setAttribute('src', '../minigame/dong.png');
+    item.setAttribute('src', '../image/spell/ignite.png');
     item.style.position = 'absolute';
+    item.style.height = '30px';
+    item.style.width = '30px';
     let x = randomNumber(x1, x2);
     item.style.left = `${x}px`;
     

@@ -18,10 +18,12 @@ import java.util.List;
 public class MemberController {
 
     private MemberService memberService;
+    private MemberRepository memberRepository;
 
     @Autowired
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, MemberRepository memberRepository) {
         this.memberService = memberService;
+        this.memberRepository = memberRepository;
     }
 
     @GetMapping("/login")
@@ -57,13 +59,22 @@ public class MemberController {
     }
 
     @GetMapping("/mypage")
-    public String mypage(HttpServletRequest request, Model model) {
+    public String doGetMypage(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
         if(session != null) {
             List<Profile> profileList = memberService.getAllProfile();
+            Member member = (Member) session.getAttribute("MEMBER");
             model.addAttribute("profileList", profileList);
+            model.addAttribute("member", member);
             return "my-page";
         }
         return "login";
+    }
+
+    @PostMapping("/mypage/introduce")
+    @ResponseBody
+    public Member changeIntroduce(@RequestBody Member member) {
+         memberRepository.updateIntroduce(member);
+         return memberRepository.findByMemberKeyMember(member);
     }
 }

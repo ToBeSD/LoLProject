@@ -1,5 +1,8 @@
 package com.korea.teamps.domain;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class Community {
     private int bno;
     private String title;

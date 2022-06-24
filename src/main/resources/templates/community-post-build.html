@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/community/community.css">
     <link rel="stylesheet" href="/community/community-post.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+	<script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<!-- 위에 navbar 부분입니다 -->
@@ -48,9 +49,9 @@
         <div class="first-title">빌드게시판</div>
         <div class="second-title">
         	<a class="main-button" href="/community/post">✎게시물 쓰기</a>
-        	<form method="post">
-        		<input class="main-input" spellcheck="false" placeholder="챔피언이름을 입력하세요"/>
-        	</form>
+			<form action="/champ/statistics/noline"  method="get">
+				<input class="main-input" name="name" placeholder="챔피언이름을 입력하세요"/>
+			</form>
         </div>
         <div style="clear: both;"></div>
     </div>
@@ -60,7 +61,8 @@
 		<div class="whiteDiv"></div>
       	<!-- 포스트 -->  	
       	<div class="post-detail">
-      		<!-- 포스트제목 -->
+			<input type="hidden" id="bno" th:value="${communityDetail.getBno()}">
+			<!-- 포스트제목 -->
       		<div class="title">
       			<div style="font-size:15px; color:#7e9bff;"><b>빌드연구소</b></div>
       			<h3 style="padding-top: 15px;" th:text="${communityDetail.getTitle()}"></h3>
@@ -83,6 +85,9 @@
       				<span>댓글 100 |</span>
       				<span th:text="|조회수 ${communityDetail.getCount()}|"></span>
       			</div>
+
+  				<button id="revise-button"  th:if="${communityDetail.getMemberKey() == #session.getAttribute('MEMBER').getMemberKey()}">글 수정</button>
+				<button id="delete-button"  th:if="${communityDetail.getMemberKey() == #session.getAttribute('MEMBER').getMemberKey()}">글 삭제</button>
       		</div>
       		<!-- 포스트하단 -->
            	<div class="content-function">
@@ -92,7 +97,7 @@
            			<button style="white-space:pre;" class="recommend" type="button"><span class="pre">&uarr;    </span>0</button>
            			<button style="white-space:pre;" class="recommend" type="button"><span class="pre">&darr;    </span>0</button>
            		</div>
-           		
+
            		<a style="padding-right:30px;" class="prev-next" href="#">다음→</a>
            	</div>
         </div>
@@ -179,5 +184,6 @@
     </footer>
 
 <script src="/common/all.js"></script>
+<script src="/community/deleteAndRenewContent.js"></script>
 </body>
 </html>

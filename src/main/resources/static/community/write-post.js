@@ -21,3 +21,14 @@ submitBtn.addEventListener('click', ()=> {
     })
 })
 
+const select = document.querySelector("#community-select");
+const champInput = document.querySelector("#champ-input");
+
+select.addEventListener('change', () => {
+    if(select.value == '빌드 연구소') {
+        champInput.style.display = 'block';
+    }else {
+        champInput.style.display = 'none';
+    }
+})
+

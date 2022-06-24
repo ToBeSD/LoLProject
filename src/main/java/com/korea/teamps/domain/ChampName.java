@@ -25,4 +25,5 @@ public class ChampName {
     public void setHeadImage(String headImage) {
         this.headImage = headImage;
     }
+
 }

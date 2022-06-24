@@ -63,8 +63,8 @@
                 <div class="line-and-input">
 <!--                        라인별 승률 들어가는 곳-->
                     <div class="input-box">
-                        <form action="/champ/statistics"  method="get">
-                            <input class="main-input" type="text" name="name" placeholder="챔피언이름을 입력하세요"/>
+                        <form action="/champ/statistics/noline"  method="get">
+                            <input class="main-input" name="name" placeholder="챔피언이름을 입력하세요"/>
                         </form>
                     </div>
                     <div style="clear: both;"></div>
@@ -80,6 +80,30 @@
                     </div>
                     <h1 style="font-weight: 400; font-size: 38px; margin: 0; width:100%; margin-top: 15px; margin-left: 190px;" th:text="${name}"></h1>
                 </div>
+                <div class="counter-champ">
+                    <div class="counter-text">카운터</div>
+                    <div>
+                        <img class="counter-img" src="/image/champhead/varus.png">
+                        <span class="counter-rate">42.15%</span>
+                    </div>
+                    <div>
+                        <img class="counter-img" src="/image/champhead/varus.png">
+                        <span class="counter-rate">42.15%</span>
+                    </div>
+                    <div>
+                        <img class="counter-img" src="/image/champhead/varus.png">
+                        <span class="counter-rate">42.15%</span>
+                    </div>
+                    <div>
+                        <img class="counter-img" src="/image/champhead/varus.png">
+                        <span class="counter-rate">42.15%</span>
+                    </div>
+                    <div>
+                        <img class="counter-img" src="/image/champhead/varus.png">
+                        <span class="counter-rate">42.15%</span>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
                 <button class="summary-button summary-button-active">대중적인 빌드</button>
                 <button class="summary-button" style="left: 33%;">고승률 빌드</button>
             </div>
@@ -108,11 +132,11 @@
                             <div class="rate" style="color: #FFFFFFA6;">12.9 패치 48.31</div>
                             <div class="rate">12.10 패치 51.24</div>
                         </div>
-                        <div style="padding-top: 10px; width: 140px;">
-                            <div class="rate yellow">챔피언순위</div>
-                            <div class="rate" style="color: #FFFFFFA6;">12.9 39등</div>
-                            <div class="rate">12.10 14등</div>
-                        </div>
+<!--                        <div style="padding-top: 10px; width: 140px;">-->
+<!--                            <div class="rate yellow">챔피언순위</div>-->
+<!--                            <div class="rate" style="color: #FFFFFFA6;">12.9 39등</div>-->
+<!--                            <div class="rate">12.10 14등</div>-->
+<!--                        </div>-->
                         <div id="usually-position" style="padding-top: 10px; width: 230px; display: flex; flex-wrap: wrap;">
 <!--                            주로 선택하는 포지션-->
                         </div>
@@ -124,26 +148,26 @@
                         <div class="rune-summary">
                             <h4 style="margin: 0; color: #ae9056">메인룬</h4>
                         <div class="rune-select">
-                            <img src="../Images/rune/지배/d_r_1.png" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
                         </div>
                         <div class="rune-select">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
                         </div>
                         <div class="rune-select">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
                         </div>
                         <div class="rune-select">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
+                            <img src="/image/rune/지배/d_r_1.png" alt="img">
                         </div>
                         <div class="rune-select">
                             <span style="color:#FFFFFFA6">승률 <span class="yellow">54.98%</span></span>
@@ -158,19 +182,19 @@
                     <div class="rune-summary">
                         <h4 style="margin: 0; color: #ae9056">보조룬</h4>
                         <div class="rune-select">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                            <img style="width: 38px; height: 38px" src="/image/rune/지배/d_r_2.png" alt="img">
+                            <img style="width: 38px; height: 38px" src="/image/rune/지배/d_r_2.png" alt="img">
+                            <img style="width: 38px; height: 38px" src="/image/rune/지배/d_r_2.png" alt="img">
                         </div>
                         <div class="rune-select">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                            <img style="width: 38px; height: 38px" src="/image/rune/지배/d_r_2.png" alt="img">
+                            <img style="width: 38px; height: 38px" src="/image/rune/지배/d_r_2.png" alt="img">
+                            <img style="width: 38px; height: 38px" src="/image/rune/지배/d_r_2.png" alt="img">
                         </div>
                         <div class="rune-select">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
+                            <img style="width: 38px; height: 38px" src="/image/rune/지배/d_r_2.png" alt="img">
+                            <img style="width: 38px; height: 38px" src="/image/rune/지배/d_r_2.png" alt="img">
+                            <img style="width: 38px; height: 38px" src="/image/rune/지배/d_r_2.png" alt="img">
                         </div>
 
                         <div id="good-rune-shard">
@@ -210,7 +234,7 @@
                         <div class="skill-summary">
                             <div class="skill-seq-row">
                                 <div class="skill-title">Q</div>
-                                <img src="../Images/anne1.jpg" alt="img">
+                                <img src="/image/skill/ahriQ.png" alt="img">
                                 <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">1</div>
                                 <div class="skill-box yellow-background">2</div>
                                 <div class="skill-box yellow-background" style="background-color: #FFFFFF0D;">3</div>
@@ -229,7 +253,7 @@
                             </div>
                             <div class="skill-seq-row">
                                 <div class="skill-title">W</div>
-                                <img src="../Images/anne1.jpg" alt="img">
+                                <img src="/image/skill/ahriW.png" alt="img">
                                 <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
                                 <div class="skill-box">2</div>
                                 <div class="skill-box" style="background-color: #FFFFFF0D;">3</div>
@@ -248,7 +272,7 @@
                             </div>
                             <div class="skill-seq-row">
                                 <div class="skill-title">E</div>
-                                <img src="../Images/anne1.jpg" alt="img">
+                                <img src="/image/skill/ahriE.png" alt="img">
                                 <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
                                 <div class="skill-box">2</div>
                                 <div class="skill-box" style="background-color: #FFFFFF0D;">3</div>
@@ -267,7 +291,7 @@
                             </div>
                             <div class="skill-seq-row">
                                 <div class="skill-title">R</div>
-                                <img src="../Images/anne1.jpg" alt="img">
+                                <img src="/image/skill/ahriR.png" alt="img">
                                 <div class="skill-box" style="background-color: #FFFFFF0D;">1</div>
                                 <div class="skill-box">2</div>
                                 <div class="skill-box" style="background-color: #FFFFFF0D;">3</div>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/common/all.css">
     <link rel="stylesheet" href="/main/main.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
     <script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -44,10 +45,10 @@
     <main class="main">
         <div class="search">
 
-            <form action="/champ/statistics" method="get" id="search_form" style="z-index:11; position : relative;">
+            <form action="/champ/statistics/noline" method="get" id="search_form" style="z-index:11; position : relative;">
                 <div class="searchbar">
                     <div style="width: 560px;">
-                        <input type="text" name="name" placeholder="챔피언 이름을 입력하세요">
+                        <input id="search-input" type="text" name="name" placeholder="챔피언 이름을 입력하세요">
                     </div>
                     <button type="submit">
                         <img src="/main/icon_search.webp" style="width: 20px; height: 20px;">
@@ -115,13 +116,11 @@
             </form>
         </div>
 
-        <button class="left">왼쪽</button>
-        <button class="right">오른쪽</button>
         <h3  style="color: #fff;">주목해야 할 챔피언 (KR) <small style="color: darkgray;">05-24 10:46 기준</small></h3>
-        <div style="overflow: hidden; position: relative;">
-            <div class="mainslide_container" style="color: #fff; z-index: 1;">
-<!--                <div class="swiper-wrapper">-->
-<!--                    <div class="swiper-slide">-->
+        <div class="swiper">
+            <div class="main-mainslide_container swiper-wrapper" style="color: #fff; z-index: 1;">
+<!--                <div class="main-swiper-wrapper swiper-slide">-->
+<!--                    <div class="main-swiper-slide">-->
 <!--                        <div class="slide-image">-->
 <!--                            <h3 class="champion-name none">아트록스<small>(탑)</small></h3>-->
 <!--                        </div>-->
@@ -165,59 +164,7 @@
 <!--                    </div>-->
 <!--                </div>-->
 
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">베인<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">루시안<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">제이스<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">가렌<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">나르<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">탐켄치<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-wrapper-small">
-                    <div class="swiper-slide">
-                        <div class="slide-image-small">
-                            <h3 class="champion-name">모데카이저<small>(탑)</small></h3>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </main>
@@ -227,176 +174,16 @@
 
     <div class="community-container">
         <div class="community">
-            <h3 class="title">빌드 연구소</h3>
-            <ul class="community-list-container">
-                <li class="community-list" style="border-top: 1px solid #dbdde1;">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list" style="border-bottom: 1px solid #dbdde1;">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-
-
+            <h3 class="title">자유 게시판</h3>
+            <ul class="community-list-container" id="free-community">
+<!--                자유게시판 글 10개-->
             </ul>
         </div>
 
         <div class="community">
             <h3 class="title">빌드 연구소</h3>
-            <ul class="community-list-container">
-                <li class="community-list" style="border-top: 1px solid #dbdde1;">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
-                <li class="community-list" style="border-bottom: 1px solid #dbdde1;">
-                    <span class="post-name">바루스</span>
-                    <a class="post-link" href="#">
-                        <span class="post-title">다이아1 승률 58%  AP 바루스</span>
-                        <span class="post-comment">[3]</span>
-                    </a>
-                    <span class="post-like">4</span>
-                </li>
+            <ul class="community-list-container" id="build-community">
+<!--                빌드 연구소 글 10개-->
             </ul>
         </div>
     </div>
@@ -423,6 +210,7 @@
 
     </footer>
 <script src="/main/main.js"></script>
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <script src="/common/all.js"></script>
 </body>
 </html>

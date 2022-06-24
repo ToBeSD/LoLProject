@@ -36,7 +36,7 @@ public class BoardController {
         return communityRepository.findByCategoryCommunity(community);
     }
 
-    @GetMapping("community/free/detail")
+    @GetMapping("community/detail")
     public String freeDetail(@RequestParam("bno") int bno, Model model) {
         CommunityDetail communityDetail = communityRepository.findByTitleContent(bno);
         model.addAttribute("communityDetail", communityDetail);
@@ -78,6 +78,11 @@ public class BoardController {
         Member member = (Member) session.getAttribute("MEMBER");
         communityRepository.insertContent(member.getMemberKey(), writeContent.getTitle(), writeContent.getContent(), writeContent.getCategory());
         return "write insert success";
+    }
+
+    @PostMapping("/community/post/delete")
+    public void deleteContent(@RequestBody CommunityDetail communityDetail) {
+        communityRepository.deleteByBnoContent(communityDetail);
     }
 
     @GetMapping("/notice")

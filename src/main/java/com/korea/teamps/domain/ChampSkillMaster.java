@@ -1,5 +1,7 @@
 package com.korea.teamps.domain;
 
+import lombok.NoArgsConstructor;
+
 public class ChampSkillMaster {
     private String name;
     private String line;
