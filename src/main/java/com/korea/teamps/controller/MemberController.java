@@ -1,11 +1,14 @@
 package com.korea.teamps.controller;
 
+import com.korea.teamps.domain.ChangePassword;
 import com.korea.teamps.domain.CommunityDetail;
 import com.korea.teamps.domain.Member;
 import com.korea.teamps.domain.Profile;
 import com.korea.teamps.repository.MemberRepository;
 import com.korea.teamps.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,9 +37,9 @@ public class MemberController {
     @PostMapping("/login")
     @ResponseBody
     public String tryLogIn(HttpServletRequest request, @RequestBody Member member) {
-        if(memberService.logIn(request, member)) {
+        if (memberService.logIn(request, member)) {
             return "/mypage";
-        }else {
+        } else {
             return "/login";
         }
     }
@@ -53,15 +56,21 @@ public class MemberController {
     }
 
     @PostMapping("/signin")
-    public String create(@RequestBody Member member) {
-        memberService.join(member);
-        return "main";
+    @ResponseBody
+    public ResponseEntity<Void> create(@RequestBody Member member) {
+        if (memberService.join(member)) {
+            return ResponseEntity.ok().build();
+        } else {
+
+//          ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
     }
 
     @GetMapping("/mypage")
     public String doGetMypage(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
-        if(session != null) {
+        if (session != null) {
             List<Profile> profileList = memberService.getAllProfile();
             Member member = (Member) session.getAttribute("MEMBER");
             model.addAttribute("profileList", profileList);
@@ -73,8 +82,43 @@ public class MemberController {
 
     @PostMapping("/mypage/introduce")
     @ResponseBody
-    public Member changeIntroduce(@RequestBody Member member) {
-         memberRepository.updateIntroduce(member);
-         return memberRepository.findByMemberKeyMember(member);
+    public ResponseEntity<Void> changeIntroduce(@RequestBody Member member) {
+        if(member.getMemberKey() != 0) {
+            memberRepository.updateIntroduce(member);
+            return ResponseEntity.ok().build();
+        }else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+    }
+
+    @PostMapping("/mypage/changepassword")
+    public ResponseEntity<Void> changePassword(@RequestBody ChangePassword changePassword, HttpServletRequest request) {
+
+        if(memberService.changePassword(changePassword)) {
+            return ResponseEntity.ok().build();
+        }else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+    }
+
+    @PostMapping("/mypage/changeprofile")
+    public ResponseEntity<Void> changeProfile(@RequestBody Member member, Model model) {
+        if(member.getMemberKey() != 0) {
+            memberRepository.updateProFile(member);
+            return ResponseEntity.ok().build();
+        }else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+    }
+
+    @PostMapping("/mypage/quit")
+    public String quitMember(@RequestBody Member member, HttpServletRequest request) {
+        memberRepository.quitMember(member);
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "redirect:/";
     }
 }

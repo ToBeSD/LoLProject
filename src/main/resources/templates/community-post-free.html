@@ -85,8 +85,9 @@
       				<span>댓글 100 |</span>
 					<span th:text="|조회수 ${communityDetail.getCount()}|"></span>
       			</div>
-				<button id="revise-button" th:if="${communityDetail.getMemberKey() == #session.getAttribute('MEMBER').getMemberKey()}">글 수정</button>
-				<button id="delete-button" th:if="${communityDetail.getMemberKey() == #session.getAttribute('MEMBER').getMemberKey()}">글 삭제</button>
+
+				<button id="revise-button"  th:if="${isWriter}">글 수정</button>
+				<button id="delete-button"  th:if="${isWriter}">글 삭제</button>
       		</div>
       		<!-- 포스트하단 -->
            	<div class="content-function">
@@ -102,52 +103,32 @@
         </div>
       	<div style="height:40px;"></div>
       	<!-- 댓글들 -->
-      	<div class="comments">
-      		<img class="comments-img" src="/image/champhead/vladimir.png"/>
-      		<div style="padding-left: 20px;">
-      			<div style="padding-bottom: 5px; color:rgb(69, 76, 107); font-size:14px;"><b>머리빠진 문도</b></div>
-      			<div style="font-size:14px;">
-      			안되는거임
-      			</div>
-      			<div style="padding-top:5px">
-      				<span style="font-size: 14px; color:gray;">2022년 3월 5일 2:53 오후</span>
-      				<button class="write-comment">↳댓글</button>
-      			</div>
-      		</div>
-      	</div>
-      	<div class="comments-comment">
-      		<img class="comments-img" src="/image/champhead/vladimir.png"/>
-      		<div style="padding-left: 20px;">
-      			<div style="padding-bottom: 5px; color:rgb(69, 76, 107); font-size:14px;"><b>눈덩이굴리는 누누</b></div>
-      			<div style="font-size:14px;">
-      			ㄴㄴ되는거임 ㅇㅇ
-      			</div>
-      			<div style="padding-top:5px">
-      				<span style="font-size: 14px; color:gray;">2022년 3월 5일 2:53 오후</span>
-      				<button class="write-comment">↳댓글</button>
-      			</div>
-      		</div>
-      	</div>
-      	<div class="comments">
-      		<img class="comments-img" src="/image/champhead/vladimir.png"/>
-      		<div style="padding-left: 20px;">
-      			<div style="padding-bottom: 5px; color:rgb(69, 76, 107); font-size:14px;"><b>인베당한 녹턴</b></div>
-      			<div style="font-size:14px;">
-      			ㅋㅋㅋ
-      			</div>
-      			<div style="padding-top:5px">
-      				<span style="font-size: 14px; color:gray;">2022년 3월 5일 2:53 오후</span>
-      				<button class="write-comment">↳댓글</button>
-      			</div>
-      		</div>
-      	</div>
+      	<div class="comment-container">
+
+		</div>
+<!--      	<div class="comments-comment">-->
+<!--      		<img class="comments-img" src="/image/champhead/vladimir.png"/>-->
+<!--      		<div style="padding-left: 20px;">-->
+<!--      			<div style="padding-bottom: 5px; color:rgb(69, 76, 107); font-size:14px;"><b>눈덩이굴리는 누누</b></div>-->
+<!--      			<div style="font-size:14px;">-->
+<!--      			ㄴㄴ되는거임 ㅇㅇ-->
+<!--      			</div>-->
+<!--      			<div style="padding-top:5px">-->
+<!--      				<span style="font-size: 14px; color:gray;">2022년 3월 5일 2:53 오후</span>-->
+<!--      				<button class="write-comment">↳댓글</button>-->
+<!--      			</div>-->
+<!--      		</div>-->
+<!--      	</div>-->
+
 		<!-- 댓글쓰기 -->
         <div class="bottom-comment">
-        	<div class="comment">
-           		<div class="comment-name">댓글쓰기</div>
-           		<textarea class="comment-space"></textarea>
-           		<button class="comment-regist" type="button">등록</button>
-           	</div>
+			<form onsubmit="return false;">
+				<div class="comment">
+					<div class="comment-name">댓글쓰기</div>
+					<textarea id="input-comment" class="comment-space"></textarea>
+					<button class="comment-regist" type="button">등록</button>
+				</div>
+			</form>
            	<div class="list-under-div">
            		<a style="border-radius:6%;" class="list-under" href="/community/post">게시물 쓰기</a>
            		<a style="border-radius:10%;" class="list-under" href="/community">목록</a>
@@ -182,6 +163,78 @@
 
     </footer>
 
+
+<script type="text/javascript" th:inline="javascript">
+	function getParameterByName(name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+				results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+
+	/*<![CDATA[*/
+	let sessionMember = [[${member}]]
+	let communityDetail = [[${communityDetail}]];
+	/*]]>*/
+
+	$.ajax({
+		type: "POST",
+		url: '/community/getcomments',
+		data: JSON.stringify({
+			bno : getParameterByName('bno'),
+		}),
+		contentType : 'application/json',
+		success: function (data) {
+			let comments = '';
+
+			if(data.length !== 0) {
+				let commentRevise = '';
+				let commentDelete = '';
+				let commentReviseComplete = '';
+				let commentReviseCancle = '';
+				let commentWriter = '';
+				let owner = '';
+				for (let i = 0; i < data.length; i++) {
+					commentRevise = sessionMember.memberKey == data[i].memberKey ? '수정' : '';
+					commentDelete = sessionMember.memberKey == data[i].memberKey ? '삭제' : '';
+					commentReviseComplete = sessionMember.memberKey == data[i].memberKey ? '저장' : '';
+					commentReviseCancle = sessionMember.memberKey == data[i].memberKey ? '취소' : '';
+					commentWriter = communityDetail.memberKey == data[i].memberKey ? '글쓴이' : '';
+					owner = communityDetail.memberKey == data[i].memberKey ? 'owner' : '';
+
+					comments += `<div class="comments">
+								<input type="hidden" value="${data[i].memberKey}">
+								<input type="hidden" value="${data[i].baseNo}">
+								<img class="comments-img" src="/image/profile/${data[i].image}"/>
+								<div id="resize-area" style="padding-left: 20px; width: 80%; display: none">
+									<textarea style="width: 100%; height: 100%"></textarea>
+								</div>
+								<div id="comment-writer" style="padding-left: 20px; width: 80%;">
+									<div style="padding-bottom: 5px; color:rgb(69, 76, 107); font-size:14px;">
+										<span class="${owner}">${commentWriter}</span>
+										<b>${data[i].nickName}</b>
+									</div>
+									<div style="font-size:14px;">${data[i].content}</div>
+									<div style="padding-top:5px">
+										<span style="font-size: 14px; color:gray;">${data[i].writeDate}</span>
+										<button class="write-comment">↳댓글</button>
+									</div>
+								</div>
+								<div id="revise-or-delete" class="comment-delete">
+									<span id="comment-revise">${commentRevise}</span>
+									<span id="comment-delete">${commentDelete}</span>
+								</div>
+								<div id="complete-or-cancle" class="comment-delete" style="display: none">
+									<span id="comment-revise-complete">${commentReviseComplete}</span>
+									<span id="comment-revise-cancle">${commentReviseCancle}</span>
+								</div>
+							</div>`;
+				}
+				$('.comment-container').append(comments);
+			}
+		}
+	})
+</script>
 <script src="/common/all.js"></script>
 <script src="/community/deleteAndRenewContent.js"></script>
 </body>

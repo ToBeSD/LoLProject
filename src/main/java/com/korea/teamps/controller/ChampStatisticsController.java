@@ -22,6 +22,18 @@ public class ChampStatisticsController {
         return champRepository.findByNameHighPick(champHighPick);
     }
 
+
+    @PostMapping("/runesummary")
+    public List<RuneSummary> runeSummary(@RequestBody ChampRuneType champRuneType) {
+        return champRepository.findByNameLineRuneType(champRuneType.getName(), champRuneType.getLine());
+    }
+
+    @PostMapping("/runesummarysub")
+    public List<RuneSummary> subRuneSummary(@RequestBody ChampRuneType champRuneType) {
+        return champRepository.findByNameLineSubRuneSummary(champRuneType.getName(), champRuneType.getLine());
+    }
+
+
     @PostMapping("/hardmatch")
     public List<ChampMatchLIst> hardMatchList(@RequestBody ChampMatchLIst champMatchLIst) {
         return champRepository.findByNameHardMatch(champMatchLIst);

@@ -109,6 +109,137 @@ $.ajax({
     },
 });
 
+
+$.ajax({
+    type: "POST",
+    url: '/champ/statistics/runesummary',
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+    }),
+    contentType : 'application/json',
+    success: function (data) {
+        let list = '';
+        if(data.length !== 0) {
+            if (data[0].runeSummary.includes('r')) {
+                list = `<div class="rune-select">
+                                <img src="/image/rune/${data[0].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[1].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[2].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[3].runeSummary}" alt="img">
+                            </div>
+                            <div class="rune-select">
+                                <img src="/image/rune/${data[4].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[5].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[6].runeSummary}" alt="img">
+                            </div>
+                            <div class="rune-select">
+                                <img src="/image/rune/${data[7].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[8].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[9].runeSummary}" alt="img">
+                            </div>
+                            <div class="rune-select">
+                                <img src="/image/rune/${data[10].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[11].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[12].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[13].runeSummary}" alt="img">
+                            </div>`;
+            } else if (data[0].runeSummary.includes('y')) {
+                list = `<div class="rune-select">
+                                <img src="/image/rune/${data[0].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[1].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[2].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[3].runeSummary}" alt="img">
+                            </div>
+                            <div class="rune-select">
+                                <img src="/image/rune/${data[4].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[5].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[6].runeSummary}" alt="img">
+                            </div>
+                            <div class="rune-select">
+                                <img src="/image/rune/${data[7].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[8].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[9].runeSummary}" alt="img">
+                            </div>
+                            <div class="rune-select">
+                                <img src="/image/rune/${data[10].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[11].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[12].runeSummary}" alt="img">
+                            </div>`;
+            } else {
+                list = `<div class="rune-select">
+                                <img src="/image/rune/${data[0].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[1].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[2].runeSummary}" alt="img">
+                            </div>
+                            <div class="rune-select">
+                                <img src="/image/rune/${data[3].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[4].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[5].runeSummary}" alt="img">
+                            </div>
+                            <div class="rune-select">
+                                <img src="/image/rune/${data[6].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[7].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[8].runeSummary}" alt="img">
+                            </div>
+                            <div class="rune-select">
+                                <img src="/image/rune/${data[9].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[10].runeSummary}" alt="img">
+                                <img src="/image/rune/${data[11].runeSummary}" alt="img">
+                            </div>`;
+            }
+            $('#main-rune-summary').append(list);
+        }
+    },
+})
+
+$.ajax({
+    type: "POST",
+    url: '/champ/statistics/runesummarysub',
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+    }),
+    contentType : 'application/json',
+    success: function (data) {
+        if(data.length !== 0) {
+            list = `<div class="rune-select">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[0].runeSummary}" alt="img">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[1].runeSummary}" alt="img">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[2].runeSummary}" alt="img">
+                    </div>
+                    <div class="rune-select">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[3].runeSummary}" alt="img">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[4].runeSummary}" alt="img">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[5].runeSummary}" alt="img">
+                    </div>
+                    <div class="rune-select">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[6].runeSummary}" alt="img">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[7].runeSummary}" alt="img">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[8].runeSummary}" alt="img">
+                    </div>`;
+            $('#subrune-summary').append(list);
+        }
+    },
+})
+
+$.ajax({
+    type: "POST",
+    url: '/champ/rankline/one',
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+        "line" : getParameterByName('line'),
+    }),
+    dataType: 'JSON',
+    contentType : 'application/json',
+    success: function (data) {
+        if(data.length !== 0) {
+
+        }
+    },
+})
+
+
 $.ajax({
     type: "POST",
     url: '/champ/statistics/hardmatch',
@@ -121,28 +252,41 @@ $.ajax({
     success: function (data) {
         let list = '';
         let isGray = "gray";
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
+                list += `<a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" class="list-a">
+                            <div class="hard-list ${isGray}">
+                                <div style="width: 10%;">
+                                    <img src="../image/champhead/${data[i].image}" alt="img">
+                                </div>
+                                <div style="width: 60%; padding: 10px 0px 0px 20px; text-align: left;">
+                                   <span>${data[i].name}</span>
+                                </div>
+                                <div style="width: 30%; padding-top: 10px;">
+                                    <span>${data[i].count}</span>
+                                    <span class="hard">${data[i].winRate}%</span>
+                                </div>
+                            </div>
+                        </a>`;
             }
-            list += `<a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" class="list-a">
-                        <div class="hard-list ${isGray}">
-                            <div style="width: 10%;">
-                                <img src="../image/champhead/${data[i].image}" alt="img">
-                            </div>
-                            <div style="width: 60%; padding: 10px 0px 0px 20px; text-align: left;">
-                               <span>${data[i].name}</span>
-                            </div>
-                            <div style="width: 30%; padding-top: 10px;">
-                                <span>${data[i].count}</span>
-                                <span class="hard">${data[i].winRate}%</span>
-                            </div>
-                        </div>
-                    </a>`;
+            $('.match-list').eq(0).append(list);
         }
-        $('.match-list').eq(0).append(list);
+
+        let counterList = '';
+        if(data.length !== 0) {
+            for (let i = 0; i < 5; i++) {
+                counterList += `<div>
+                                    <img class="counter-img" src="/image/champhead/${data[i].image}">
+                                    <span class="counter-rate">${data[i].winRate}%</span>
+                               </div>`;
+            }
+            $('.counter-text').after(counterList);
+        }
     },
 })
 
@@ -158,28 +302,30 @@ $.ajax({
     success: function (data) {
         let list = '';
         let isGray = "gray";
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
+                list += `<a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" class="list-a">
+                            <div class="hard-list ${isGray}">
+                                <div style="width: 10%;">
+                                    <img src="../image/champhead/${data[i].image}" alt="img">
+                                </div>
+                                <div style="width: 60%; padding: 10px 0px 0px 20px; text-align: left;">
+                                   <span>${data[i].name}</span>
+                                </div>
+                                <div style="width: 30%; padding-top: 10px;">
+                                    <span>${data[i].count}</span>
+                                    <span class="hard">${data[i].winRate}%</span>
+                                </div>
+                            </div>
+                        </a>`;
             }
-            list += `<a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" class="list-a">
-                        <div class="hard-list ${isGray}">
-                            <div style="width: 10%;">
-                                <img src="../image/champhead/${data[i].image}" alt="img">
-                            </div>
-                            <div style="width: 60%; padding: 10px 0px 0px 20px; text-align: left;">
-                               <span>${data[i].name}</span>
-                            </div>
-                            <div style="width: 30%; padding-top: 10px;">
-                                <span>${data[i].count}</span>
-                                <span class="hard">${data[i].winRate}%</span>
-                            </div>
-                        </div>
-                    </a>`;
+            $('.match-list').eq(1).append(list);
         }
-        $('.match-list').eq(1).append(list);
     },
 })
 
@@ -196,43 +342,45 @@ $.ajax({
         let list = '';
         let isGray = "gray";
         let isGoodOrBad = "";
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
+
+                if (data[i].winRate >= 54) {
+                    isGoodOrBad = "very-good";
+                } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                    isGoodOrBad = "good";
+                } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                    isGoodOrBad = "soso";
+                } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                    isGoodOrBad = "bad";
+                } else if (data[i].winRate < 46) {
+                    isGoodOrBad = "trash";
+                }
+                list += `<li class="list-items ${isGray}">
+                            <div class="spell">
+                                <img src="../image/spell/${data[i].pick1}" alt="img">
+                                <img src="../image/spell/${data[i].pick2}" alt="img">
+                            </div>
+                            <div class="spell-percent">
+                                <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                                <span style="width: 23.3%;">${data[i].pickRate}</span>
+                                <span style="width: 23.3%;">${data[i].count}</span>
+                            </div>
+                        </li>`;
             }
 
-            if(data[i].winRate >= 54) {
-                isGoodOrBad = "very-good";
-            }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                isGoodOrBad = "good";
-            }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                isGoodOrBad = "soso";
-            }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                isGoodOrBad = "bad";
-            }else if(data[i].winRate < 46) {
-                isGoodOrBad = "trash";
-            }
-            list += `<li class="list-items ${isGray}">
-                        <div class="spell">
-                            <img src="../image/spell/${data[i].pick1}" alt="img">
-                            <img src="../image/spell/${data[i].pick2}" alt="img">
-                        </div>
-                        <div class="spell-percent">
-                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                            <span style="width: 23.3%;">${data[i].pickRate}</span>
-                            <span style="width: 23.3%;">${data[i].count}</span>
-                        </div>
-                    </li>`;
+            let goodSpell = `<p>추천 스펠</p>
+                             <img src="../image/spell/${data[0].pick1}" alt="img">
+                             <img src="../image/spell/${data[0].pick2}" alt="img">`;
+
+            $('.good-spell').append(goodSpell);
+            $('#spell-list').append(list);
         }
-
-        let goodSpell = `<p>추천 스펠</p>
-                         <img src="../image/spell/${data[0].pick1}" alt="img">
-                         <img src="../image/spell/${data[0].pick2}" alt="img">`;
-
-        $('.good-spell').append(goodSpell);
-        $('#spell-list').append(list);
     },
 })
 
@@ -251,63 +399,64 @@ $.ajax({
         let goodStartItem = '';
         let isGray = "gray";
         let isGoodOrBad = "";
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
+
+                if (data[i].winRate >= 54) {
+                    isGoodOrBad = "very-good";
+                } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                    isGoodOrBad = "good";
+                } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                    isGoodOrBad = "soso";
+                } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                    isGoodOrBad = "bad";
+                } else if (data[i].winRate < 46) {
+                    isGoodOrBad = "trash";
+                }
+
+                if (data[i].pick2 == '없음') {
+                    list += `<li class="list-items ${isGray}">
+                                <div class="spell">
+                                    <img src="../image/item/${data[i].pick1}" alt="img">
+                                </div>
+                                <div class="spell-percent">
+                                    <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                                    <span style="width: 23.3%;">${data[i].pickRate}</span>
+                                    <span style="width: 23.3%;">${data[i].count}</span>
+                                </div>
+                            </li>`;
+                } else {
+                    list += `<li class="list-items ${isGray}">
+                                <div class="spell">
+                                    <img src="../image/item/${data[i].pick1}" alt="img">
+                                    <img src="../image/item/${data[i].pick2}" alt="img">
+                                </div>
+                                <div class="spell-percent">
+                                    <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                                    <span style="width: 23.3%;">${data[i].pickRate}</span>
+                                    <span style="width: 23.3%;">${data[i].count}</span>
+                                </div>
+                            </li>`;
+                }
             }
 
-            if(data[i].winRate >= 54) {
-                isGoodOrBad = "very-good";
-            }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                isGoodOrBad = "good";
-            }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                isGoodOrBad = "soso";
-            }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                isGoodOrBad = "bad";
-            }else if(data[i].winRate < 46) {
-                isGoodOrBad = "trash";
-            }
 
-            if(data[i].pick2 == '없음') {
-                list += `<li class="list-items ${isGray}">
-                            <div class="spell">
-                                <img src="../image/item/${data[i].pick1}" alt="img">
-                            </div>
-                            <div class="spell-percent">
-                                <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                                <span style="width: 23.3%;">${data[i].pickRate}</span>
-                                <span style="width: 23.3%;">${data[i].count}</span>
-                            </div>
-                        </li>`;
-            }else {
-                list += `<li class="list-items ${isGray}">
-                            <div class="spell">
-                                <img src="../image/item/${data[i].pick1}" alt="img">
-                                <img src="../image/item/${data[i].pick2}" alt="img">
-                            </div>
-                            <div class="spell-percent">
-                                <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                                <span style="width: 23.3%;">${data[i].pickRate}</span>
-                                <span style="width: 23.3%;">${data[i].count}</span>
-                            </div>
-                        </li>`;
+            if (data[0].pick2 == '없음') {
+                goodStartItem = `<p>시작 아이템</p>
+                                     <img src="../image/item/${data[0].pick1}" alt="img">`;
+            } else {
+                goodStartItem = `<p>시작 아이템</p>
+                                     <img src="../image/item/${data[0].pick1}" alt="img">
+                                     <img src="../image/item/${data[0].pick2}" alt="img">`;
             }
+            $('.good-start-item').append(goodStartItem);
+            $('#start-item-list').append(list);
         }
-
-
-
-        if(data[0].pick2 == '없음') {
-            goodStartItem = `<p>시작 아이템</p>
-                                 <img src="../image/item/${data[0].pick1}" alt="img">`;
-        }else {
-            goodStartItem = `<p>시작 아이템</p>
-                                 <img src="../image/item/${data[0].pick1}" alt="img">
-                                 <img src="../image/item/${data[0].pick2}" alt="img">`;
-        }
-        $('.good-start-item').append(goodStartItem);
-        $('#start-item-list').append(list);
     },
 })
 
@@ -324,42 +473,44 @@ $.ajax({
         let list = '';
         let isGray = "gray";
         let isGoodOrBad = "";
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
-            }
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
 
-            if(data[i].winRate >= 54) {
-                isGoodOrBad = "very-good";
-            }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                isGoodOrBad = "good";
-            }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                isGoodOrBad = "soso";
-            }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                isGoodOrBad = "bad";
-            }else if(data[i].winRate < 46) {
-                isGoodOrBad = "trash";
-            }
+                if (data[i].winRate >= 54) {
+                    isGoodOrBad = "very-good";
+                } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                    isGoodOrBad = "good";
+                } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                    isGoodOrBad = "soso";
+                } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                    isGoodOrBad = "bad";
+                } else if (data[i].winRate < 46) {
+                    isGoodOrBad = "trash";
+                }
 
-            if(data[i].pick2 == '없음') {
-                list += `<li class="list-items ${isGray}">
-                            <div class="spell">
-                                <img src="../image/item/${data[i].pick1}" alt="img">
-                            </div>
-                            <div class="spell-percent">
-                                <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                                <span style="width: 23.3%;">${data[i].pickRate}</span>
-                                <span style="width: 23.3%;">${data[i].count}</span>
-                            </div>
-                        </li>`;
+                if (data[i].pick2 == '없음') {
+                    list += `<li class="list-items ${isGray}">
+                                <div class="spell">
+                                    <img src="../image/item/${data[i].pick1}" alt="img">
+                                </div>
+                                <div class="spell-percent">
+                                    <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                                    <span style="width: 23.3%;">${data[i].pickRate}</span>
+                                    <span style="width: 23.3%;">${data[i].count}</span>
+                                </div>
+                            </li>`;
+                }
             }
+            let goodShoes = `<p>신발</p>
+                             <img src="../image/item/${data[0].pick1}" alt="img">`;
+            $('.good-shoes').append(goodShoes);
+            $('#shoes-list').append(list);
         }
-        let goodShoes = `<p>신발</p>
-                         <img src="../image/item/${data[0].pick1}" alt="img">`;
-        $('.good-shoes').append(goodShoes);
-        $('#shoes-list').append(list);
     },
 })
 
@@ -377,49 +528,50 @@ $.ajax({
         let list = '';
         let isGray = "gray";
         let isGoodOrBad = "";
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
 
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
+                if (data[i].winRate >= 54) {
+                    isGoodOrBad = "very-good";
+                } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                    isGoodOrBad = "good";
+                } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                    isGoodOrBad = "soso";
+                } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                    isGoodOrBad = "bad";
+                } else if (data[i].winRate < 46) {
+                    isGoodOrBad = "trash";
+                }
+
+                list +=
+                    `<li class="list-items ${isGray}">
+                        <div class="spell">
+                            <img src="../image/item/${data[i].item}" alt="img">
+                        </div>
+                        <div class="spell-percent">
+                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                            <span style="width: 23.3%;">${data[i].pickRate}</span>
+                            <span style="width: 23.3%;">${data[i].count}</span>
+                        </div>
+                    </li>`;
             }
 
-            if(data[i].winRate >= 54) {
-                isGoodOrBad = "very-good";
-            }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                isGoodOrBad = "good";
-            }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                isGoodOrBad = "soso";
-            }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                isGoodOrBad = "bad";
-            }else if(data[i].winRate < 46) {
-                isGoodOrBad = "trash";
-            }
-
-            list +=
-                `<li class="list-items ${isGray}">
-                    <div class="spell">
-                        <img src="../image/item/${data[i].item}" alt="img">
-                    </div>
-                    <div class="spell-percent">
-                        <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                        <span style="width: 23.3%;">${data[i].pickRate}</span>
-                        <span style="width: 23.3%;">${data[i].count}</span>
-                    </div>
-                </li>`;
+            let goodOneCore = `1코어
+                               <div class="core-img-div">
+                                    <img src="../image/item/${data[0].item}" alt="img">
+                               </div>
+                               or
+                               <img src="../image/item/${data[1].item}" alt="img">
+                               or
+                               <img src="../image/item/${data[2].item}" alt="img">`;
+            $('#goodOneCore').append(goodOneCore);
+            $('#core1-list').append(list);
         }
-
-        let goodOneCore = `1코어
-                           <div class="core-img-div">
-                                <img src="../image/item/${data[0].item}" alt="img">
-                           </div>
-                           or
-                           <img src="../image/item/${data[1].item}" alt="img">
-                           or
-                           <img src="../image/item/${data[2].item}" alt="img">`;
-        $('#goodOneCore').append(goodOneCore);
-        $('#core1-list').append(list);
     },
 })
 
@@ -437,48 +589,49 @@ $.ajax({
         let list = '';
         let isGray = "gray";
         let isGoodOrBad = "";
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
 
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
+                if (data[i].winRate >= 54) {
+                    isGoodOrBad = "very-good";
+                } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                    isGoodOrBad = "good";
+                } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                    isGoodOrBad = "soso";
+                } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                    isGoodOrBad = "bad";
+                } else if (data[i].winRate < 46) {
+                    isGoodOrBad = "trash";
+                }
+
+                list +=
+                    `<li class="list-items ${isGray}">
+                        <div class="spell">
+                            <img src="../image/item/${data[i].item}" alt="img">
+                        </div>
+                        <div class="spell-percent">
+                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                            <span style="width: 23.3%;">${data[i].pickRate}</span>
+                            <span style="width: 23.3%;">${data[i].count}</span>
+                        </div>
+                    </li>`;
             }
-
-            if(data[i].winRate >= 54) {
-                isGoodOrBad = "very-good";
-            }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                isGoodOrBad = "good";
-            }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                isGoodOrBad = "soso";
-            }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                isGoodOrBad = "bad";
-            }else if(data[i].winRate < 46) {
-                isGoodOrBad = "trash";
-            }
-
-            list +=
-                `<li class="list-items ${isGray}">
-                    <div class="spell">
-                        <img src="../image/item/${data[i].item}" alt="img">
-                    </div>
-                    <div class="spell-percent">
-                        <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                        <span style="width: 23.3%;">${data[i].pickRate}</span>
-                        <span style="width: 23.3%;">${data[i].count}</span>
-                    </div>
-                </li>`;
+            let goodTwoCore = `2코어
+                               <div class="core-img-div">
+                                   <img src="../image/item/${data[0].item}" alt="img">
+                               </div>
+                               or
+                               <img src="../image/item/${data[1].item}" alt="img">
+                               or
+                               <img src="../image/item/${data[2].item}" alt="img">`;
+            $('#goodTwoCore').append(goodTwoCore);
+            $('#core2-list').append(list);
         }
-        let goodTwoCore = `2코어
-                           <div class="core-img-div">
-                               <img src="../image/item/${data[0].item}" alt="img">
-                           </div>
-                           or
-                           <img src="../image/item/${data[1].item}" alt="img">
-                           or
-                           <img src="../image/item/${data[2].item}" alt="img">`;
-        $('#goodTwoCore').append(goodTwoCore);
-        $('#core2-list').append(list);
     },
 })
 
@@ -496,49 +649,50 @@ $.ajax({
         let list = '';
         let isGray = "gray";
         let isGoodOrBad = "";
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
 
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
+                if (data[i].winRate >= 54) {
+                    isGoodOrBad = "very-good";
+                } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                    isGoodOrBad = "good";
+                } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                    isGoodOrBad = "soso";
+                } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                    isGoodOrBad = "bad";
+                } else if (data[i].winRate < 46) {
+                    isGoodOrBad = "trash";
+                }
+
+                list +=
+                    `<li class="list-items ${isGray}">
+                        <div class="spell">
+                            <img src="../image/item/${data[i].item}" alt="img">
+                        </div>
+                        <div class="spell-percent">
+                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                            <span style="width: 23.3%;">${data[i].pickRate}</span>
+                            <span style="width: 23.3%;">${data[i].count}</span>
+                        </div>
+                    </li>`;
             }
 
-            if(data[i].winRate >= 54) {
-                isGoodOrBad = "very-good";
-            }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                isGoodOrBad = "good";
-            }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                isGoodOrBad = "soso";
-            }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                isGoodOrBad = "bad";
-            }else if(data[i].winRate < 46) {
-                isGoodOrBad = "trash";
-            }
-
-            list +=
-                `<li class="list-items ${isGray}">
-                    <div class="spell">
-                        <img src="../image/item/${data[i].item}" alt="img">
-                    </div>
-                    <div class="spell-percent">
-                        <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                        <span style="width: 23.3%;">${data[i].pickRate}</span>
-                        <span style="width: 23.3%;">${data[i].count}</span>
-                    </div>
-                </li>`;
+            let goodThreeCore = `3코어
+                               <div class="core-img-div">
+                                   <img src="../image/item/${data[0].item}" alt="img">
+                               </div>
+                               or
+                               <img src="../image/item/${data[1].item}" alt="img">
+                               or
+                               <img src="../image/item/${data[2].item}" alt="img">`;
+            $('#goodThreeCore').append(goodThreeCore);
+            $('#core3-list').append(list);
         }
-
-        let goodThreeCore = `3코어
-                           <div class="core-img-div">
-                               <img src="../image/item/${data[0].item}" alt="img">
-                           </div>
-                           or
-                           <img src="../image/item/${data[1].item}" alt="img">
-                           or
-                           <img src="../image/item/${data[2].item}" alt="img">`;
-        $('#goodThreeCore').append(goodThreeCore);
-        $('#core3-list').append(list);
     },
 })
 
@@ -556,40 +710,41 @@ $.ajax({
         let list = '';
         let isGray = "gray";
         let isGoodOrBad = "";
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
 
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
+                if (data[i].winRate >= 54) {
+                    isGoodOrBad = "very-good";
+                } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                    isGoodOrBad = "good";
+                } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                    isGoodOrBad = "soso";
+                } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                    isGoodOrBad = "bad";
+                } else if (data[i].winRate < 46) {
+                    isGoodOrBad = "trash";
+                }
+
+                list +=
+                    `<li class="list-items ${isGray}">
+                        <div class="spell">
+                            <img src="../image/item/${data[i].item1}" alt="img">
+                            <img src="../image/item/${data[i].item2}" alt="img">
+                        </div>
+                        <div class="spell-percent">
+                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                            <span style="width: 23.3%;">${data[i].pickRate}</span>
+                            <span style="width: 23.3%;">${data[i].count}</span>
+                        </div>
+                    </li>`;
             }
-
-            if(data[i].winRate >= 54) {
-                isGoodOrBad = "very-good";
-            }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                isGoodOrBad = "good";
-            }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                isGoodOrBad = "soso";
-            }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                isGoodOrBad = "bad";
-            }else if(data[i].winRate < 46) {
-                isGoodOrBad = "trash";
-            }
-
-            list +=
-                `<li class="list-items ${isGray}">
-                    <div class="spell">
-                        <img src="../image/item/${data[i].item1}" alt="img">
-                        <img src="../image/item/${data[i].item2}" alt="img">
-                    </div>
-                    <div class="spell-percent">
-                        <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                        <span style="width: 23.3%;">${data[i].pickRate}</span>
-                        <span style="width: 23.3%;">${data[i].count}</span>
-                    </div>
-                </li>`;
+            $('#core2-combine').append(list);
         }
-        $('#core2-combine').append(list);
     },
 })
 
@@ -607,41 +762,42 @@ $.ajax({
         let list = '';
         let isGray = "gray";
         let isGoodOrBad = "";
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
 
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
+                if (data[i].winRate >= 54) {
+                    isGoodOrBad = "very-good";
+                } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                    isGoodOrBad = "good";
+                } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                    isGoodOrBad = "soso";
+                } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                    isGoodOrBad = "bad";
+                } else if (data[i].winRate < 46) {
+                    isGoodOrBad = "trash";
+                }
+
+                list +=
+                    `<li class="list-items ${isGray}">
+                        <div class="spell">
+                            <img src="../image/item/${data[i].item1}" alt="img">
+                            <img src="../image/item/${data[i].item2}" alt="img">
+                            <img src="../image/item/${data[i].item3}" alt="img">
+                        </div>
+                        <div class="spell-percent">
+                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                            <span style="width: 23.3%;">${data[i].pickRate}</span>
+                            <span style="width: 23.3%;">${data[i].count}</span>
+                        </div>
+                    </li>`;
             }
-
-            if(data[i].winRate >= 54) {
-                isGoodOrBad = "very-good";
-            }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                isGoodOrBad = "good";
-            }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                isGoodOrBad = "soso";
-            }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                isGoodOrBad = "bad";
-            }else if(data[i].winRate < 46) {
-                isGoodOrBad = "trash";
-            }
-
-            list +=
-                `<li class="list-items ${isGray}">
-                    <div class="spell">
-                        <img src="../image/item/${data[i].item1}" alt="img">
-                        <img src="../image/item/${data[i].item2}" alt="img">
-                        <img src="../image/item/${data[i].item3}" alt="img">
-                    </div>
-                    <div class="spell-percent">
-                        <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                        <span style="width: 23.3%;">${data[i].pickRate}</span>
-                        <span style="width: 23.3%;">${data[i].count}</span>
-                    </div>
-                </li>`;
+            $('#core3-combine').append(list);
         }
-        $('#core3-combine').append(list);
     },
 })
 $.ajax({
@@ -658,49 +814,50 @@ $.ajax({
         let list = '';
         let isGray = "gray";
         let isGoodOrBad = "";
+        if (data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
 
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
+                if (data[i].winRate >= 54) {
+                    isGoodOrBad = "very-good";
+                } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                    isGoodOrBad = "good";
+                } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                    isGoodOrBad = "soso";
+                } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                    isGoodOrBad = "bad";
+                } else if (data[i].winRate < 46) {
+                    isGoodOrBad = "trash";
+                }
+
+                list +=
+                    `<li class="list-items ${isGray}">
+                        <div class="spell">
+                            <img src="../image/item/${data[i].item1}" alt="img">
+                            <img src="../image/item/${data[i].item2}" alt="img">
+                            <img src="../image/item/${data[i].item3}" alt="img">
+                            <img src="../image/item/${data[i].item4}" alt="img">
+                        </div>
+                        <div class="spell-percent">
+                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                            <span style="width: 23.3%;">${data[i].pickRate}</span>
+                            <span style="width: 23.3%;">${data[i].count}</span>
+                        </div>
+                    </li>`;
             }
 
-            if(data[i].winRate >= 54) {
-                isGoodOrBad = "very-good";
-            }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                isGoodOrBad = "good";
-            }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                isGoodOrBad = "soso";
-            }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                isGoodOrBad = "bad";
-            }else if(data[i].winRate < 46) {
-                isGoodOrBad = "trash";
-            }
-
-            list +=
-                `<li class="list-items ${isGray}">
-                    <div class="spell">
-                        <img src="../image/item/${data[i].item1}" alt="img">
-                        <img src="../image/item/${data[i].item2}" alt="img">
-                        <img src="../image/item/${data[i].item3}" alt="img">
-                        <img src="../image/item/${data[i].item4}" alt="img">
-                    </div>
-                    <div class="spell-percent">
-                        <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                        <span style="width: 23.3%;">${data[i].pickRate}</span>
-                        <span style="width: 23.3%;">${data[i].count}</span>
-                    </div>
-                </li>`;
+            let goodCore = `<p>코어템</p>
+                                <img src="../image/item/${data[0].item1}" alt="img">
+                                <img src="../image/item/${data[0].item2}" alt="img">
+                                <img src="../image/item/${data[0].item3}" alt="img">
+                                <img src="../image/item/${data[0].item4}" alt="img">`;
+            $('.good-core').append(goodCore);
+            $('#core4-combine').append(list);
         }
-
-        let goodCore = `<p>코어템</p>
-                        <img src="../image/item/${data[0].item1}" alt="img">
-                        <img src="../image/item/${data[0].item2}" alt="img">
-                        <img src="../image/item/${data[0].item3}" alt="img">
-                        <img src="../image/item/${data[0].item4}" alt="img">`;
-        $('.good-core').append(goodCore);
-        $('#core4-combine').append(list);
     },
 })
 
@@ -718,47 +875,48 @@ $.ajax({
         let list = '';
         let isGray = "gray";
         let isGoodOrBad = "";
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
 
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
+                if (data[i].winRate >= 54) {
+                    isGoodOrBad = "very-good";
+                } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                    isGoodOrBad = "good";
+                } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                    isGoodOrBad = "soso";
+                } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                    isGoodOrBad = "bad";
+                } else if (data[i].winRate < 46) {
+                    isGoodOrBad = "trash";
+                }
+
+                list +=
+                    `<li class="list-items ${isGray}">
+                        <div class="spell">
+                            <img src="../image/skill/${data[i].skill1}" alt="img">
+                            <img src="../image/skill/${data[i].skill2}" alt="img">
+                            <img src="../image/skill/${data[i].skill3}" alt="img">
+                        </div>
+                        <div class="spell-percent">
+                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                            <span style="width: 23.3%;">${data[i].pickRate}</span>
+                            <span style="width: 23.3%;">${data[i].count}</span>
+                        </div>
+                    </li>`;
             }
 
-            if(data[i].winRate >= 54) {
-                isGoodOrBad = "very-good";
-            }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                isGoodOrBad = "good";
-            }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                isGoodOrBad = "soso";
-            }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                isGoodOrBad = "bad";
-            }else if(data[i].winRate < 46) {
-                isGoodOrBad = "trash";
-            }
-
-            list +=
-                `<li class="list-items ${isGray}">
-                    <div class="spell">
-                        <img src="../image/skill/${data[i].skill1}" alt="img">
-                        <img src="../image/skill/${data[i].skill2}" alt="img">
-                        <img src="../image/skill/${data[i].skill3}" alt="img">
-                    </div>
-                    <div class="spell-percent">
-                        <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                        <span style="width: 23.3%;">${data[i].pickRate}</span>
-                        <span style="width: 23.3%;">${data[i].count}</span>
-                    </div>
-                </li>`;
+            let goodSkillMaster = `<p>스킬 마스터 순서</p>
+                                   <img src="../image/skill/${data[0].skill1}" alt="img">
+                                   <img src="../image/skill/${data[0].skill2}" alt="img">
+                                   <img src="../image/skill/${data[0].skill3}" alt="img">`;
+            $('.good-skill-master').append(goodSkillMaster);
+            $('#skill-master').append(list);
         }
-
-        let goodSkillMaster = `<p>스킬 마스터 순서</p>
-                               <img src="../image/skill/${data[0].skill1}" alt="img">
-                               <img src="../image/skill/${data[0].skill2}" alt="img">
-                               <img src="../image/skill/${data[0].skill3}" alt="img">`;
-        $('.good-skill-master').append(goodSkillMaster);
-        $('#skill-master').append(list);
     },
 })
 
@@ -780,36 +938,37 @@ $.ajax({
     success: function (data) {
         let list = '';
         let isGoodOrBad = "";
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
 
-        for(let i = 0; i < data.length; i++) {
+                if (data[i].winRate >= 54) {
+                    isGoodOrBad = "very-good";
+                } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                    isGoodOrBad = "good";
+                } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                    isGoodOrBad = "soso";
+                } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                    isGoodOrBad = "bad";
+                } else if (data[i].winRate < 46) {
+                    isGoodOrBad = "trash";
+                }
 
-            if(data[i].winRate >= 54) {
-                isGoodOrBad = "very-good";
-            }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                isGoodOrBad = "good";
-            }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                isGoodOrBad = "soso";
-            }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                isGoodOrBad = "bad";
-            }else if(data[i].winRate < 46) {
-                isGoodOrBad = "trash";
+                list +=
+                    `<li class="list-items border-bottom">
+                        <div class="spell">
+                            <img src="../image/skill/${data[i].skill1}" alt="img">
+                            <img src="../image/skill/${data[i].skill2}" alt="img">
+                            <img src="../image/skill/${data[i].skill3}" alt="img">
+                        </div>
+                        <div class="spell-percent" style="width: 40%;">
+                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                            <span style="width: 23.3%;">${data[i].pickRate}</span>
+                            <span style="width: 23.3%;">${data[i].count}</span>
+                        </div>
+                    </li>`;
             }
-
-            list +=
-                `<li class="list-items border-bottom">
-                    <div class="spell">
-                        <img src="../image/skill/${data[i].skill1}" alt="img">
-                        <img src="../image/skill/${data[i].skill2}" alt="img">
-                        <img src="../image/skill/${data[i].skill3}" alt="img">
-                    </div>
-                    <div class="spell-percent" style="width: 40%;">
-                        <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                        <span style="width: 23.3%;">${data[i].pickRate}</span>
-                        <span style="width: 23.3%;">${data[i].count}</span>
-                    </div>
-                </li>`;
+            $('#skill-seq').append(list);
         }
-        $('#skill-seq').append(list);
     },
 })
 
@@ -835,36 +994,37 @@ whatLv0.addEventListener('click', () => {
             $('#skill-seq').children('li').remove();
             let list = '';
             let isGoodOrBad = "";
+            if(data.length !== 0) {
+                for (let i = 0; i < data.length; i++) {
 
-            for(let i = 0; i < data.length; i++) {
+                    if (data[i].winRate >= 54) {
+                        isGoodOrBad = "very-good";
+                    } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                        isGoodOrBad = "good";
+                    } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                        isGoodOrBad = "soso";
+                    } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                        isGoodOrBad = "bad";
+                    } else if (data[i].winRate < 46) {
+                        isGoodOrBad = "trash";
+                    }
 
-                if(data[i].winRate >= 54) {
-                    isGoodOrBad = "very-good";
-                }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                    isGoodOrBad = "good";
-                }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                    isGoodOrBad = "soso";
-                }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                    isGoodOrBad = "bad";
-                }else if(data[i].winRate < 46) {
-                    isGoodOrBad = "trash";
+                    list +=
+                        `<li class="list-items border-bottom">
+                        <div class="spell">
+                            <img src="../image/skill/${data[i].skill1}" alt="img">
+                            <img src="../image/skill/${data[i].skill2}" alt="img">
+                            <img src="../image/skill/${data[i].skill3}" alt="img">
+                        </div>
+                        <div class="spell-percent" style="width: 40%;">
+                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                            <span style="width: 23.3%;">${data[i].pickRate}</span>
+                            <span style="width: 23.3%;">${data[i].count}</span>
+                        </div>
+                    </li>`;
                 }
-
-                list +=
-                    `<li class="list-items border-bottom">
-                    <div class="spell">
-                        <img src="../image/skill/${data[i].skill1}" alt="img">
-                        <img src="../image/skill/${data[i].skill2}" alt="img">
-                        <img src="../image/skill/${data[i].skill3}" alt="img">
-                    </div>
-                    <div class="spell-percent" style="width: 40%;">
-                        <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                        <span style="width: 23.3%;">${data[i].pickRate}</span>
-                        <span style="width: 23.3%;">${data[i].count}</span>
-                    </div>
-                </li>`;
+                $('#skill-seq').append(list);
             }
-            $('#skill-seq').append(list);
         },
     })
 })
@@ -890,39 +1050,40 @@ whatLv1.addEventListener('click', () => {
             $('#skill-seq').children('li').remove();
             let list = '';
             let isGoodOrBad = "";
+            if(data.length !== 0) {
+                for (let i = 0; i < data.length; i++) {
 
-            for(let i = 0; i < data.length; i++) {
+                    if (data[i].winRate >= 54) {
+                        isGoodOrBad = "very-good";
+                    } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                        isGoodOrBad = "good";
+                    } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                        isGoodOrBad = "soso";
+                    } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                        isGoodOrBad = "bad";
+                    } else if (data[i].winRate < 46) {
+                        isGoodOrBad = "trash";
+                    }
 
-                if(data[i].winRate >= 54) {
-                    isGoodOrBad = "very-good";
-                }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                    isGoodOrBad = "good";
-                }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                    isGoodOrBad = "soso";
-                }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                    isGoodOrBad = "bad";
-                }else if(data[i].winRate < 46) {
-                    isGoodOrBad = "trash";
+                    list +=
+                        `<li class="list-items border-bottom">
+                        <div class="spell">
+                            <img src="../image/skill/${data[i].skill1}" alt="img">
+                            <img src="../image/skill/${data[i].skill2}" alt="img">
+                            <img src="../image/skill/${data[i].skill3}" alt="img">
+                            <img src="../image/skill/${data[i].skill4}" alt="img">
+                            <img src="../image/skill/${data[i].skill5}" alt="img">
+                            <img src="../image/skill/${data[i].skill6}" alt="img">
+                        </div>
+                        <div class="spell-percent" style="width: 40%;">
+                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                            <span style="width: 23.3%;">${data[i].pickRate}</span>
+                            <span style="width: 23.3%;">${data[i].count}</span>
+                        </div>
+                    </li>`;
                 }
-
-                list +=
-                    `<li class="list-items border-bottom">
-                    <div class="spell">
-                        <img src="../image/skill/${data[i].skill1}" alt="img">
-                        <img src="../image/skill/${data[i].skill2}" alt="img">
-                        <img src="../image/skill/${data[i].skill3}" alt="img">
-                        <img src="../image/skill/${data[i].skill4}" alt="img">
-                        <img src="../image/skill/${data[i].skill5}" alt="img">
-                        <img src="../image/skill/${data[i].skill6}" alt="img">
-                    </div>
-                    <div class="spell-percent" style="width: 40%;">
-                        <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                        <span style="width: 23.3%;">${data[i].pickRate}</span>
-                        <span style="width: 23.3%;">${data[i].count}</span>
-                    </div>
-                </li>`;
+                $('#skill-seq').append(list);
             }
-            $('#skill-seq').append(list);
         },
     })
 })
@@ -948,44 +1109,45 @@ whatLv2.addEventListener('click', () => {
             $('#skill-seq').children('li').remove();
             let list = '';
             let isGoodOrBad = "";
+            if(data.length !== 0) {
+                for (let i = 0; i < data.length; i++) {
 
-            for(let i = 0; i < data.length; i++) {
+                    if (data[i].winRate >= 54) {
+                        isGoodOrBad = "very-good";
+                    } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                        isGoodOrBad = "good";
+                    } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                        isGoodOrBad = "soso";
+                    } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                        isGoodOrBad = "bad";
+                    } else if (data[i].winRate < 46) {
+                        isGoodOrBad = "trash";
+                    }
 
-                if(data[i].winRate >= 54) {
-                    isGoodOrBad = "very-good";
-                }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                    isGoodOrBad = "good";
-                }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                    isGoodOrBad = "soso";
-                }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                    isGoodOrBad = "bad";
-                }else if(data[i].winRate < 46) {
-                    isGoodOrBad = "trash";
+                    list +=
+                        `<li class="list-items border-bottom">
+                        <div class="spell">
+                            <img src="../image/skill/${data[i].skill1}" alt="img">
+                            <img src="../image/skill/${data[i].skill2}" alt="img">
+                            <img src="../image/skill/${data[i].skill3}" alt="img">
+                            <img src="../image/skill/${data[i].skill4}" alt="img">
+                            <img src="../image/skill/${data[i].skill5}" alt="img">
+                            <img src="../image/skill/${data[i].skill6}" alt="img">
+                            <img src="../image/skill/${data[i].skill7}" alt="img">
+                            <img src="../image/skill/${data[i].skill8}" alt="img">
+                            <img src="../image/skill/${data[i].skill9}" alt="img">
+                            <img src="../image/skill/${data[i].skill10}" alt="img">
+                            <img src="../image/skill/${data[i].skill11}" alt="img">
+                        </div>
+                        <div class="spell-percent" style="width: 40%;">
+                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                            <span style="width: 23.3%;">${data[i].pickRate}</span>
+                            <span style="width: 23.3%;">${data[i].count}</span>
+                        </div>
+                    </li>`;
                 }
-
-                list +=
-                    `<li class="list-items border-bottom">
-                    <div class="spell">
-                        <img src="../image/skill/${data[i].skill1}" alt="img">
-                        <img src="../image/skill/${data[i].skill2}" alt="img">
-                        <img src="../image/skill/${data[i].skill3}" alt="img">
-                        <img src="../image/skill/${data[i].skill4}" alt="img">
-                        <img src="../image/skill/${data[i].skill5}" alt="img">
-                        <img src="../image/skill/${data[i].skill6}" alt="img">
-                        <img src="../image/skill/${data[i].skill7}" alt="img">
-                        <img src="../image/skill/${data[i].skill8}" alt="img">
-                        <img src="../image/skill/${data[i].skill9}" alt="img">
-                        <img src="../image/skill/${data[i].skill10}" alt="img">
-                        <img src="../image/skill/${data[i].skill11}" alt="img">
-                    </div>
-                    <div class="spell-percent" style="width: 40%;">
-                        <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                        <span style="width: 23.3%;">${data[i].pickRate}</span>
-                        <span style="width: 23.3%;">${data[i].count}</span>
-                    </div>
-                </li>`;
+                $('#skill-seq').append(list);
             }
-            $('#skill-seq').append(list);
         },
     })
 })
@@ -1003,44 +1165,45 @@ $.ajax({
         let list = '';
         let isGray = "gray";
         let isGoodOrBad = "";
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
 
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
+                if (data[i].winRate >= 54) {
+                    isGoodOrBad = "very-good";
+                } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                    isGoodOrBad = "good";
+                } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                    isGoodOrBad = "soso";
+                } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                    isGoodOrBad = "bad";
+                } else if (data[i].winRate < 46) {
+                    isGoodOrBad = "trash";
+                }
+
+                list +=
+                    `<li class="list-items ${isGray}" style="height: 45px"> 
+                        <div class="spell" style="width: 75%">
+                            <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick1}" alt="img">
+                            <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick2}" alt="img">
+                            <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick3}" alt="img">
+                            <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick4}" alt="img">
+                            <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick5}" alt="img">
+                            <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick6}" alt="img">
+                        </div>
+                        <div class="spell-percent" style="width: 45%;">
+                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                            <span style="width: 23.3%;">${data[i].pickRate}</span>
+                        </div>
+                    </li>`;
             }
 
-            if(data[i].winRate >= 54) {
-                isGoodOrBad = "very-good";
-            }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                isGoodOrBad = "good";
-            }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                isGoodOrBad = "soso";
-            }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                isGoodOrBad = "bad";
-            }else if(data[i].winRate < 46) {
-                isGoodOrBad = "trash";
-            }
-
-            list +=
-                `<li class="list-items ${isGray}" style="height: 45px"> 
-                    <div class="spell" style="width: 75%">
-                        <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick1}" alt="img">
-                        <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick2}" alt="img">
-                        <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick3}" alt="img">
-                        <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick4}" alt="img">
-                        <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick5}" alt="img">
-                        <img style="width: 35px; height: 35px" src="../image/rune/${data[i].pick6}" alt="img">
-                    </div>
-                    <div class="spell-percent" style="width: 45%;">
-                        <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                        <span style="width: 23.3%;">${data[i].pickRate}</span>
-                    </div>
-                </li>`;
+            $('#rune-combine').append(list);
         }
-
-        $('#rune-combine').append(list);
     },
 })
 
@@ -1057,42 +1220,43 @@ $.ajax({
         let list = '';
         let isGray = "gray";
         let isGoodOrBad = "";
+        if(data.length !== 0) {
+            for (let i = 0; i < data.length; i++) {
+                if ((i + 3) % 2 === 0) {
+                    isGray = ""
+                } else {
+                    isGray = "gray"
+                }
 
-        for(let i = 0; i < data.length; i++) {
-            if((i + 3) % 2 === 0) {
-                isGray = ""
-            }else {
-                isGray = "gray"
+                if (data[i].winRate >= 54) {
+                    isGoodOrBad = "very-good";
+                } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                    isGoodOrBad = "good";
+                } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                    isGoodOrBad = "soso";
+                } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                    isGoodOrBad = "bad";
+                } else if (data[i].winRate < 46) {
+                    isGoodOrBad = "trash";
+                }
+
+                list +=
+                    `<li class="list-items ${isGray}" style="height: 45px">
+                        <div class="spell">
+                            <img src="../image/rune/${data[i].pick1}" alt="img">
+                            <img src="../image/rune/${data[i].pick2}" alt="img">
+                            <img src="../image/rune/${data[i].pick3}" alt="img">
+                        </div>
+                        <div class="spell-percent">
+                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                            <span style="width: 23.3%;">${data[i].pickRate}</span>
+                        </div>
+                    </li>`;
             }
 
-            if(data[i].winRate >= 54) {
-                isGoodOrBad = "very-good";
-            }else if(data[i].winRate < 54 && data[i].winRate >= 51) {
-                isGoodOrBad = "good";
-            }else if(data[i].winRate < 51 && data[i].winRate >= 48) {
-                isGoodOrBad = "soso";
-            }else if(data[i].winRate < 48 && data[i].winRate >= 46) {
-                isGoodOrBad = "bad";
-            }else if(data[i].winRate < 46) {
-                isGoodOrBad = "trash";
-            }
-
-            list +=
-                `<li class="list-items ${isGray}" style="height: 45px">
-                    <div class="spell">
-                        <img src="../image/rune/${data[i].pick1}" alt="img">
-                        <img src="../image/rune/${data[i].pick2}" alt="img">
-                        <img src="../image/rune/${data[i].pick3}" alt="img">
-                    </div>
-                    <div class="spell-percent">
-                        <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                        <span style="width: 23.3%;">${data[i].pickRate}</span>
-                    </div>
-                </li>`;
+            let goodRuneShard = ``;
+            $('#good-rune-shard').append(goodRuneShard);
+            $('#rune-shard').append(list);
         }
-
-        let goodRuneShard = ``;
-        $('#good-rune-shard').append(goodRuneShard);
-        $('#rune-shard').append(list);
     },
 })

@@ -135,6 +135,31 @@ main {
 	transition: all 300ms;
 }
 
+.owner {
+	border: 1px solid #3d69ff;
+	color: #3d69ff;
+	border-radius: 4px;
+	padding: 0 3px 1px 3px;
+	position: relative;
+	font-size: 12px;
+	margin-right: 4px;
+}
+
+.comment-delete {
+	width: 20%;
+	text-align: right;
+	padding-top: 50px;
+	padding-right: 10px;
+	color: #8489DB;
+}
+
+.comment-delete span {
+	cursor: pointer;
+}
+
+.comment-delete span:hover {
+	color: #3d69ff;
+}
 
 .write-comment:hover{
 	color: blue;

@@ -2,6 +2,8 @@ package com.korea.teamps.domain;
 
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+
 public class ChampMatchLIst {
     private String name;
     private String line;

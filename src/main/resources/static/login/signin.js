@@ -55,7 +55,8 @@ submitBtn.addEventListener('click', () => {
             url: '/signin',
             data: JSON.stringify(signInForm.toObject()),
             contentType : 'application/json',
-            success: function () {
+            success: function (data) {
+                location.href = '/login';
                 console.log('success')
             },
         })

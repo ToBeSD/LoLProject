@@ -45,8 +45,7 @@ $.ajax({
         $('.main-mainslide_container').append(list);
 
 
-
-        $('.small-card-image').click((e)=> {
+        $(document).on("click", ".small-card-image", function(e) {
             console.log(e.target)
             $('.slide-image-small').parent().parent().css({display: 'block'})
             $('.main-swiper-wrapper').remove();
@@ -153,14 +152,14 @@ $.ajax({
 
 $.ajax({
     type: "POST",
-    url: '/community',
+    url: '/community/build',
     data: JSON.stringify({
         category : "빌드 연구소",
     }),
     contentType : 'application/json',
     success: function (data) {
         let list = '';
-        for(let i = 0; i < 11; i++) {
+        for(let i = 0; i < data.length; i++) {
             list += `<li class="community-list" style="border-bottom: 1px solid #dbdde1;">
                         <span class="post-name">빌드</span>
                         <a class="post-link" href="#">
@@ -171,6 +170,5 @@ $.ajax({
                     </li>`;
         }
         $('#build-community').append(list);
-        },
+    },
 })
-

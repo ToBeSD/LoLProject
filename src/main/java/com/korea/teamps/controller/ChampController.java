@@ -99,6 +99,12 @@ public class ChampController {
         return "rank";
     }
 
+    @PostMapping("/champ/rankline/one")
+    @ResponseBody
+    public  ChampRank findOneChampRank(@RequestBody ChampRank champRank) {
+        return champRepository.findByLineNameChampRank(champRank);
+    }
+
     @PostMapping ("/champ/rankline")
     @ResponseBody
     public List<ChampRank> champLineRanks(@RequestBody ChampRank champRank) {

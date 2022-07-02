@@ -77,5 +77,4 @@ public class Member {
     public void setAdmin(String admin) {
         this.admin = admin;
     }
-
 }

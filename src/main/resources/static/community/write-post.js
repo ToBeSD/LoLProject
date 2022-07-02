@@ -15,20 +15,20 @@ submitBtn.addEventListener('click', ()=> {
         }),
         dataType: 'JSON',
         contentType : 'application/json',
-        success: function (data) {
-            console.log(data)
+        success: function (data, textStatus, jqXHR) {
+            if(jqXHR.status == 200 && category.value == '빌드 연구소') {
+                location.href = '/community/build';
+            }else if(jqXHR.status == 200 && category.value == '자유 게시판') {
+                location.href = '/community';
+            }
+        },
+        error: function (e) {
+            if(e.status == 403) {
+                alert('로그인은 하셨는지요?');
+                location.href = '/login';
+            }
         },
     })
 })
 
-const select = document.querySelector("#community-select");
-const champInput = document.querySelector("#champ-input");
-
-select.addEventListener('change', () => {
-    if(select.value == '빌드 연구소') {
-        champInput.style.display = 'block';
-    }else {
-        champInput.style.display = 'none';
-    }
-})
 

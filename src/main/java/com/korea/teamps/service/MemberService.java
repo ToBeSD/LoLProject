@@ -1,5 +1,6 @@
 package com.korea.teamps.service;
 
+import com.korea.teamps.domain.ChangePassword;
 import com.korea.teamps.domain.Member;
 import com.korea.teamps.domain.Profile;
 import com.korea.teamps.repository.MemberRepository;
@@ -27,9 +28,10 @@ public class MemberService {
     }
 
     //회원 가입
-    public void join(Member member) {
-//        validateDuplicateMember(member); // 중복 회원 검증
+    public boolean join(Member member) {
+        //validateDuplicateMember(member); // 중복 회원 검증
         memberRepository.save(passwordEncoder(member));
+        return true;
     }
     
     //비밀번호 암호화
@@ -54,7 +56,7 @@ public class MemberService {
     public boolean logIn(HttpServletRequest request, Member inputMember) {
         Member realMember = memberRepository.findByEmail(inputMember.getEmail());
 
-        if(isValidEmailPassword(inputMember, realMember)) {
+        if(isValidPassword(inputMember.getPassword(), realMember)) {
             HttpSession session = request.getSession(false);
             if (session == null) {
                 session = request.getSession(true);
@@ -76,9 +78,26 @@ public class MemberService {
         }
     }
 
+    //비밀번호 변경
+    public boolean changePassword(ChangePassword changePassword) {
+        Member realMember = memberRepository.findByMemberKeyPassword(changePassword.getMemberKey());
+
+        if(isValidPassword(changePassword.getPassword(), realMember)){
+            String newPassword = changePassword.getNewPassword();
+            realMember.setPassword(newPassword);
+
+            Member encodedPassword = passwordEncoder(realMember);
+            memberRepository.updatePassword(encodedPassword);
+
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     //비밀번호 비교
-    private boolean isValidEmailPassword(Member inputMember, Member realMember) {
-        boolean matches = passwordEncoder.matches(inputMember.getPassword(), realMember.getPassword());
+    private boolean isValidPassword(String inputPassword, Member realMember) {
+        boolean matches = passwordEncoder.matches(inputPassword, realMember.getPassword());
 
         if(matches == true) {
             return true;

@@ -205,12 +205,13 @@ img {
     width: 350px;
     float: right;
     padding-top: 30px;
+    text-align: right;
 }
 
 .counter-text {
     display: inline-block;
     font-size: 14px;
-    width: 60px;
+    width: 90px;
     padding-top: 37px;
     color: #ffc030;
     font-weight: 600;
@@ -225,7 +226,7 @@ img {
 .counter-img {
     width: 30px;
     height: 30px;
-    transform: translate(13px, 5px);
+    transform: translate(0px, 5px);
 }
 
 .select-line {

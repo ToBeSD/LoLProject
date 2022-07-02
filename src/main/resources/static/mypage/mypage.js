@@ -1,30 +1,27 @@
 $(function() {
     //프로필 설정
     $(".change-img div.profile-settings").hover(function() {
-        //$(this).find("img:first-child").css('display','none');
-        //$(this).find("img").eq(2).css('display','block');
-        //$(this).find("div").css('display','block');
-        //$(this).find("img").eq(1).css('display','block');
-        /* $(this).find("img:first-child").css('opacity','0');
-        $(this).find("img").eq(1).css('opacity','1');
-        $(this).find("div").css('opacity','1');
-        $(this).find("img").eq(2).css('opacity','1'); */
         $(this).find("img:first-child").animate({opacity:0},100);// ('opacity','0');
         $(this).find("img").eq(1).animate({opacity:1},100); // .css('opacity','1');
         $(this).find("div").animate({opacity:1},250); //css('opacity','1');
         $(this).find("img").eq(2).animate({opacity:1},100);  //.css('opacity','1');
-        $(this).find("div").click(() => {
-            alert('click');
+        $('.change-img').off('click').on('click', (e) => {
+            let targetImage = e.target.src.replace('http://localhost:8080/image/profile/', '');
+            $.ajax({
+                type: "POST",
+                url: '/mypage/changeprofile',
+                data: JSON.stringify({
+                    memberKey: $('#memberkey').val(),
+                    image: targetImage,
+                }),
+                contentType : 'application/json',
+                success: function (data) {
+                    alert('프로필이 변경되었습니다.');
+                },
+            })
+            $('.my-image').attr('src', e.target.src);
         })
     }, function() {
-        //$(this).find("img:first-child").css('display','block');
-        //$(this).find("img").eq(2).css('display','none');
-        //$(this).find("div").css('display','none');
-        //$(this).find("img").eq(1).css('display','none');
-        /* $(this).find("img:first-child").css('opacity','1');
-        $(this).find("img").eq(1).css('opacity','0');
-        $(this).find("div").css('opacity','0');
-        $(this).find("img").eq(2).css('opacity','0'); */
         $(this).find("img:first-child").animate({opacity:1});  //.css('opacity','1');
         $(this).find("img").eq(1).animate({opacity:0});  //.css('opacity','0');
         $(this).find("div").animate({opacity:0});  //.css('opacity','0');
@@ -45,9 +42,13 @@ $(function() {
             contentType : 'application/json',
             success: function (data) {
                 introduce.val(data.introduce)
+                alert("한줄소개가 변경되었습니다.")
+            },
+            error(e) {
+              alert(e.status);
             },
         })
-    });
+    })
 
     $("#btn-save-id2").click(function() {
         if($('#new-password').val() === $('#new-password-confirm').val()) {
@@ -55,14 +56,20 @@ $(function() {
                 type: "POST",
                 url: '/mypage/changepassword',
                 data: JSON.stringify({
-                    password : $('#new-password').val(),
+                    memberKey: $('#memberkey').val(),
+                    password: $('#now-password').val(),
+                    newPassword: $('#new-password').val(),
                 }),
-                contentType : 'application/json',
-                success: function (data) {
-
+                contentType: 'application/json',
+                success: function (data, textStatus, jqXHR) {  // data는 서버가 보내준 data , textStatus는 status를 텍스트로 보여줌
+                                                               // jqXHR은 jq.XHR.status로 status코드 보여줌
+                    alert("비밀번호가 변경되었습니다.")
                 },
+                error: function(e) {
+                    // alert(e.status); status코드
+                    alert("현재 비밀번호를 잘못 입력 하셨습니다.")
+                }
             })
-            alert("비밀번호가 변경되었습니다. 다시 로그인 해주세요.");
 
         } else {
             $('#new-password').html("");
@@ -75,7 +82,18 @@ $(function() {
     });
 
     $("#btn-save-id3").click(function() {
-        alert("회원탈퇴 완료.");
+        $.ajax({
+            type: "POST",
+            url: '/mypage/quit',
+            data: JSON.stringify({
+                memberKey : $('#memberkey').val(),
+            }),
+            contentType : 'application/json',
+            success: function () {
+                location.href = "/";
+                alert('회원탈퇴 완료.')
+            },
+        })
     });
 
     $('#introduce-modal-id').animate({opacity:0},10);

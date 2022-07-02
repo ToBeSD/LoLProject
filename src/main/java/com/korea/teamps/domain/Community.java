@@ -1,8 +1,12 @@
 package com.korea.teamps.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Community {
     private int bno;
     private String title;
@@ -14,19 +18,7 @@ public class Community {
     private String category;
     private String nickName;
     private String image;
-
-    public Community(int bno, String title, String content, String writeDate, int good, int bad, int count, String category, String nickName, String image) {
-        this.bno = bno;
-        this.title = title;
-        this.content = content;
-        this.writeDate = writeDate;
-        this.good = good;
-        this.bad = bad;
-        this.count = count;
-        this.category = category;
-        this.nickName = nickName;
-        this.image = image;
-    }
+    private int page;
 
     public String getTitle() {
         return title;
@@ -106,5 +98,13 @@ public class Community {
 
     public void setBno(int bno) {
         this.bno = bno;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 }

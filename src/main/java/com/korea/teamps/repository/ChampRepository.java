@@ -73,6 +73,14 @@ public interface ChampRepository {
     @Select("SELECT tier.*, image.IMAGE_HEAD\n" +
             "FROM c_champ_tier tier, champ_skill image\n" +
             "WHERE tier.name = image.name\n" +
+            "  AND tier.NAME = #{name}\n" +
+            "  AND tier.line = #{line}\n" +
+            "ORDER BY tier.ps_score desc")
+    ChampRank findByLineNameChampRank(ChampRank champRank);
+
+    @Select("SELECT tier.*, image.IMAGE_HEAD\n" +
+            "FROM c_champ_tier tier, champ_skill image\n" +
+            "WHERE tier.name = image.name\n" +
             "AND tier.line = #{line}" +
             "ORDER BY tier.ps_score desc")
     List<ChampRank> findByLineChampRank(ChampRank champRank);
@@ -92,15 +100,39 @@ public interface ChampRepository {
     @Select("select name, IMAGE_HEAD from CHAMP_SKILL where name = #{name}")
     ChampName findByNameHeadImage(@Param("name") String name);
 
-    @Select("select craw.name, craw.line, image1.BUILD mainRuneType, image2.BUILD subRuneType\n" +
-            "            from C_RUNE_COMBINE craw, RUNE_INFO image1, RUNE_INFO image2\n" +
-            "            where craw.pick1 = image1.name\n" +
-            "              and craw.pick5 = image2.name\n" +
-            "              and craw.name = #{name}\n" +
-            "              and craw.line = '탑'\n" +
-            "              and ROWNUM = 1\n" +
-            "            order by craw.PICK_RATE desc")
-    ChampRuneType findByNameRuneType(@Param("name") String name);
+    @Select("select image_D\n" +
+            "from rune_info\n" +
+            "where (\n" +
+            "    select build\n" +
+            "    from rune_info\n" +
+            "    where (\n" +
+            "        select c_rune_combine.pick1\n" +
+            "        from c_rune_combine\n" +
+            "        where name = #{name}\n" +
+            "        and (\n" +
+            "            select max(c_rune_combine.win_rate)\n" +
+            "            from c_rune_combine\n" +
+            "            where name = #{name}\n" +
+            "            and line = #{line}\n" +
+            "            AND c_rune_combine.pick_rate > 5)\n" +
+            "            = c_rune_combine.win_rate) = name) = build")
+    List<RuneSummary> findByNameLineRuneType(@Param("name") String name, @Param("line") String line);
+
+    @Select("select image\n" +
+            "from rune_info_assist\n" +
+            "where (\n" +
+            "    select build from rune_info_assist\n" +
+            "    where (\n" +
+            "        select c_rune_combine.pick5\n" +
+            "        from c_rune_combine\n" +
+            "        where name = #{name}\n" +
+            "          and (\n" +
+            "                  select max(c_rune_combine.win_rate)\n" +
+            "                  from c_rune_combine\n" +
+            "                  where name = #{name}\n" +
+            "                    and line = #{line}\n" +
+            "                    AND c_rune_combine.pick_rate > 5) = c_rune_combine.win_rate) = name) = build")
+    List<RuneSummary> findByNameLineSubRuneSummary(@Param("name") String name, @Param("line") String line);
 
     @Select("select match.enemy name, match.line, match.COUNT count, match.WIN_RATE winRate, image.IMAGE_HEAD image\n" +
             "from C_CHAMP_MATCH match, CHAMP_SKILL image\n" +

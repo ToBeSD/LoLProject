@@ -37,12 +37,14 @@
 			<div>비밀번호 변경<button class="change-pw-modal-btn" id="change-pw-modal-btn-id">✖</button></div>
 			
 			<div style="width:240px; height: 220px; margin:auto;">
-				<p style="font-size:12px;">현재 비밀번호</p>
-				<input id="now-password" class="pw-input" type="password" />
-				<p style="font-size:12px;">새로운 비밀번호</p>
-				<input id="new-password" class="pw-input" type="password" />
-				<p style="font-size:12px;">새로운 비밀번호 확인</p>
-				<input id="new-password-confirm" class="pw-input" type="password" />
+				<form onsubmit="return false;">
+					<p style="font-size:12px;">현재 비밀번호</p>
+					<input id="now-password" class="pw-input" type="password" />
+					<p style="font-size:12px;">새로운 비밀번호</p>
+					<input id="new-password" class="pw-input" type="password" />
+					<p style="font-size:12px;">새로운 비밀번호 확인</p>
+					<input id="new-password-confirm" class="pw-input" type="password" />
+				</form>
 			</div>
 		
 			<div style="float:right; margin-right:2px; width:120px; height:50px;">

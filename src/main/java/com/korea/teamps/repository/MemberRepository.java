@@ -1,5 +1,6 @@
 package com.korea.teamps.repository;
 
+import com.korea.teamps.domain.ChangePassword;
 import com.korea.teamps.domain.Member;
 import com.korea.teamps.domain.Profile;
 import org.apache.ibatis.annotations.*;
@@ -11,7 +12,7 @@ import java.util.Optional;
 public interface MemberRepository {
 
 
-    @Insert("INSERT INTO member VALUES (SQ_MEMBER.NEXTVAL, #{email}, #{password}, #{nickname}, null, null, null)")
+    @Insert("INSERT INTO member VALUES (SQ_MEMBER.NEXTVAL, #{email}, #{password}, #{nickname}, 'anne1.jpg', null, null)")
     void save(Member member);
 
     @Select("SELECT * FROM member WHERE email = #{email} and pw = #{password}")
@@ -24,7 +25,18 @@ public interface MemberRepository {
 
     @Select("select image from PROFILE_IMAGE")
     List<Profile> getAllProfile();
+    @Select("select * from MEMBER where memberkey = #{memberKey}")
+    Member findByMemberKeyPassword(int memberKey);
 
     @Update("update MEMBER set INTRODUCE = #{introduce} where MEMBERKEY = #{memberKey}")
-    Member updateIntroduce(Member member);
+    void updateIntroduce(Member member);
+    @Update("update Member set PW = #{password} where MEMBERKEY = #{memberKey}")
+    void updatePassword(Member member);
+
+    @Update("update MEMBER set IMAGE = #{image} where MEMBERKEY = #{memberKey}")
+    void updateProFile(Member member);
+
+
+    @Delete("delete from MEMBER where memberkey = #{memberKey}")
+    void quitMember(Member member);
 }

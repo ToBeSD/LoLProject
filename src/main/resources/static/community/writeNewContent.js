@@ -14,7 +14,15 @@ submitBtn.addEventListener('click', () => {
         }),
         contentType : 'application/json',
         success: function () {
-            console.log('글작성 성공')
+            if(category.value == '빌드 연구소') {
+                location.href = '/community/build';
+            }else if(category.value == '자유 게시판') {
+                location.href = '/community';
+            }
         },
+        error: function (e) {
+            alert('로그인은 하셨는지요?');
+            location.href = '/login';
+        }
     })
 })
