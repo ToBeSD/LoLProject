@@ -453,7 +453,7 @@ img {
 #good-rune-shard img {
     width: 25px;
     height: 25px;
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 .item-skill-summary {
@@ -466,9 +466,10 @@ img {
 .item-core-summary {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: self-start;
     width: 35%;
     height: 70%;
+    padding-left: 45px;
 }
 
 .item-core-summary-items {
@@ -521,13 +522,16 @@ img {
 }
 
 .skill-box {
-    width: 26px;
-    height: 26px;
-    margin-right: 5px;
+    width: 32px;
+    height: 32px;
     border-radius: 4px;
-    font-size: 12px;
-    padding: 5px;
+    font-size: 13px;
+    padding: 8px;
     background-color: #FFFFFF0D;
+}
+
+.skill-image-summary {
+    height: 32px;
 }
 
 .skill-mastar-summary {

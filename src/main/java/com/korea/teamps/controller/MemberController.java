@@ -72,7 +72,8 @@ public class MemberController {
         HttpSession session = request.getSession(false);
         if (session != null) {
             List<Profile> profileList = memberService.getAllProfile();
-            Member member = (Member) session.getAttribute("MEMBER");
+            Member sessionMember = (Member) session.getAttribute("MEMBER");
+            Member member = memberRepository.findByMemberKeyMember(sessionMember);
             model.addAttribute("profileList", profileList);
             model.addAttribute("member", member);
             return "my-page";

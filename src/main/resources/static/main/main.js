@@ -132,16 +132,16 @@ $.ajax({
     url: '/community',
     data: JSON.stringify({
         category : "자유 게시판",
+        page : 1,
     }),
     contentType : 'application/json',
     success: function (data) {
         let list = '';
-        for(let i = 0; i < 11; i++) {
+        for(let i = 0; i < data.length; i++) {
             list += `<li class="community-list" style="border-bottom: 1px solid #dbdde1;">
-                        <span class="post-name">자유</span>
-                        <a class="post-link" href="#">
+                        <span class="post-name free">자유</span>
+                        <a class="post-link" href="/community/detail?bno=${data[i].bno}">
                             <span class="post-title">${data[i].title}</span>
-                            <span class="post-comment">[댓글수]</span>
                         </a>
                         <span class="post-like">${data[i].good}</span>
                       </li>`;
@@ -155,16 +155,16 @@ $.ajax({
     url: '/community/build',
     data: JSON.stringify({
         category : "빌드 연구소",
+        page : 1,
     }),
     contentType : 'application/json',
     success: function (data) {
         let list = '';
         for(let i = 0; i < data.length; i++) {
             list += `<li class="community-list" style="border-bottom: 1px solid #dbdde1;">
-                        <span class="post-name">빌드</span>
-                        <a class="post-link" href="#">
+                        <span class="post-name">${data[i].champName}</span>
+                        <a class="post-link" href="/community/build/detail?bno=${data[i].bno}">
                             <span class="post-title">${data[i].title}</span>
-                            <span class="post-comment">[댓글수]</span>
                         </a>
                         <span class="post-like">${data[i].good}</span>
                     </li>`;

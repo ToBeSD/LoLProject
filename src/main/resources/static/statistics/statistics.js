@@ -1,22 +1,3 @@
-const summaryBtn1 = document.querySelectorAll('.summary-button')[0];
-const summaryBtn2 = document.querySelectorAll('.summary-button')[1];
-
-summaryBtn1.addEventListener('click', () => {
-    summaryBtn1.classList.remove('summary-button-active');
-    summaryBtn2.classList.remove('summary-button-active');
-
-    summaryBtn1.classList.add('summary-button-active');
-})
-
-summaryBtn2.addEventListener('click', () => {
-    summaryBtn1.classList.remove('summary-button-active');
-    summaryBtn2.classList.remove('summary-button-active');
-
-    summaryBtn2.classList.add('summary-button-active');
-})
-
-
-
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -72,22 +53,7 @@ $.ajax({
                    </a>
                 </div>`;
 
-    usually = `<div class="rate yellow">주로 선택하는 포지션</div>
-                    <div class="rate" style="width: 33.3%;">
-                        <p>${data[0].line}</p>
-                        <span style="color: #FFFFFFA6;">${data[0].pickRate}%</span>
-                    </div>
-                    <div class="rate" style="width: 33.3%;">
-                        <p>${data[1].line}</p>
-                        <span style="color: #FFFFFFA6;">${data[1].pickRate}%</span>
-                    </div>
-                    <div class="rate" style="width: 33.3%;">
-                        <p>${data[2].line}</p>
-                        <span style="color: #FFFFFFA6;">${data[2].pickRate}%</span>
-               </div>`;
-
         $('.line-and-input').prepend(list);
-        $('#usually-position').append(usually);
 
         switch (getParameterByName('line')) {
             case '탑' :
@@ -106,6 +72,66 @@ $.ajax({
                 $('.select-line button').eq(4).addClass('button-active')
                 break;
         }
+    },
+});
+
+$.ajax({
+    type: "POST",
+    url: '/champ/statistics/highpickdesc',
+    data: JSON.stringify({
+        "name": getParameterByName('name')
+    }),
+    dataType: 'JSON',
+    contentType: 'application/json',
+    success: function (data) {
+        usuallyPosition = `<div class="rate yellow">주로 선택하는 포지션</div>
+                    <div class="rate" style="width: 33.3%;">
+                        <p>${data[0].line}</p>
+                        <span style="color: #FFFFFFA6;">${data[0].pickRate}%</span>
+                    </div>
+                    <div class="rate" style="width: 33.3%;">
+                        <p>${data[1].line}</p>
+                        <span style="color: #FFFFFFA6;">${data[1].pickRate}%</span>
+                    </div>
+                    <div class="rate" style="width: 33.3%;">
+                        <p>${data[2].line}</p>
+                        <span style="color: #FFFFFFA6;">${data[2].pickRate}%</span>
+               </div>`;
+        $('#usually-position').append(usuallyPosition);
+    },
+});
+
+$.ajax({
+    type: "POST",
+    url: '/champ/statistics/ratesummary',
+    data: JSON.stringify({
+        "name": getParameterByName('name'),
+        "line": getParameterByName('line'),
+    }),
+    dataType: 'JSON',
+    contentType: 'application/json',
+    success: function (data) {
+        let rate = `<div style="padding-top: 10px; width: 80px;">
+                        <div class="rate yellow">승률</div>
+                        <div class="rate">${data.winRate}%</div>
+                    </div>
+    
+                    <div style="padding-top: 10px; width: 80px;">
+                        <div class="rate yellow">픽률</div>
+                        <div class="rate">${data.pickRate}%</div>
+                    </div>
+    
+                    <div style="padding-top: 10px; width: 80px;">
+                        <div class="rate yellow">벤율</div>
+                        <div class="rate">${data.banRate}%</div>
+                    </div>
+    
+                    <div style="padding-top: 10px; width: 165px;">
+                        <div class="rate yellow">PS스코어</div>
+                        <div class="rate" style="color: #FFFFFFA6;">이전 패치 ${data.psScoreBefore}</div>
+                        <div class="rate">현재 패치 ${data.psScore}</div>
+                    </div>`;
+        $('#rate-summary').prepend(rate);
     },
 });
 
@@ -189,9 +215,31 @@ $.ajax({
                             </div>`;
             }
             $('#main-rune-summary').append(list);
+
+            $.ajax({
+                type: "POST",
+                url: '/champ/statistics/runesummary/active',
+                data: JSON.stringify({
+                    "name": getParameterByName('name'),
+                    "line": getParameterByName('line'),
+                }),
+                contentType: 'application/json',
+                success: function (active) {
+                    let activeRune = [active.pick1, active.pick2, active.pick3, active.pick4];
+                    for (let i = 0; i < activeRune.length; i++) {
+                        for(let j = 0; j <=3; j++) {
+                            if(activeRune[i].includes(j + 1)) {
+                                $('.rune-select').eq(i).children('img').eq(j).attr('src', `/image/rune/${activeRune[i]}`);
+                            }
+                        }
+                    }
+
+                }
+            })
         }
     },
 })
+
 
 $.ajax({
     type: "POST",
@@ -203,7 +251,29 @@ $.ajax({
     contentType : 'application/json',
     success: function (data) {
         if(data.length !== 0) {
-            list = `<div class="rune-select">
+            let darkRune = [data[0].runeSummary, data[1].runeSummary, data[2].runeSummary, data[3].runeSummary,
+                            data[4].runeSummary, data[5].runeSummary, data[6].runeSummary, data[7].runeSummary,
+                            data[8].runeSummary];
+
+            if (data[0].runeSummary.includes('r')) {
+                list = `<div class="rune-select">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[0].runeSummary}" alt="img">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[1].runeSummary}" alt="img">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[2].runeSummary}" alt="img">
+                    </div>
+                    <div class="rune-select">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[3].runeSummary}" alt="img">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[4].runeSummary}" alt="img">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[5].runeSummary}" alt="img">
+                    </div>
+                    <div class="rune-select">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[6].runeSummary}" alt="img">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[7].runeSummary}" alt="img">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[8].runeSummary}" alt="img">
+                        <img style="width: 38px; height: 38px" src="/image/rune/d_${data[9].runeSummary}" alt="img">
+                    </div>`;
+            }else {
+                list = `<div class="rune-select">
                         <img style="width: 38px; height: 38px" src="/image/rune/d_${data[0].runeSummary}" alt="img">
                         <img style="width: 38px; height: 38px" src="/image/rune/d_${data[1].runeSummary}" alt="img">
                         <img style="width: 38px; height: 38px" src="/image/rune/d_${data[2].runeSummary}" alt="img">
@@ -218,7 +288,29 @@ $.ajax({
                         <img style="width: 38px; height: 38px" src="/image/rune/d_${data[7].runeSummary}" alt="img">
                         <img style="width: 38px; height: 38px" src="/image/rune/d_${data[8].runeSummary}" alt="img">
                     </div>`;
+            }
             $('#subrune-summary').append(list);
+
+            $.ajax({
+                type: "POST",
+                url: '/champ/statistics/runesummary/active',
+                data: JSON.stringify({
+                    "name": getParameterByName('name'),
+                    "line": getParameterByName('line'),
+                }),
+                contentType: 'application/json',
+                success: function (active) {
+                    let activeRune = [active.pick5, active.pick6];
+                    for (let i = 0; i < activeRune.length; i++) {
+                        for(let j = 0; j <=8; j++) {
+                            if(activeRune[i] == `${darkRune[j]}`) {
+                                $('#subrune-summary').find('img').eq(j).attr('src', `/image/rune/${activeRune[i]}`);
+                            }
+                        }
+                    }
+
+                }
+            })
         }
     },
 })
@@ -238,6 +330,68 @@ $.ajax({
         }
     },
 })
+
+$.ajax({
+    type: "POST",
+    url: '/champ/basicskill',
+    data: JSON.stringify({
+        "name" : getParameterByName('name'),
+    }),
+    dataType: 'JSON',
+    contentType : 'application/json',
+    success: function (data) {
+        if(data.length !== 0) {
+            let skillImg = '';
+            for(let i = 0; i < data.length; i++) {
+                skillImg = `<img class="skill-image-summary" src="/image/skill/${data[i].image}" alt="img">`;
+                $('.skill-title').eq(i).after(skillImg);
+            }
+        }
+
+        $.ajax({
+            type: "POST",
+            url: '/champ/statistics/skillseqsummary',
+            data: JSON.stringify({
+                "name" : getParameterByName('name'),
+                "line" : getParameterByName('line'),
+            }),
+            dataType: 'JSON',
+            contentType : 'application/json',
+            success: function (data) {
+                if(data.length !== 0) {
+                    let skillSeq = [data.skill1,data.skill2,data.skill3,data.skill4,data.skill5,data.skill6,
+                        data.skill7,data.skill8,data.skill9,data.skill10,data.skill11];
+
+                    for (let i = 0; i < skillSeq.length; i++) {
+                        if (skillSeq[i] == "Q") {
+                            $('.skill-seq-row').eq(0).append(`<div class="skill-box" style="background-color: #ffc030;">${i+1}</div>`)
+                            $('.skill-seq-row').eq(1).append('<div class="skill-box"></div>')
+                            $('.skill-seq-row').eq(2).append('<div class="skill-box"></div>')
+                            $('.skill-seq-row').eq(3).append('<div class="skill-box"></div>')
+                        }else if (skillSeq[i] == "W") {
+                            $('.skill-seq-row').eq(0).append('<div class="skill-box"></div>')
+                            $('.skill-seq-row').eq(1).append(`<div class="skill-box" style="background-color: #ffc030;">${i+1}</div>`)
+                            $('.skill-seq-row').eq(2).append('<div class="skill-box"></div>')
+                            $('.skill-seq-row').eq(3).append('<div class="skill-box"></div>')
+                        } else if (skillSeq[i] == "E") {
+                            $('.skill-seq-row').eq(0).append('<div class="skill-box"></div>')
+                            $('.skill-seq-row').eq(1).append('<div class="skill-box"></div>')
+                            $('.skill-seq-row').eq(2).append(`<div class="skill-box" style="background-color: #ffc030;">${i+1}</div>`)
+                            $('.skill-seq-row').eq(3).append('<div class="skill-box"></div>')
+                        } else if (skillSeq[i] == "R") {
+                            $('.skill-seq-row').eq(0).append('<div class="skill-box"></div>')
+                            $('.skill-seq-row').eq(1).append('<div class="skill-box"></div>')
+                            $('.skill-seq-row').eq(2).append('<div class="skill-box"></div>')
+                            $('.skill-seq-row').eq(3).append(`<div class="skill-box" style="background-color: #ffc030;">${i+1}</div>`)
+                        }
+                    }
+                }
+            },
+        })
+    },
+})
+
+
 
 
 $.ajax({
@@ -561,14 +715,29 @@ $.ajax({
                     </li>`;
             }
 
-            let goodOneCore = `1코어
-                               <div class="core-img-div">
-                                    <img src="../image/item/${data[0].item}" alt="img">
-                               </div>
-                               or
-                               <img src="../image/item/${data[1].item}" alt="img">
-                               or
-                               <img src="../image/item/${data[2].item}" alt="img">`;
+            let goodOneCore = '';
+            if(data.length == 1) {
+                goodOneCore = `1코어
+                                   <div class="core-img-div">
+                                        <img src="../image/item/${data[0].item}" alt="img">
+                                   </div>`;
+            }else if(data.length ==2) {
+                goodOneCore = `1코어
+                                   <div class="core-img-div">
+                                        <img src="../image/item/${data[0].item}" alt="img">
+                                   </div>
+                                   or
+                                   <img src="../image/item/${data[1].item}" alt="img">`;
+            }else {
+                goodOneCore = `1코어
+                                   <div class="core-img-div">
+                                        <img src="../image/item/${data[0].item}" alt="img">
+                                   </div>
+                                   or
+                                   <img src="../image/item/${data[1].item}" alt="img">
+                                   or
+                                   <img src="../image/item/${data[2].item}" alt="img">`;
+            }
             $('#goodOneCore').append(goodOneCore);
             $('#core1-list').append(list);
         }
@@ -621,14 +790,33 @@ $.ajax({
                         </div>
                     </li>`;
             }
-            let goodTwoCore = `2코어
-                               <div class="core-img-div">
-                                   <img src="../image/item/${data[0].item}" alt="img">
-                               </div>
-                               or
-                               <img src="../image/item/${data[1].item}" alt="img">
-                               or
-                               <img src="../image/item/${data[2].item}" alt="img">`;
+
+
+            let goodTwoCore = '';
+            if(data.length == 1) {
+                goodTwoCore = `2코어
+                                   <div class="core-img-div">
+                                        <img src="../image/item/${data[0].item}" alt="img">
+                                   </div>`;
+            }else if(data.length ==2) {
+                goodTwoCore = `2코어
+                                   <div class="core-img-div">
+                                        <img src="../image/item/${data[0].item}" alt="img">
+                                   </div>
+                                   or
+                                   <img src="../image/item/${data[1].item}" alt="img">`;
+            }else {
+                goodTwoCore = `2코어
+                                   <div class="core-img-div">
+                                        <img src="../image/item/${data[0].item}" alt="img">
+                                   </div>
+                                   or
+                                   <img src="../image/item/${data[1].item}" alt="img">
+                                   or
+                                   <img src="../image/item/${data[2].item}" alt="img">`;
+            }
+
+
             $('#goodTwoCore').append(goodTwoCore);
             $('#core2-list').append(list);
         }
@@ -682,14 +870,30 @@ $.ajax({
                     </li>`;
             }
 
-            let goodThreeCore = `3코어
-                               <div class="core-img-div">
-                                   <img src="../image/item/${data[0].item}" alt="img">
-                               </div>
-                               or
-                               <img src="../image/item/${data[1].item}" alt="img">
-                               or
-                               <img src="../image/item/${data[2].item}" alt="img">`;
+            let goodThreeCore = '';
+            if(data.length == 1) {
+                goodThreeCore = `2코어
+                                   <div class="core-img-div">
+                                        <img src="../image/item/${data[0].item}" alt="img">
+                                   </div>`;
+            }else if(data.length ==2) {
+                goodThreeCore = `2코어
+                                   <div class="core-img-div">
+                                        <img src="../image/item/${data[0].item}" alt="img">
+                                   </div>
+                                   or
+                                   <img src="../image/item/${data[1].item}" alt="img">`;
+            }else {
+                goodThreeCore = `2코어
+                                   <div class="core-img-div">
+                                        <img src="../image/item/${data[0].item}" alt="img">
+                                   </div>
+                                   or
+                                   <img src="../image/item/${data[1].item}" alt="img">
+                                   or
+                                   <img src="../image/item/${data[2].item}" alt="img">`;
+            }
+
             $('#goodThreeCore').append(goodThreeCore);
             $('#core3-list').append(list);
         }
@@ -972,185 +1176,196 @@ $.ajax({
     },
 })
 
-whatLv0.addEventListener('click', () => {
-    whatLv0.classList.remove('what-level-active');
-    whatLv1.classList.remove('what-level-active');
-    whatLv2.classList.remove('what-level-active');
 
-    whatLv0.classList.add('what-level-active');
+if(whatLv0 !== undefined) {
+
+    whatLv0.addEventListener('click', () => {
+        whatLv0.classList.remove('what-level-active');
+        whatLv1.classList.remove('what-level-active');
+        whatLv2.classList.remove('what-level-active');
+
+        whatLv0.classList.add('what-level-active');
 
 
-    $.ajax({
-        type: "POST",
-        url: '/champ/statistics/skillseq',
-        data: JSON.stringify({
-            "name" : getParameterByName('name'),
-            "line" : getParameterByName('line'),
-            "whatLevel" : 3,
-        }),
-        dataType: 'JSON',
-        contentType : 'application/json',
-        success: function (data) {
-            $('#skill-seq').children('li').remove();
-            let list = '';
-            let isGoodOrBad = "";
-            if(data.length !== 0) {
-                for (let i = 0; i < data.length; i++) {
+        $.ajax({
+            type: "POST",
+            url: '/champ/statistics/skillseq',
+            data: JSON.stringify({
+                "name" : getParameterByName('name'),
+                "line" : getParameterByName('line'),
+                "whatLevel" : 3,
+            }),
+            dataType: 'JSON',
+            contentType : 'application/json',
+            success: function (data) {
+                $('#skill-seq').children('li').remove();
+                let list = '';
+                let isGoodOrBad = "";
+                if(data.length !== 0) {
+                    for (let i = 0; i < data.length; i++) {
 
-                    if (data[i].winRate >= 54) {
-                        isGoodOrBad = "very-good";
-                    } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
-                        isGoodOrBad = "good";
-                    } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
-                        isGoodOrBad = "soso";
-                    } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
-                        isGoodOrBad = "bad";
-                    } else if (data[i].winRate < 46) {
-                        isGoodOrBad = "trash";
+                        if (data[i].winRate >= 54) {
+                            isGoodOrBad = "very-good";
+                        } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                            isGoodOrBad = "good";
+                        } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                            isGoodOrBad = "soso";
+                        } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                            isGoodOrBad = "bad";
+                        } else if (data[i].winRate < 46) {
+                            isGoodOrBad = "trash";
+                        }
+
+                        list +=
+                            `<li class="list-items border-bottom">
+                            <div class="spell">
+                                <img src="../image/skill/${data[i].skill1}" alt="img">
+                                <img src="../image/skill/${data[i].skill2}" alt="img">
+                                <img src="../image/skill/${data[i].skill3}" alt="img">
+                            </div>
+                            <div class="spell-percent" style="width: 40%;">
+                                <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                                <span style="width: 23.3%;">${data[i].pickRate}</span>
+                                <span style="width: 23.3%;">${data[i].count}</span>
+                            </div>
+                        </li>`;
                     }
-
-                    list +=
-                        `<li class="list-items border-bottom">
-                        <div class="spell">
-                            <img src="../image/skill/${data[i].skill1}" alt="img">
-                            <img src="../image/skill/${data[i].skill2}" alt="img">
-                            <img src="../image/skill/${data[i].skill3}" alt="img">
-                        </div>
-                        <div class="spell-percent" style="width: 40%;">
-                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                            <span style="width: 23.3%;">${data[i].pickRate}</span>
-                            <span style="width: 23.3%;">${data[i].count}</span>
-                        </div>
-                    </li>`;
+                    $('#skill-seq').append(list);
                 }
-                $('#skill-seq').append(list);
-            }
-        },
+            },
+        })
     })
-})
+}
 
-whatLv1.addEventListener('click', () => {
-    whatLv0.classList.remove('what-level-active');
-    whatLv1.classList.remove('what-level-active');
-    whatLv2.classList.remove('what-level-active');
+if(whatLv1 !== undefined) {
 
-    whatLv1.classList.add('what-level-active');
+    whatLv1.addEventListener('click', () => {
+        whatLv0.classList.remove('what-level-active');
+        whatLv1.classList.remove('what-level-active');
+        whatLv2.classList.remove('what-level-active');
 
-    $.ajax({
-        type: "POST",
-        url: '/champ/statistics/skillseq',
-        data: JSON.stringify({
-            "name" : getParameterByName('name'),
-            "line" : getParameterByName('line'),
-            "whatLevel" : 6,
-        }),
-        dataType: 'JSON',
-        contentType : 'application/json',
-        success: function (data) {
-            $('#skill-seq').children('li').remove();
-            let list = '';
-            let isGoodOrBad = "";
-            if(data.length !== 0) {
-                for (let i = 0; i < data.length; i++) {
+        whatLv1.classList.add('what-level-active');
 
-                    if (data[i].winRate >= 54) {
-                        isGoodOrBad = "very-good";
-                    } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
-                        isGoodOrBad = "good";
-                    } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
-                        isGoodOrBad = "soso";
-                    } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
-                        isGoodOrBad = "bad";
-                    } else if (data[i].winRate < 46) {
-                        isGoodOrBad = "trash";
+        $.ajax({
+            type: "POST",
+            url: '/champ/statistics/skillseq',
+            data: JSON.stringify({
+                "name" : getParameterByName('name'),
+                "line" : getParameterByName('line'),
+                "whatLevel" : 6,
+            }),
+            dataType: 'JSON',
+            contentType : 'application/json',
+            success: function (data) {
+                $('#skill-seq').children('li').remove();
+                let list = '';
+                let isGoodOrBad = "";
+                if(data.length !== 0) {
+                    for (let i = 0; i < data.length; i++) {
+
+                        if (data[i].winRate >= 54) {
+                            isGoodOrBad = "very-good";
+                        } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                            isGoodOrBad = "good";
+                        } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                            isGoodOrBad = "soso";
+                        } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                            isGoodOrBad = "bad";
+                        } else if (data[i].winRate < 46) {
+                            isGoodOrBad = "trash";
+                        }
+
+                        list +=
+                            `<li class="list-items border-bottom">
+                            <div class="spell">
+                                <img src="../image/skill/${data[i].skill1}" alt="img">
+                                <img src="../image/skill/${data[i].skill2}" alt="img">
+                                <img src="../image/skill/${data[i].skill3}" alt="img">
+                                <img src="../image/skill/${data[i].skill4}" alt="img">
+                                <img src="../image/skill/${data[i].skill5}" alt="img">
+                                <img src="../image/skill/${data[i].skill6}" alt="img">
+                            </div>
+                            <div class="spell-percent" style="width: 40%;">
+                                <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                                <span style="width: 23.3%;">${data[i].pickRate}</span>
+                                <span style="width: 23.3%;">${data[i].count}</span>
+                            </div>
+                        </li>`;
                     }
-
-                    list +=
-                        `<li class="list-items border-bottom">
-                        <div class="spell">
-                            <img src="../image/skill/${data[i].skill1}" alt="img">
-                            <img src="../image/skill/${data[i].skill2}" alt="img">
-                            <img src="../image/skill/${data[i].skill3}" alt="img">
-                            <img src="../image/skill/${data[i].skill4}" alt="img">
-                            <img src="../image/skill/${data[i].skill5}" alt="img">
-                            <img src="../image/skill/${data[i].skill6}" alt="img">
-                        </div>
-                        <div class="spell-percent" style="width: 40%;">
-                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                            <span style="width: 23.3%;">${data[i].pickRate}</span>
-                            <span style="width: 23.3%;">${data[i].count}</span>
-                        </div>
-                    </li>`;
+                    $('#skill-seq').append(list);
                 }
-                $('#skill-seq').append(list);
-            }
-        },
+            },
+        })
     })
-})
+}
 
-whatLv2.addEventListener('click', () => {
-    whatLv0.classList.remove('what-level-active');
-    whatLv1.classList.remove('what-level-active');
-    whatLv2.classList.remove('what-level-active');
+if(whatLv2 !== undefined) {
 
-    whatLv2.classList.add('what-level-active');
+    whatLv2.addEventListener('click', () => {
+        whatLv0.classList.remove('what-level-active');
+        whatLv1.classList.remove('what-level-active');
+        whatLv2.classList.remove('what-level-active');
 
-    $.ajax({
-        type: "POST",
-        url: '/champ/statistics/skillseq',
-        data: JSON.stringify({
-            "name" : getParameterByName('name'),
-            "line" : getParameterByName('line'),
-            "whatLevel" : 11,
-        }),
-        dataType: 'JSON',
-        contentType : 'application/json',
-        success: function (data) {
-            $('#skill-seq').children('li').remove();
-            let list = '';
-            let isGoodOrBad = "";
-            if(data.length !== 0) {
-                for (let i = 0; i < data.length; i++) {
+        whatLv2.classList.add('what-level-active');
 
-                    if (data[i].winRate >= 54) {
-                        isGoodOrBad = "very-good";
-                    } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
-                        isGoodOrBad = "good";
-                    } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
-                        isGoodOrBad = "soso";
-                    } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
-                        isGoodOrBad = "bad";
-                    } else if (data[i].winRate < 46) {
-                        isGoodOrBad = "trash";
+        $.ajax({
+            type: "POST",
+            url: '/champ/statistics/skillseq',
+            data: JSON.stringify({
+                "name" : getParameterByName('name'),
+                "line" : getParameterByName('line'),
+                "whatLevel" : 11,
+            }),
+            dataType: 'JSON',
+            contentType : 'application/json',
+            success: function (data) {
+                $('#skill-seq').children('li').remove();
+                let list = '';
+                let isGoodOrBad = "";
+
+                if(data.length !== 0) {
+                    for (let i = 0; i < data.length; i++) {
+
+                        if (data[i].winRate >= 54) {
+                            isGoodOrBad = "very-good";
+                        } else if (data[i].winRate < 54 && data[i].winRate >= 51) {
+                            isGoodOrBad = "good";
+                        } else if (data[i].winRate < 51 && data[i].winRate >= 48) {
+                            isGoodOrBad = "soso";
+                        } else if (data[i].winRate < 48 && data[i].winRate >= 46) {
+                            isGoodOrBad = "bad";
+                        } else if (data[i].winRate < 46) {
+                            isGoodOrBad = "trash";
+                        }
+
+                        list +=
+                            `<li class="list-items border-bottom">
+                            <div class="spell">
+                                <img src="../image/skill/${data[i].skill1}" alt="img">
+                                <img src="../image/skill/${data[i].skill2}" alt="img">
+                                <img src="../image/skill/${data[i].skill3}" alt="img">
+                                <img src="../image/skill/${data[i].skill4}" alt="img">
+                                <img src="../image/skill/${data[i].skill5}" alt="img">
+                                <img src="../image/skill/${data[i].skill6}" alt="img">
+                                <img src="../image/skill/${data[i].skill7}" alt="img">
+                                <img src="../image/skill/${data[i].skill8}" alt="img">
+                                <img src="../image/skill/${data[i].skill9}" alt="img">
+                                <img src="../image/skill/${data[i].skill10}" alt="img">
+                                <img src="../image/skill/${data[i].skill11}" alt="img">
+                            </div>
+                            <div class="spell-percent" style="width: 40%;">
+                                <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
+                                <span style="width: 23.3%;">${data[i].pickRate}</span>
+                                <span style="width: 23.3%;">${data[i].count}</span>
+                            </div>
+                        </li>`;
                     }
-
-                    list +=
-                        `<li class="list-items border-bottom">
-                        <div class="spell">
-                            <img src="../image/skill/${data[i].skill1}" alt="img">
-                            <img src="../image/skill/${data[i].skill2}" alt="img">
-                            <img src="../image/skill/${data[i].skill3}" alt="img">
-                            <img src="../image/skill/${data[i].skill4}" alt="img">
-                            <img src="../image/skill/${data[i].skill5}" alt="img">
-                            <img src="../image/skill/${data[i].skill6}" alt="img">
-                            <img src="../image/skill/${data[i].skill7}" alt="img">
-                            <img src="../image/skill/${data[i].skill8}" alt="img">
-                            <img src="../image/skill/${data[i].skill9}" alt="img">
-                            <img src="../image/skill/${data[i].skill10}" alt="img">
-                            <img src="../image/skill/${data[i].skill11}" alt="img">
-                        </div>
-                        <div class="spell-percent" style="width: 40%;">
-                            <span style="width: 23.3%;" class="${isGoodOrBad}">${data[i].winRate}</span>
-                            <span style="width: 23.3%;">${data[i].pickRate}</span>
-                            <span style="width: 23.3%;">${data[i].count}</span>
-                        </div>
-                    </li>`;
+                    $('#skill-seq').append(list);
                 }
-                $('#skill-seq').append(list);
-            }
-        },
+            },
+        })
     })
-})
+}
 
 $.ajax({
     type: "POST",
@@ -1253,10 +1468,23 @@ $.ajax({
                         </div>
                     </li>`;
             }
-
-            let goodRuneShard = ``;
-            $('#good-rune-shard').append(goodRuneShard);
             $('#rune-shard').append(list);
+
+            let runeShardSummary = [data[0].pick1, data[0].pick2, data[0].pick3];
+            let runeShard1 = ['ability.png', 'attackspeed.png', 'cooltime.png'];
+            let runeShard2 = ['ability.png','Def.png', 'magicDef.png'];
+            let runeShard3 = ['health.png', 'Def.png', 'magicDef.png'];
+            for (let j = 0; j < 3; j++) {
+                if (runeShardSummary[0] == runeShard1[j]) {
+                    $('.rune-select').eq(7).children('img').eq(j).css({opacity: 1});
+                }
+                if (runeShardSummary[1] == runeShard2[j]) {
+                    $('.rune-select').eq(8).children('img').eq(j).css({opacity: 1});
+                }
+                if (runeShardSummary[2] == runeShard3[j]) {
+                    $('.rune-select').eq(9).children('img').eq(j).css({opacity: 1});
+                }
+            }
         }
     },
 })

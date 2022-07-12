@@ -5,8 +5,8 @@ $(function() {
         $(this).find("img").eq(1).animate({opacity:1},100); // .css('opacity','1');
         $(this).find("div").animate({opacity:1},250); //css('opacity','1');
         $(this).find("img").eq(2).animate({opacity:1},100);  //.css('opacity','1');
-        $('.change-img').off('click').on('click', (e) => {
-            let targetImage = e.target.src.replace('http://localhost:8080/image/profile/', '');
+        $(this).find("div").off('click').on('click', (e) => {
+            let targetImage = $(e.target).siblings('#img').attr('src').replace('/image/profile/', '');
             $.ajax({
                 type: "POST",
                 url: '/mypage/changeprofile',
@@ -19,7 +19,7 @@ $(function() {
                     alert('프로필이 변경되었습니다.');
                 },
             })
-            $('.my-image').attr('src', e.target.src);
+            $('.my-image').attr('src', $(e.target).siblings('#img').attr('src'));
         })
     }, function() {
         $(this).find("img:first-child").animate({opacity:1});  //.css('opacity','1');
@@ -40,8 +40,8 @@ $(function() {
                 introduce : text,
             }),
             contentType : 'application/json',
-            success: function (data) {
-                introduce.val(data.introduce)
+            success: function () {
+                introduce.html(text);
                 alert("한줄소개가 변경되었습니다.")
             },
             error(e) {

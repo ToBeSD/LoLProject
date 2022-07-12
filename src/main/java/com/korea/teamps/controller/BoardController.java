@@ -1,8 +1,8 @@
 package com.korea.teamps.controller;
 
 import com.korea.teamps.domain.*;
+import com.korea.teamps.repository.ChampRepository;
 import com.korea.teamps.repository.CommunityRepository;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +18,12 @@ import java.util.List;
 public class BoardController {
 
     private final CommunityRepository communityRepository;
+    private final ChampRepository champRepository;
 
     @Autowired
-    public BoardController(CommunityRepository communityRepository) {
+    public BoardController(CommunityRepository communityRepository, ChampRepository champRepository) {
         this.communityRepository = communityRepository;
+        this.champRepository = champRepository;
     }
 
     @GetMapping("/community")
@@ -37,15 +39,24 @@ public class BoardController {
 
     @PostMapping("/community/allcontent")
     @ResponseBody
-    public List<Community> getAllFreeContent(@RequestBody Community community) {
-        return communityRepository.findByCategoryAllContent(community);
+    public CommunityCount getAllFreeContent(@RequestBody Community community) {
+        return communityRepository.findByCategoryAllContentCount(community);
     }
+
+//    @PostMapping("/community/findbymember")
+//    @ResponseBody
+//    public List<Community> getContentByTitle(@RequestBody Community community) {
+//        return communityRepository.findByMemberCommunity(community);
+//    }
+
+
 
     @GetMapping("community/detail")
     public String freeDetail(@RequestParam("bno") int bno, Model model, HttpServletRequest request) {
         CommunityDetail communityDetail = communityRepository.findByBnoContent(bno);
 
         HttpSession session = request.getSession(false);
+        communityRepository.countUp(bno);
 
         if (session != null) {
             Member member = (Member) session.getAttribute("MEMBER");
@@ -66,17 +77,32 @@ public class BoardController {
     public String build() {
         return "build";
     }
+
     @PostMapping("/community/build")
     @ResponseBody
     public List<Community> getCommunityBuild(@RequestBody Community community) {
-        return communityRepository.findByCategoryCommunity(community);
+        if (community.getTitle() == null && community.getNickName() == null) {
+            return communityRepository.findByCategoryCommunity(community);
+
+        } else if (community.getTitle() != null && community.getNickName() == null) {
+
+            return communityRepository.findByTitleCommunity(community);
+
+        } else if (community.getTitle() == null && community.getNickName() != null) {
+
+            return communityRepository.findByNickNameCommunity(community);
+
+        }else {
+            return communityRepository.findByCategoryCommunity(community);
+        }
     }
+
     @GetMapping("community/build/detail")
     public String buildDetail(@RequestParam("bno") int bno, Model model, HttpServletRequest request) {
         CommunityDetail communityDetail = communityRepository.findByBnoContent(bno);
 
         HttpSession session = request.getSession(false);
-
+        communityRepository.countUp(bno);
         if (session != null) {
             Member member = (Member) session.getAttribute("MEMBER");
             model.addAttribute("isWriter", communityDetail.getMemberKey() == member.getMemberKey());
@@ -105,7 +131,7 @@ public class BoardController {
         HttpSession session = request.getSession(false);
         Member member = (Member) session.getAttribute("MEMBER");
         if(member != null) {
-            communityRepository.insertContent(member.getMemberKey(), writeContent.getTitle(), writeContent.getContent(), writeContent.getCategory());
+            communityRepository.insertContent(member.getMemberKey(), writeContent.getTitle(), writeContent.getContent(), writeContent.getCategory(), writeContent.getChampName());
             return ResponseEntity.ok().build();
         }else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
@@ -119,6 +145,12 @@ public class BoardController {
         CommunityDetail detail = communityRepository.findByBnoContent(bno);
         communityRepository.deleteByBnoContent(communityDetail);
         return detail;
+    }
+
+    @GetMapping("/community/champname")
+    @ResponseBody
+    public List<ChampName> getChampNameAndImage() {
+        return champRepository.getAllChampNameAndImage();
     }
 
     @PostMapping("/community/getcomments")
@@ -161,6 +193,18 @@ public class BoardController {
     public ResponseEntity<Void> deleteComment(@RequestBody CommunityComment communityComment) {
         communityRepository.deleteComment(communityComment);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/community/goodorbad")
+    public ResponseEntity<Void> communityGoodOrBad(@RequestBody GoodOrBad goodOrBad) {
+        communityRepository.goodOrBadUp(goodOrBad);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/champ/community")
+    @ResponseBody
+    public List<Community> getChampCommunity(@RequestBody Community community) {
+        return communityRepository.findByChampNameContent(community);
     }
 
     @GetMapping("/notice")

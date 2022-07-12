@@ -16,17 +16,21 @@ main {
 	border-radius: 3px;
 }
 
+.free {
+	width: 60px !important;
+}
+
 .build {
 	font-weight: 600;
 	color: #353945;
-	width: 72px;
+	width: 200px;
 	height: 24px;
 	text-align: center;
 }
 
 .build1 {
 	color: #353945;
-	width: 770px;
+	width: 550px;
 	height: 24px;
 	text-align: left;
 }
@@ -81,4 +85,8 @@ main {
 
 .bottom-btn-in2 {
 	padding-left: 290px;
+}
+
+.page-button-active {
+	background-color: rgb(225, 228, 237);
 }

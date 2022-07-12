@@ -35,7 +35,8 @@ commentBtn.addEventListener('click', () => {
             location.reload();
         },
         error(e) {
-            alert(e.status)
+            alert('로그인 하셔야합니다.')
+            location.href = '/login'
         }
     })
 })
@@ -97,6 +98,33 @@ $(document).on('click', '#comment-revise-complete', function (e){
 })
 
 
+
+
+$('.recommend').click((e) => {
+    let goodOrBad = '';
+    if (e.target.innerHTML.includes('좋아요')) {
+        goodOrBad = 'good';
+    } else if(e.target.innerHTML.includes('싫어요')){
+        goodOrBad = 'bad';
+    }
+
+    $.ajax({
+        type: "POST",
+        url: '/community/goodorbad',
+        data: JSON.stringify({
+            goodBad : goodOrBad,
+            bno : getParameterByName('bno'),
+        }),
+        contentType : 'application/json',
+        success: function (data) {
+
+        },
+        error(e) {
+            console.log(e.status)
+        }
+    });
+})
+
 const deleteBtn = document.querySelector('#delete-button');
 
 deleteBtn.addEventListener('click', () => {
@@ -119,4 +147,3 @@ deleteBtn.addEventListener('click', () => {
         }
     })
 })
-

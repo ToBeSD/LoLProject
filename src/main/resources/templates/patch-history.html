@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>패치히스토리</title>
+    <title>Document</title>
     <link rel="stylesheet" href="/statistics/patch-history.css">
     <link rel="stylesheet" href="/statistics/statistics-main.css">
     <script src="/common/jquery-3.6.0.min.js"></script>
 </head>
-<body style="height:auto;">
+<body>
     <header class="header-mainnav">
         <div class="header-container">
             <a href="/">
@@ -80,243 +80,145 @@
                     </div>
                     <h1 style="font-weight: 400; font-size: 38px; margin: 0; width:100%; margin-top: 15px; margin-left: 190px;" th:text="${name}"></h1>
                 </div>
+                <div class="counter-champ">
+                    <div class="counter-text">카운터</div>
+                    <!--                    카운터 챔프 들어가는 곳-->
+                </div>
+                <div style="clear: both"></div>
                 <button class="summary-button summary-button-active">대중적인 빌드</button>
-                <button class="summary-button" style="left: 33%;">고승률 빌드</button>
             </div>
 
             <div class="champ-summary"  id="yoyack">
                 <div class="rate-content">
 
-                    <div class="number-box">
-                        <div style="padding-top: 10px; width: 80px;">
-                            <div class="rate yellow">승률</div>
-                            <div class="rate">54.05%</div>
-                        </div>
+                    <div class="number-box" id="rate-summary">
+                        <!--                        champRateSummary들어가는곳-->
 
-                        <div style="padding-top: 10px; width: 80px;">
-                            <div class="rate yellow">픽률</div>
-                            <div class="rate">0.79%</div>
+                        <div id="usually-position" style="padding-top: 10px; width: 230px; display: flex; flex-wrap: wrap;">
+                            <!--                            주로 선택하는 포지션-->
                         </div>
-
-                        <div style="padding-top: 10px; width: 80px;">
-                            <div class="rate yellow">벤율</div>
-                            <div class="rate">0.21</div>
-                        </div>
-
-                        <div style="padding-top: 10px; width: 165px;">
-                            <div class="rate yellow">PS스코어</div>
-                            <div class="rate" style="color: #FFFFFFA6;">12.9 패치 48.31</div>
-                            <div class="rate">12.10 패치 51.24</div>
-                        </div>
-                        <div style="padding-top: 10px; width: 140px;">
-                            <div class="rate yellow">챔피언순위</div>
-                            <div class="rate" style="color: #FFFFFFA6;">12.9 39등</div>
-                            <div class="rate">12.10 14등</div>
-                        </div>
-                        <div style="padding-top: 10px; width: 230px; display: flex; flex-wrap: wrap;">
-                            <div class="rate yellow">주로 선택하는 포지션</div>
-
-                        </div>
-
                     </div>
                 </div>
 
                 <div class="rune-item-skill-container">
                     <div class="main-rune">
                         <div class="rune-summary">
-                            <h4 style="margin: 0; color: #ae9056">메인룬</h4>
-                        <div class="rune-select">
-                            <img src="../Images/rune/지배/d_r_1.png" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                        </div>
-                        <div class="rune-select">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                        </div>
-                        <div class="rune-select">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                        </div>
-                        <div class="rune-select">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                            <img src="../Images/aatrox.jpg" alt="img">
-                        </div>
-                        <div class="rune-select">
-                            <span style="color:#FFFFFFA6">승률 <span class="yellow">54.98%</span></span>
-                        </div>
-                        <div class="rune-select">
-                            <span style="color:#FFFFFFA6">게임 수 <span class="yellow">291</span></span>
-                        </div>
-                    </div>
-                </div>
+                            <h4 style="margin: 0; color: #ae9056" id="main-rune-summary">메인룬</h4>
 
-                <div class="sub-rune">
-                    <div class="rune-summary">
-                        <h4 style="margin: 0; color: #ae9056">보조룬</h4>
-                        <div class="rune-select">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                        </div>
-                        <div class="rune-select">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                        </div>
-                        <div class="rune-select">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                            <img style="width: 38px; height: 38px" src="../Images/aatrox.jpg" alt="img">
-                        </div>
 
-                        <div id="good-rune-shard" style="padding-top: 30px;">
-                            <div class="rune-select">
-                                <img src="../image/rune/ability.png" alt="img">
-                                <img src="../image/rune/attackspeed.png" alt="img">
-                                <img src="../image/rune/cooltime.png" alt="img">
-                            </div>
-                            <div class="rune-select">
-                                <img src="../image/rune/ability.png" alt="img">
-                                <img src="../image/rune/Def.png" alt="img">
-                                <img src="../image/rune/magicDef.png" alt="img">
-                            </div>
-                            <div class="rune-select">
-                                <img src="../image/rune/health.png" alt="img">
-                                <img src="../image/rune/Def.png" alt="img">
-                                <img src="../image/rune/magicDef.png" alt="img">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-skill-summary">
-                    <div class="item-core-summary">
-                        <div class="item-core-summary-items"  id="goodOneCore">
-
-                        </div>
-                        <div class="item-core-summary-items"  id="goodTwoCore">
-
-                        </div>
-                        <div class="item-core-summary-items"  id="goodThreeCore">
-
+                            <!--                        <div class="rune-select">-->
+                            <!--                            <span style="color:#FFFFFFA6">승률 <span class="yellow">54.98%</span></span>-->
+                            <!--                        </div>-->
+                            <!--                        <div class="rune-select">-->
+                            <!--                            <span style="color:#FFFFFFA6">게임 수 <span class="yellow">291</span></span>-->
+                            <!--                        </div>-->
                         </div>
                     </div>
 
-                    <div class="skill-summary-container">
-                        <div class="skill-summary">
-                            <div class="skill-seq-row">
-                                <div class="skill-title">Q</div>
-                                <img src="../Images/anne1.jpg" alt="img">
-                                <div class="skill-box" style="background-color: #ffc030;">1</div>
-                                <div class="skill-box">2</div>
-                                <div class="skill-box">3</div>
-                                <div class="skill-box" style="background-color: #ffc030;">4</div>
-                                <div class="skill-box" style="background-color: #ffc030;">5</div>
-                                <div class="skill-box">6</div>
-                                <div class="skill-box" style="background-color: #ffc030;">7</div>
-                                <div class="skill-box">8</div>
-                                <div class="skill-box" style="background-color: #ffc030;">9</div>
-                                <div class="skill-box">10</div>
-                                <div class="skill-box">11</div>
-                            </div>
-                            <div class="skill-seq-row">
-                                <div class="skill-title">W</div>
-                                <img src="../Images/anne1.jpg" alt="img">
-                                <div class="skill-box">1</div>
-                                <div class="skill-box" style="background-color: #ffc030;">2</div>
-                                <div class="skill-box">3</div>
-                                <div class="skill-box">4</div>
-                                <div class="skill-box">5</div>
-                                <div class="skill-box">6</div>
-                                <div class="skill-box">7</div>
-                                <div class="skill-box" style="background-color: #ffc030;">8</div>
-                                <div class="skill-box">9</div>
-                                <div class="skill-box" style="background-color: #ffc030;">10</div>
-                                <div class="skill-box">11</div>
-                            </div>
-                            <div class="skill-seq-row">
-                                <div class="skill-title">E</div>
-                                <img src="../Images/anne1.jpg" alt="img">
-                                <div class="skill-box">1</div>
-                                <div class="skill-box">2</div>
-                                <div class="skill-box" style="background-color: #ffc030;">3</div>
-                                <div class="skill-box">4</div>
-                                <div class="skill-box">5</div>
-                                <div class="skill-box">6</div>
-                                <div class="skill-box">7</div>
-                                <div class="skill-box">8</div>
-                                <div class="skill-box">9</div>
-                                <div class="skill-box">10</div>
-                                <div class="skill-box">11</div>
-                            </div>
-                            <div class="skill-seq-row">
-                                <div class="skill-title">R</div>
-                                <img src="../Images/anne1.jpg" alt="img">
-                                <div class="skill-box">1</div>
-                                <div class="skill-box">2</div>
-                                <div class="skill-box">3</div>
-                                <div class="skill-box">4</div>
-                                <div class="skill-box">5</div>
-                                <div class="skill-box" style="background-color: #ffc030;">6</div>
-                                <div class="skill-box">7</div>
-                                <div class="skill-box">8</div>
-                                <div class="skill-box">9</div>
-                                <div class="skill-box">10</div>
-                                <div class="skill-box" style="background-color: #ffc030;">11</div>
+                    <div class="sub-rune">
+                        <div class="rune-summary">
+                            <h4 style="margin: 0; color: #ae9056" id="subrune-summary">보조룬</h4>
+                            <!--                        보조룬 들어가는곳-->
+
+
+                            <div id="good-rune-shard">
+                                <div class="rune-select">
+                                    <img src="../image/rune/ability.png" alt="img">
+                                    <img src="../image/rune/attackspeed.png" alt="img">
+                                    <img src="../image/rune/cooltime.png" alt="img">
+                                </div>
+                                <div class="rune-select">
+                                    <img src="../image/rune/ability.png" alt="img">
+                                    <img src="../image/rune/Def.png" alt="img">
+                                    <img src="../image/rune/magicDef.png" alt="img">
+                                </div>
+                                <div class="rune-select">
+                                    <img src="../image/rune/health.png" alt="img">
+                                    <img src="../image/rune/Def.png" alt="img">
+                                    <img src="../image/rune/magicDef.png" alt="img">
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="skill-mastar-summary">
-                        <div class="good-skill-master">
-
+                    <div class="item-skill-summary">
+                        <div class="item-core-summary">
+                            <div class="item-core-summary-items" id="goodOneCore">
+                                <!--                                1코어 들어가는 곳-->
+                            </div>
+                            <div class="item-core-summary-items" id="goodTwoCore">
+                                <!--                                2코어 들어가는 곳-->
+                            </div>
+                            <div class="item-core-summary-items" id="goodThreeCore">
+                                <!--                                3코어 들어가는 곳-->
+                            </div>
                         </div>
-                        <div class="good-spell">
 
+                        <div class="skill-summary-container">
+                            <div class="skill-summary">
+                                <div class="skill-seq-row">
+                                    <div class="skill-title">Q</div>
+                                </div>
+                                <div class="skill-seq-row">
+                                    <div class="skill-title">W</div>
+                                </div>
+                                <div class="skill-seq-row">
+                                    <div class="skill-title">E</div>
+                                </div>
+                                <div class="skill-seq-row">
+                                    <div class="skill-title">R</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="good-start-item">
 
-                        </div>
-                        <div class="good-shoes">
-
-                        </div>
-                        <div class="good-core">
-
+                        <div class="skill-mastar-summary">
+                            <div class="good-skill-master">
+                                <!--                            스킬마스터 순서-->
+                            </div>
+                            <div class="good-spell">
+                                <!--                            추천 스펠-->
+                            </div>
+                            <div class="good-start-item">
+                                <!--                            시작 아이템-->
+                            </div>
+                            <div class="good-shoes">
+                                <!--                            신발-->
+                            </div>
+                            <div class="good-core">
+                                <!--                            코어템-->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>   
 
         <div style="width: 100%; height: 400px;"></div>
 
-        <div class="champ-nav">
-            <a class="champ-nav-items" th:href="@{/champ/statistics(name=${name})}">챔피언 통계</a>
-            <a class="champ-nav-items" th:href="@{/champ(name=${name})}">기본 정보</a>
-            <a class="champ-nav-items champ-nav-active" th:href="@{/champ/patch(name=${name})}">패치 히스토리</a>
-            <a class="champ-nav-items" th:href="@{/champ/community(name=${name})}">커뮤니티</a>
-        </div>
-	<section id="patch-history" style="padding-bottom:400px;">
-		<h3>패치 히스토리</h3>
-		
-<!--        패치 히스토리-->
+    <div class="champ-nav">
+        <a class="champ-nav-items" th:href="@{/champ/statistics(name=${name}, line=${line})}">챔피언 통계</a>
+        <a class="champ-nav-items" th:href="@{/champ(name=${name}, line=${line})}">기본 정보</a>
+        <a class="champ-nav-items champ-nav-active" th:href="@{/champ/patch(name=${name}, line=${line})}">패치 히스토리</a>
+        <a class="champ-nav-items" th:href="@{/champ/community(name=${name}, line=${line})}">커뮤니티</a>
+    </div>
 
-		
-	</section>
-</div> <!--  이거 지우면 깨지니까 지우지 말자 -->
+    <section id="patch-history" style="padding-bottom:400px;">
+        <h3>패치 히스토리</h3>
+
+        <!--        패치 히스토리-->
+
+
+    </section>
+
+    </div> <!--  이거 지우면 깨지니까 지우지 말자 -->
     
+
+
+
+
     <div class="top-button">
         <span style="color: #6c757d;">UP</span>
     </div>
-
-
 
 
     <footer class="footer">
@@ -340,6 +242,7 @@
         </div>
 
     </footer>
+
 <script src="/statistics/patch-history.js"></script>
 <script src="/statistics/statistics.js"></script>
 <script src="/common/all.js"></script>

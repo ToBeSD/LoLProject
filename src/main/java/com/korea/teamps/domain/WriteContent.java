@@ -9,10 +9,13 @@ public class WriteContent {
     private String content;
     private String category;
 
-    public WriteContent(String title, String content, String category) {
+    private String champName;
+
+    public WriteContent(String title, String content, String category, String champName) {
         this.title = title;
         this.content = content;
         this.category = category;
+        this.champName = champName;
     }
 
     public String getTitle() {
@@ -37,5 +40,13 @@ public class WriteContent {
 
     public String getCategory() {
         return category;
+    }
+
+    public String getChampName() {
+        return champName;
+    }
+
+    public void setChampName(String champName) {
+        this.champName = champName;
     }
 }

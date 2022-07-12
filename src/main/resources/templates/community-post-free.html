@@ -68,7 +68,7 @@
 				<h3 style="padding-top: 15px;" th:text="${communityDetail.getTitle()}"></h3>
       		</div>
       		<!-- 포스트내용 -->
-			<div class="write" th:text="${communityDetail.getContent()}"></div>
+			<div class="write" th:utext="${communityDetail.getContent()}"></div>
       		<!-- 포스트글쓴이 -->
       		<div class="writer">
       			<div>
@@ -82,7 +82,6 @@
       			</div>
 
       			<div class="writer-bot">
-      				<span>댓글 100 |</span>
 					<span th:text="|조회수 ${communityDetail.getCount()}|"></span>
       			</div>
 
@@ -94,8 +93,8 @@
            		<a style="padding-left:30px;" class="prev-next" href="#">←이전</a>
            		
            		<div class="justify-content-start">
-           			<button style="white-space:pre;" class="recommend" type="button"><span class="pre">&uarr;    </span>0</button>
-           			<button style="white-space:pre;" class="recommend" type="button"><span class="pre">&darr;    </span>0</button>
+					<button style="white-space:pre;" class="recommend" type="button"><span class="pre" th:text="|좋아요 ${communityDetail.getGood}|"></span></button>
+					<button style="white-space:pre;" class="recommend" type="button"><span class="pre" th:text="|싫어요 ${communityDetail.getBad}|"></span></button>
            		</div>
            		
            		<a style="padding-right:30px;" class="prev-next" href="#">다음→</a>
@@ -195,10 +194,12 @@
 				let commentWriter = '';
 				let owner = '';
 				for (let i = 0; i < data.length; i++) {
-					commentRevise = sessionMember.memberKey == data[i].memberKey ? '수정' : '';
-					commentDelete = sessionMember.memberKey == data[i].memberKey ? '삭제' : '';
-					commentReviseComplete = sessionMember.memberKey == data[i].memberKey ? '저장' : '';
-					commentReviseCancle = sessionMember.memberKey == data[i].memberKey ? '취소' : '';
+					if(sessionMember !== null) {
+						commentRevise = sessionMember.memberKey == data[i].memberKey ? '수정' : '';
+						commentDelete = sessionMember.memberKey == data[i].memberKey ? '삭제' : '';
+						commentReviseComplete = sessionMember.memberKey == data[i].memberKey ? '저장' : '';
+						commentReviseCancle = sessionMember.memberKey == data[i].memberKey ? '취소' : '';
+					}
 					commentWriter = communityDetail.memberKey == data[i].memberKey ? '글쓴이' : '';
 					owner = communityDetail.memberKey == data[i].memberKey ? 'owner' : '';
 
@@ -207,7 +208,7 @@
 								<input type="hidden" value="${data[i].baseNo}">
 								<img class="comments-img" src="/image/profile/${data[i].image}"/>
 								<div id="resize-area" style="padding-left: 20px; width: 80%; display: none">
-									<textarea style="width: 100%; height: 100%"></textarea>
+									<textarea style="width: 100%; height: 100%; resize: none"></textarea>
 								</div>
 								<div id="comment-writer" style="padding-left: 20px; width: 80%;">
 									<div style="padding-bottom: 5px; color:rgb(69, 76, 107); font-size:14px;">

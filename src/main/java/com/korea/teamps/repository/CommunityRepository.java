@@ -1,8 +1,6 @@
 package com.korea.teamps.repository;
 
-import com.korea.teamps.domain.Community;
-import com.korea.teamps.domain.CommunityComment;
-import com.korea.teamps.domain.CommunityDetail;
+import com.korea.teamps.domain.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -10,15 +8,15 @@ import java.util.List;
 @Mapper
 public interface CommunityRepository {
 
-    @Insert("insert into community values (#{memberKey}, bno_seq.nextval, #{title}, #{content}, sysdate, 0, 0, 0, #{category})")
+    @Insert("insert into community values (#{memberKey}, bno_seq.nextval, #{title}, #{content}, sysdate, 0, 0, 0, #{category}, #{champName})")
     void insertContent(@Param("memberKey") int memberKey, @Param("title") String title, @Param("content") String content,
-                       @Param("category") String category);
+                       @Param("category") String category, @Param("champName") String champName);
 
     @Select("select * from\n" +
             "             (select rownum rnum, A.*\n" +
             "                from (select community.bno, community.TITLE, community.CONTENT, community.WRITEDATE, community.GOOD,\n" +
             "                                   community.BAD, community.COUNT, community.CATEGORY,\n" +
-            "                                   member.NICKNAME, member.image\n" +
+            "                                   member.NICKNAME, member.image, community.champname\n" +
             "                            from COMMUNITY community, MEMBER member\n" +
             "                            where community.MEMBERKEY = member.MEMBERKEY\n" +
             "                              and community.CATEGORY = #{category}\n" +
@@ -26,13 +24,36 @@ public interface CommunityRepository {
             "where rnum between ${page}1 - 10 and ${page}0")
     List<Community> findByCategoryCommunity(Community community);
 
-    @Select("select community.bno, community.TITLE, community.CONTENT, community.WRITEDATE, community.GOOD,\n" +
-            "        community.BAD, community.COUNT, community.CATEGORY,\n" +
-            "        member.NICKNAME, member.image\n" +
-            " from COMMUNITY community, MEMBER member\n" +
-            " where community.MEMBERKEY = member.MEMBERKEY\n" +
-            "   and community.CATEGORY = #{category}")
-    List<Community> findByCategoryAllContent(Community community);
+    @Select("select * from\n" +
+            "                         (select rownum rnum, A.*\n" +
+            "                            from (select community.bno, community.TITLE, community.CONTENT, community.WRITEDATE, community.GOOD,\n" +
+            "                                               community.BAD, community.COUNT, community.CATEGORY,\n" +
+            "                                               member.NICKNAME, member.image, community.champname\n" +
+            "                                        from COMMUNITY community, MEMBER member\n" +
+            "                                        where community.MEMBERKEY = member.MEMBERKEY\n" +
+            "                                          and community.CATEGORY = #{category}\n" +
+            "                                          and community.title = #{title}\n" +
+            "                                        order by community.WRITEDATE desc) A)\n" +
+            "            where rnum between ${page}1 - 10 and ${page}0")
+    List<Community> findByTitleCommunity(Community community);
+
+    @Select("select * from\n" +
+            "                         (select rownum rnum, A.*\n" +
+            "                            from (select community.bno, community.TITLE, community.CONTENT, community.WRITEDATE, community.GOOD,\n" +
+            "                                               community.BAD, community.COUNT, community.CATEGORY,\n" +
+            "                                               member.NICKNAME, member.image, community.champname\n" +
+            "                                        from COMMUNITY community, MEMBER member\n" +
+            "                                        where community.MEMBERKEY = member.MEMBERKEY\n" +
+            "                                          and community.CATEGORY = #{category}\n" +
+            "                                          and community.title = #{nickName}\n" +
+            "                                        order by community.WRITEDATE desc) A)\n" +
+            "            where rnum between ${page}1 - 10 and ${page}0")
+    List<Community> findByNickNameCommunity(Community community);
+
+    @Select("select count(*) " +
+            "from COMMUNITY  " +
+            "where CATEGORY = #{category}")
+    CommunityCount findByCategoryAllContentCount(Community community);
 
     @Select("select member.memberkey, community.bno, community.title, community.CONTENT, community.WRITEDATE, community.good, community.bad,\n" +
             "       community.COUNT, community.CATEGORY , member.INTRODUCE, member.IMAGE, member.nickname\n" +
@@ -62,4 +83,22 @@ public interface CommunityRepository {
 
     @Delete("delete from COMMUNITY_COMMENT where base_no = #{baseNo}")
     void deleteComment(CommunityComment communityComment);
+
+    @Update("update COMMUNITY " +
+            "set count = (select count from COMMUNITY where bno = #{bno}) + 1 " +
+            "where BNO = #{bno}")
+    void countUp(int bno);
+
+    @Update("update COMMUNITY " +
+            "set ${goodBad} = (select ${goodBad} from COMMUNITY where bno = #{bno}) + 1\n" +
+            "where bno = #{bno}")
+    void goodOrBadUp(GoodOrBad goodOrBad);
+
+    @Select("select community.* , member.NICKNAME, champ.IMAGE_FULL image\n" +
+            "from COMMUNITY community, MEMBER member, CHAMP_SKILL champ\n" +
+            "where community.MEMBERKEY = member.MEMBERKEY\n" +
+            "  and community.CHAMPNAME = champ.name\n" +
+            "  and community.CHAMPNAME = #{champName}" +
+            "  and ROWNUM < 8")
+    List<Community> findByChampNameContent(Community community);
 }

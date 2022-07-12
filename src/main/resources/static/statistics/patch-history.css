@@ -448,7 +448,7 @@ body {
 .item-core-summary-items img{
     width: 35px;
     height: 35px;
-    transform: translate(0%, 30%);
+    transform: translate(0%, 0%);
 }
 
 .skill-summary-container {

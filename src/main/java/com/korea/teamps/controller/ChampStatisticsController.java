@@ -22,10 +22,23 @@ public class ChampStatisticsController {
         return champRepository.findByNameHighPick(champHighPick);
     }
 
+    @PostMapping("/highpickdesc")
+    public List<ChampHighPick> highPickListDesc(@RequestBody ChampHighPick champHighPick) {
+        return champRepository.findByNameHighPickDesc(champHighPick);
+    }
+    @PostMapping("/ratesummary")
+    public ChampRateSummary champRateSummary(@RequestBody ChampRateSummary champRateSummary) {
+        return champRepository.findByLineNameChampRateSummary(champRateSummary);
+    }
 
     @PostMapping("/runesummary")
     public List<RuneSummary> runeSummary(@RequestBody ChampRuneType champRuneType) {
         return champRepository.findByNameLineRuneType(champRuneType.getName(), champRuneType.getLine());
+    }
+
+    @PostMapping("/runesummary/active")
+    public ChampRuneCombine runeSummaryActive(@RequestBody ChampRuneCombine champRuneCombine) {
+        return champRepository.findByNameRuneCombineOne(champRuneCombine);
     }
 
     @PostMapping("/runesummarysub")
@@ -33,6 +46,10 @@ public class ChampStatisticsController {
         return champRepository.findByNameLineSubRuneSummary(champRuneType.getName(), champRuneType.getLine());
     }
 
+    @PostMapping("/skillseqsummary")
+    public ChampSkillSeq skillSeqSummary(@RequestBody ChampSkillSeq champSkillSeq) {
+        return champRepository.findByNameSkillSeqSummary(champSkillSeq);
+    }
 
     @PostMapping("/hardmatch")
     public List<ChampMatchLIst> hardMatchList(@RequestBody ChampMatchLIst champMatchLIst) {

@@ -26,11 +26,12 @@ public class ChampController {
     }
 
     @GetMapping("/champ")
-    public String champ(@RequestParam("name") String name, Model model) {
+    public String champ(@RequestParam("name") String name, @RequestParam("line") String line, Model model) {
         ChampName champName = champRepository.findByNameHeadImage(name);
         String headImage = champName.getHeadImage();
         model.addAttribute("name", name);
         model.addAttribute("headImage", headImage);
+        model.addAttribute("line", line);
 
         return "basic-info";
     }
@@ -47,11 +48,12 @@ public class ChampController {
     }
 
     @GetMapping("/champ/patch")
-    public String patchHistory(@RequestParam("name") String name, Model model) {
+    public String patchHistory(@RequestParam("name") String name, @RequestParam("line") String line, Model model) {
         ChampName champName = champRepository.findByNameHeadImage(name);
         String headImage = champName.getHeadImage();
         model.addAttribute("name", name);
         model.addAttribute("headImage", headImage);
+        model.addAttribute("line", line);
 
         return "patch-history";
     }
@@ -63,22 +65,24 @@ public class ChampController {
     }
 
     @GetMapping("/champ/community")
-    public String community(@RequestParam("name") String name, Model model) {
+    public String community(@RequestParam("name") String name, @RequestParam("line") String line, Model model) {
         ChampName champName = champRepository.findByNameHeadImage(name);
         String headImage = champName.getHeadImage();
         model.addAttribute("name", name);
         model.addAttribute("headImage", headImage);
+        model.addAttribute("line", line);
 
         return "champ-community";
     }
 
     @GetMapping("/champ/statistics")
-    public String getStatistics(@RequestParam("name") String name, Model model) {
+    public String getStatistics(@RequestParam("name") String name, @RequestParam("line") String line, Model model) {
         ChampName champName = champRepository.findByNameHeadImage(name);
         if(champName.getName() != null) {
             String headImage = champName.getHeadImage();
             model.addAttribute("headImage", headImage);
             model.addAttribute("name", champName.getName());
+            model.addAttribute("line", line);
             return "statistics";
         }
 

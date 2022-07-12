@@ -1,6 +1,7 @@
 const writeForm = document.querySelector('#community-form');
 const title = writeForm.querySelector('input[name = title]');
-const category = writeForm.querySelector('select');
+const category = writeForm.querySelector('select[name = category]');
+const champName = writeForm.querySelector('select[name = champname]');
 const content = writeForm.querySelector('textarea[name=content]');
 const submitBtn = document.querySelector('.submit-button');
 
@@ -12,6 +13,7 @@ submitBtn.addEventListener('click', ()=> {
             title : title.value,
             category : category.value,
             content : content.value,
+            champName : champName.value,
         }),
         dataType: 'JSON',
         contentType : 'application/json',
@@ -31,4 +33,32 @@ submitBtn.addEventListener('click', ()=> {
     })
 })
 
+category.addEventListener('change', () => {
+    if(category.value == '빌드 연구소') {
 
+        champName.style.display = 'block';
+
+        $.ajax({
+            type: "GET",
+            url: '/community/champname',
+            dataType: 'JSON',
+            contentType : 'application/json',
+            success: function (data) {
+                let nameList = '';
+
+                for (let i = 0; i < data.length; i++) {
+                    nameList += `<option>
+                                    <span>${data[i].name}</span>
+                                </option>`;
+                }
+
+                $('#champ-select').append(nameList);
+            },
+            error: function (e) {
+                alert(e.status)
+            },
+        })
+    } else {
+        champName.style.display = 'none';
+    }
+})

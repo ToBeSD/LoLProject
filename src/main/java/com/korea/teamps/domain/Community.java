@@ -19,6 +19,15 @@ public class Community {
     private String nickName;
     private String image;
     private int page;
+    private String champName;
+
+    public int getBno() {
+        return bno;
+    }
+
+    public void setBno(int bno) {
+        this.bno = bno;
+    }
 
     public String getTitle() {
         return title;
@@ -92,14 +101,6 @@ public class Community {
         this.image = image;
     }
 
-    public int getBno() {
-        return bno;
-    }
-
-    public void setBno(int bno) {
-        this.bno = bno;
-    }
-
     public int getPage() {
         return page;
     }
@@ -107,4 +108,14 @@ public class Community {
     public void setPage(int page) {
         this.page = page;
     }
+
+    public String getChampName() {
+        return champName;
+    }
+
+    public void setChampName(String champName) {
+        this.champName = champName;
+    }
+
+
 }

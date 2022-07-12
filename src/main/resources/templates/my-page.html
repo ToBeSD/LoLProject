@@ -158,9 +158,9 @@
         	<div style="height:150px;" id="profile-image">
 <!--        			프로필 이미지 들어가는 곳-->
 				<div class="profile-settings fl" th:each="profile : ${profileList}">
-					<img class="img" th:src="@{${'/image/profile/' + profile.image}}"/>
+					<img id="img" class="img" th:src="@{${'/image/profile/' + profile.image}}"/>
 					<img src="/main/icon_search.webp"/>
-					<div>프로필로<br/>설정</div>
+					<div id="change-profile">프로필로<br/>설정</div>
 					<img class="img" th:src="@{${'/image/profile/' + profile.image}}"/>
 				</div>
         	</div>

@@ -360,7 +360,7 @@ h2 {
 }
 
 .community-list span {
-    width: 60px;    
+    width: 160px;
     height: 100%;
     text-align: center;
 }
@@ -393,4 +393,8 @@ h2 {
 .post-like {
     font-weight: 600;
     color: #3d69ff;
+}
+
+.free {
+    width: 65px !important;
 }

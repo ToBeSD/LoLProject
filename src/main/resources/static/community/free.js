@@ -11,7 +11,7 @@ $.ajax({
         for(let i = 0; i < data.length; i++) {
             list += `<div class="list">
                 <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                    <span class="build">
+                    <span class="build free">
                         자유
                     </span>
                     <span class="build1">
@@ -45,15 +45,18 @@ $.ajax({
     contentType : 'application/json',
     success: function (data) {
         let pageBtn = '';
-        for (let i = 0; i < (data.length/10); i++) {
-            pageBtn += `<button class="bottom-btn-in">${i + 1}</button>`;
+        let display = 'block';
+        for (let i = 0; i < (data.count/10); i++) {
+            if(i >= 5) {
+                display = 'none';
+            }
+            pageBtn += `<button class="bottom-btn-in page-btn" style="display: ${display}">${i + 1}</button>`;
         }
         $('#page-start').after(pageBtn);
     },
 })
 
-$(document).on('click', '.bottom-btn-in', function (e){
-    console.log(e.target.innerHTML)
+$(document).on('click', '.page-btn', function (e){
     $.ajax({
         type: "POST",
         url: '/community',
@@ -69,7 +72,7 @@ $(document).on('click', '.bottom-btn-in', function (e){
             for (let i = 0; i < data.length; i++) {
                 newList += `<div class="list">
                 <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                    <span class="build">
+                    <span class="build free">
                         자유
                     </span>
                     <span class="build1">
@@ -91,6 +94,39 @@ $(document).on('click', '.bottom-btn-in', function (e){
             </div>`;
             }
             $(".title-build").after(newList);
+            window.scrollTo({ top:200, behavior: 'smooth' })
+
+            if($(e.target).html() == $('#page-start').next().html()  ||  $(e.target).html() == $('#page-end').prev().html()) {
+                return;
+
+            }else if($(e.target).html() == $('#page-start').next().next().html()) {
+
+                $('.page-btn').css({display: 'none'});
+                $(e.target).next().next().next().css({display: 'block'});
+                $(e.target).next().next().css({display: 'block'});
+                $(e.target).next().css({display: 'block'});
+                $(e.target).css({display: 'block'});
+                $(e.target).prev().css({display : 'block'});
+
+            } else if($(e.target).html() == $('#page-end').prev().prev().html()) {
+
+                $('.page-btn').css({display: 'none'});
+                $(e.target).next().css({display: 'block'});
+                $(e.target).css({display: 'block'});
+                $(e.target).prev().css({display : 'block'});
+                $(e.target).prev().prev().css({display : 'block'});
+                $(e.target).prev().prev().prev().css({display : 'block'});
+
+            } else{
+
+                $('.page-btn').css({display: 'none'});
+                $(e.target).next().next().css({display: 'block'});
+                $(e.target).next().css({display: 'block'});
+                $(e.target).css({display: 'block'});
+                $(e.target).prev().css({display : 'block'});
+                $(e.target).prev().prev().css({display : 'block'});
+
+            }
         },
     })
 })

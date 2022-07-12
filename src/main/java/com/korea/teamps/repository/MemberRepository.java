@@ -18,7 +18,7 @@ public interface MemberRepository {
     @Select("SELECT * FROM member WHERE email = #{email} and pw = #{password}")
     Member findMember(Member member);
 
-    @Select("SELECT * FROM member WHERE memberkey = #{membeKey}")
+    @Select("SELECT * FROM member WHERE memberkey = #{memberKey}")
     Member findByMemberKeyMember(Member member);
     @Select("SELECT * FROM member WHERE email = #{email}")
     Member findByEmail(@Param("email") String email);

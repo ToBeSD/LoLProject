@@ -78,6 +78,14 @@ public interface ChampRepository {
             "ORDER BY tier.ps_score desc")
     ChampRank findByLineNameChampRank(ChampRank champRank);
 
+    @Select("SELECT tier.name, tier.line, tier.PS_SCORE, tierbefore.PS_SCORE b_ps_score, tier.WIN_RATE, tier.PICK_RATE, tier.BAN_RATE\n" +
+            "            FROM c_champ_tier tier, C_CHAMP_TIER_BEFORE tierbefore\n" +
+            "            WHERE tier.name = tierbefore.name\n" +
+            "              AND tier.NAME = #{name}\n" +
+            "              AND tier.line = #{line}" +
+            "              AND rownum = 1")
+    ChampRateSummary findByLineNameChampRateSummary(ChampRateSummary champRateSummary);
+
     @Select("SELECT tier.*, image.IMAGE_HEAD\n" +
             "FROM c_champ_tier tier, champ_skill image\n" +
             "WHERE tier.name = image.name\n" +
@@ -93,12 +101,17 @@ public interface ChampRepository {
 
     @Select("select * from C_HIGH_PICK where name = #{name}")
     List<ChampHighPick> findByNameHighPick(ChampHighPick champHighPick);
+    @Select("select * from C_HIGH_PICK where name = #{name} order by pickrate desc")
+    List<ChampHighPick> findByNameHighPickDesc(ChampHighPick champHighPick);
 
     @Select("select * from (select * from c_high_pick where name = #{name} order by pickrate desc) where rownum = 1")
     ChampHighPick findByNameHighPickOne(ChampHighPick champHighPick);
 
     @Select("select name, IMAGE_HEAD from CHAMP_SKILL where name = #{name}")
     ChampName findByNameHeadImage(@Param("name") String name);
+
+    @Select("select name, IMAGE_HEAD from CHAMP_SKILL")
+    List<ChampName> getAllChampNameAndImage();
 
     @Select("select image_D\n" +
             "from rune_info\n" +
@@ -119,19 +132,19 @@ public interface ChampRepository {
     List<RuneSummary> findByNameLineRuneType(@Param("name") String name, @Param("line") String line);
 
     @Select("select image\n" +
-            "from rune_info_assist\n" +
-            "where (\n" +
-            "    select build from rune_info_assist\n" +
-            "    where (\n" +
-            "        select c_rune_combine.pick5\n" +
-            "        from c_rune_combine\n" +
-            "        where name = #{name}\n" +
-            "          and (\n" +
-            "                  select max(c_rune_combine.win_rate)\n" +
-            "                  from c_rune_combine\n" +
-            "                  where name = #{name}\n" +
-            "                    and line = #{line}\n" +
-            "                    AND c_rune_combine.pick_rate > 5) = c_rune_combine.win_rate) = name) = build")
+            "            from rune_info_assist\n" +
+            "            where (\n" +
+            "                select build from rune_info_assist\n" +
+            "                where (\n" +
+            "                    select c_rune_combine.pick5\n" +
+            "                    from c_rune_combine\n" +
+            "                    where name = #{name}\n" +
+            "                      and (\n" +
+            "                              select max(c_rune_combine.pick_rate)\n" +
+            "                              from c_rune_combine\n" +
+            "                              where name = #{name}\n" +
+            "                                and line = #{line}\n" +
+            "                                AND c_rune_combine.pick_rate > 5) = c_rune_combine.pick_rate) = name) = build")
     List<RuneSummary> findByNameLineSubRuneSummary(@Param("name") String name, @Param("line") String line);
 
     @Select("select match.enemy name, match.line, match.COUNT count, match.WIN_RATE winRate, image.IMAGE_HEAD image\n" +
@@ -235,6 +248,29 @@ public interface ChampRepository {
             "order by craw.PICK_RATE desc")
     List<ChampSkillSeq> findByNameSkillSeq(ChampSkillSeq champSkillSeq);
 
+    @Select("select craw.name, craw.line, image1.SKILL_KEY skill1, image2.SKILL_KEY skill2, image3.SKILL_KEY skill3, nvl(image4.SKILL_KEY, '없음') skill4, nvl(image5.SKILL_KEY, '없음') skill5,\n" +
+            "                   nvl(image6.SKILL_KEY, '없음') skill6, nvl(image7.SKILL_KEY, '없음') skill7, nvl(image8.SKILL_KEY, '없음') skill8, nvl(image9.SKILL_KEY, '없음') skill9, nvl(image10.SKILL_KEY, '없음') skill10,\n" +
+            "                   nvl(image11.SKILL_KEY, '없음') skill11,craw.WIN_RATE, craw.PICK_RATE, craw.COUNT, craw.what_level\n" +
+            "            from C_SKILL_SEQ craw, SKILL_INFO image1, SKILL_INFO image2, SKILL_INFO image3, SKILL_INFO image4, SKILL_INFO image5, SKILL_INFO image6\n" +
+            "               , SKILL_INFO image7, SKILL_INFO image8, SKILL_INFO image9, SKILL_INFO image10, SKILL_INFO image11\n" +
+            "            where craw.pick1 = image1.name\n" +
+            "              and craw.pick2 = image2.name\n" +
+            "              and craw.pick3 = image3.name\n" +
+            "              and nvl(craw.pick4, '없음') = image4.name\n" +
+            "              and nvl(craw.pick5, '없음') = image5.name\n" +
+            "              and nvl(craw.pick6, '없음') = image6.name\n" +
+            "              and nvl(craw.pick7, '없음') = image7.name\n" +
+            "              and nvl(craw.pick8, '없음') = image8.name\n" +
+            "              and nvl(craw.pick9, '없음') = image9.name\n" +
+            "              and nvl(craw.pick10, '없음') = image10.name\n" +
+            "              and nvl(craw.pick11, '없음') = image11.name\n" +
+            "              and craw.name = #{name}\n" +
+            "              and craw.line = #{line}\n" +
+            "              and craw.WHAT_LEVEL = 11\n" +
+            "              and rownum = 1\n" +
+            "            order by craw.PICK_RATE desc")
+    ChampSkillSeq findByNameSkillSeqSummary(ChampSkillSeq champSkillSeq);
+
     @Select("select craw.name, craw.line, image1.image skill1, image2.image skill2, image3.image skill3, image4.image skill4, image5.image skill5,\n" +
             "       image6.image skill6, craw.WIN_RATE, craw.PICK_RATE\n" +
             "from C_RUNE_COMBINE craw, RUNE_INFO image1, RUNE_INFO image2, RUNE_INFO image3, RUNE_INFO image4, RUNE_INFO image5, RUNE_INFO image6\n" +
@@ -248,6 +284,23 @@ public interface ChampRepository {
             "  and craw.line = #{line}" +
             "order by craw.PICK_RATE desc")
     List<ChampRuneCombine> findByNameRuneCombine(ChampRuneCombine champRuneCombine);
+
+    @Select("select *\n" +
+            "    from (select craw.name, craw.line, image1.image skill1, image2.image skill2, image3.image skill3, image4.image skill4, image5.image skill5,\n" +
+            "                   image6.image skill6, craw.WIN_RATE, craw.PICK_RATE\n" +
+            "            from C_RUNE_COMBINE craw, RUNE_INFO image1, RUNE_INFO image2, RUNE_INFO image3, RUNE_INFO image4, RUNE_INFO image5, RUNE_INFO image6\n" +
+            "            where craw.pick1 = image1.name\n" +
+            "              and craw.pick2 = image2.name\n" +
+            "              and craw.pick3 = image3.name\n" +
+            "              and craw.pick4 = image4.name\n" +
+            "              and craw.pick5 = image5.name\n" +
+            "              and craw.pick6 = image6.name\n" +
+            "              and craw.name = #{name}\n" +
+            "              and craw.line = #{line}\n" +
+            "            order by craw.PICK_RATE desc)\n" +
+            "    where rownum = 1")
+    ChampRuneCombine findByNameRuneCombineOne(ChampRuneCombine champRuneCombine);
+
 
     @Select("select craw.name, craw.line, image1.image pick1, image2.image pick2, image3.image pick3, craw.WIN_RATE, craw.PICK_RATE\n" +
             "from C_RUNE_SHARD craw, RUNE_INFO image1, RUNE_INFO image2, RUNE_INFO image3\n" +
