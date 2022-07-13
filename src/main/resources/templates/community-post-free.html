@@ -90,14 +90,14 @@
       		</div>
       		<!-- 포스트하단 -->
            	<div class="content-function">
-           		<a style="padding-left:30px;" class="prev-next" href="#">←이전</a>
+				<a style="padding-left:30px;" class="prev-next" th:href="@{/community/detail(bno=${communityDetail.bno - 1})}">←이전</a>
            		
            		<div class="justify-content-start">
 					<button style="white-space:pre;" class="recommend" type="button"><span class="pre" th:text="|좋아요 ${communityDetail.getGood}|"></span></button>
 					<button style="white-space:pre;" class="recommend" type="button"><span class="pre" th:text="|싫어요 ${communityDetail.getBad}|"></span></button>
            		</div>
-           		
-           		<a style="padding-right:30px;" class="prev-next" href="#">다음→</a>
+
+           		<a style="padding-right:30px;" class="prev-next" th:href="@{/community/detail(bno=${communityDetail.bno - 1})}">다음→</a>
            	</div>
         </div>
       	<div style="height:40px;"></div>

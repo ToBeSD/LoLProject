@@ -1,5 +1,6 @@
 package com.korea.teamps.domain;
 
+
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
