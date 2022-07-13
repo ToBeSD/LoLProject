@@ -25,100 +25,71 @@ public class ChampController {
         this.champRepository = champRepository;
     }
 
+    //챔피언 기본정보 페이지로 이동
     @GetMapping("/champ")
     public String champ(@RequestParam("name") String name, @RequestParam("line") String line, Model model) {
-        ChampName champName = champRepository.findByNameHeadImage(name);
-        String headImage = champName.getHeadImage();
-        model.addAttribute("name", name);
-        model.addAttribute("headImage", headImage);
-        model.addAttribute("line", line);
-
-        return "basic-info";
+        return champService.champBasicInfo(name, line, model);
     }
-
+    
+    //챔피언 기본스킬 불러오기
     @PostMapping("/champ/basicskill")
     @ResponseBody
     public List<ChampBasicSkill> champBasicSkill(@RequestBody ChampBasicSkill champBasicSkill) {
         return champRepository.findByNameBasicSkill(champBasicSkill);
     }
+    
+    //챔피언 기본스탯 불러오기
     @PostMapping("/champ/basicstat")
     @ResponseBody
     public List<ChampBasicStat> champBasicStat(@RequestBody ChampBasicStat champBasicStat) {
         return champRepository.findByNameBasicStat(champBasicStat);
     }
 
+    //패치 히스토리 페이지로 이동
     @GetMapping("/champ/patch")
     public String patchHistory(@RequestParam("name") String name, @RequestParam("line") String line, Model model) {
-        ChampName champName = champRepository.findByNameHeadImage(name);
-        String headImage = champName.getHeadImage();
-        model.addAttribute("name", name);
-        model.addAttribute("headImage", headImage);
-        model.addAttribute("line", line);
-
-        return "patch-history";
+        return champService.patchHistory(name, line, model);
     }
 
+    //패치 히스토리 정보 불러오기
     @PostMapping("/champ/patch")
     @ResponseBody
     public List<ChampPatchHistory> patchHistory(@RequestBody ChampPatchHistory champPatchHistory) {
         return champRepository.findPatchHistory(champPatchHistory);
     }
 
+    //챔피언 커뮤니티로 이동
     @GetMapping("/champ/community")
-    public String community(@RequestParam("name") String name, @RequestParam("line") String line, Model model) {
-        ChampName champName = champRepository.findByNameHeadImage(name);
-        String headImage = champName.getHeadImage();
-        model.addAttribute("name", name);
-        model.addAttribute("headImage", headImage);
-        model.addAttribute("line", line);
-
-        return "champ-community";
+    public String champCommunity(@RequestParam("name") String name, @RequestParam("line") String line, Model model) {
+        return champService.champCommunity(name, line, model);
     }
 
+    //챔피언 통계 페이지로 이동
     @GetMapping("/champ/statistics")
     public String getStatistics(@RequestParam("name") String name, @RequestParam("line") String line, Model model) {
-        ChampName champName = champRepository.findByNameHeadImage(name);
-        if(champName.getName() != null) {
-            String headImage = champName.getHeadImage();
-            model.addAttribute("headImage", headImage);
-            model.addAttribute("name", champName.getName());
-            model.addAttribute("line", line);
-            return "statistics";
-        }
-
-        return "errorpage";
+        return champService.getStatistics(name, line, model);
     }
 
+    //검색창에서 챔피언 이름 검색시 통계 페이지로 이동
     @GetMapping("/champ/statistics/noline")
     public String getNoLineStatistics(ChampHighPick champHighPick, RedirectAttributes re) {
-            ChampHighPick line = champRepository.findByNameHighPickOne(champHighPick);
-        if (line != null) {
-            re.addAttribute("name", line.getName());
-            re.addAttribute("line", line.getLine());
-            return "redirect:/champ/statistics";
-        }else {
-            return "errorpage";
-        }
+        return champService.getNoLineStatistics(champHighPick, re);
     }
 
-
+    //챔피언 랭킹 페이지로 이동
     @GetMapping("/champ/rank")
     public String rank() {
         return "rank";
     }
-
-    @PostMapping("/champ/rankline/one")
-    @ResponseBody
-    public  ChampRank findOneChampRank(@RequestBody ChampRank champRank) {
-        return champRepository.findByLineNameChampRank(champRank);
-    }
-
+    
+    //라인별 챔피언 랭킹 불러오기
     @PostMapping ("/champ/rankline")
     @ResponseBody
     public List<ChampRank> champLineRanks(@RequestBody ChampRank champRank) {
         return champRepository.findByLineChampRank(champRank);
     }
 
+    //전체 챔피언 랭킹 불러오기
     @GetMapping("/champ/rankall")
     @ResponseBody
     public List<ChampRank> champAllRanks() {

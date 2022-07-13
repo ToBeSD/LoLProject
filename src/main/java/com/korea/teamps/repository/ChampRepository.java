@@ -70,14 +70,6 @@ public interface ChampRepository {
             "  and craw.name = #{name}")
     List<ChampPatchHistory> findPatchHistory(ChampPatchHistory champPatchHistory);
 
-    @Select("SELECT tier.*, image.IMAGE_HEAD\n" +
-            "FROM c_champ_tier tier, champ_skill image\n" +
-            "WHERE tier.name = image.name\n" +
-            "  AND tier.NAME = #{name}\n" +
-            "  AND tier.line = #{line}\n" +
-            "ORDER BY tier.ps_score desc")
-    ChampRank findByLineNameChampRank(ChampRank champRank);
-
     @Select("SELECT tier.name, tier.line, tier.PS_SCORE, tierbefore.PS_SCORE b_ps_score, tier.WIN_RATE, tier.PICK_RATE, tier.BAN_RATE\n" +
             "            FROM c_champ_tier tier, C_CHAMP_TIER_BEFORE tierbefore\n" +
             "            WHERE tier.name = tierbefore.name\n" +

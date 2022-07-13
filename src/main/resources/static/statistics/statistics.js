@@ -315,21 +315,6 @@ $.ajax({
     },
 })
 
-$.ajax({
-    type: "POST",
-    url: '/champ/rankline/one',
-    data: JSON.stringify({
-        "name" : getParameterByName('name'),
-        "line" : getParameterByName('line'),
-    }),
-    dataType: 'JSON',
-    contentType : 'application/json',
-    success: function (data) {
-        if(data.length !== 0) {
-
-        }
-    },
-})
 
 $.ajax({
     type: "POST",
