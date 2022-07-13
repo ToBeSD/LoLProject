@@ -104,10 +104,18 @@ public interface ChampRepository {
     @Select("select * from C_HIGH_PICK where name = #{name} order by pickrate desc")
     List<ChampHighPick> findByNameHighPickDesc(ChampHighPick champHighPick);
 
-    @Select("select * from (select * from c_high_pick where name = #{name} order by pickrate desc) where rownum = 1")
+    @Select("select * from\n" +
+            "             (select *\n" +
+            "              from c_high_pick\n" +
+            "              where name like '%${name}%'\n" +
+            "              order by pickrate desc)\n" +
+            "         where rownum = 1")
     ChampHighPick findByNameHighPickOne(ChampHighPick champHighPick);
 
-    @Select("select name, IMAGE_HEAD from CHAMP_SKILL where name = #{name}")
+    @Select("select name, IMAGE_HEAD\n" +
+            "from CHAMP_SKILL\n" +
+            "where name like '%${name}%'\n" +
+            "  and rownum = 1")
     ChampName findByNameHeadImage(@Param("name") String name);
 
     @Select("select name, IMAGE_HEAD from CHAMP_SKILL")

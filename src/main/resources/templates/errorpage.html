@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>error</title>
+    <link rel="stylesheet" href="/errorpage/errorpage.css">
+</head>
+
+
+<body>
+	<div class="error">
+		<div class="contents">
+			<div>
+				<h1><img src="/errorpage/img_logo_error.webp"> 404</h1>
+				<h3>페이지가 존재하지 않습니다.</h3>
+                <br>
+				<button class="home-button">첫 화면으로 돌아가기</button>
+			</div>
+		</div>
+	</div>
+
+    <script>
+        document.querySelector('.home-button').addEventListener('click', () =>{
+            location.href = '/';
+        })
+    </script>
+</body>
+
+</html>

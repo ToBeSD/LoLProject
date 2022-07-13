@@ -61,13 +61,13 @@
            	<div class="whiteDiv"></div>
            	<div class="firstDiv">
            		<div class="firstDivLeft">자유게시판</div>
-                <form action="">
+                <form id="find-form" method="post" onsubmit="return false;">
                     <div class="justify-content-start">
-                            <select class="select">
-                                <option>제목</option>
-                                <option>작성자</option>
-                            </select>
-                            <input class="contents-input" spellcheck="false" placeholder="검색하기"/>
+                        <select class="select">
+                            <option>제목</option>
+                            <option>작성자</option>
+                        </select>
+                        <input class="contents-input" spellcheck="false" placeholder="검색하기"/>
                         <a class="main-button" href="/community/post">✎게시물 쓰기</a>
                     </div>
                 </form>

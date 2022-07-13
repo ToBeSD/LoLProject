@@ -24,6 +24,8 @@ public interface CommunityRepository {
             "where rnum between ${page}1 - 10 and ${page}0")
     List<Community> findByCategoryCommunity(Community community);
 
+
+
     @Select("select * from\n" +
             "                         (select rownum rnum, A.*\n" +
             "                            from (select community.bno, community.TITLE, community.CONTENT, community.WRITEDATE, community.GOOD,\n" +
@@ -32,7 +34,7 @@ public interface CommunityRepository {
             "                                        from COMMUNITY community, MEMBER member\n" +
             "                                        where community.MEMBERKEY = member.MEMBERKEY\n" +
             "                                          and community.CATEGORY = #{category}\n" +
-            "                                          and community.title = #{title}\n" +
+            "                                          and community.title like '%${title}%'\n" +
             "                                        order by community.WRITEDATE desc) A)\n" +
             "            where rnum between ${page}1 - 10 and ${page}0")
     List<Community> findByTitleCommunity(Community community);
@@ -45,7 +47,7 @@ public interface CommunityRepository {
             "                                        from COMMUNITY community, MEMBER member\n" +
             "                                        where community.MEMBERKEY = member.MEMBERKEY\n" +
             "                                          and community.CATEGORY = #{category}\n" +
-            "                                          and community.title = #{nickName}\n" +
+            "                                          and member.nickname like '%${nickName}%'\n" +
             "                                        order by community.WRITEDATE desc) A)\n" +
             "            where rnum between ${page}1 - 10 and ${page}0")
     List<Community> findByNickNameCommunity(Community community);
@@ -54,6 +56,20 @@ public interface CommunityRepository {
             "from COMMUNITY  " +
             "where CATEGORY = #{category}")
     CommunityCount findByCategoryAllContentCount(Community community);
+
+    @Select("select count(*) "+
+            "from COMMUNITY community, MEMBER member  " +
+            "where CATEGORY = #{category}" +
+            "  and community.MEMBERKEY = member.MEMBERKEY" +
+            "  and community.title like '%${title}%'")
+    CommunityCount findByTitleContentCount(Community community);
+
+    @Select("select count(*)\n" +
+            "            from COMMUNITY community, MEMBER member\n" +
+            "            where CATEGORY = #{category}\n" +
+            "              and community.MEMBERKEY = member.MEMBERKEY" +
+            "              and member.nickname like '%${nickName}%'")
+    CommunityCount findByNickNameContentCount(Community community);
 
     @Select("select member.memberkey, community.bno, community.title, community.CONTENT, community.WRITEDATE, community.good, community.bad,\n" +
             "       community.COUNT, community.CATEGORY , member.INTRODUCE, member.IMAGE, member.nickname\n" +

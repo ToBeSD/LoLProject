@@ -34,7 +34,13 @@ public class BoardController {
     @PostMapping("/community")
     @ResponseBody
     public List<Community> getCommunityFree(@RequestBody Community community) {
-        return communityRepository.findByCategoryCommunity(community);
+        if(community.getTitle() == null && community.getNickName() == null) {
+            return communityRepository.findByCategoryCommunity(community);
+        } else if (community.getTitle() != null && community.getNickName() == null) {
+            return communityRepository.findByTitleCommunity(community);
+        } else {
+            return communityRepository.findByNickNameCommunity(community);
+        }
     }
 
     @PostMapping("/community/allcontent")
@@ -43,12 +49,17 @@ public class BoardController {
         return communityRepository.findByCategoryAllContentCount(community);
     }
 
-//    @PostMapping("/community/findbymember")
-//    @ResponseBody
-//    public List<Community> getContentByTitle(@RequestBody Community community) {
-//        return communityRepository.findByMemberCommunity(community);
-//    }
+    @PostMapping("/community/searchedcontent")
+    @ResponseBody
+    public CommunityCount getSearchedContent(@RequestBody Community community) {
 
+        if (community.getTitle() != null) {
+            return communityRepository.findByTitleContentCount(community);
+        }else {
+            return communityRepository.findByNickNameContentCount(community);
+        }
+
+    }
 
 
     @GetMapping("community/detail")
@@ -88,12 +99,10 @@ public class BoardController {
 
             return communityRepository.findByTitleCommunity(community);
 
-        } else if (community.getTitle() == null && community.getNickName() != null) {
+        } else {
 
             return communityRepository.findByNickNameCommunity(community);
 
-        }else {
-            return communityRepository.findByCategoryCommunity(community);
         }
     }
 

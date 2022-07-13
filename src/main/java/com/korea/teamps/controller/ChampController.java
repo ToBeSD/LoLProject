@@ -86,15 +86,19 @@ public class ChampController {
             return "statistics";
         }
 
-        return "";
+        return "errorpage";
     }
 
     @GetMapping("/champ/statistics/noline")
     public String getNoLineStatistics(ChampHighPick champHighPick, RedirectAttributes re) {
-        ChampHighPick line = champRepository.findByNameHighPickOne(champHighPick);
-        re.addAttribute("name", line.getName());
-        re.addAttribute("line", line.getLine());
-        return "redirect:/champ/statistics";
+            ChampHighPick line = champRepository.findByNameHighPickOne(champHighPick);
+        if (line != null) {
+            re.addAttribute("name", line.getName());
+            re.addAttribute("line", line.getLine());
+            return "redirect:/champ/statistics";
+        }else {
+            return "errorpage";
+        }
     }
 
 
