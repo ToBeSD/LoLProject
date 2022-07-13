@@ -56,7 +56,7 @@ $.ajax({
             let card = '';
             $.ajax({
                 type: "POST",
-                url: '/maincard',
+                url: '/maincard/detail',
                 data: JSON.stringify({
                     name : name,
                     line : line,

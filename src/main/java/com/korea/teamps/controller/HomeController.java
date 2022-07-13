@@ -29,26 +29,27 @@ public class HomeController {
     }
 
 
+    //메인 페이지로 이동
     @GetMapping("/")
-    public String home(Model model) {
+    public String home() {
         return "main";
     }
 
+    //메인 페이지 챔피언 카드 불러오기
     @GetMapping("/maincard")
     @ResponseBody
     public List<ChampMainCard> getAllMainCard() {
         return champService.attentionList();
     }
 
-    @PostMapping("/maincard")
+    //챔피언 카드 클릭시 상세정보 불러오기
+    @PostMapping("/maincard/detail")
     @ResponseBody
     public ChampMainCard getOneMainCard(@RequestBody ChampMainCard champMainCard) {
-        if(champMainCard.getName() == null) {
-            return champMainCard;
-        }
         return champRepository.findByNameMainCard(champMainCard);
     }
 
+    //미니게임 페이지로 이동
     @GetMapping("/minigame")
     public String minigame() {
         return "minigame";
