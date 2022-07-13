@@ -4,6 +4,7 @@ const submitBtn = document.querySelector('#summit-button');
 const emailInput = signInForm.querySelector('input[name=email]');
 const passwordInput = signInForm.querySelector('input[name=password]');
 const passwordConfirmInput = signInForm.querySelector('input[name=password-confirm]')
+const nickNameInput = signInForm.querySelector('input[name=nickname]')
 
 const emailPattern = new RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);
 const passwordPattern = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/)
@@ -57,8 +58,14 @@ submitBtn.addEventListener('click', () => {
             contentType : 'application/json',
             success: function (data) {
                 location.href = '/login';
-                console.log('success')
             },
+            error(e) {
+                alert('중복된 이메일 입니다.')
+                emailInput.value = '';
+                passwordInput.value = '';
+                passwordConfirmInput.value = '';
+                nickNameInput.value = '';
+            }
         })
     }else {
         console.log('적절한 이메일, 비밀번호가 아닙니다.')

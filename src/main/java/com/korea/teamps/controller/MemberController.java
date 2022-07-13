@@ -21,105 +21,73 @@ import java.util.List;
 public class MemberController {
 
     private MemberService memberService;
-    private MemberRepository memberRepository;
 
     @Autowired
-    public MemberController(MemberService memberService, MemberRepository memberRepository) {
+    public MemberController(MemberService memberService) {
         this.memberService = memberService;
-        this.memberRepository = memberRepository;
     }
 
+    //회원가입 페이지로 이동
+    @GetMapping("/signin")
+    public String signIn() {
+        return "signin";
+    }
+
+    //회원가입
+    @PostMapping("/signin")
+    @ResponseBody
+    public ResponseEntity create(@RequestBody Member member) {
+        return memberService.newRegist(member);
+    }
+
+    //로그인 페이지로 이동
     @GetMapping("/login")
     public String logInPage() {
         return "login";
     }
 
+    //로그인
     @PostMapping("/login")
     @ResponseBody
-    public String tryLogIn(HttpServletRequest request, @RequestBody Member member) {
-        if (memberService.logIn(request, member)) {
-            return "/mypage";
-        } else {
-            return "/login";
-        }
+    public ResponseEntity tryLogIn(@RequestBody Member member, HttpServletRequest request) {
+        return memberService.tryLogIn(member, request);
     }
 
+    //로그아웃
     @GetMapping("/logout")
     public String tryLogOut(HttpServletRequest request) {
         memberService.logOut(request);
         return "main";
     }
 
-    @GetMapping("/signin")
-    public String signIn() {
-        return "signin";
-    }
-
-    @PostMapping("/signin")
-    @ResponseBody
-    public ResponseEntity<Void> create(@RequestBody Member member) {
-        if (memberService.join(member)) {
-            return ResponseEntity.ok().build();
-        } else {
-
-//          ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-    }
-
+    //마이페이지로 이동
     @GetMapping("/mypage")
-    public String doGetMypage(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            List<Profile> profileList = memberService.getAllProfile();
-            Member sessionMember = (Member) session.getAttribute("MEMBER");
-            Member member = memberRepository.findByMemberKeyMember(sessionMember);
-            model.addAttribute("profileList", profileList);
-            model.addAttribute("member", member);
-            return "my-page";
-        }
-        return "login";
+    public String doGetMypage(Model model, HttpServletRequest request) {
+        return memberService.doGetMypage(model, request);
     }
 
+    //자기소개 변경
     @PostMapping("/mypage/introduce")
     @ResponseBody
     public ResponseEntity<Void> changeIntroduce(@RequestBody Member member) {
-        if(member.getMemberKey() != 0) {
-            memberRepository.updateIntroduce(member);
-            return ResponseEntity.ok().build();
-        }else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
+        return memberService.changeIntroduce(member);
     }
 
+    //비밀번호 변경
     @PostMapping("/mypage/changepassword")
     public ResponseEntity<Void> changePassword(@RequestBody ChangePassword changePassword, HttpServletRequest request) {
-
-        if(memberService.changePassword(changePassword)) {
-            return ResponseEntity.ok().build();
-        }else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
+        return memberService.changePassword(changePassword, request);
     }
 
+    //프로필 변경
     @PostMapping("/mypage/changeprofile")
-    public ResponseEntity<Void> changeProfile(@RequestBody Member member, Model model) {
-        if(member.getMemberKey() != 0) {
-            memberRepository.updateProFile(member);
-            return ResponseEntity.ok().build();
-        }else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
+    public ResponseEntity<Void> changeProfile(@RequestBody Member member) {
+        return memberService.changeProfile(member);
     }
 
-    @PostMapping("/mypage/quit")
+    //회원탈퇴
+    @DeleteMapping("/mypage/quit")
     public String quitMember(@RequestBody Member member, HttpServletRequest request) {
-        memberRepository.quitMember(member);
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-        return "redirect:/";
+        return memberService.quitMember(member, request);
     }
 }

@@ -77,13 +77,13 @@ $(function() {
             $('#new-password').focus();
             alert('새로운 비밀번호와 비밀번호 확인이 일치하지 않습니다.')
         }
-
-
     });
+
+
 
     $("#btn-save-id3").click(function() {
         $.ajax({
-            type: "POST",
+            type: "DELETE",
             url: '/mypage/quit',
             data: JSON.stringify({
                 memberKey : $('#memberkey').val(),

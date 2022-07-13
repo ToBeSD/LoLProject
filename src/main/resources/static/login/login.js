@@ -7,9 +7,12 @@ submitBtn.addEventListener('click', () => {
         url: '/login',
         data: JSON.stringify(signInForm.toObject()),
         contentType : 'application/json',
-        success: function (data) {
-            location.href = data;
+        success: function () {
+            location.href = '/mypage';
         },
+        error(e){
+            alert('이메일 혹은 비밀번호가 틀렸습니다.')
+        }
     })
 })
 
