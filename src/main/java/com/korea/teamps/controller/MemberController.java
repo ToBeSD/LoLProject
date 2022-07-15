@@ -1,21 +1,25 @@
 package com.korea.teamps.controller;
 
-import com.korea.teamps.domain.ChangePassword;
-import com.korea.teamps.domain.CommunityDetail;
-import com.korea.teamps.domain.Member;
-import com.korea.teamps.domain.Profile;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.korea.teamps.domain.*;
 import com.korea.teamps.repository.MemberRepository;
 import com.korea.teamps.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class MemberController {
@@ -57,7 +61,21 @@ public class MemberController {
     @GetMapping("/logout")
     public String tryLogOut(HttpServletRequest request) {
         memberService.logOut(request);
-        return "main";
+        return "redirect:/";
+    }
+
+    //카카오로 로그인
+    @GetMapping("/login/kakao")
+    public String kakaoLogin(@RequestParam String code, HttpServletRequest request) {
+        memberService.kakaoLogIn(code, request);
+        return "redirect:/mypage";
+    }
+
+    //카카오 로그아웃
+    @GetMapping("/logout/kakao")
+    public String kakaoLogOut() {
+        memberService.kakaoLogOut();
+        return "redirect:/logout";
     }
 
     //마이페이지로 이동

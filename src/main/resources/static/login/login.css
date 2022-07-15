@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    height: 1400px;
+    height: 1200px;
     position: relative;
 }
 
@@ -101,7 +101,7 @@ ul {
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    padding-inline-start: 40px;
+    padding-inline-start: 20px;
 }
 li {
     display: inline-block;
@@ -189,10 +189,7 @@ form p {
 .text-center {
     text-align: center !important;
 }
-.fbook {
-    background-color: #2553b4;
 
-}
 .col-12 {
     max-width: 100%;
     position: relative;
@@ -282,12 +279,6 @@ main {
 
 .main-input:hover::placeholder {
     color : black;
-}
-.img_log {
-    width: 40px;
-    height: 40px;
-    display: inline-block;
-    cursor: pointer;
 }
 
 .btn-theme:hover {

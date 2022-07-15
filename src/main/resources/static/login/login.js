@@ -10,7 +10,7 @@ submitBtn.addEventListener('click', () => {
         success: function () {
             location.href = '/mypage';
         },
-        error(e){
+        error(){
             alert('이메일 혹은 비밀번호가 틀렸습니다.')
         }
     })

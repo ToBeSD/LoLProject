@@ -1,8 +1,6 @@
 package com.korea.teamps.domain;
 
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 public class Member {
 
     private int memberKey;
@@ -12,6 +10,10 @@ public class Member {
     private String image;
     private String introduce;
     private String admin;
+
+    public Member() {
+
+    }
 
     public Member(int memberKey, String email, String password, String nickname, String image, String introduce, String admin) {
         this.memberKey = memberKey;

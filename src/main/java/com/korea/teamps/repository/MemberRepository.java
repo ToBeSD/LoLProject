@@ -13,15 +13,15 @@ public interface MemberRepository {
 
 
     @Insert("INSERT INTO member VALUES (SQ_MEMBER.NEXTVAL, #{email}, #{password}, #{nickname}, 'anne1.jpg', null, null)")
-    void save(Member member);
+    void newRegistor(Member member);
 
     @Select("SELECT * FROM member WHERE email = #{email} and pw = #{password}")
     Member findMember(Member member);
 
     @Select("SELECT * FROM member WHERE memberkey = #{memberKey}")
     Member findByMemberKeyMember(Member member);
-    @Select("SELECT * FROM member WHERE email = #{email}")
-    Member findByEmail(@Param("email") String email);
+    @Select("SELECT memberkey, email, pw password, nickname, image, introduce, admin FROM member WHERE email = #{email}")
+    Member findByEmailMember(@Param("email") String email);
 
     @Select("select image from PROFILE_IMAGE")
     List<Profile> getAllProfile();
