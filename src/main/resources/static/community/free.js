@@ -11,7 +11,7 @@ $.ajax({
         for(let i = 0; i < data.length; i++) {
             list += `<div class="list">
                 <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                    <span class="build free">
+                    <span class="free">
                         자유
                     </span>
                     <span class="build1">
@@ -75,7 +75,7 @@ $(document).on('click', '#find-all', function (e){
             for (let i = 0; i < data.length; i++) {
                 newList += `<div class="list">
                 <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                    <span class="build free">
+                    <span class="free">
                         자유
                     </span>
                     <span class="build1">
@@ -154,7 +154,7 @@ $('.contents-input').on('keypress',(e) => {
                     for (let i = 0; i < data.length; i++) {
                         list += `<div>
                                     <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                                        <span class="build free">
+                                        <span class="free">
                                             자유
                                         </span>
                                         <span class="build1">
@@ -218,7 +218,7 @@ $('.contents-input').on('keypress',(e) => {
                     for (let i = 0; i < data.length; i++) {
                         list += `<div>
                                     <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                                        <span class="build free">
+                                        <span class="free">
                                             자유
                                         </span>
                                         <span class="build1">
@@ -290,7 +290,7 @@ $(document).on('click', '#find-by-nickname', function (e) {
             for (let i = 0; i < data.length; i++) {
                 newList += `<div class="list">
             <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                <span class="build free">
+                <span class="free">
                     자유
                 </span>
                 <span class="build1">
@@ -369,7 +369,7 @@ $(document).on('click', '#find-by-title', function (e) {
             for (let i = 0; i < data.length; i++) {
                 newList += `<div class="list">
             <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                <span class="build free">
+                <span class="free">
                     자유
                 </span>
                 <span class="build1">

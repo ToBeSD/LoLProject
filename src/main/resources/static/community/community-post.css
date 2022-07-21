@@ -18,6 +18,13 @@ main {
 	border-bottom: 1px solid rgb(171, 174, 186);
 }
 
+.title h3 {
+	padding-top: 15px;
+	width: 690px;
+	margin-right: 0;
+	display: inline-block;
+}
+
 .write {
 	height: auto;
 	padding: 30px 40px 30px 40px;
@@ -100,6 +107,35 @@ main {
 .recommend {
 	margin-right:10px;
 }
+
+.edit-button {
+	width: 75px;
+	height: 24px;
+	border: 1px solid rgba(47,62,78,.28);
+	background: rgba(0,0,0,0);
+	color: rgba(47,62,78,.48);
+	line-height: .8;
+	font-size: 12px;
+	padding: 4px 6px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.edit-button a {
+	text-decoration: none;
+	color: rgba(47,62,78,.48);
+}
+
+.edit-button a:hover {
+	color: #3254ce;
+}
+
+.edit-button:hover {
+	background: rgba(126,155,255,.12);
+	color: #3254ce;
+	border: 1px solid rgba(126,155,255,.12);
+}
+
 /*댓글들*/
 .comments {
 	display: flex;

@@ -39,13 +39,13 @@ public class BoardController {
     @PostMapping("/community")
     @ResponseBody
     public List<Community> getCommunityFree(@RequestBody Community community) {
-        return boardService.getCommunityContent(community);
+        return boardService.getFreeCommunityContent(community);
     }
 
     //자유게시판 글 상세보기
     @GetMapping("community/detail")
     public String freeDetail(@RequestParam("bno") int bno, Model model, HttpServletRequest request) {
-        return boardService.getDetailPage(bno, model, request);
+        return boardService.getFreeDetailPage(bno, model, request);
     }
 
     //빌드 연구소로 이동
@@ -58,13 +58,13 @@ public class BoardController {
     @PostMapping("/community/build")
     @ResponseBody
     public List<Community> getCommunityBuild(@RequestBody Community community) {
-        return boardService.getCommunityContent(community);
+        return boardService.getBuildCommunityContent(community);
     }
 
     //빌드 연구소 글 상세보기
     @GetMapping("community/build/detail")
-    public String buildDetail(@RequestParam("bno") int bno, Model model, HttpServletRequest request) {
-        return boardService.getDetailPage(bno, model, request);
+    public String buildDetail(@RequestParam("bno") int bno, @RequestParam("champname") String champName, Model model, HttpServletRequest request) {
+        return boardService.getBuildDetailPage(bno, champName, model, request);
     }
     
     // 검색한 글 불러오기
@@ -105,6 +105,36 @@ public class BoardController {
         return boardService.deleteContent(communityDetail);
     }
 
+
+    //자유 게시판 글 수정
+    @GetMapping("/community/free/edit")
+    public String freeEdit(@RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("bno") int bno, Model model) {
+        model.addAttribute("title", title);
+        model.addAttribute("content", content);
+        return "free-edit";
+    }
+
+    //자유게시판 글수정 완료
+    @PostMapping("/community/free/edit/complete")
+    public ResponseEntity freeEditDone(@RequestBody CommunityDetail communityDetail) {
+        return boardService.freeEditDone(communityDetail);
+    }
+
+    //빌드 연구소 글 수정
+    @GetMapping("/community/build/edit")
+    public String buildEdit(@RequestParam("title") String title, @RequestParam("content") String content, Model model) {
+        model.addAttribute("title", title);
+        model.addAttribute("content", content);
+        return "build-edit";
+    }
+
+    //빌드 연구소 글수정 완료
+    @PostMapping("/community/build/edit/complete")
+    public ResponseEntity buildEditDone(@RequestBody BuildEdit buildEdit) {
+        return boardService.buildEditDone(buildEdit);
+    }
+
+
     //글쓰기 화면에서 챔피언 select태그에 활용
     @GetMapping("/community/champname")
     @ResponseBody
@@ -119,10 +149,16 @@ public class BoardController {
         return boardService.getComments(communityComment, model, request);
     }
 
-    // 댓글 생성하기
+    // 댓글 쓰기
     @PostMapping("/community/comment")
     public ResponseEntity<Void> insertComment(@RequestBody CommunityComment communityComment, HttpServletRequest request) {
         return boardService.insertComment(communityComment, request);
+    }
+
+    //대댓글 쓰기
+    @PostMapping("/community/undercomment")
+    public ResponseEntity<Void> insertUnderComment(@RequestBody CommunityComment communityComment, HttpServletRequest request) {
+        return boardService.insertUnderComment(communityComment, request);
     }
 
     //댓글 수정하기
@@ -135,8 +171,7 @@ public class BoardController {
     //댓글 삭제하기
     @PostMapping("/community/commentdelete")
     public ResponseEntity<Void> deleteComment(@RequestBody CommunityComment communityComment) {
-        communityRepository.deleteComment(communityComment);
-        return ResponseEntity.ok().build();
+        return boardService.deleteComment(communityComment);
     }
 
     //글 좋아요 싫어요

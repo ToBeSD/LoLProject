@@ -21,6 +21,8 @@ public class Community {
     private int page;
     private String champName;
 
+    private String champImage;
+
     public int getBno() {
         return bno;
     }
@@ -115,6 +117,13 @@ public class Community {
 
     public void setChampName(String champName) {
         this.champName = champName;
+    }
+
+    public String getChampImage() {
+        return champImage;
+    }
+    public void setChampImage(String champImage) {
+        this.champImage = champImage;
     }
 
 

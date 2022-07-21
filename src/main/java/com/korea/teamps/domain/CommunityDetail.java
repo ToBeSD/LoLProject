@@ -18,6 +18,7 @@ public class CommunityDetail {
     private String nickName;
 
 
+
     public CommunityDetail(int memberKey, int bno, String title, String content, String writeDate, int good, int bad, int count, String category, String introduce, String image, String nickName) {
         this.memberKey = memberKey;
         this.bno = bno;

@@ -25,7 +25,7 @@ $.ajax({
         let list = '';
         for(let i = 0; i < data.length; i++) {
             list +=`
-             <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
+             <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none; color: #353945;">
                <div class="list">
                     <span>${i + 1}</span>
                     <div style="width: 40px; padding: 0;">
@@ -69,7 +69,7 @@ position.addEventListener('click', (e) => {
                 let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
-                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
+                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none; color: #353945;">
                        <div class="list">
                             <span>${i + 1}</span>
                             <div style="width: 40px; padding: 0;">
@@ -114,7 +114,7 @@ position.addEventListener('click', (e) => {
                 let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
-                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
+                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none; color: #353945;">
                        <div class="list">
                             <span>${i + 1}</span>
                             <div style="width: 40px; padding: 0;">
@@ -158,7 +158,7 @@ position.addEventListener('click', (e) => {
                 let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
-                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
+                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none; color: #353945;">
                        <div class="list">
                             <span>${i + 1}</span>
                             <div style="width: 40px; padding: 0;">
@@ -203,7 +203,7 @@ position.addEventListener('click', (e) => {
                 let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
-                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
+                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none; color: #353945;">
                        <div class="list">
                             <span>${i + 1}</span>
                             <div style="width: 40px; padding: 0;">
@@ -247,7 +247,7 @@ position.addEventListener('click', (e) => {
                 let list = '';
                 for(let i = 0; i < data.length; i++) {
                     list +=`
-                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
+                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none; color: #353945;">
                        <div class="list">
                             <span>${i + 1}</span>
                             <div style="width: 40px; padding: 0;">
@@ -287,7 +287,7 @@ position.addEventListener('click', (e) => {
                 let list = '';
                 for(let i = 0; i < data.length; i++) {
                      list +=`
-                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none">
+                     <a href="/champ/statistics?name=${data[i].name}&line=${data[i].line}" style="text-decoration: none; color: #353945;">
                        <div class="list">
                             <span>${i + 1}</span>
                             <div style="width: 40px; padding: 0;">

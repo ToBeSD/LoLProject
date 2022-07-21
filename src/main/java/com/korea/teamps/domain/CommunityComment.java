@@ -8,15 +8,17 @@ public class CommunityComment {
     private int memberKey;
     private int bno;
     private int baseNo;
+    private int upperBaseNo;
     private String content;
     private String writeDate;
     private String image;
     private String nickName;
 
-    public CommunityComment(int memberKey, int bno, int baseNo, String content, String writeDate, String image, String nickName) {
+    public CommunityComment(int memberKey, int bno, int baseNo, int upperBaseNo, String content, String writeDate, String image, String nickName) {
         this.memberKey = memberKey;
         this.bno = bno;
         this.baseNo = baseNo;
+        this.upperBaseNo = upperBaseNo;
         this.content = content;
         this.writeDate = writeDate;
         this.image = image;
@@ -77,5 +79,13 @@ public class CommunityComment {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public int getUpperBaseNo() {
+        return upperBaseNo;
+    }
+
+    public void setUpperBaseNo(int upperBaseNo) {
+        this.upperBaseNo = upperBaseNo;
     }
 }

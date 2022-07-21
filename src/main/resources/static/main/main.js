@@ -163,7 +163,7 @@ $.ajax({
         for(let i = 0; i < data.length; i++) {
             list += `<li class="community-list" style="border-bottom: 1px solid #dbdde1;">
                         <span class="post-name">${data[i].champName}</span>
-                        <a class="post-link" href="/community/build/detail?bno=${data[i].bno}">
+                        <a class="post-link" href="/community/build/detail?bno=${data[i].bno}&champname=${data[i].champName}">
                             <span class="post-title">${data[i].title}</span>
                         </a>
                         <span class="post-like">${data[i].good}</span>

@@ -16,15 +16,56 @@ public interface CommunityRepository {
             "             (select rownum rnum, A.*\n" +
             "                from (select community.bno, community.TITLE, community.CONTENT, community.WRITEDATE, community.GOOD,\n" +
             "                                   community.BAD, community.COUNT, community.CATEGORY,\n" +
+            "                                   member.NICKNAME, member.image, community.champname, champ.IMAGE_HEAD champImage\n" +
+            "                            from COMMUNITY community, MEMBER member, CHAMP_SKILL champ\n" +
+            "                            where community.MEMBERKEY = member.MEMBERKEY\n" +
+            "                              and community.CHAMPNAME = champ.NAME\n" +
+            "                              and community.CATEGORY = #{category}\n" +
+            "                            order by community.WRITEDATE desc) A)" +
+            "where rnum between ${page}1 - 10 and ${page}0")
+    List<Community> findByCategoryBuildCommunity(Community community);
+
+
+
+    @Select("select * from\n" +
+            "                         (select rownum rnum, A.*\n" +
+            "                            from (select community.bno, community.TITLE, community.CONTENT, community.WRITEDATE, community.GOOD,\n" +
+            "                                               community.BAD, community.COUNT, community.CATEGORY,\n" +
+            "                                               member.NICKNAME, member.image, community.champname, champ.IMAGE_HEAD champImage\n" +
+            "                                        from COMMUNITY community, MEMBER member, CHAMP_SKILL champ\n" +
+            "                                        where community.MEMBERKEY = member.MEMBERKEY\n" +
+            "                                          and community.CATEGORY = #{category}\n" +
+            "                                          and community.CHAMPNAME = champ.NAME\n" +
+            "                                          and community.title like '%${title}%'\n" +
+            "                                        order by community.WRITEDATE desc) A)\n" +
+            "            where rnum between ${page}1 - 10 and ${page}0")
+    List<Community> findByTitleBuildCommunity(Community community);
+
+    @Select("select * from\n" +
+            "                         (select rownum rnum, A.*\n" +
+            "                            from (select community.bno, community.TITLE, community.CONTENT, community.WRITEDATE, community.GOOD,\n" +
+            "                                               community.BAD, community.COUNT, community.CATEGORY,\n" +
+            "                                               member.NICKNAME, member.image, community.champname, champ.IMAGE_HEAD champImage\n" +
+            "                                        from COMMUNITY community, MEMBER member, CHAMP_SKILL champ\n" +
+            "                                        where community.MEMBERKEY = member.MEMBERKEY\n" +
+            "                                          and community.CATEGORY = #{category}\n" +
+            "                                          and community.CHAMPNAME = champ.NAME\n" +
+            "                                          and member.nickname like '%${nickName}%'\n" +
+            "                                        order by community.WRITEDATE desc) A)\n" +
+            "            where rnum between ${page}1 - 10 and ${page}0")
+    List<Community> findByNickNameBuildCommunity(Community community);
+
+    @Select("select * from\n" +
+            "             (select rownum rnum, A.*\n" +
+            "                from (select community.bno, community.TITLE, community.CONTENT, community.WRITEDATE, community.GOOD,\n" +
+            "                                   community.BAD, community.COUNT, community.CATEGORY,\n" +
             "                                   member.NICKNAME, member.image, community.champname\n" +
             "                            from COMMUNITY community, MEMBER member\n" +
             "                            where community.MEMBERKEY = member.MEMBERKEY\n" +
-            "                              and community.CATEGORY = #{category}\n" +
+            "                              and community.CATEGORY = '자유 게시판'\n" +
             "                            order by community.WRITEDATE desc) A)\n" +
             "where rnum between ${page}1 - 10 and ${page}0")
-    List<Community> findByCategoryCommunity(Community community);
-
-
+    List<Community> findByCategoryFreeCommunity(Community community);
 
     @Select("select * from\n" +
             "                         (select rownum rnum, A.*\n" +
@@ -37,7 +78,7 @@ public interface CommunityRepository {
             "                                          and community.title like '%${title}%'\n" +
             "                                        order by community.WRITEDATE desc) A)\n" +
             "            where rnum between ${page}1 - 10 and ${page}0")
-    List<Community> findByTitleCommunity(Community community);
+    List<Community> findByTitleFreeCommunity(Community community);
 
     @Select("select * from\n" +
             "                         (select rownum rnum, A.*\n" +
@@ -50,7 +91,7 @@ public interface CommunityRepository {
             "                                          and member.nickname like '%${nickName}%'\n" +
             "                                        order by community.WRITEDATE desc) A)\n" +
             "            where rnum between ${page}1 - 10 and ${page}0")
-    List<Community> findByNickNameCommunity(Community community);
+    List<Community> findByNickNameFreeCommunity(Community community);
 
     @Select("select count(*) " +
             "from COMMUNITY  " +
@@ -81,24 +122,39 @@ public interface CommunityRepository {
     @Delete("delete from COMMUNITY where bno = #{bno}")
     void deleteByBnoContent(CommunityDetail communityDetail);
 
-    @Select("select community.*, member.image, member.nickname\n" +
-            "from COMMUNITY_COMMENT community, MEMBER member\n" +
-            "where community.MEMBERKEY = member.MEMBERKEY\n" +
-            "  and community.bno = #{bno}" +
-            "order by base_no")
+    @Update("update COMMUNITY set title = #{title}, CONTENT = #{content} where bno = #{bno}")
+    void reviseByBnoFreeContent(CommunityDetail communityDetail);
+
+    @Update("update COMMUNITY set title = #{title}, CONTENT = #{content}, CHAMPNAME = #{champName} where bno = #{bno}")
+    void reviseByBnoBuildContent(BuildEdit buildEdit);
+
+    @Select("select community.memberkey, bno, base_no baseNo, upper_base_no upperBaseNo, content, writedate, member.image, member.nickname\n" +
+            "            from COMMUNITY_COMMENT_SIM community, MEMBER member\n" +
+            "            where community.MEMBERKEY = member.MEMBERKEY\n" +
+            "              and community.bno = #{bno}\n" +
+            "            order by base_no, upper_base_no")
     List<CommunityComment> findByBnoComment(@Param("bno") int bno);
 
-    @Insert("insert into COMMUNITY_COMMENT(MEMBERKEY, BNO, BASE_NO, CONTENT, WRITEDATE)\n" +
+    @Insert("insert into COMMUNITY_COMMENT_SIM(MEMBERKEY, BNO, BASE_NO, CONTENT, WRITEDATE) " +
             "select #{memberKey}, #{bno}, nvl(max(BASE_NO), 0) + 1, #{content}, sysdate " +
-            "from COMMUNITY_COMMENT " +
+            "from COMMUNITY_COMMENT_SIM " +
             "where bno = #{bno}")
     void newComment(CommunityComment communityComment);
 
-    @Update("update COMMUNITY_COMMENT set CONTENT = #{content} where BASE_NO = #{baseNo}")
+    @Insert("insert into COMMUNITY_COMMENT_SIM(MEMBERKEY, BNO, BASE_NO, CONTENT, WRITEDATE, UPPER_BASE_NO)\n" +
+            "    select #{memberKey}, #{bno}, #{baseNo}, #{content}, sysdate, nvl(max(UPPER_BASE_NO), 0) + 1\n" +
+            "    from COMMUNITY_COMMENT_SIM\n" +
+            "    where BASE_NO = #{baseNo}")
+    void newUnderComment(CommunityComment communityComment);
+
+    @Update("update COMMUNITY_COMMENT_SIM set CONTENT = #{content} where BASE_NO = #{baseNo} and UPPER_BASE_NO = #{upperBaseNo}")
     void updateComment(CommunityComment communityComment);
 
-    @Delete("delete from COMMUNITY_COMMENT where base_no = #{baseNo}")
+    @Delete("delete from COMMUNITY_COMMENT_SIM where base_no = #{baseNo}")
     void deleteComment(CommunityComment communityComment);
+
+    @Delete("delete from COMMUNITY_COMMENT_SIM where base_no = #{baseNo} and upper_base_no = #{upperBaseNo}")
+    void deleteUnderComment(CommunityComment communityComment);
 
     @Update("update COMMUNITY " +
             "set count = (select count from COMMUNITY where bno = #{bno}) + 1 " +

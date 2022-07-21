@@ -458,7 +458,7 @@ $.ajax({
                                 </div>
                                 <div style="width: 30%; padding-top: 10px;">
                                     <span>${data[i].count}</span>
-                                    <span class="hard">${data[i].winRate}%</span>
+                                    <span class="easy">${data[i].winRate}%</span>
                                 </div>
                             </div>
                         </a>`;

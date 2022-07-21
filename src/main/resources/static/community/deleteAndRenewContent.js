@@ -6,20 +6,44 @@ function getParameterByName(name) {
 }
 
 $(document).on('click', '.write-comment', function(e) {
-    let dedet = `<div class="bottom-comment">
+    $('.under-comment-button').remove();
+
+    let baseNo = $(e.target).parent().parent().siblings('input').eq(1).val();
+    let dedet = `<div class="bottom-comment under-comment-button">
                     <form action="/communoty/comment">
                         <div class="comment">
                             <div class="comment-name">댓글쓰기</div>
                             <input type="hidden" name="bno" value="${getParameterByName('bno')}">
-                            <textarea id="input-comment" name="content" class="comment-space"></textarea>
-                            <button class="comment-regist" type="button">등록</button>
+                            <input type="hidden" name="baseNo" value="${baseNo}">
+                            <textarea id="under-text" name="content" class="comment-space"></textarea>
+                            <button id="under-comment" class="comment-regist" type="button">등록</button>
                         </div>
                     </form>
                 </div>`;
     $(e.target).parent().parent().parent().after(dedet);
 })
 
-const commentBtn = document.querySelector('.comment-regist');
+$(document).on('click', '#under-comment', (e)=> {
+    $.ajax({
+        type: "POST",
+        url: '/community/undercomment',
+        data: JSON.stringify({
+            bno : getParameterByName('bno'),
+            baseNo : $(e.target).siblings('input').eq(1).val(),
+            content : $('#under-text').val(),
+        }),
+        contentType : 'application/json',
+        success: function () {
+            location.reload();
+        },
+        error(e) {
+            alert('로그인 하셔야합니다.')
+            location.href = '/login'
+        }
+    })
+})
+
+const commentBtn = document.querySelector('#comment-regist');
 const comment = document.querySelector('#input-comment');
 
 commentBtn.addEventListener('click', () => {
@@ -68,6 +92,7 @@ $(document).on('click', '#comment-delete', function (e){
         url: '/community/commentdelete',
         data: JSON.stringify({
             baseNo : $(e.target).parent().siblings('input').eq(1).val(),
+            upperBaseNo : $(e.target).parent().siblings('input').eq(2).val(),
         }),
         contentType : 'application/json',
         success: function () {
@@ -80,12 +105,20 @@ $(document).on('click', '#comment-delete', function (e){
 })
 
 $(document).on('click', '#comment-revise-complete', function (e){
+    let textArea = $(e.target).parent().siblings('#resize-area').find('textarea').val()
+
+    if(textArea == '') {
+        alert('변경사항을 입력해 주세요.')
+        return;
+    }
+
     $.ajax({
         type: "POST",
         url: '/community/commentrevise',
         data: JSON.stringify({
             baseNo : $(e.target).parent().siblings('input').eq(1).val(),
-            content :  $(e.target).parent().siblings('#resize-area').find('textarea').val(),
+            upperBaseNo : $(e.target).parent().siblings('input').eq(2).val(),
+            content :  textArea,
         }),
         contentType : 'application/json',
         success: function () {

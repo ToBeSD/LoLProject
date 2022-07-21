@@ -46,7 +46,7 @@
     </header>
 
     <div class="main">
-        <div class="first-title">자유게시판</div>
+        <div class="first-title" th:text="${communityDetail.getCategory()}"></div>
         <div class="second-title">
         	<a class="main-button" href="/community/post">✎게시물 쓰기</a>
 			<form action="/champ/statistics/noline"  method="get">
@@ -61,79 +61,70 @@
 		<div class="whiteDiv"></div>
       	<!-- 포스트 -->  	
       	<div class="post-detail">
-			<input type="hidden" id="bno" th:value="${communityDetail.getBno()}">
-      		<!-- 포스트제목 -->
+			<!-- 포스트제목 -->
       		<div class="title">
-      			<div style="font-size:15px; color:#7e9bff;"><b>자유게시판</b></div>
-				<h3 style="padding-top: 15px;" th:text="${communityDetail.getTitle()}"></h3>
+      			<div style="font-size:15px; color:#7e9bff;"><b th:text="${communityDetail.getCategory}"></b></div>
+      			<h3 id="title" th:text="${communityDetail.getTitle()}"></h3>
+				<button id="revise-button" class="edit-button"  th:if="${isWriter}">
+					<a th:href="@{'/community/' + ${categoryEng} + '/edit?title=' + ${communityDetail.getTitle} + '&content=' + ${communityDetail.getContent} + '&bno=' + ${communityDetail.getBno} + '&champname=' + ${champName} }">게시물 수정</a>
+				</button>
+				<button id="delete-button" class="edit-button" th:if="${isWriter}">게시물 삭제</button>
       		</div>
       		<!-- 포스트내용 -->
-			<div class="write" th:utext="${communityDetail.getContent()}"></div>
+      		<div id="content" class="write" th:utext="${communityDetail.getContent()}"></div>
       		<!-- 포스트글쓴이 -->
       		<div class="writer">
       			<div>
-					<img class="writer-img" th:src="@{${'/image/profile/' + communityDetail.getImage()}}"/>
+      				<img class="writer-img" th:src="@{${'/image/profile/' + communityDetail.getImage()}}"/>
       			</div>
-
+      			
       			<div class="writer-mid">
       				<div style="padding:5px 10px; font-size:12px; color:darkgray;">글쓴이</div>
-					<div style="padding:5px 10px;"><b th:text="${communityDetail.getNickName()}"></b></div>
-					<div style="padding:5px 10px; font-size:15px; color:gray;" th:text="${communityDetail.getIntroduce()}"></div>
+      				<div style="padding:5px 10px;"><b th:text="${communityDetail.getNickName()}"></b></div>
+      				<div style="padding:5px 10px; font-size:15px; color:gray;" th:text="${communityDetail.getIntroduce()}"></div>
       			</div>
-
+      			
       			<div class="writer-bot">
-					<span th:text="|조회수 ${communityDetail.getCount()}|"></span>
+      				<span th:text="|조회수 ${communityDetail.getCount()}|"></span>
       			</div>
 
-				<button id="revise-button"  th:if="${isWriter}">글 수정</button>
-				<button id="delete-button"  th:if="${isWriter}">글 삭제</button>
+
       		</div>
       		<!-- 포스트하단 -->
            	<div class="content-function">
-				<a style="padding-left:30px;" class="prev-next" th:href="@{/community/detail(bno=${communityDetail.bno - 1})}">←이전</a>
+           		<a style="padding-left:30px;" class="prev-next" th:href="@{/community/build/detail(bno=${communityDetail.bno - 1})}">←이전</a>
            		
            		<div class="justify-content-start">
-					<button style="white-space:pre;" class="recommend" type="button"><span class="pre" th:text="|좋아요 ${communityDetail.getGood}|"></span></button>
-					<button style="white-space:pre;" class="recommend" type="button"><span class="pre" th:text="|싫어요 ${communityDetail.getBad}|"></span></button>
+           			<button style="white-space:pre;" class="recommend" type="button"><span class="pre" th:text="|좋아요 ${communityDetail.getGood}|"></span></button>
+           			<button style="white-space:pre;" class="recommend" type="button"><span class="pre" th:text="|싫어요 ${communityDetail.getBad}|"></span></button>
            		</div>
 
-           		<a style="padding-right:30px;" class="prev-next" th:href="@{/community/detail(bno=${communityDetail.bno - 1})}">다음→</a>
+           		<a style="padding-right:30px;" class="prev-next" th:href="@{/community/build/detail(bno=${communityDetail.bno + 1})}">다음→</a>
            	</div>
         </div>
       	<div style="height:40px;"></div>
       	<!-- 댓글들 -->
-      	<div class="comment-container">
+		<div class="comment-container">
+
 
 		</div>
-<!--      	<div class="comments-comment">-->
-<!--      		<img class="comments-img" src="/image/champhead/vladimir.png"/>-->
-<!--      		<div style="padding-left: 20px;">-->
-<!--      			<div style="padding-bottom: 5px; color:rgb(69, 76, 107); font-size:14px;"><b>눈덩이굴리는 누누</b></div>-->
-<!--      			<div style="font-size:14px;">-->
-<!--      			ㄴㄴ되는거임 ㅇㅇ-->
-<!--      			</div>-->
-<!--      			<div style="padding-top:5px">-->
-<!--      				<span style="font-size: 14px; color:gray;">2022년 3월 5일 2:53 오후</span>-->
-<!--      				<button class="write-comment">↳댓글</button>-->
-<!--      			</div>-->
-<!--      		</div>-->
-<!--      	</div>-->
 
 		<!-- 댓글쓰기 -->
-        <div class="bottom-comment">
+		<div class="bottom-comment">
+			<input type="hidden" th:value="${isCommentWriter}">
 			<form onsubmit="return false;">
 				<div class="comment">
-					<div class="comment-name">댓글쓰기</div>
-					<textarea id="input-comment" class="comment-space"></textarea>
-					<button class="comment-regist" type="button">등록</button>
+						<div class="comment-name">댓글쓰기</div>
+						<textarea id="input-comment" class="comment-space"></textarea>
+						<button id="comment-regist" class="comment-regist" type="button">등록</button>
 				</div>
 			</form>
-           	<div class="list-under-div">
-           		<a style="border-radius:6%;" class="list-under" href="/community/post">게시물 쓰기</a>
-           		<a style="border-radius:10%;" class="list-under" href="/community">목록</a>
-     		</div>
-     	</div>
-    </main>
+			<div class="list-under-div">
+				<a style="border-radius:6%;" class="list-under" href="/community/post">게시물 쓰기</a>
+				<a style="border-radius:10%;" class="list-under" href="/community">목록</a>
+			</div>
+		</div>
+	</main>
 	
 	<!-- 하단고정 -->
 	<div class="top-button">
@@ -193,8 +184,20 @@
 				let commentReviseCancle = '';
 				let commentWriter = '';
 				let owner = '';
+
+				let className = '';
+				let display = '';
 				for (let i = 0; i < data.length; i++) {
-					if(sessionMember !== null) {
+
+					if(data[i].upperBaseNo == 0) {
+						className = 'comments';
+						display = "display: inline-block";
+					}else {
+						className = 'comments-comment';
+						display = "display: none";
+					}
+
+					if (sessionMember !== null) {
 						commentRevise = sessionMember.memberKey == data[i].memberKey ? '수정' : '';
 						commentDelete = sessionMember.memberKey == data[i].memberKey ? '삭제' : '';
 						commentReviseComplete = sessionMember.memberKey == data[i].memberKey ? '저장' : '';
@@ -203,9 +206,10 @@
 					commentWriter = communityDetail.memberKey == data[i].memberKey ? '글쓴이' : '';
 					owner = communityDetail.memberKey == data[i].memberKey ? 'owner' : '';
 
-					comments += `<div class="comments">
+					comments += `<div class="${className}">
 								<input type="hidden" value="${data[i].memberKey}">
 								<input type="hidden" value="${data[i].baseNo}">
+								<input type="hidden" value="${data[i].upperBaseNo}">
 								<img class="comments-img" src="/image/profile/${data[i].image}"/>
 								<div id="resize-area" style="padding-left: 20px; width: 80%; display: none">
 									<textarea style="width: 100%; height: 100%; resize: none"></textarea>
@@ -218,7 +222,7 @@
 									<div style="font-size:14px;">${data[i].content}</div>
 									<div style="padding-top:5px">
 										<span style="font-size: 14px; color:gray;">${data[i].writeDate}</span>
-										<button class="write-comment">↳댓글</button>
+										<button style="${display}" class="write-comment">↳댓글</button>
 									</div>
 								</div>
 								<div id="revise-or-delete" class="comment-delete">
@@ -233,6 +237,7 @@
 				}
 				$('.comment-container').append(comments);
 			}
+
 		}
 	})
 </script>

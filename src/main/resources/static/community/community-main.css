@@ -18,14 +18,17 @@ main {
 
 .free {
 	width: 60px !important;
+	padding-left: 15px;
+	text-decoration: none;
+	color: #353945;
+	font-weight: 600;
 }
 
 .build {
-	font-weight: 600;
-	color: #353945;
-	width: 200px;
-	height: 24px;
-	text-align: center;
+	transform: translate(0px, -8px);
+	width: 40px;
+	height: 40px;
+	padding: 0px 15px;
 }
 
 .build1 {

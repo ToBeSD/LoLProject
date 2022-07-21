@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커뮤니티-포스트</title>
+    <link rel="stylesheet" href="/common/all.css">
+    <link rel="stylesheet" href="/common/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="/community/community.css">
+    <link rel="stylesheet" href="/community/write-post.css">
+    <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+    <script src="/common/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<!-- 위에 navbar 부분입니다 -->
+<header class="header-mainnav">
+    <div class="header-container">
+        <a href="/">
+            <img src="/header-logo.webp" alt="LOL.PS">
+        </a>
+        <div class = "nav-item-container">
+            <a class="nav-items" href="/notice">공지사항</a>
+            <a class="nav-items" href="/champ/rank">챔피언 랭킹</a>
+            <a class="nav-items" href="/community">자유게시판</a>
+            <a class="nav-items" href="/community/build">빌드연구소</a>
+            <a class="nav-items" href="/minigame">미니게임</a>
+        </div>
+        <div class="sign-login">
+            <a th:if="${#session} == null" href="/signin">
+                <button class="signin">회원가입</button>
+            </a>
+            <a th:if="${#session} == null" href="/login">
+                <button class="login">로그인</button>
+            </a>
+            <a>
+                <form th:if="${#session} != null" action="/logout/kakao" style="display: inline">
+                    <button class="signin">로그아웃</button>
+                </form>
+            </a>
+            <a th:if="${#session} != null" href="/mypage">
+                <button class="login">마이페이지</button>
+            </a>
+        </div>
+    </div>
+</header>
+
+<div class="main">
+    <div class="first-title">글 수정</div>
+    <div class="second-title">
+        <form action="/champ/statistics/noline" method="get">
+            <input class="main-input" type="text" name="name" placeholder="챔피언이름을 입력하세요"/>
+        </form>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+
+<!-- 중단 -->
+<main>
+    <div class="whiteDiv"></div>
+    <!-- 포스트 -->
+    <form id="community-form" method="post" onsubmit="return false;">
+        <div class="post-detail">
+            <!-- 제목 -->
+            <div class="title">
+                <div style="font-size:15px; color:#7e9bff; padding-bottom:20px;"><b>빌드 연구소</b></div>
+                <div style="height:20px;"></div>
+
+                <span style="font-size:15px;"><b>제목</b></span>
+
+                <input style="width:678px; border: 1px solid rgb(126, 155, 255);" class="input-title" id="title" name="title" th:value="${title}"/>
+
+                <div style="height:50px;"></div>
+
+                <select style="width:700px; border-color:rgb(126, 155, 255);" class="input-title" id="champ-select" name="champname">
+                    <option>--------</option>
+                </select>
+
+                <!-- 내용 -->
+
+                <div style="height:50px;"></div>
+
+                <div style="padding:20px 0px;">
+                    <div style="font-size:15px;"><b>본문</b></div>
+                    <div style="height:20px;"></div>
+                    <!-- form 안에 에디터를 사용하는 경우 (보통 이경우를 많이 사용하는듯)-->
+                    <textarea style="resize: none;" id="summernote" class="summernote" name="content" th:utext="${content}"></textarea>
+                </div>
+            </div>
+
+            <div class="complete-btn-div">
+                <div style="font-size:12px; color: darkgray;">
+                    ※ 저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시글은 이용약관 및 관련법률에 의해 제재를</br>
+                    받으실 수 있습니다.
+                </div>
+                <div style="padding-left: 250px;">
+                    <button class="submit-button">작성완료</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+
+<!-- 하단고정 -->
+<div class="top-button">
+    <span style="color: #6c757d;">UP</span>
+</div>
+
+<footer class="footer">
+
+    <div class="footer-left">
+        <span class="footer-left-item">공지사항</span>
+        <span class="footer-left-item">버그리포팅</span>
+        <span class="footer-left-item">파트너 신청</span>
+        <div style="margin-bottom: 10px;"></div>
+        <span class="footer-left-item">이용약관</span>
+        <span class="footer-left-item">개인정보처리방침</span>
+    </div>
+
+    <div class="footer-right">
+        <h5>PS Analytics, Inc. © 2020</h5>
+        <p>
+            lol.ps is hosted by PS Analytics, Inc. lol.ps isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in
+            producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc.
+            League of Legends © Riot Games, Inc.
+        </p>
+    </div>
+
+</footer>
+
+<script src="/common/getParameter.js"></script>
+<script src="/community/write-post.js"></script>
+<script src="/common/all.js"></script>
+<script src="/common/common.js"></script>
+<script src="/common/summernote.js"></script>
+<script src="/common/summernote-ko-KR.js"></script>
+<script src="/common/summernote-lite.js"></script>
+<script>
+
+    const editComplete = document.querySelector('.submit-button');
+
+    editComplete.addEventListener('click', () => {
+        $.ajax({
+            type: "POST",
+            url: '/community/build/edit/complete',
+            data: JSON.stringify({
+                bno : getParameterByName('bno'),
+                title : $('#title').val(),
+                champName : $('#champ-select').val(),
+                content : $('#summernote').val(),
+            }),
+            contentType : 'application/json',
+            success: function () {
+                location.href = '/community/build';
+            },
+            error(e) {
+                alert('error')
+            },
+        })
+    })
+
+    $.ajax({
+        type: "GET",
+        url: '/community/champname',
+        dataType: 'JSON',
+        contentType : 'application/json',
+        success: function (data) {
+            let nameList = '';
+
+            for (let i = 0; i < data.length; i++) {
+                nameList += `<option>
+                                <span>${data[i].name}</span>
+                            </option>`;
+            }
+
+            $('#champ-select').append(nameList);
+
+            const champSelect = document.querySelector('#champ-select');
+            champSelect.value = getParameterByName("champname");
+        },
+        error: function (e) {
+            alert(e.status)
+        },
+    })
+</script>
+</body>
+</html>

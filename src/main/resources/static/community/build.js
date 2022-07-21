@@ -10,12 +10,10 @@ $.ajax({
         let list = '';
         for (let i = 0; i < data.length; i++) {
             list += `<div>
-            <a class="contents-item" href="/community/build/detail?bno=${data[i].bno}">
-                <span class="build">
-                    ${data[i].champName}
-                </span>
+            <a class="contents-item" href="/community/build/detail?bno=${data[i].bno}&champname=${data[i].champName}">
+                <img class="build" src="/image/champhead/${data[i].champImage}">
                 <span class="build1">
-                    ${data[i].title}
+                    [${data[i].champName}]${data[i].title}
                 </span>
                 <span class="build2" style="width:150px;">
                     ${data[i].nickName}
@@ -74,12 +72,10 @@ $(document).on('click', '#find-all', function (e) {
 
             for (let i = 0; i < data.length; i++) {
                 newList += `<div class="list">
-            <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                <span class="build">
-                    ${data[i].champName}
-                </span>
+            <a class="contents-item" href="/community/detail?bno=${data[i].bno}&champname=${data[i].champName}">
+                <img class="build" src="/image/champhead/${data[i].champImage}">
                 <span class="build1">
-                    ${data[i].title}
+                    [${data[i].champName}]${data[i].title}
                 </span>
                 <span class="build2" style="width:150px;">
                     ${data[i].nickName}
@@ -153,12 +149,10 @@ $('.contents-input').on('keypress',(e) => {
                     let list = '';
                     for (let i = 0; i < data.length; i++) {
                         list += `<div>
-                                    <a class="contents-item" href="/community/build/detail?bno=${data[i].bno}">
-                                        <span class="build">
-                                            ${data[i].champName}
-                                        </span>
+                                    <a class="contents-item" href="/community/build/detail?bno=${data[i].bno}&champname=${data[i].champName}">
+                                        <img class="build" src="/image/champhead/${data[i].champImage}">
                                         <span class="build1">
-                                            ${data[i].title}
+                                            [${data[i].champName}]${data[i].title}
                                         </span>
                                         <span class="build2" style="width:150px;">
                                             ${data[i].nickName}
@@ -217,12 +211,10 @@ $('.contents-input').on('keypress',(e) => {
                     let list = '';
                     for (let i = 0; i < data.length; i++) {
                         list += `<div>
-                                    <a class="contents-item" href="/community/build/detail?bno=${data[i].bno}">
-                                        <span class="build">
-                                            ${data[i].champName}
-                                        </span>
+                                    <a class="contents-item" href="/community/build/detail?bno=${data[i].bno}&champname=${data[i].champName}">
+                                       <img class="build" src="/image/champhead/${data[i].champImage}">
                                         <span class="build1">
-                                            ${data[i].title}
+                                            [${data[i].champName}]${data[i].title}
                                         </span>
                                         <span class="build2" style="width:150px;">
                                             ${data[i].nickName}
@@ -289,12 +281,10 @@ $(document).on('click', '#find-by-nickname', function (e) {
 
             for (let i = 0; i < data.length; i++) {
                 newList += `<div class="list">
-            <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                <span class="build">
-                    ${data[i].champName}
-                </span>
+            <a class="contents-item" href="/community/detail?bno=${data[i].bno}&champname=${data[i].champName}">
+                <img class="build" src="/image/champhead/${data[i].champImage}">
                 <span class="build1">
-                    ${data[i].title}
+                    [${data[i].champName}]${data[i].title}
                 </span>
                 <span class="build2" style="width:150px;">
                     ${data[i].nickName}
@@ -368,12 +358,10 @@ $(document).on('click', '#find-by-title', function (e) {
 
             for (let i = 0; i < data.length; i++) {
                 newList += `<div class="list">
-            <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                <span class="build">
-                    ${data[i].champName}
-                </span>
+            <a class="contents-item" href="/community/detail?bno=${data[i].bno}&champname=${data[i].champName}">
+                <img class="build" src="/image/champhead/${data[i].champImage}">
                 <span class="build1">
-                    ${data[i].title}
+                    [${data[i].champName}]${data[i].title}
                 </span>
                 <span class="build2" style="width:150px;">
                     ${data[i].nickName}
