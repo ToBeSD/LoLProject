@@ -9,28 +9,30 @@ $.ajax({
     success: function (data) {
         let list = '';
         for(let i = 0; i < data.length; i++) {
-            list += `<div class="list">
-                <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                    <span class="free">
-                        자유
-                    </span>
-                    <span class="build1">
-                        ${data[i].title}
-                    </span>
-                    <span class="build2" style="width:150px;">
-                        ${data[i].nickName}
-                    </span>
-                    <span class="build2" style="width:100px; font-weight: 400">
-                        ${data[i].writeDate}
-                    </span>
-                    <span class="build2" style="width:30px; font-weight: 400">
-                        ${data[i].count}
-                    </span>
-                    <span class="build2" style="width:30px; color: #353945;">
-                        ${data[i].good}
-                    </span>
-                </a>
-            </div>`;
+            list += `<div class="list" style="display: flex">
+                        <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
+                            <span class="free">
+                                자유
+                            </span>
+                            <span class="build1">
+                                ${data[i].title}
+                            </span>
+                            <span class="build2" style="width:150px;">
+                                ${data[i].nickName}
+                            </span>
+                            <span class="build2" style="width:100px; font-weight: 400">
+                                ${data[i].writeDate}
+                            </span>
+                            <span class="build2" style="width:30px; font-weight: 400">
+                                ${data[i].count}
+                            </span>
+                            <span class="build2" style="width:30px; color: #353945;">
+                                ${data[i].good}
+                            </span>
+                        </a>
+                        <input type="hidden" value="${data[i].bno}">
+                        <img class="delete-button" src="/trash-can.png" style="width: 24px; height: 24px; padding-top: 12px">
+                    </div>`;
         }
         $('.contents').append(list);
     },
@@ -73,28 +75,30 @@ $(document).on('click', '#find-all', function (e){
             let newList = '';
 
             for (let i = 0; i < data.length; i++) {
-                newList += `<div class="list">
-                <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                    <span class="free">
-                        자유
-                    </span>
-                    <span class="build1">
-                        ${data[i].title}
-                    </span>
-                    <span class="build2" style="width:150px;">
-                        ${data[i].nickName}
-                    </span>
-                    <span class="build2" style="width:100px; font-weight: 400">
-                        ${data[i].writeDate}
-                    </span>
-                    <span class="build2" style="width:30px; font-weight: 400">
-                        ${data[i].count}
-                    </span>
-                    <span class="build2" style="width:30px; color: #353945;">
-                        ${data[i].good}
-                    </span>
-                </a>
-            </div>`;
+                newList += `<div class="list" style="display: flex">
+                                <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
+                                    <span class="free">
+                                        자유
+                                    </span>
+                                    <span class="build1">
+                                        ${data[i].title}
+                                    </span>
+                                    <span class="build2" style="width:150px;">
+                                        ${data[i].nickName}
+                                    </span>
+                                    <span class="build2" style="width:100px; font-weight: 400">
+                                        ${data[i].writeDate}
+                                    </span>
+                                    <span class="build2" style="width:30px; font-weight: 400">
+                                        ${data[i].count}
+                                    </span>
+                                    <span class="build2" style="width:30px; color: #353945;">
+                                        ${data[i].good}
+                                    </span>
+                                </a>
+                                <input type="hidden" value="${data[i].bno}">
+                                <img class="delete-button" src="/trash-can.png" style="width: 24px; height: 24px; padding-top: 12px">
+                            </div>`;
             }
             $(".title-build").after(newList);
             window.scrollTo({ top:200, behavior: 'smooth' })
@@ -148,11 +152,11 @@ $('.contents-input').on('keypress',(e) => {
                 }),
                 contentType: 'application/json',
                 success: function (data) {
-                    $('.contents-item').remove();
+                    $('.list').remove();
 
                     let list = '';
                     for (let i = 0; i < data.length; i++) {
-                        list += `<div>
+                        list += `<div class="list" style="display: flex">
                                     <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
                                         <span class="free">
                                             자유
@@ -173,6 +177,8 @@ $('.contents-input').on('keypress',(e) => {
                                             ${data[i].good}
                                         </span>
                                     </a>
+                                    <input type="hidden" value="${data[i].bno}">
+                                    <img class="delete-button" src="/trash-can.png" style="width: 24px; height: 24px; padding-top: 12px">
                                 </div>`;
                     }
                     $('.contents').append(list);
@@ -212,11 +218,11 @@ $('.contents-input').on('keypress',(e) => {
                 }),
                 contentType: 'application/json',
                 success: function (data) {
-                    $('.contents-item').remove();
+                    $('.list').remove();
 
                     let list = '';
                     for (let i = 0; i < data.length; i++) {
-                        list += `<div>
+                        list += `<div class="list" style="display: flex">
                                     <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
                                         <span class="free">
                                             자유
@@ -237,6 +243,8 @@ $('.contents-input').on('keypress',(e) => {
                                             ${data[i].good}
                                         </span>
                                     </a>
+                                    <input type="hidden" value="${data[i].bno}">
+                                    <img class="delete-button" src="/trash-can.png" style="width: 24px; height: 24px; padding-top: 12px">
                                 </div>`;
                     }
                     $('.contents').append(list);
@@ -284,32 +292,34 @@ $(document).on('click', '#find-by-nickname', function (e) {
         contentType: 'application/json',
         success: function (data) {
             console.log(data)
-            $('.contents-item').remove();
+            $('.list').remove();
             let newList = '';
 
             for (let i = 0; i < data.length; i++) {
-                newList += `<div class="list">
-            <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                <span class="free">
-                    자유
-                </span>
-                <span class="build1">
-                    ${data[i].title}
-                </span>
-                <span class="build2" style="width:150px;">
-                    ${data[i].nickName}
-                </span>
-                <span class="build2" style="width:100px; font-weight: 400">
-                    ${data[i].writeDate}
-                </span>
-                <span class="build2" style="width:30px; font-weight: 400">
-                    ${data[i].count}
-                </span>
-                <span class="build2" style="width:30px; color: #353945;">
-                    ${data[i].good}
-                </span>
-            </a>
-        </div>`;
+                newList += `<div class="list" style="display: flex">
+                                <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
+                                    <span class="free">
+                                        자유
+                                    </span>
+                                    <span class="build1">
+                                        ${data[i].title}
+                                    </span>
+                                    <span class="build2" style="width:150px;">
+                                        ${data[i].nickName}
+                                    </span>
+                                    <span class="build2" style="width:100px; font-weight: 400">
+                                        ${data[i].writeDate}
+                                    </span>
+                                    <span class="build2" style="width:30px; font-weight: 400">
+                                        ${data[i].count}
+                                    </span>
+                                    <span class="build2" style="width:30px; color: #353945;">
+                                        ${data[i].good}
+                                    </span>
+                                </a>
+                                <input type="hidden" value="${data[i].bno}">
+                                <img class="delete-button" src="/trash-can.png" style="width: 24px; height: 24px; padding-top: 12px">
+                            </div>`;
             }
             $(".title-build").after(newList);
             window.scrollTo({top: 200, behavior: 'smooth'})
@@ -363,35 +373,34 @@ $(document).on('click', '#find-by-title', function (e) {
         }),
         contentType: 'application/json',
         success: function (data) {
-            $('.contents-item').remove();
+            $('.list').remove();
             let newList = '';
 
             for (let i = 0; i < data.length; i++) {
-                newList += `<div class="list">
-            <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
-                <span class="free">
-                    자유
-                </span>
-                <span class="build1">
-                    ${data[i].title}
-                </span>
-                <span class="build2" style="width:150px;">
-                    ${data[i].nickName}
-                </span>
-                <span class="build2" style="width:100px; font-weight: 400">
-                    ${data[i].writeDate}
-                </span>
-                <span class="build2" style="width:30px; font-weight: 400">
-                    ${data[i].count}
-                </span>
-                <span class="build2" style="width:30px; color: #353945;">
-                    ${data[i].good}
-                </span>
-                <span class="build2 adminBtn">
-                    삭제
-                </span>
-            </a>
-        </div>`;
+                newList += `<div class="list" style="display: flex">
+                                <a class="contents-item" href="/community/detail?bno=${data[i].bno}">
+                                    <span class="free">
+                                        자유
+                                    </span>
+                                    <span class="build1">
+                                        ${data[i].title}
+                                    </span>
+                                    <span class="build2" style="width:150px;">
+                                        ${data[i].nickName}
+                                    </span>
+                                    <span class="build2" style="width:100px; font-weight: 400">
+                                        ${data[i].writeDate}
+                                    </span>
+                                    <span class="build2" style="width:30px; font-weight: 400">
+                                        ${data[i].count}
+                                    </span>
+                                    <span class="build2" style="width:30px; color: #353945;">
+                                        ${data[i].good}
+                                    </span>
+                                </a>
+                                <input type="hidden" value="${data[i].bno}">
+                                <img class="delete-button" src="/trash-can.png" style="width: 24px; height: 24px; padding-top: 12px">
+                            </div>`;
             }
             $(".title-build").after(newList);
             window.scrollTo({top: 200, behavior: 'smooth'})
@@ -429,4 +438,23 @@ $(document).on('click', '#find-by-title', function (e) {
             }
         },
     })
+})
+
+$(document).on('click', '.delete-button', (e) => {
+
+    $.ajax({
+        type: "POST",
+        url: '/community/post/delete',
+        data: JSON.stringify({
+            bno : $(e.target).siblings('input').val(),
+        }),
+        contentType: 'application/json',
+        success: function () {
+            location.reload();
+        },
+        error() {
+            alert('관리자 권한이 없습니다.');
+        }
+    })
+
 })

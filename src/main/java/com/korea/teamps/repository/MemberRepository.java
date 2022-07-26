@@ -25,7 +25,7 @@ public interface MemberRepository {
 
     @Select("select image from PROFILE_IMAGE")
     List<Profile> getAllProfile();
-    @Select("select * from MEMBER where memberkey = #{memberKey}")
+    @Select("select memberkey, email, pw password, nickname, image, introduce, admin from MEMBER where memberkey = #{memberKey}")
     Member findByMemberKeyPassword(int memberKey);
 
     @Update("update MEMBER set INTRODUCE = #{introduce} where MEMBERKEY = #{memberKey}")

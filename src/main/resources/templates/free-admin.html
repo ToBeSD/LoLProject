@@ -65,9 +65,7 @@
            	<div class="firstDiv">
            		<div class="firstDivLeft">자유게시판</div>
                 <div style="width: 450px;padding-top: 3.5px;" th:if="${isAdmin}">
-                    <button>
-                        <a href="/community/admin">관리</a>
-                    </button>
+                    <button>관리</button>
                 </div>
                 <form id="find-form" method="post" onsubmit="return false;">
                     <div class="justify-content-start">
@@ -124,9 +122,8 @@
                 League of Legends © Riot Games, Inc.
             </p>
         </div>
-
     </footer>
-<script src="/community/free.js"></script>
+<script src="/community/free-admin.js"></script>
 <script src="/common/all.js"></script>
 </body>
 </html>

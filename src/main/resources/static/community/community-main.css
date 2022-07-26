@@ -24,6 +24,12 @@ main {
 	font-weight: 600;
 }
 
+.adminBtn {
+	width:30px;
+	color: #353945;
+	display: none;
+}
+
 .build {
 	transform: translate(0px, -8px);
 	width: 40px;

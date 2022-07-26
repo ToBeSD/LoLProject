@@ -173,4 +173,14 @@ public interface CommunityRepository {
             "  and community.CHAMPNAME = #{champName}" +
             "  and ROWNUM < 8")
     List<Community> findByChampNameContent(Community community);
+
+    @Select("select * from NOTICE where rownum < 11 order by bno desc")
+    List<Notice> getNotice();
+
+    @Select("select * from NOTICE where bno = #{bno}")
+    Notice findByBnoNotice(@Param("bno") int bno);
+
+    @Insert("insert into NOTICE(title, content, writedate, bno) \n" +
+            "values (#{title}, #{content}, sysdate, NOTICE_BNO_SEQ.nextval)")
+    void createNewNotice(Notice notice);
 }

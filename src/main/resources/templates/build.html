@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -61,6 +61,11 @@
            	<div class="whiteDiv"></div>
            	<div class="firstDiv">
            		<div class="firstDivLeft">빌드연구소</div>
+                <div style="width: 450px;padding-top: 3.5px;" th:if="${isAdmin}">
+                    <button>
+                        <a href="/community/build/admin">관리</a>
+                    </button>
+                </div>
                 <form id="find-form" method="post" onsubmit="return false;">
                     <div class="justify-content-start">
                         <select class="select">

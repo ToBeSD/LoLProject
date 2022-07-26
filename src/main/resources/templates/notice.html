@@ -4,238 +4,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>notice</title>
-	<link rel="stylesheet" href="/common/all.css">
-    <link rel="stylesheet" href="/notice/notice.css">
+    <title>자유게시판</title>
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="/common/all.css">
+    <link rel="stylesheet" href="/community/community.css">
+    <link rel="stylesheet" href="/community/community-main.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
-	<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="/common/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    
-    <!-- 위에 navbar 부분입니다 -->
+   <!-- 위에 navbar 부분입니다 -->
     <header class="header-mainnav">
         <div class="header-container">
             <a href="/">
                 <img src="/header-logo.webp" alt="LOL.PS">
             </a>
             <div class = "nav-item-container">
-				<a class="nav-items" href="/notice">공지사항</a>
-				<a class="nav-items" href="/champ/rank">챔피언 랭킹</a>
-				<a class="nav-items" href="/community">자유게시판</a>
-				<a class="nav-items" href="/community/build">빌드연구소</a>
-				<a class="nav-items" href="/minigame">미니게임</a>
-			</div>
+                <a class="nav-items" href="/notice">공지사항</a>
+                <a class="nav-items" href="/champ/rank">챔피언 랭킹</a>
+                <a class="nav-items" href="/community">자유게시판</a>
+                <a class="nav-items" href="/community/build">빌드연구소</a>
+                <a class="nav-items" href="/minigame">미니게임</a>
+            </div>
             <div class="sign-login">
-				<a th:if="${#session} == null" href="/signin">
-					<button class="signin">회원가입</button>
-				</a>
-				<a th:if="${#session} == null" href="/login">
-					<button class="login">로그인</button>
-				</a>
-				<a>
-					<form th:if="${#session} != null" action="/logout/kakao" style="display: inline">
-						<button class="signin">로그아웃</button>
-					</form>
-				</a>
-				<a th:if="${#session} != null" href="/mypage">
-					<button class="login">마이페이지</button>
-				</a>
-			</div>
+                <a th:if="${#session} == null" href="/signin">
+                    <button class="signin">회원가입</button>
+                </a>
+                <a th:if="${#session} == null" href="/login">
+                    <button class="login">로그인</button>
+                </a>
+                <a>
+                    <form th:if="${#session} != null" action="/logout/kakao" style="display: inline">
+                        <button class="signin">로그아웃</button>
+                    </form>
+                </a>
+                <a th:if="${#session} != null" href="/mypage">
+                    <button class="login">마이페이지</button>
+                </a>
+            </div>
         </div>
     </header>
 
     <div class="main">
         <div class="first-title">공지사항</div>
+        <div class="second-title">
+        	<a class="main-button" href="/notice/post" th:if="${isAdmin}">✎게시물 쓰기</a>
+        	<form action="/champ/statistics/noline"  method="get">
+        		<input class="main-input" name="name" placeholder="챔피언이름을 입력하세요"/>
+        	</form>
+        </div>
+        <div style="clear: both;"></div>
     </div>
-
-    <main class="clearfix">
-        <div class="contents">
-           	<div class="whiteDiv"></div>
-           	
-           	<a class="contents-item" href="49.html">
-           		<div class="notice1" >
-           			49
-           		</div>
-           		<div class="notice2">
-           			패치 업데이트) 12.10 버전 한국 서버 데이터 업데이트 완료
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-05-25 21:28</div>
-           			<div class="notice4">조회 579</div>
-           		</div>
-           	</a>
-           	
-           	<a class="contents-item" href="48.html">
-           		<div class="notice1">
-           			48
-           		</div>
-           		<div class="notice2">
-           			lol.ps 커뮤니티 개편 및 PS 파트너 모집 안내
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-05-23 10:39</div>
-           			<div class="notice4">조회 4007</div>
-           		</div>
-           	</a>
-           	
-           	<a class="contents-item" href="47.html">
-           		<div class="notice1">
-           			47
-           		</div>
-           		<div class="notice2">
-           			12.8 업데이트 지연 안내
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-04-28 00:36</div>
-           			<div class="notice4">조회 1967</div>
-           		</div>
-           	</a>
-           	
-           	<a class="contents-item" href="46.html">
-           		<div class="notice1">
-           			46
-           		</div>
-           		<div class="notice2">
-           			패치 업데이트) 12.7 버전 북미,서유럽 데이터 업데이트 완료
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-04-18 11:22</div>
-           			<div class="notice4">조회 1484</div>
-           		</div>
-           	</a>
-           	
-           	<a class="contents-item" href="45.html">
-           		<div class="notice1">
-           			45
-           		</div>
-           		<div class="notice2">
-           			패치 업데이트) 12.6 버전 한국 서버 데이터 업데이트 완료
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-03-31 14:14</div>
-           			<div class="notice4">조회 1203</div>
-           		</div>
-           	</a>
-           	
-           	<a class="contents-item" href="44.html">
-           		<div class="notice1">
-           			44
-           		</div>
-           		<div class="notice2">
-           			12.5b 패치 업데이트 지연 안내
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-03-30 19:01</div>
-           			<div class="notice4">조회 2918</div>
-           		</div>
-           	</a>
-           	
-           	<a class="contents-item" href="43.html">
-           		<div class="notice1">
-           			43
-           		</div>
-           		<div class="notice2">
-           			패치 업데이트) 12.5 버전 한국 데이터 업데이트 완료
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-03-10 17:24</div>
-           			<div class="notice4">조회 3295</div>
-           		</div>
-           	</a>
-           	
-           	<a class="contents-item" href="42.html">
-           		<div class="notice1">
-           			42
-           		</div>
-           		<div class="notice2">
-           			빌드연구소) 게시물 추천수 조작 이슈 대응
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-03-03 11:00</div>
-           			<div class="notice4">조회 3788</div>
-           		</div>
-           	</a>
-           	
-           	<a class="contents-item" href="41.html">
-           		<div class="notice1">
-           			41
-           		</div>
-           		<div class="notice2">
-           			패치 업데이트) 12.4 버전 북미,서유럽 데이터 업데이트 완료
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-02-28 22:02</div>
-           			<div class="notice4">조회 2077</div>
-           		</div>
-           	</a>
-           	
-           	<a class="contents-item" href="40.html">
-           		<div class="notice1">
-           			40
-           		</div>
-           		<div class="notice2">
-           			패치 업데이트) 12.4 버전 국내 데이터 업데이트 완료
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-02-18 12:44</div>
-           			<div class="notice4">조회 1504</div>
-           		</div>
-           	</a>
-           	
-           	<a class="contents-item" href="39.html">
-           		<div class="notice1">
-           			39
-           		</div>
-           		<div class="notice2">
-           			업데이트) 빌드 연구소 게시글 작성 이미지 추가 기능 업데이트
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-02-17 01:10</div>
-           			<div class="notice4">조회 2158</div>
-           		</div>
-           	</a>
-           	
-           	<a class="contents-item" href="38.html">
-           		<div class="notice1">
-           			38
-           		</div>
-           		<div class="notice2">
-           			패치 업데이트) 12.3 버전 북미,서유럽 데이터 업데이트 완료
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-02-12 14:32</div>
-           			<div class="notice4">조회 1160</div>
-           		</div>
-           	</a>
-           	
-           	<a class="contents-item" href="37.html">
-           		<div class="notice1">
-           			37
-           		</div>
-           		<div class="notice2">
-           			패치 업데이트) 12.3 버전 국내 데이터 업데이트 완료
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-02-02 16:04</div>
-           			<div class="notice4">조회 2238</div>
-           		</div>
-           	</a>
-           	
-           	<a class="contents-item" href="36.html">
-           		<div class="notice1">
-           			36
-           		</div>
-           		<div class="notice2">
-           			제리 스킬 마스터 순서 관련 지표 버그 수정 완료
-           		</div>
-           		<div class="notice3">
-           			<div class="notice4">2022-01-25 14:11</div>
-           			<div class="notice4">조회 1539</div>
-           		</div>
-           	</a>
-           	
+	
+    <main>
+        <div class="contents" style="padding-top: 100px;">
+<!--           	글 들어가는 곳-->
         </div>
     </main>
+    
 
 	<div class="top-button">
         <span style="color: #6c757d;">UP</span>
@@ -262,7 +88,7 @@
         </div>
 
     </footer>
-
 <script src="/common/all.js"></script>
+<script src="/notice/notice.js"></script>
 </body>
 </html>

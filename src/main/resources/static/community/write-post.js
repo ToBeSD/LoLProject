@@ -15,7 +15,6 @@ submitBtn.addEventListener('click', ()=> {
             content : content.value,
             champName : champName.value,
         }),
-        dataType: 'JSON',
         contentType : 'application/json',
         success: function (data, textStatus, jqXHR) {
             if(jqXHR.status == 200 && category.value == '빌드 연구소') {

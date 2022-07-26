@@ -29,9 +29,22 @@ public class BoardController {
         this.boardService = boardService;
     }
 
+    //자유게시판 관리페이지로 이동
+    @GetMapping("/community/admin")
+    public String freeAdmin(HttpServletRequest request) {
+        return boardService.freeAdmin(request);
+    }
+
+    //빌드 연구소 관리페이지로 이동
+    @GetMapping("/community/build/admin")
+    public String buildAdmin(HttpServletRequest request) {
+        return boardService.buildAdmin(request);
+    }
+
     //자유게시판으로 이동
     @GetMapping("/community")
-    public String free() {
+    public String free(HttpServletRequest request, Model model) {
+        boardService.isAdmin(request, model);
         return "free";
     }
 
@@ -50,7 +63,8 @@ public class BoardController {
 
     //빌드 연구소로 이동
     @GetMapping("/community/build")
-    public String build() {
+    public String build(HttpServletRequest request, Model model) {
+        boardService.isAdmin(request, model);
         return "build";
     }
 
@@ -66,7 +80,7 @@ public class BoardController {
     public String buildDetail(@RequestParam("bno") int bno, @RequestParam("champname") String champName, Model model, HttpServletRequest request) {
         return boardService.getBuildDetailPage(bno, champName, model, request);
     }
-    
+
     // 검색한 글 불러오기
     @PostMapping("/community/searchedcontent")
     @ResponseBody
@@ -85,9 +99,9 @@ public class BoardController {
     @GetMapping("/community/post")
     public String postFree(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if(session == null) {
+        if (session == null) {
             return "login";
-        }else {
+        } else {
             return "write-post";
         }
     }
@@ -190,7 +204,33 @@ public class BoardController {
 
     //공지사항으로 이동
     @GetMapping("/notice")
-    public String notice() {
-        return "notice";
+    public String notice(HttpServletRequest request, Model model) {
+        return boardService.noticeAdmin(request, model);
+    }
+
+    //공지사항 글 불러오기
+    @PostMapping("/notice")
+    @ResponseBody
+    public List<Notice> getNotice() {
+        return communityRepository.getNotice();
+    }
+
+    //공지사항 글 상세보기
+    @GetMapping("/notice/detail")
+    public String noticeDetail(@RequestParam("bno") int bno, Model model) {
+        model.addAttribute("noticeDetail", communityRepository.findByBnoNotice(bno));
+        return "notice-detail";
+    }
+
+    //공지사항 글쓰기
+    @GetMapping("/notice/post")
+    public String noticePost(HttpServletRequest request) {
+        return boardService.noticePost(request);
+    }
+
+    //공지사항 글쓰기 완료
+    @PostMapping("/notice/post")
+    public ResponseEntity noticePostComplete(@RequestBody Notice notice) {
+        return boardService.noticePostComplete(notice);
     }
 }

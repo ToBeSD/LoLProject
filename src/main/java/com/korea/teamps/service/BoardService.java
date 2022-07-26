@@ -7,12 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.SecureRandom;
 import java.util.List;
 
 @Service
@@ -23,6 +25,81 @@ public class BoardService {
     @Autowired
     public BoardService(CommunityRepository communityRepository1) {
         this.communityRepository = communityRepository1;
+    }
+
+    //자유게시판 관리페이지로 이동
+    public String freeAdmin(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+            Member member = (Member) session.getAttribute("MEMBER");
+            if(member.getAdmin() != null) {
+                return "free-admin";
+            }else {
+                return "redirect:/community";
+            }
+        }else {
+            return "redirect:/community";
+        }
+    }
+    
+    //빌드 연수고 관리페이지로 이동
+    public String buildAdmin(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+            Member member = (Member) session.getAttribute("MEMBER");
+            if(member.getAdmin() != null) {
+                return "build-admin";
+            }else {
+                return "redirect:/community/build";
+            }
+        }else {
+            return "redirect:/community/build";
+        }
+    }
+
+    //공지사항 관리자 여부 파악
+    public String noticeAdmin(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+            Member member = (Member) session.getAttribute("MEMBER");
+
+            if (member.getAdmin() != null) {
+                model.addAttribute("isAdmin", true);
+
+            }else {
+                model.addAttribute("isAdmin", false);
+            }
+
+        }else {
+                model.addAttribute("isAdmin", false);
+        }
+
+        return "notice";
+    }
+
+    //공지사항 글쓰기 페이지
+    public String noticePost(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+            Member member = (Member) session.getAttribute("MEMBER");
+            if(member.getAdmin() != null) {
+                return "notice-post";
+            }else {
+                return "redirect:/notice";
+            }
+        }else {
+            return "redirect:/notice";
+        }
+    }
+
+    //공지사항 글쓰기 완료
+    public ResponseEntity noticePostComplete(Notice notice) {
+        if (notice.getTitle() != null) {
+            communityRepository.createNewNotice(notice);
+            return ResponseEntity.ok().build();
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
     //글 쓰기
@@ -62,6 +139,18 @@ public class BoardService {
             return ResponseEntity.ok().build();
         }else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    public void isAdmin(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            Member member = (Member) session.getAttribute("MEMBER");
+            if(member.getAdmin() != null) {
+                model.addAttribute("isAdmin", true);
+            }else {
+                model.addAttribute("isAdmin", false);
+            }
         }
     }
 
