@@ -129,7 +129,7 @@ public class MemberService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
         params.add("client_id", "1e5f1398f6098e14639513d07165e3b6");
-        params.add("redirect_uri", "http://localhost:8080/login/kakao");
+        params.add("redirect_uri", "http://lolpscloneproject-env.eba-wr2mtsmm.ap-northeast-2.elasticbeanstalk.com/login/kakao");
         params.add("code", code);
 
         //http header 와 http body를  하나의 오브젝트에 담기
@@ -225,7 +225,7 @@ public class MemberService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("client_id", "1e5f1398f6098e14639513d07165e3b6");
-        headers.add("logout_redirect_uri", "http://localhost:8080/logout");
+        headers.add("logout_redirect_uri", "http://lolpscloneproject-env.eba-wr2mtsmm.ap-northeast-2.elasticbeanstalk.com/logout");
         headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
         //http header를  하나의 오브젝트에 담기
@@ -234,7 +234,7 @@ public class MemberService {
 
         //http 요청하기 그리고 response변수에 응답받음
         ResponseEntity<String> response = rt.exchange(
-                "https://kauth.kakao.com//oauth/logout?client_id=1e5f1398f6098e14639513d07165e3b6&logout_redirect_uri=http://localhost:8080/logout",
+                "https://kauth.kakao.com//oauth/logout?client_id=1e5f1398f6098e14639513d07165e3b6&logout_redirect_uri=http://lolpscloneproject-env.eba-wr2mtsmm.ap-northeast-2.elasticbeanstalk.com/logout",
                 HttpMethod.GET,
                 kakaoLogOutRequest,
                 String.class // string으로 응답받기
