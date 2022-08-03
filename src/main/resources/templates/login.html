@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,18 +20,18 @@
                 <img src="/header-logo.webp" alt="LOL.PS">
             </a>
             <div class = "nav-item-container">
-                <a class="nav-items" href="/notice">공지사항</a>
-                <a class="nav-items" href="/champ/rank">챔피언 랭킹</a>
-                <a class="nav-items" href="/community">자유게시판</a>
-                <a class="nav-items" href="/community/build">빌드연구소</a>
-                <a class="nav-items" href="/minigame">미니게임</a>
+                <a class="nav-items" href="/notice">Notive</a>
+                <a class="nav-items" href="/champ/rank">Champion Rank</a>
+                <a class="nav-items" href="/community">Free Board</a>
+                <a class="nav-items" href="/community/build">Build Board</a>
+                <a class="nav-items" href="/minigame">Mini Game</a>
             </div>
             <div class="sign-login">
                 <a href="/signin">
-                    <button class="signin">회원가입</button>
+                    <button class="signin">SignIn</button>
                 </a>
                 <a href="/login">
-                    <button class="login">로그인</button>
+                    <button class="login">LogIn</button>
                 </a>
             </div>
         </div>
@@ -44,34 +44,30 @@
         <div class = "contents">
             <div class=" row-sign">
                 <div class = "col-12">
-                    <h2 class="page-title">로그인</h2>
+                    <h2 class="page-title">LogIn</h2>
                 </div>
                 <div class = "row">
                     <div class = "email_login_box"> 
-                        <h3>이메일 로그인</h3>
+                        <h3>Login By Email</h3>
                         <form class="login-form" onsubmit="return false;">
                             <div class = "form-group">
-                                <label for="id_email">이메일 주소</label>
+                                <label for="id_email">Email</label>
                                 <input type="email" name="email" class="form-control" placeholder="gamer@lol.ps" required="" id="id_email">
                             </div>
                             <div class = "form-group">
-                                <label for="id_password">비밀번호</label>
-                                <input type="password" name="password" class="form-control" placeholder="비밀번호" required="" id="id_password">
+                                <label for="id_password">Password</label>
+                                <input type="password" name="password" class="form-control" placeholder="Password" required="" id="id_password">
 
                             </div>
-                            <button id="submit-button" type="submit" class="btn btn-lg btn-theme btn-big">이메일 계정 로그인</button>
-                            <div class="text-center">
-                                <a href="#" class="btn btn-lg btn-light-theme btn-small">이메일 찾기</a>
-                                <a href="#" class="btn btn-lg btn-light-theme btn-small">비밀번호 찾기</a>
-                            </div>
+                            <button id="submit-button" type="submit" class="btn btn-lg btn-theme btn-big">LogIn</button>
                         </form>
                     </div>
 
                     <div class="sign-sns signin">
-                        <h3>소셜계정으로 로그인</h3>
+                        <h3>LogIn By SNS</h3>
                             <ul>
                                 <li>
-                                    <a href="https://kauth.kakao.com/oauth/authorize?client_id=1e5f1398f6098e14639513d07165e3b6&redirect_uri=http://lolpscloneproject-env.eba-wr2mtsmm.ap-northeast-2.elasticbeanstalk.com/login/kakao&response_type=code">
+                                    <a  th:href="@{https://kauth.kakao.com/oauth/authorize(client_id=${@environment.getProperty('kakao.api.client.id')} , redirect_uri=${@environment.getProperty('kakao.login.domain')}, response_type='code' )}">
                                         <img style="cursor: pointer; height: 40px;" src="/image/kakao/kakao_login_medium_narrow.png" alt="카카오톡 로그인" >
                                     </a>
                                 </li>

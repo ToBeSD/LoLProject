@@ -93,7 +93,7 @@ function init() {
     stop.classList.remove(NONE);
     stop.classList.add(SHOW);
     
-    intervalItem = setInterval(addItem,50);
+    intervalItem = setInterval(addItem,100);
     intervalTime = setInterval(getTime,10);
 }
 

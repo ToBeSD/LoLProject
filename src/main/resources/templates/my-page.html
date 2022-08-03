@@ -71,42 +71,42 @@
 	
 <div id="fake-body">
 	<!-- 위에 navbar 부분입니다 -->
-    <header class="header-mainnav">
-        <div class="header-container">
-            <a href="/">
-                <img src="/header-logo.webp" alt="LOL.PS">
-            </a>
+	<header class="header-mainnav">
+		<div class="header-container">
+			<a href="/">
+				<img src="/header-logo.webp" alt="LOL.PS">
+			</a>
 			<div class = "nav-item-container">
-				<a class="nav-items" href="/notice">공지사항</a>
-				<a class="nav-items" href="/champ/rank">챔피언 랭킹</a>
-				<a class="nav-items" href="/community">자유게시판</a>
-				<a class="nav-items" href="/community/build">빌드연구소</a>
-				<a class="nav-items" href="/minigame">미니게임</a>
+				<a class="nav-items" href="/notice">Notice</a>
+				<a class="nav-items" href="/champ/rank">Champion rank</a>
+				<a class="nav-items" href="/community">Free Board</a>
+				<a class="nav-items" href="/community/build">Build Board</a>
+				<a class="nav-items" href="/minigame">Mini Game</a>
 			</div>
 			<div class="sign-login">
 				<a th:if="${#session} == null" href="/signin">
-					<button class="signin">회원가입</button>
+					<button class="signin">SignIn</button>
 				</a>
 				<a th:if="${#session} == null" href="/login">
-					<button class="login">로그인</button>
+					<button class="login">LogIn</button>
 				</a>
 				<a>
 					<form th:if="${#session} != null" action="/logout/kakao" style="display: inline">
-						<button class="signin">로그아웃</button>
+						<button class="signin">SignIn</button>
 					</form>
 				</a>
 				<a th:if="${#session} != null" href="/mypage">
-					<button class="login">마이페이지</button>
+					<button class="login">MyPage</button>
 				</a>
 			</div>
 		</div>
-    </header>
+	</header>
 
     <div class="main">
-        <div class="first-title">마이페이지</div>
+        <div class="first-title">MyPage</div>
         <div class="second-title">
 			<form action="/champ/statistics/noline"  method="get">
-				<input class="main-input" type="text" name="name" placeholder="챔피언이름을 입력하세요"/>
+				<input class="main-input" type="text" name="name" placeholder="Please enter the name of the champion"/>
 			</form>
         </div>
         <div style="clear: both;"></div>
@@ -132,16 +132,16 @@
       					</div>
       					
       					<div>
-      						<button id="introduce-btn" class="first-btn">한줄소개 변경</button>
+      						<button id="introduce-btn" class="first-btn">Change Introduce</button>
       					</div>
       				</div>
       				
       				<div style="position:absolute; top:210px; right:50px;">
-      					<button id="change-pw-btn" style="width:100px;" class="first-btn">비밀번호 변경</button>
+      					<button id="change-pw-btn" style="width:100px;" class="first-btn">Change Password</button>
       				</div>
       				
       				<div style="position:absolute; top:250px; right:50px;">
-      					<button id="member-secession-btn" style="width:100px;" class="first-btn">회원탈퇴</button>
+      					<button id="member-secession-btn" style="width:100px;" class="first-btn">Quit Service</button>
       				</div>
       				
       			</div>
@@ -151,7 +151,7 @@
         
         <div style="width:100%; height:350px;"></div>
         
-        <div style="color:rgb(23, 60, 189);"><b>프로필 앨범</b></div>
+        <div style="color:rgb(23, 60, 189);"><b>Profile Image</b></div>
     
         <div class="change-img">
         	<div style="height:150px;" id="profile-image">
@@ -159,7 +159,7 @@
 				<div class="profile-settings fl" th:each="profile : ${profileList}">
 					<img id="img" class="img" th:src="@{${'/image/profile/' + profile.image}}"/>
 					<img src="/main/icon_search.webp"/>
-					<div id="change-profile">프로필로<br/>설정</div>
+					<div id="change-profile">Set<br/>Profile</div>
 					<img class="img" th:src="@{${'/image/profile/' + profile.image}}"/>
 				</div>
         	</div>

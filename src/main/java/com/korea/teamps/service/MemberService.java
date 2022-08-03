@@ -196,16 +196,16 @@ public class MemberService {
     //회원이 아니면 자동 회원가입하고 로그인
     public void kakaoLogIn(String code, HttpServletRequest request) {
         KakaoProfile kakaoProfile = getKakaoProfile(code);
-        Member kakaoMember = memberRepository.findByEmailMember(kakaoProfile.getKakao_account().getEmail());
+        Member kakaoMember = memberRepository.findByEmailMember(kakaoProfile.getId() + "@kakao.com");
 
         if (kakaoMember == null) {
             UUID kakaoRandomPassword = UUID.randomUUID();
             Member newKakaoMember = new Member();
-            newKakaoMember.setEmail(kakaoProfile.getKakao_account().getEmail());
+            newKakaoMember.setEmail(kakaoProfile.getId() + "@kakao.com");
             newKakaoMember.setPassword(kakaoRandomPassword.toString());
             newKakaoMember.setNickname(kakaoProfile.getKakao_account().getProfile().nickname);
             memberRepository.newRegistor(passwordEncoder(newKakaoMember));
-            kakaoMember = memberRepository.findByEmailMember(kakaoProfile.getKakao_account().getEmail());
+            kakaoMember = memberRepository.findByEmailMember(kakaoProfile.getId() + "@kakao.com");
         }
 
 

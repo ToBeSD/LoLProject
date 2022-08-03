@@ -20,26 +20,26 @@
                 <img src="/header-logo.webp" alt="LOL.PS">
             </a>
             <div class = "nav-item-container">
-                <a class="nav-items" href="/notice">공지사항</a>
-                <a class="nav-items" href="/champ/rank">챔피언 랭킹</a>
-                <a class="nav-items" href="/community">자유게시판</a>
-                <a class="nav-items" href="/community/build">빌드연구소</a>
-                <a class="nav-items" href="/minigame">미니게임</a>
+                <a class="nav-items" href="/notice">Notice</a>
+                <a class="nav-items" href="/champ/rank">Champion rank</a>
+                <a class="nav-items" href="/community">Free Board</a>
+                <a class="nav-items" href="/community/build">Build Board</a>
+                <a class="nav-items" href="/minigame">Mini Game</a>
             </div>
             <div class="sign-login">
                 <a th:if="${#session} == null" href="/signin">
-                    <button class="signin">회원가입</button>
+                    <button class="signin">SignIn</button>
                 </a>
                 <a th:if="${#session} == null" href="/login">
-                    <button class="login">로그인</button>
+                    <button class="login">LogIn</button>
                 </a>
                 <a>
                     <form th:if="${#session} != null" action="/logout/kakao" style="display: inline">
-                        <button class="signin">로그아웃</button>
+                        <button class="signin">SignIn</button>
                     </form>
                 </a>
                 <a th:if="${#session} != null" href="/mypage">
-                    <button class="login">마이페이지</button>
+                    <button class="login">MyPage</button>
                 </a>
             </div>
         </div>
@@ -49,7 +49,7 @@
         <div class="first-title">게시물쓰기</div>
         <div class="second-title">
         	<form action="/champ/statistics/noline" method="get">
-        		<input class="main-input" type="text" name="name" placeholder="챔피언이름을 입력하세요"/>
+        		<input class="main-input" type="text" name="name" placeholder="Please enter the name of the champion"/>
         	</form>
         </div>
         <div style="clear: both;"></div>
