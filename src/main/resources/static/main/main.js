@@ -76,33 +76,33 @@ $.ajax({
             
                                     <li class="champ-status-header">
                                         <span></span>
-                                        <span class="before">이전패치</span>
-                                        <span>현재패치</span>
+                                        <span class="before">以前パッチ</span>
+                                        <span>現在パッチ</span>
                                     </li>
                                     <li class="champ-status-item">
-                                        <h4>승률</h4>
+                                        <h4>勝率</h4>
                                         <span class="before">${data.wBefore}%</span>
                                         <span>${data.w}%</span>
                                     </li>
                                     <li class="champ-status-item">
-                                        <h4>픽률</h4>
+                                        <h4>ピック率</h4>
                                         <span class="before">${data.p}%</span>
                                         <span>${data.pBefore}%</span>
                                     </li>
                                     <li class="champ-status-item">
-                                        <h4>벤율</h4>
+                                        <h4>バーン率</h4>
                                         <span class="before">${data.b}%</span>
                                         <span>${data.bBefore}%</span>
                                     </li>
                                 </div>
             
                                 <div class="champ-point">
-                                    <h4>주목해야 할 포인트</h4>
-                                    <p style="font-size: 12px;">최근 패치에서 ${data.name}의 승률이 ${data.winVari}% 변동 되었습니다. 곧 구체적인 원인을 분석하여 업데이트 될 예정입니다.</p>
+                                    <h4>注目すべきポイント</h4>
+                                    <p style="font-size: 12px;">最近のパッチで${data.name}の勝率が${data.winVari}% 変動しました。</p>
                                 </div>
             
                                 <div style="width:135px; padding: 10px 0px 0px 170px;">
-                                    <a class="champ-link" href="/champ/statistics?name=${data.name}&line=${data.line}">챔피언 상세정보 →</a>
+                                    <a class="champ-link" href="/champ/statistics?name=${data.name}&line=${data.line}">詳細情報 →</a>
                                 </div>
                             </div>
                         </div>

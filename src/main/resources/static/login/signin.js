@@ -25,7 +25,7 @@ emailInput.addEventListener('change', (e) => {
     if(validationTest(emailPattern, emailInput)) {
         emailPtag.innerHTML = "";
     }else{
-        emailPtag.innerHTML = '올바른 이메일 형식을 입력하세요!!'
+        emailPtag.innerHTML = '正しいemailを入力してください!!'
         emailInput.focus();
         return;
     }
@@ -35,7 +35,7 @@ passwordInput.addEventListener('change', (e) => {
     if(validationTest(passwordPattern, passwordInput)) {
         passwordPtag.innerHTML = "";
     }else{
-        passwordPtag.innerHTML = '숫자, 알파벳, 특수문자를 포함하셔야 합니다!!';
+        passwordPtag.innerHTML = '数字, アルファベット, 特殊文字を含めてください!!';
         passwordInput.focus();
         return;
     }
@@ -45,7 +45,7 @@ passwordConfirmInput.addEventListener('change', () => {
     if(passwordInput.value === passwordConfirmInput.value) {
         passwordConfirmPtag.innerHTML = "";
     }else {
-        passwordConfirmPtag.innerHTML = "비밀번호와 일치하지 않습니다!!";
+        passwordConfirmPtag.innerHTML = "パスワードと一致しておりません!!";
     }
 })
 
@@ -60,7 +60,7 @@ submitBtn.addEventListener('click', () => {
                 location.href = '/login';
             },
             error(e) {
-                alert('중복된 이메일 입니다.')
+                alert('重複のemailです.')
                 emailInput.value = '';
                 passwordInput.value = '';
                 passwordConfirmInput.value = '';
@@ -68,6 +68,6 @@ submitBtn.addEventListener('click', () => {
             }
         })
     }else {
-        console.log('적절한 이메일, 비밀번호가 아닙니다.')
+        console.log('適切なEmail、パスワードではありません.')
     }
 })

@@ -128,8 +128,8 @@ public class MemberService {
         //http body 오브젝트 생성
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
-        params.add("client_id", "1e5f1398f6098e14639513d07165e3b6");
-        params.add("redirect_uri", "http://lolpscloneproject-env.eba-wr2mtsmm.ap-northeast-2.elasticbeanstalk.com/login/kakao");
+        params.add("client_id", "6dd35eeb1a27d42e085c4df17a0f6470");
+        params.add("redirect_uri", "http://localhost:5000/login/kakao");
         params.add("code", code);
 
         //http header 와 http body를  하나의 오브젝트에 담기
